@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import babyinfo.BabyInfoDAO;
 import babyinfo.BabyInfoVO;
@@ -20,17 +21,15 @@ import babyinfo.BabyInfoVO;
 @Controller
 public class BabyInfoController {
 	@Autowired BabyInfoDAO dao;
-	Gson gson = new Gson();
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 	
 	@ResponseBody
-	@RequestMapping("/list.bif")
-	public void babyinfo_list(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	@RequestMapping(value = "/list.bif", produces="application/json;charset=UTF-8")
+	public String babyinfo_list(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		System.out.println("접근");
 		List<BabyInfoVO> list = dao.baby_info_list();
-		PrintWriter writer = res.getWriter();
-		res.setCharacterEncoding("utf-8");
-		res.setContentType("text/html");
+		System.out.println(list.get(0).getBaby_birth());
 		String data = gson.toJson(list);
-		writer.print(data);
+		return data;
 	}
 }
