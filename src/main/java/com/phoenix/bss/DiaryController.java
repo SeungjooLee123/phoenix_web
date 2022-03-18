@@ -10,5 +10,6 @@ public class DiaryController {
 	@RequestMapping(value =  "/insert.di", produces="application/json;charset=UTF-8" )
 	public void home() {
 		System.out.println("접근");
+		//왜 안돼 유ㅐ
 	}
 }
