@@ -11,6 +11,8 @@
 
 </head>
 <body>
+<h3>테스트</h3>
+<h3>테스트</h3>
     <header>
         <nav>
             <ul id="tnb">
@@ -19,7 +21,11 @@
                 <li><a href="#">회원가입</a></li>
             </ul>
         </nav>
+
         <a href="#"><img src="imgs/testbss.png"></a>
+
+        <a href="#"><img src="imgs/logo.png" alt="로고이미지"></a>
+
     </header>
     <div id="article">
         <nav>
