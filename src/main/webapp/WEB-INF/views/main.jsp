@@ -19,7 +19,7 @@
                 <li><a href="#">회원가입</a></li>
             </ul>
         </nav>
-        <a href="#"><img src="imgs/logo.png"></a>
+        <a href="#"><img src="imgs/testbss.png"></a>
     </header>
     <div id="article">
         <nav>
