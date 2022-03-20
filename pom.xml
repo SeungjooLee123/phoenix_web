@@ -8,8 +8,11 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<java-version>1.6</java-version>
-		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
+	<!--  수정1.  ysb : mybatis 사용을 위한 버전 변경 1.6 ▶  1.8 ver-->
+		<java-version>1.8</java-version>
+		<!-- ↓↓ mavenRepository에서 spring 검색 > spring context > 5.3.14 클릭 > Maven 탭 내용 중 5.3.14 만 복사 후 바꾸기 -->
+		<org.springframework-version>5.3.14</org.springframework-version>
+		<!--  ▲ -->
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
@@ -118,7 +121,7 @@
 		</dependency>        
 		      
 		<!-- 스프링과 DB를 연동하기 위한 라이브러리 설치 -->
-		<!-- OJDBC _오라클용 라이브러리 -->
+		<!-- ysb 추가1. OJDBC _오라클용 라이브러리 -->
 		<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc8 -->
 		<dependency>
 		    <groupId>com.oracle.database.jdbc</groupId>
@@ -127,6 +130,7 @@
 		</dependency>
 
 <!-- DBCP 라이브러리 DB와 연결시 매번 연결(Connection)하지 않게해줌-->
+<!-- ysb 추가2.  DB 연결할 객채를 미리 만들어줌 -->
 <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
 <dependency>
     <groupId>commons-dbcp</groupId>
@@ -134,7 +138,7 @@
     <version>1.4</version>
 </dependency>
 
-<!-- 스프링에서 JDBC를 사용하기 위한 라이브러리 -->
+<!-- ysb 추가3. 스프링에서 JDBC를 사용하기 위한 라이브러리 -->
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 <dependency>
     <groupId>org.springframework</groupId>
@@ -142,7 +146,7 @@
     <version>5.3.14</version>
 </dependency>
 
-<!-- MyBatis 라이브러리 -->
+<!-- ysb 추가4. MyBatis 라이브러리 -->
 <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 <dependency>
     <groupId>org.mybatis</groupId>
@@ -150,21 +154,23 @@
     <version>3.5.7</version>
 </dependency>
 
-<!-- 스프링에서 MyBatis를 사용하기 위한 라이브러리 -->
+<!-- ysb 추가5. 스프링에서 MyBatis를 사용하기 위한 라이브러리 -->
 <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
 <dependency>
     <groupId>org.mybatis</groupId>
     <artifactId>mybatis-spring</artifactId>
     <version>2.0.6</version>
 </dependency>
-<!-- 화면의 레이아웃을 수정하기 위한 라이브러리 22-02-10 추가  -->
+
+<!-- ysb 추가6. 화면의 레이아웃을 수정하기 위한 라이브러리  -->
 <!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-jsp -->
 <dependency>
     <groupId>org.apache.tiles</groupId>
     <artifactId>tiles-jsp</artifactId>
     <version>3.0.8</version>
 </dependency>
-<!-- 데이터 타입 변화를 위한 라이브러리 02-02-11추가  -->
+
+<!-- ysb 추가7. 데이터 타입 변화를 위한 라이브러리  -->
 <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
@@ -172,7 +178,7 @@
     <version>2.13.1</version>
 </dependency>
 
-<!-- (네이버API) json 객체 사용을 위한 라이브러리 22-02-11 추가 -->
+<!-- ysb 추가8. (네이버API) json 객체 사용을 위한 라이브러리-->
 <!-- https://mvnrepository.com/artifact/org.json/json -->
 <dependency>
     <groupId>org.json</groupId>
@@ -180,14 +186,19 @@
     <version>20211205</version>
 </dependency>
 
-<!-- 첨부 파일 업로드를 위한 라이브러리 추가 22-02-17 -->
+<!-- ysb 추가9. 첨부 파일 업로드를 위한 라이브러리 추가-->
 <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 <dependency>
     <groupId>commons-fileupload</groupId>
     <artifactId>commons-fileupload</artifactId>
     <version>1.4</version>
 </dependency>
-
+		      <!-- Gson 사용 위해 추가 ysm 2022-03-18 -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.5</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>
@@ -210,8 +221,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                <!-- 수정2 ysb :  source, target 을 1.6에서 1.8로 변경한다.(java버전과 동일하게 할 수 있도록 ${java-version}으로 변경해도 됨)-->
+                    <source>${java-version}</source>
+                    <target>1.8</target>
+                     <!-- ▲ 여기까지 + 바꾸고 나서 프로젝트명 ▶우클릭 ▶ build Path 변경 -->
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>

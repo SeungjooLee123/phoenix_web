@@ -4,14 +4,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+<!-- 수정1.  ysb  : ▲ spring bean file context 태그 검색 ▶ 첫번째 블로그  ▶  애노테이션 설정을 사용하기 위한 포맷 에서 복사 -->
 
-<!-- context : 외부 파일을 사용할 수 있도록 경로를 설정 -->
+<!-- 추가1. ysb : context : 외부 파일을 사용할 수 있도록 경로를 설정 -->
 <context:property-placeholder location="classpath:data/db.properties"/>
 
-<!-- 9번에서 경로를 설정했기때문에 가능  -->
-<!--  id를 지정하면 다른 bean에서 참조할 수 있음 -->
-
+<!-- 추가2. ysb : DBCP를 이용하여 db.properties에 담긴 정보를 가져오는 bean-->
 <bean id="dbcp_bteam" class="org.apache.commons.dbcp.BasicDataSource">
+<!-- ▲ id를 지정하면 다른 bean에서 참조가 가능 -->
+
 	<!-- property : 데이터를 담은 필드를 의미 -->
 	<property name="driverClassName" value="${db.driver}"/>
 	<property name="url" value="${db.url}"/>
@@ -19,24 +20,23 @@
 	<property name="password" value="${db.password}"/>
 </bean>
 
-
-
-
-<!-- myBatis 등록하는 빈 -->
-<!-- DB 연결, 쿼리문 역할 -->
+<!-- 추가3 .ysb : myBatis 등록하는 빈 -->
+<!-- DB 연결, 쿼리문 역할하는 파일과 연결하는 빈 -->
 <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	<property name="dataSource" ref="dbcp_bteam"/>
+	<!-- ▲ 위에서 작성한 id=dbcp인 빈을 참조 -->
 	<property name="mapperLocations" value="classpath:sqlmap/*-mapper.xml"/>
+	<!-- ▲ mapper의 경로 지정 : src/test/resources > sqlmap이라는 폴더안의 _아무거나_-mapper.xml로 끝나는 파일 모두 찾음-->
 </bean>
 
-
+<!-- ▼ 쿼리문 결과가 임시로 저장되는 공간을 지정함 -->
 <bean class="org.mybatis.spring.SqlSessionTemplate">
 	<constructor-arg name="sqlSessionFactory" ref="factory"/>
-	<qualifier value="bteam"/>
+	<!--  <qualifier value="bteam"/>-->
 </bean>
 
 
-<!--  fileupload를 위한 bean설정 -->
+<!--  추가4. ysb : fileupload를 위한 bean설정 -->
 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	<property name="maxUploadSize" value="104857600"/>
 	<property name="defaultEncoding" value="utf-8"/>
