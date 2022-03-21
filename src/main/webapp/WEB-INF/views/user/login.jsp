@@ -3,23 +3,129 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login-logo{
+margin-bottom: 60px;
+margin-top: 100px;
+text-align: center;
+}
+
+.input {
+display: flex;
+justify-content: center;
+}
+
+#userId:focus,  #userPw:focus {
+outline: 1px solid  #A5A0F0;
+z-index: 5;
+}
+
+.btns{
+text-align: center;
+margin-top: 15px;
+}
+
+.social-text{
+text-align: center;
+padding-top: 40px;
+padding-bottom: 20px;
+font-weight: 550;
+font-size: 20px;
+}
+
+.tnb {
+display:flex;
+justify-content: center;
+font-size: 13px;
+margin-top: 50px;
+padding-bottom: 30px;
+color: #707070;
+}
+
+.ad{
+text-align: center;
+}
+
+ul {
+list-style: none;
+}
+
+.footer-copy {
+	padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+.footer-logo{
+margin-right: 10px;
+width: 70px;
+height: 15px;
+}
+.footer-corp {
+color: #505050;
+font-weight: 700;
+}
+.text {
+color:#707070;
+}
+
+.corp{
+padding: 0 4px;
+font-weight: 500;
+color: #000;
+}
+
+.sid{
+padding:0 4px;}
+</style>
 <meta charset="UTF-8">
 <title>Login</title>
 </head>
 <body>
 <header>
-	<nav>
+	<nav class="login-logo">
 		   <a href='<c:url value="/"></c:url>'><img src="imgs/testbss.png"></a>
 	</nav>
 </header>
 <article>
-<div>
-	<input type="text" placeholder="아이디" id="userId" autofocus/>
+<div class="input">
+	<input type="text" placeholder="아이디" id="userId" autofocus style="width:350px; height:40px; margin-bottom:13px; padding-left: 10px; border: 1px solid #dadada; border-radius:6px;"/>
 </div>
-<div>
-	<input type="password" placeholder="비밀번호" id="userPw"/>
+<div class="input">
+	<input type="password" placeholder="비밀번호" id="userPw" style="width:350px; height:40px; padding-left: 10px; border: 1px solid #dadada; border-radius:6px;"/>
 </div>
-	<a onclick="login()">로그인</a><a href='<c:url value="/join"/>'>회원가입</a>
+<div class="btns">
+	<a onclick="login()"><img src="imgs/btn_login.png" style="width:155px; height:40px; margin-right:40px; cursor: pointer;"></a><a href='<c:url value="/join"/>'><img src="imgs/btn_join.png" style="width:155px; height:40px;"></a>
+</div>
+<hr style="width:20%; height:1px; border:none; background:#B5B5B5; margin: 0 auto; margin-top: 50px; opacity: 0.3;">  
+<p class="social-text">소셜로그인</p>
+<div class="btns">
+<a><img src="imgs/kakao_login.png" style="width:155px; height:40px; margin-right:40px;"></a><a><img src="imgs/naver_login.png" style="width:155px; height:40px;"></a>
+</div>	
+<nav>
+	<ul class="tnb">
+		<li>비밀번호 찾기 |</li>
+		<li class="sid">아이디 찾기 |</li>
+		<li>회원가입</li>
+	</ul>
+</nav>
+<div class="ad">
+	<img src="imgs/bss_ad1.png" style="width:400px; height:150px;">
+</div>
+<footer>
+<div class="footer-copy">
+<a href="<c:url value='/'/>"><span class="footer-logo"><img src="imgs/testbss.png" width="70" height="15"></span></a>
+	<span class="text">Copyright</span>
+	<span class="corp"> © BSS Corp.</span>
+	<span class="text"> All Rights Reserved.</span>
+</div>
+</footer>
 	<script type="text/javascript">
 		function login() {
 			if($('#userId').val() == '') {
