@@ -11,16 +11,6 @@
 
 </head>
 <body>
-    <header>
-        <nav>
-            <ul id="tnb">
-                <li><a href="#">홈</a></li>
-                <li><a href="#">로그인</a></li>
-                <li><a href="#">회원가입</a></li>
-            </ul>
-        </nav>
-        <a href="#"><img src="imgs/logo.png"></a>
-    </header>
     <div id="article">
         <nav>
             <ul id="gnb">
@@ -47,12 +37,6 @@
             </ul>
         </nav>
     </footer>
-    <div id="copy">
-        <p>
-            오시는 길: 광주서구 경열로3, 한울직업전문학교 <br>
-            Copyright BSS Corp. All Rights Reserved. | 사업자등록번호 :111-11-111111
-        </p>
-    </div>
     <script type="text/javascript">
 	$(document).ready(function() {
 	    var idx = 0;
