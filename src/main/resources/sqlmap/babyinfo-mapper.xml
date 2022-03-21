@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="babyinfo.mapper">
+
 <select id="list" resultType="babyinfo.BabyInfoVO">
 	select * from master_baby_info_tbl
+</select>
+
+<select id="rels" resultType="String">
+	select family_rels from master_family_info_tbl where title = (select title from master_baby_info_tbl where baby_id = #{baby_id})
+</select>
+
+<update id="chtitle">
+	update master_family_info_tbl set title = #{title} where title = (select title from master_baby_info_tbl where baby_id = #{baby_id})
+</update>
+
+<select id="coparent" resultType="babyinfo.FamilyInfoVO">
+	select * from master_family_info_tbl where title = (select title from master_baby_info_tbl where baby_id = #{baby_id})
+</select>
+
+<select id="titlelist" resultType="String">
+	select title from master_family_info_tbl
 </select>
 </mapper>
