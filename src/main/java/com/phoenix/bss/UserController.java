@@ -17,6 +17,12 @@ public class UserController {
 	
 	@Autowired UserDAO dao;
 	
+	//회원가입 화면 요청
+	@RequestMapping("/join")
+	public String join() {
+		return "user/join";
+	}
+	
 	//로그아웃 요청
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {

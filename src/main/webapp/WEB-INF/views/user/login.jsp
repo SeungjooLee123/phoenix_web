@@ -9,6 +9,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+a:link,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
 
 .login-logo{
 margin-bottom: 60px;
@@ -98,7 +103,8 @@ padding:0 4px;}
 	<input type="text" placeholder="아이디" id="userId" autofocus style="width:350px; height:40px; margin-bottom:13px; padding-left: 10px; border: 1px solid #dadada; border-radius:6px;"/>
 </div>
 <div class="input">
-	<input type="password" placeholder="비밀번호" id="userPw" style="width:350px; height:40px; padding-left: 10px; border: 1px solid #dadada; border-radius:6px;"/>
+	<input type="password" placeholder="비밀번호" id="userPw" style="width:350px; height:40px; padding-left: 10px; border: 1px solid #dadada; border-radius:6px;"
+	onkeypress = "if(event.keyCode ==13 ) login()"/>
 </div>
 <div class="btns">
 	<a onclick="login()"><img src="imgs/btn_login.png" style="width:155px; height:40px; margin-right:40px; cursor: pointer;"></a><a href='<c:url value="/join"/>'><img src="imgs/btn_join.png" style="width:155px; height:40px;"></a>
@@ -112,7 +118,7 @@ padding:0 4px;}
 	<ul class="tnb">
 		<li>비밀번호 찾기 |</li>
 		<li class="sid">아이디 찾기 |</li>
-		<li>회원가입</li>
+		<a href='<c:url value="/join"/>'><li>회원가입</li></a>
 	</ul>
 </nav>
 <div class="ad">
@@ -146,7 +152,7 @@ padding:0 4px;}
 				if(response) {
 					location =  '<c:url value="/"/>';
 				}else {
-					alert("아이디 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.")
+					alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.\n입력하신 내용을 다시 확인해 주세요.")
 				}	
 			}, error : function (req, text) {
 				alert(text + ':' + req.status);

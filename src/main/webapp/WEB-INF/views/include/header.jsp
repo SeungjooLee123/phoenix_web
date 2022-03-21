@@ -4,6 +4,52 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<style type="text/css">
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a:link,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+nav ul {
+  list-style: none;
+}
+
+header {
+  width: 1300px;
+  height: 150px;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+header img {
+  position: absolute;
+  width: 194px;
+  height: 82px;
+  right: 60vh;
+  top: 20%;
+}
+
+#tnb {
+  display: flex;
+  column-gap: 1rem;
+  list-style: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 13px;
+  color: #9a9a9a;
+}
+
+
+
+</style>
     <header>
         <nav>
             <ul id="tnb">
