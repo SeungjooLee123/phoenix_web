@@ -4,59 +4,71 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="css/common.css?v=<%=new Date().getTime()%>">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!--  <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>-->
+<style type="text/css">
 
-<style>
-header ul, header ul li {
-maring: 0;
-padding: 0;
-display: inline;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-header .category {
-font-size: 18px;
+a:link,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+nav ul {
+  list-style: none;
 }
 
-header .category ul li:not(:first-child){ /* 첫번재 li만 빼고 지정 */
-padding-left : 30px;
+header {
+  width: 1300px;
+  height: 150px;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 20px;
 }
-header .category ul li a:hover, header .category ul li a.active{
-font-weight: bold;
-color: #0000cd;
-} 
-header .category ul:first-child { float:left; }
-header .category ul:last-child { float:right; margin-right: 200px;}
+
+header img {
+  position: absolute;
+  width: 194px;
+  height: 82px;
+  right: 60vh;
+  top: 20%;
+}
+
+#tnb {
+  display: flex;
+  column-gap: 1rem;
+  list-style: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 13px;
+  color: #9a9a9a;
+}
+
+
+
 </style>
-<header style="text-align: left; border-bottom: 1px solid #ccc; padding: 15px 0;">
-	<div class='category' style="margin-left: 200px;">
-		<ul>
-			<li><a href='<c:url value="/" />'><img src='imgs/hanul_logo.png'/></a></li>
-			<li><a href='list.cu' ${category eq 'cu' ? "class='active'" : '' }>고객관리</a></li>
-			<li><a href='list.hr' ${category eq 'hr' ? "class='active'" : '' }>사원 목록</a></li>
-			<li><a href='list.no' ${category eq 'no' ? "class='active'" : '' }>공지 사항</a></li>
-			<li><a href='list.bo' ${category eq 'bo' ? "class='active'" : '' }>방명록</a></li>
-			<li><a href='map.api' ${category eq 'api' ? "class='active'" : '' }>카카오 지도</a></li>
-			<li><a href='list.vi' ${category eq 'vi' ? "class='active'" : '' }>시각화</a></li>
-		</ul>
-		
-		<!-- 로그인, 회원가입 버튼 -->
-		<!-- 로그인을 하지 않은 경우 -->
-		<ul>
-			<c:if test="${empty loginInfo  }">
-			<li>
-				<a class="btn-fill" href="login" >로그인</a>
-				<a class="btn-fill" href="member">회원가입</a>
-			</li>
-			</c:if>
-			<!-- 로그인을 한 경우 -->
-			<c:if test="${ !empty loginInfo }">
-				<li><strong>${loginInfo.name }님</strong></li>
-				<li><a class="btn-fill" href="logout">로그아웃</a></li>
-			</c:if>
-		</ul>
-	</div>
-</header>
+    <header>
+        <nav>
+            <ul id="tnb">
+                <li><a href='<c:url value="/"/>'>홈</a></li>
+                <!-- 로그인 하지 않은 경우 -->
+                <c:if test="${empty loginInfo }">
+               		 <li><a href='<c:url value="/login"/>'>로그인</a></li>
+               		 <li><a href='<c:url value="/join"/>'>회원가입</a></li>
+                </c:if>
+                <!-- 로그인의 경우 -->
+                    <c:if test="${!empty loginInfo }">
+               			 <li>${loginInfo.id }님</li>
+                   		<li><a href='<c:url value="/logout"/>'>로그아웃</a></li>
+                </c:if>
+            </ul>  
+        </nav>
+        <a href='<c:url value="/"/>'><img src="imgs/testbss.png"></a>
+    </header>
+
 
 
 
