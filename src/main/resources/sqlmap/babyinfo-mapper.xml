@@ -3,7 +3,7 @@
 <mapper namespace="babyinfo.mapper">
 
 <select id="list" resultType="babyinfo.BabyInfoVO">
-	select * from master_baby_info_tbl
+	select * from master_baby_info_tbl where title in (select title from master_family_info_tbl where id=#{id})
 </select>
 
 <select id="rels" resultType="String">

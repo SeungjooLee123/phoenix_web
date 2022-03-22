@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 public class BabyInfoDAO {
 	@Autowired private SqlSession sql;
 	
-	public List<BabyInfoVO> baby_info_list() {
-		return sql.selectList("babyinfo.mapper.list");
+	public List<BabyInfoVO> baby_info_list(String id) {
+		return sql.selectList("babyinfo.mapper.list", id);
 	}
 	
 	public String baby_info_rels(String baby_id) {

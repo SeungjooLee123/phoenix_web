@@ -28,7 +28,8 @@ public class BabyInfoController {
 	@ResponseBody
 	@RequestMapping(value = "/list.bif", produces="application/json;charset=UTF-8")
 	public String babyinfo_list(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		List<BabyInfoVO> list = dao.baby_info_list();
+		String id = req.getParameter("id");
+		List<BabyInfoVO> list = dao.baby_info_list(id);
 		String data = gson.toJson(list);
 		return data;
 	}
