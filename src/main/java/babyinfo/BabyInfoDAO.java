@@ -15,8 +15,8 @@ public class BabyInfoDAO {
 		return sql.selectList("babyinfo.mapper.list", id);
 	}
 	
-	public String baby_info_rels(String baby_id) {
-		return sql.selectOne("babyinfo.mapper.rels", baby_id);
+	public FamilyInfoVO baby_info_rels(HashMap<String, String> map) {
+		return sql.selectOne("babyinfo.mapper.rels", map);
 	}
 	
 	public void baby_info_title_change(HashMap<String, String> map) {
@@ -29,5 +29,13 @@ public class BabyInfoDAO {
 	
 	public List<String> baby_info_title_list(){
 		return sql.selectList("babyinfo.mapper.titlelist");
+	}
+	
+	public boolean baby_info_update(BabyInfoVO vo) {
+		return sql.update("babyinfo.mapper.babyupdate", vo) == 1 ? true : false;
+	}
+	
+	public boolean baby_info_rels_update(FamilyInfoVO vo) {
+		return sql.update("babyinfo.mapper.relsupdate", vo) == 1 ? true : false;
 	}
 }
