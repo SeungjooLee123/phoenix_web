@@ -6,8 +6,8 @@
 	select * from master_baby_info_tbl where title in (select title from master_family_info_tbl where id=#{id})
 </select>
 
-<select id="rels" resultType="String">
-	select family_rels from master_family_info_tbl where title = (select title from master_baby_info_tbl where baby_id = #{baby_id})
+<select id="rels" resultType="babyinfo.FamilyInfoVO">
+	select * from master_family_info_tbl where id = #{id} and title = (select title from master_baby_info_tbl where baby_id = #{baby_id})
 </select>
 
 <update id="chtitle">
@@ -21,4 +21,12 @@
 <select id="titlelist" resultType="String">
 	select title from master_family_info_tbl
 </select>
+
+<update id="babyupdate">
+	update master_baby_info_tbl set baby_name = #{baby_name}, baby_gender = #{baby_gender}, baby_kg = #{baby_kg}, baby_cm = #{baby_cm}, baby_birth = #{baby_birth}, baby_photo = #{baby_photo, jdbcType=VARCHAR} where baby_id = #{baby_id}
+</update>
+
+<update id="relsupdate">
+	update master_family_info_tbl set family_rels = #{family_rels} where id = #{id} and title = #{title}
+</update>
 </mapper>
