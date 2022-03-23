@@ -23,7 +23,7 @@
 </select>
 
 <update id="babyupdate">
-	update master_baby_info_tbl set baby_name = #{baby_name}, baby_gender = #{baby_gender}, baby_kg = #{baby_kg}, baby_cm = #{baby_cm}, baby_birth = #{baby_birth}, baby_photo = #{baby_photo, jdbcType=VARCHAR} where baby_id = #{baby_id}
+	update master_baby_info_tbl set baby_name = #{baby_name}, baby_gender = #{baby_gender}, baby_birth = #{baby_birth}, baby_photo = #{baby_photo, jdbcType=VARCHAR} where baby_id = #{baby_id}
 </update>
 
 <update id="relsupdate">
