@@ -18,8 +18,8 @@ import diary.DiaryVO;
 @Controller
 public class DiaryController {
 	@Autowired DiaryDAO dao;
-	//Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-	Gson gson = new Gson();
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	//Gson gson = new Gson();
 	
 	@ResponseBody
 	@RequestMapping(value =  "/list.di", produces="application/json;charset=UTF-8" )
