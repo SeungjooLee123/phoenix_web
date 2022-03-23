@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="diary.mapper">  
 <select id="list" resultType="diary.DiaryVO">
-	select * from master_baby_care_tbl where BABY_ID='bcdc8ebd-ba95-48a8-b61b-16c55b2fb544' order by DIARY_ID DESC
+	select * from master_baby_care_tbl where BABY_ID='bcdc8ebd-ba95-48a8-b61b-16c55b2fb544' and to_char(DIARY_DATE, 'YYYY-MM-DD') = #{strDate} order by START_TIME DESC, DIARY_ID DESC
 </select>
 <insert id="insert_mou">
 	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,DIARY_TYPE,MEMO)
@@ -50,4 +50,14 @@ VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date
 <delete id="delete">
 	delete from master_baby_care_tbl where DIARY_ID = #{diary_id} and BABY_ID = #{baby_id}
 </delete>
+<update id="update">
+	update master_baby_care_tbl set
+	AMOUNT = #{amount,jdbcType=VARCHAR},
+	START_TIME = #{start_time},
+	TEMPERATURE = #{temperature,jdbcType=VARCHAR},
+	MEMO = #{memo,jdbcType=VARCHAR},
+	END_TIME = #{end_time,jdbcType=VARCHAR},
+	DIARY_TYPE = #{diary_type,jdbcType=VARCHAR}
+	where DIARY_ID = #{diary_id} and BABY_ID = 'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544'
+</update>
 </mapper>
