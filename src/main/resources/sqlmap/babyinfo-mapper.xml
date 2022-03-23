@@ -29,4 +29,8 @@
 <update id="relsupdate">
 	update master_family_info_tbl set family_rels = #{family_rels} where id = #{id} and title = #{title}
 </update>
+
+<delete id="delete">
+	delete from master_baby_info_tbl where baby_id = #{baby_id}
+</delete>
 </mapper>

@@ -1,12 +1,10 @@
 package com.phoenix.bss;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,10 +70,8 @@ public class BabyInfoController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/updatebaby.bif", produces = "application/json;charset=UTF-8")
-	public void babyinfo_update(String vo, String family, HttpServletRequest req, HttpServletResponse res, HttpSession session) throws IOException {
+	public boolean babyinfo_update(String vo, String family, HttpServletRequest req, HttpSession session) throws IOException {
 		BabyInfoVO baby = gson.fromJson(vo, BabyInfoVO.class);
-		PrintWriter writer = res.getWriter();
-		res.setCharacterEncoding("utf-8");
 		MultipartRequest mulReq = (MultipartRequest) req;
 		MultipartFile file = mulReq.getFile("file");
 		if(file != null) {
@@ -84,7 +80,12 @@ public class BabyInfoController {
 			String server_path = "http://" + req.getLocalAddr() + ":" + req.getLocalPort() + req.getContextPath() + "/resources/";
 			baby.setBaby_photo(server_path + path);
 		}
-		dao.baby_info_rels_update(gson.fromJson(family, FamilyInfoVO.class));
-		dao.baby_info_update(baby);
+		return dao.baby_info_update(baby) || dao.baby_info_rels_update(gson.fromJson(family, FamilyInfoVO.class));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/babydel.bif", produces = "application/json;charset=UTF-8")
+	public boolean babyinfo_delete(String baby_id) {
+		return dao.baby_info_delete(baby_id);
 	}
 }

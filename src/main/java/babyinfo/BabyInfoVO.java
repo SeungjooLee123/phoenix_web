@@ -3,9 +3,16 @@ package babyinfo;
 import java.sql.Date;
 
 public class BabyInfoVO {
-	String baby_id, title, baby_name, baby_photo, baby_gender;
+	String baby_id, title, baby_name, baby_photo, baby_gender, id;
 	double baby_kg, baby_cm;
 	Date baby_birth;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getBaby_id() {
 		return baby_id;
 	}
