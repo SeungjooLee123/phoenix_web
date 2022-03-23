@@ -50,4 +50,14 @@ VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date
 <delete id="delete">
 	delete from master_baby_care_tbl where DIARY_ID = #{diary_id} and BABY_ID = #{baby_id}
 </delete>
+<update id="update">
+	update master_baby_care_tbl set
+	AMOUNT = #{amount,jdbcType=VARCHAR},
+	START_TIME = #{start_time},
+	TEMPERATURE = #{temperature,jdbcType=VARCHAR},
+	MEMO = #{memo,jdbcType=VARCHAR},
+	END_TIME = #{end_time,jdbcType=VARCHAR},
+	DIARY_TYPE = #{diary_type,jdbcType=VARCHAR}
+	where DIARY_ID = #{diary_id} and BABY_ID = 'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544'
+</update>
 </mapper>

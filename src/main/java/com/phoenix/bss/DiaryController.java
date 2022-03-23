@@ -60,9 +60,18 @@ public class DiaryController {
 		System.out.println("delete접근");
 		String strVo = req.getParameter("dto");
 		DiaryVO vo = gson.fromJson(strVo, DiaryVO.class);
-		//System.out.println(vo.getMemo());
-		//dao.diary_insert(vo);
+		
 
 		return gson.toJson(dao.diary_delete(vo));
+	}
+	@ResponseBody
+	@RequestMapping(value =  "/update.di", produces="application/json;charset=UTF-8" )
+	public String update(HttpServletRequest req) {
+		System.out.println("update접근");
+		String strVo = req.getParameter("dto");
+		DiaryVO vo = gson.fromJson(strVo, DiaryVO.class);
+		String str = gson.toJson(dao.diary_update(vo));
+		System.out.println(str);
+		return str;
 	}
 }

@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.JsonElement;
+
 
 @Repository
 public class DiaryDAO {
@@ -48,5 +50,8 @@ public class DiaryDAO {
 	}
 	public boolean diary_delete(DiaryVO vo) {
 		return sql.delete("diary.mapper.delete",vo) == 1 ? true : false;
+	}
+	public boolean diary_update(DiaryVO vo) {
+		return sql.update("diary.mapper.update",vo) == 1 ? true : false;
 	}
 }
