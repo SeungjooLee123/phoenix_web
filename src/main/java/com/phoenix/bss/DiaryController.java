@@ -23,11 +23,12 @@ public class DiaryController {
 	
 	@ResponseBody
 	@RequestMapping(value =  "/list.di", produces="application/json;charset=UTF-8" )
-	public String list() {
+	public String list(HttpServletRequest req) {
 		System.out.println("list접근");
-		
-		List<DiaryVO> list = dao.diary_list();
-		System.out.println(list.get(0).getBaby_category());
+		String strDate = req.getParameter("date");
+		System.out.println(strDate);
+		List<DiaryVO> list = dao.diary_list(strDate);
+		//System.out.println(list.get(0).getBaby_category());
 		String data = gson.toJson(list);
 		
 		return data;

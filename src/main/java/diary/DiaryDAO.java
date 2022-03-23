@@ -13,8 +13,8 @@ import com.google.gson.JsonElement;
 public class DiaryDAO {
 	@Autowired private SqlSession sql;
 	
-	public List<DiaryVO> diary_list() {
-		return sql.selectList("diary.mapper.list");
+	public List<DiaryVO> diary_list(String strDate) {
+		return sql.selectList("diary.mapper.list",strDate);
 	}
 	public boolean diary_insert(DiaryVO vo) {
 		//if(vo.getBaby_category().equals(""))
