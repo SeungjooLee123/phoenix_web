@@ -1,5 +1,6 @@
 package diary;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -13,8 +14,8 @@ import com.google.gson.JsonElement;
 public class DiaryDAO {
 	@Autowired private SqlSession sql;
 	
-	public List<DiaryVO> diary_list(String strDate) {
-		return sql.selectList("diary.mapper.list",strDate);
+	public List<DiaryVO> diary_list(HashMap<String, String> map) {
+		return sql.selectList("diary.mapper.list",map);
 	}
 	public boolean diary_insert(DiaryVO vo) {
 		//if(vo.getBaby_category().equals(""))
