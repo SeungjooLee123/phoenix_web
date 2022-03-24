@@ -6,4 +6,9 @@
 <select id="login" resultType="user.UserVO">
 	select * from MASTER_USER_INFO_TBL where id=#{id} and pw=#{pw}
 </select>
+
+<select id="titlelist" resultType="String">
+	select title from master_family_info_tbl where id=#{id}
+</select>
+
 </mapper>

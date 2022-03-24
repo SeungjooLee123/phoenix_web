@@ -1,6 +1,7 @@
 package user;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,4 +16,7 @@ public class UserDAO {
 		return sql.selectOne("user.mapper.login", map);
 	}
 
+	public List<String> baby_info_title_list(String id){
+		return sql.selectList("user.mapper.titlelist", id);
+	}
 }

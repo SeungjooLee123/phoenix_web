@@ -1,7 +1,9 @@
 package com.phoenix.bss;
 
+import java.io.IOException;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
+import diary.DiaryVO;
 import user.UserDAO;
 import user.UserVO;
 
@@ -16,6 +21,7 @@ import user.UserVO;
 public class UserController {
 	
 	@Autowired UserDAO dao;
+	Gson gson = new Gson();
 	
 	//회원가입 화면 요청
 	@RequestMapping("/join")
@@ -47,5 +53,16 @@ public class UserController {
 	public String login() {
 		return "user/login";
 	}
+	
+	//가족 타이틀 리스트
+	@ResponseBody
+	@RequestMapping(value = "/titlelist.us", produces = "application/json;charset=UTF-8")
+	public String babyinfo_title_list(HttpServletRequest req) throws IOException{
+		System.out.println("titlelist접근");
+		String id = req.getParameter("id");
+		return gson.toJson(dao.baby_info_title_list(id));
+	}
+	
+	
 
 }
