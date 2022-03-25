@@ -1,5 +1,6 @@
 package com.phoenix.bss;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +27,11 @@ public class DiaryController {
 	public String list(HttpServletRequest req) {
 		System.out.println("list접근");
 		String strDate = req.getParameter("date");
-		System.out.println(strDate);
-		List<DiaryVO> list = dao.diary_list(strDate);
+		String id = req.getParameter("id");
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("date", strDate);
+		map.put("id", id);
+		List<DiaryVO> list = dao.diary_list(map);
 		//System.out.println(list.get(0).getBaby_category());
 		String data = gson.toJson(list);
 		
@@ -40,7 +44,6 @@ public class DiaryController {
 		System.out.println("insert접근");
 		String strVo = req.getParameter("dto");
 		DiaryVO vo = gson.fromJson(strVo, DiaryVO.class);
-		System.out.println(vo.getMemo());
 		//dao.diary_insert(vo);
 
 		return gson.toJson(dao.diary_insert(vo));
@@ -52,7 +55,7 @@ public class DiaryController {
 		System.out.println("detail접근");
 		int no = Integer.parseInt(req.getParameter("no"));
 		String data = gson.toJson(dao.diary_detail(no));
-		//System.out.println(data);
+		System.out.println(data);
 		return data;
 	}
 	@ResponseBody
