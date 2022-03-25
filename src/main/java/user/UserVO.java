@@ -1,5 +1,6 @@
 package user;
 
+
 public class UserVO {
 	private String title, family_rels, id, pw,pw_chk, naver_id, kakao_id;
 
@@ -62,4 +63,5 @@ public class UserVO {
 	
 	
 
+    
 }

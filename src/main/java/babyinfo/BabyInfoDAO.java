@@ -38,4 +38,8 @@ public class BabyInfoDAO {
 	public boolean baby_info_rels_update(FamilyInfoVO vo) {
 		return sql.update("babyinfo.mapper.relsupdate", vo) == 1 ? true : false;
 	}
+	
+	public boolean baby_info_delete(String baby_id) {
+		return sql.delete("babyinfo.mapper.delete", baby_id) == 1 ? true : false;
+	}
 }

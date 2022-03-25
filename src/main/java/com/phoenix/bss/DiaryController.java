@@ -18,16 +18,17 @@ import diary.DiaryVO;
 @Controller
 public class DiaryController {
 	@Autowired DiaryDAO dao;
-	//Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-	Gson gson = new Gson();
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	//Gson gson = new Gson();
 	
 	@ResponseBody
 	@RequestMapping(value =  "/list.di", produces="application/json;charset=UTF-8" )
-	public String list() {
+	public String list(HttpServletRequest req) {
 		System.out.println("list접근");
-		
-		List<DiaryVO> list = dao.diary_list();
-		System.out.println(list.get(0).getBaby_category());
+		String strDate = req.getParameter("date");
+		System.out.println(strDate);
+		List<DiaryVO> list = dao.diary_list(strDate);
+		//System.out.println(list.get(0).getBaby_category());
 		String data = gson.toJson(list);
 		
 		return data;
@@ -60,9 +61,18 @@ public class DiaryController {
 		System.out.println("delete접근");
 		String strVo = req.getParameter("dto");
 		DiaryVO vo = gson.fromJson(strVo, DiaryVO.class);
-		//System.out.println(vo.getMemo());
-		//dao.diary_insert(vo);
+		
 
 		return gson.toJson(dao.diary_delete(vo));
+	}
+	@ResponseBody
+	@RequestMapping(value =  "/update.di", produces="application/json;charset=UTF-8" )
+	public String update(HttpServletRequest req) {
+		System.out.println("update접근");
+		String strVo = req.getParameter("dto");
+		DiaryVO vo = gson.fromJson(strVo, DiaryVO.class);
+		String str = gson.toJson(dao.diary_update(vo));
+		System.out.println(str);
+		return str;
 	}
 }

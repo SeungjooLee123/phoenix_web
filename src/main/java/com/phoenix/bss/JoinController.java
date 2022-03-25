@@ -28,10 +28,10 @@ public class JoinController {
 	
 	@ResponseBody
 	@RequestMapping ( value = "/user.join", produces="application/json;charset=UTF-8")
-	public UserVO userJoin (String vo) {
+	public UserVO userJoin (UserVO vo) {
 		Gson gson = new Gson();
 		System.out.println(vo);
-		return gson.toJson( dao.userJoin(vo))
+		return vo;
 	}
 	
 	

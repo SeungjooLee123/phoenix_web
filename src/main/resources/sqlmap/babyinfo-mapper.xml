@@ -23,10 +23,14 @@
 </select>
 
 <update id="babyupdate">
-	update master_baby_info_tbl set baby_name = #{baby_name}, baby_gender = #{baby_gender}, baby_kg = #{baby_kg}, baby_cm = #{baby_cm}, baby_birth = #{baby_birth}, baby_photo = #{baby_photo, jdbcType=VARCHAR} where baby_id = #{baby_id}
+	update master_baby_info_tbl set baby_name = #{baby_name}, baby_gender = #{baby_gender}, baby_birth = #{baby_birth}, baby_photo = #{baby_photo, jdbcType=VARCHAR} where baby_id = #{baby_id}
 </update>
 
 <update id="relsupdate">
 	update master_family_info_tbl set family_rels = #{family_rels} where id = #{id} and title = #{title}
 </update>
+
+<delete id="delete">
+	delete from master_baby_info_tbl where baby_id = #{baby_id}
+</delete>
 </mapper>
