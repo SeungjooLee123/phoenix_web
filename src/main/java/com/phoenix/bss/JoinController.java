@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import join.JoinDAO;
+import user.UserVO;
 
 @Controller
 public class JoinController {
@@ -24,6 +25,16 @@ public class JoinController {
 		System.out.println(id);
 		return gson.toJson( dao.id_check(id) );
 	}
+	
+	@ResponseBody
+	@RequestMapping ( value = "/user.join", produces="application/json;charset=UTF-8")
+	public UserVO userJoin (String vo) {
+		Gson gson = new Gson();
+		System.out.println(vo);
+		return gson.toJson( dao.userJoin(vo))
+	}
+	
+	
 	
 	
 	
