@@ -44,7 +44,6 @@ public class DiaryController {
 		System.out.println("insert접근");
 		String strVo = req.getParameter("dto");
 		DiaryVO vo = gson.fromJson(strVo, DiaryVO.class);
-		System.out.println(vo.getMemo());
 		//dao.diary_insert(vo);
 
 		return gson.toJson(dao.diary_insert(vo));
@@ -56,7 +55,7 @@ public class DiaryController {
 		System.out.println("detail접근");
 		int no = Integer.parseInt(req.getParameter("no"));
 		String data = gson.toJson(dao.diary_detail(no));
-		//System.out.println(data);
+		System.out.println(data);
 		return data;
 	}
 	@ResponseBody
