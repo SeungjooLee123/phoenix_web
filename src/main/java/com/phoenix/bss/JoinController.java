@@ -26,12 +26,15 @@ public class JoinController {
 		return gson.toJson( dao.id_check(id) );
 	}
 	
+	
+	//회원가입처리
 	@ResponseBody
 	@RequestMapping ( value = "/user.join", produces="application/json;charset=UTF-8")
 	public UserVO userJoin (UserVO vo) {
 		Gson gson = new Gson();
 		System.out.println(vo);
-		return vo;
+		
+		return dao.userJoin(vo) ;
 	}
 	
 	
