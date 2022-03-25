@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sns.mapper">  
+
+<insert id="insert">
+insert all
+into master_sns_tbl values(sns_no, title, id, sns_date, sns_content)
+select (seq_sns_no.nextval, #{title}, #{id}, sysdate, #{sns_content, jdbcType=VARCHAR})
+<foreach collection="list" item="list" index="i">
+into master_sns_img_tbl (sns_no, title, id, sns_img)
+values(seq_sns_no.nextval, #{title}, #{id}, #{sns_img, jdbcType=VARCHAR})
+</foreach>
+</insert>
+
+<!-- <insert id="insert">
+insert into MASTER_SNS_TBL (sns_no, title, id, sns_date, sns_content)
+values (seq_sns_no.nextval, #{title}, #{id}, sysdate, #{sns_content, jdbcType=VARCHAR})
+
+<foreach collection="list" item="item" index="i">
+into MASTER_SNS_IMG_TBL (sns_no, title, id, sns_img)
+values (#{sns_no}, #{title}, #{id}, #{sns_img, jdbcType=VARCHAR})
+</foreach>
+</insert> -->
+
+</mapper>
