@@ -6,7 +6,7 @@ public class DiaryVO {
 	int diary_id;
 	String baby_id;
 	Date diary_date;
-	int amount;
+	double amount;
 	String start_time;
 	double temperature;
 	String memo;
@@ -32,10 +32,10 @@ public class DiaryVO {
 	public void setDiary_date(Date diary_date) {
 		this.diary_date = diary_date;
 	}
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	public String getStart_time() {

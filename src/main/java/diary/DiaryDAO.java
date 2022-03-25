@@ -1,18 +1,21 @@
 package diary;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.JsonElement;
+
 
 @Repository
 public class DiaryDAO {
 	@Autowired private SqlSession sql;
 	
-	public List<DiaryVO> diary_list() {
-		return sql.selectList("diary.mapper.list");
+	public List<DiaryVO> diary_list(HashMap<String, String> map) {
+		return sql.selectList("diary.mapper.list",map);
 	}
 	public boolean diary_insert(DiaryVO vo) {
 		//if(vo.getBaby_category().equals(""))
@@ -48,5 +51,8 @@ public class DiaryDAO {
 	}
 	public boolean diary_delete(DiaryVO vo) {
 		return sql.delete("diary.mapper.delete",vo) == 1 ? true : false;
+	}
+	public boolean diary_update(DiaryVO vo) {
+		return sql.update("diary.mapper.update",vo) == 1 ? true : false;
 	}
 }

@@ -3,9 +3,15 @@ package babyinfo;
 import java.sql.Date;
 
 public class BabyInfoVO {
-	String baby_id, title, baby_name, baby_photo, baby_gender;
-	double baby_kg, baby_cm;
+	String baby_id, title, baby_name, baby_photo, baby_gender, id;
 	Date baby_birth;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getBaby_id() {
 		return baby_id;
 	}
@@ -36,25 +42,10 @@ public class BabyInfoVO {
 	public void setBaby_gender(String baby_gender) {
 		this.baby_gender = baby_gender;
 	}
-	public double getBaby_kg() {
-		return baby_kg;
-	}
-	public void setBaby_kg(double baby_kg) {
-		this.baby_kg = baby_kg;
-	}
-	public double getBaby_cm() {
-		return baby_cm;
-	}
-	public void setBaby_cm(double baby_cm) {
-		this.baby_cm = baby_cm;
-	}
 	public Date getBaby_birth() {
 		return baby_birth;
 	}
 	public void setBaby_birth(Date baby_birth) {
 		this.baby_birth = baby_birth;
 	}
-	
-	
-
 }

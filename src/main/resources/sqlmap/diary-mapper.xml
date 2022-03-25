@@ -2,47 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="diary.mapper">  
 <select id="list" resultType="diary.DiaryVO">
-	select * from master_baby_care_tbl where BABY_ID='bcdc8ebd-ba95-48a8-b61b-16c55b2fb544' order by DIARY_ID DESC
+	select * from master_baby_care_tbl where BABY_ID=#{id} and to_char(DIARY_DATE, 'YYYY-MM-DD') = #{date} order by START_TIME DESC, DIARY_ID DESC
 </select>
 <insert id="insert_mou">
 	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,DIARY_TYPE,MEMO)
-VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date},#{start_time},#{end_time},'모유',#{diary_type,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR})
+VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'모유',#{diary_type,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR})
 </insert>
 <insert id="insert_bunu">
 	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,AMOUNT,MEMO)
-VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date},#{start_time},#{end_time},'분유',#{amount},#{memo,jdbcType=VARCHAR})
+VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'분유',#{amount},#{memo,jdbcType=VARCHAR})
 </insert>
 <insert id="insert_eat">
 	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,AMOUNT,MEMO)
-VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date},#{start_time},#{end_time},'이유식',#{amount},#{memo,jdbcType=VARCHAR})
+VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'이유식',#{amount},#{memo,jdbcType=VARCHAR})
 </insert>
 <insert id="insert_toilet">
 	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,BABY_CATEGORY,DIARY_TYPE,MEMO)
-VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date},#{start_time},'기저귀',#{diary_type,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR})
+VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},'기저귀',#{diary_type,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR})
 </insert>
 <insert id="insert_sleep">
 	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,DIARY_TYPE,MEMO)
-VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date},#{start_time},#{end_time},'수면',#{diary_type,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR})
+VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'수면',#{diary_type,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR})
 </insert>
 <insert id="insert_bath">
 	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,MEMO)
-VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date},#{start_time},#{end_time},'목욕',#{memo,jdbcType=VARCHAR})
+VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'목욕',#{memo,jdbcType=VARCHAR})
 </insert>
 <insert id="insert_temp">
-	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,BABY_CATEGORY,MEMO)
-VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date},#{start_time},'체온',#{memo,jdbcType=VARCHAR})
+	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,BABY_CATEGORY,TEMPERATURE,MEMO)
+VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},'체온',#{temperature},#{memo,jdbcType=VARCHAR})
 </insert>
 <insert id="insert_water">
 	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,AMOUNT,MEMO)
-VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date},#{start_time},#{end_time},'물',#{amount},#{memo,jdbcType=VARCHAR})
+VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'물',#{amount},#{memo,jdbcType=VARCHAR})
 </insert>
 <insert id="insert_pills">
 	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,AMOUNT,MEMO)
-VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date},#{start_time},#{end_time},'투약',#{amount},#{memo,jdbcType=VARCHAR})
+VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'투약',#{amount},#{memo,jdbcType=VARCHAR})
 </insert>
 <insert id="insert_danger">
 	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,AMOUNT,MEMO)
-VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date},#{start_time},#{end_time},'간식',#{amount},#{memo,jdbcType=VARCHAR})
+VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'간식',#{amount},#{memo,jdbcType=VARCHAR})
 </insert>
 <select id="detail" resultType="diary.DiaryVO">
 	select * from master_baby_care_tbl where DIARY_ID=#{no}
@@ -50,4 +50,14 @@ VALUES (seq_diary_id.nextval,'bcdc8ebd-ba95-48a8-b61b-16c55b2fb544',#{diary_date
 <delete id="delete">
 	delete from master_baby_care_tbl where DIARY_ID = #{diary_id} and BABY_ID = #{baby_id}
 </delete>
+<update id="update">
+	update master_baby_care_tbl set
+	AMOUNT = #{amount,jdbcType=VARCHAR},
+	START_TIME = #{start_time},
+	TEMPERATURE = #{temperature,jdbcType=VARCHAR},
+	MEMO = #{memo,jdbcType=VARCHAR},
+	END_TIME = #{end_time,jdbcType=VARCHAR},
+	DIARY_TYPE = #{diary_type,jdbcType=VARCHAR}
+	where DIARY_ID = #{diary_id} and BABY_ID = #{baby_id}
+</update>
 </mapper>
