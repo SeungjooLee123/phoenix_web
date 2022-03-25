@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 public class SnsDAO {
 	@Autowired private SqlSession sql;
 	
-	public boolean snsInsert(HashMap<Object, Object> map) {
-		return sql.insert("sns.mapper.insert", map) == 1 ? true : false;
+	public boolean snsInsert(SnsVO imgVO) {
+		return sql.insert("sns.mapper.insert", imgVO) == 1 ? true : false;
 		
 	}
 	

@@ -1,6 +1,7 @@
 package sns;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 
 public class SnsVO {
@@ -9,8 +10,16 @@ public class SnsVO {
 	String sns_content, id, title;
 	int sns_no;
 	Date sns_date;
+	ArrayList<String> imgList = new ArrayList<String>();
 	
 	
+	
+	public ArrayList<String> getImgList() {
+		return imgList;
+	}
+	public void setImgList(ArrayList<String> imgList) {
+		this.imgList = imgList;
+	}
 	public String getTitle() {
 		return title;
 	}

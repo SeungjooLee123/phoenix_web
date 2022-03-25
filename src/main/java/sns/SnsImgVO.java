@@ -8,6 +8,7 @@ public class SnsImgVO {
 	 String  id, title;
 	    int sns_no;
 
+	
 
 	    public ArrayList<String> getSns_img() {
 			return sns_img;
