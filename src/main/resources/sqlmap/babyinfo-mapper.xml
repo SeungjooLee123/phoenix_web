@@ -18,10 +18,6 @@
 	select * from master_family_info_tbl where title = (select title from master_baby_info_tbl where baby_id = #{baby_id})
 </select>
 
-<select id="titlelist" resultType="String">
-	select title from master_family_info_tbl
-</select>
-
 <update id="babyupdate">
 	update master_baby_info_tbl set baby_name = #{baby_name}, baby_gender = #{baby_gender}, baby_birth = #{baby_birth}, baby_photo = #{baby_photo, jdbcType=VARCHAR} where baby_id = #{baby_id}
 </update>
@@ -33,4 +29,8 @@
 <delete id="delete">
 	delete from master_baby_info_tbl where baby_id = #{baby_id}
 </delete>
+
+<select id="count" resultType="Integer">
+	select count(*) from master_baby_info_tbl where title = #{title}
+</select>
 </mapper>

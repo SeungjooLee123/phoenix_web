@@ -63,12 +63,6 @@ public class BabyInfoController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/titlelist.bif", produces = "application/json;charset=UTF-8")
-	public String babyinfo_title_list() throws IOException{
-		return gson.toJson(dao.baby_info_title_list());
-	}
-	
-	@ResponseBody
 	@RequestMapping(value = "/updatebaby.bif", produces = "application/json;charset=UTF-8")
 	public boolean babyinfo_update(String vo, String family, HttpServletRequest req, HttpSession session) throws IOException {
 		BabyInfoVO baby = gson.fromJson(vo, BabyInfoVO.class);
@@ -85,7 +79,13 @@ public class BabyInfoController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/babydel.bif", produces = "application/json;charset=UTF-8")
-	public boolean babyinfo_delete(String baby_id) {
-		return dao.baby_info_delete(baby_id);
+	public String babyinfo_delete(String baby_id) {
+		return gson.toJson(dao.baby_info_delete(baby_id));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/countbaby.bif", produces = "application/json;charset=UTF-8")
+	public String babyinfo_count(String title) {
+		return gson.toJson(dao.baby_info_count(title));
 	}
 }
