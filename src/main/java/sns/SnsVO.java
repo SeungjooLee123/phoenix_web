@@ -11,9 +11,24 @@ public class SnsVO {
 	int sns_no;
 	Date sns_date;
 	ArrayList<String> imgList = new ArrayList<String>();
+	String filename, filepath;
 	
 	
 	
+	
+	
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public String getFilepath() {
+		return filepath;
+	}
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
 	public ArrayList<String> getImgList() {
 		return imgList;
 	}

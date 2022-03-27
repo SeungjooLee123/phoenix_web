@@ -2,16 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sns.mapper">  
 
+<select id="list" resultType="sns.SnsVO">
+select * from MASTER_SNS_TBL where title = (select title from master_family_info_tbl where id=#{id}) 
+</select>
+
 <insert id="insert">
 DECLARE V_TEMP_sns_no number;
 BEGIN
 SELECT seq_sns_no.nextval INTO V_TEMP_sns_no FROM DUAL; 
 insert all 
-INTO  master_sns_tbl (sns_no, title, id, sns_date, sns_content ) 
-VALUES (V_TEMP_sns_no, #{title}, #{id}, sysdate, #{sns_content, jdbcType=VARCHAR})
+INTO  master_sns_tbl (sns_no, title, id, sns_date, sns_content, filename, filepath) 
+VALUES (V_TEMP_sns_no, #{title}, #{id}, sysdate, #{sns_content, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR})
 <foreach collection="imgList" item="item" index="i"> 
-into master_sns_img_tbl (sns_no, title, id, sns_img)
-values (V_TEMP_sns_no , #{title}, #{id}, #{item, jdbcType=VARCHAR})
+into master_sns_img_tbl (sns_no, title, id, sns_img, filename, filepath)
+values (V_TEMP_sns_no , #{title}, #{id}, #{item, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR})
 </foreach>
 SELECT 1 FROM DUAL;
 END;

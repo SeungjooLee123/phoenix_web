@@ -7,10 +7,29 @@ public class SnsImgVO {
 	ArrayList<String> sns_img;
 	 String  id, title;
 	    int sns_no;
+	    String filename, filepath;
+	    
+	    
 
 	
 
-	    public ArrayList<String> getSns_img() {
+	    public String getFilename() {
+			return filename;
+		}
+
+		public void setFilename(String filename) {
+			this.filename = filename;
+		}
+
+		public String getFilepath() {
+			return filepath;
+		}
+
+		public void setFilepath(String filepath) {
+			this.filepath = filepath;
+		}
+
+		public ArrayList<String> getSns_img() {
 			return sns_img;
 		}
 
