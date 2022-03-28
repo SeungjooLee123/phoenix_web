@@ -2,8 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sns.mapper">  
 
+<delete id="delete">
+delete * from MASTER_SNS_TBL where sns_no = #{sns_no}
+</delete>
+
 <select id="list" resultType="sns.SnsVO">
-select * from MASTER_SNS_TBL where title = (select title from master_family_info_tbl where id=#{id}) 
+select * from MASTER_SNS_TBL where title IN (select title from master_family_info_tbl where id=#{id}) 
 </select>
 
 <insert id="insert">

@@ -11,6 +11,10 @@ import org.springframework.stereotype.Repository;
 public class SnsDAO {
 	@Autowired private SqlSession sql;
 	
+	public boolean snsDelete(int no) {
+		return sql.delete("sns.mapper.delete", no) == 1 ? true : false;
+	}
+	
 	public List<SnsVO> snsList(SnsVO vo) {
 		return sql.selectList("sns.mapper.list", vo);
 	}
