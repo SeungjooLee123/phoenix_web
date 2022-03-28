@@ -6,4 +6,15 @@
 	select count(*) from	MASTER_USER_INFO_TBL where id = #{id}
 </select>
 	
+	
+	<!-- insert into MASTER_USER_INFO_TBL (id, pw)
+	values ( #{id} , #{pw} ) -->
+<insert id="userjoin">
+	INSERT ALL 
+	INTO MASTER_USER_INFO_TBL (id, pw)
+	VALUES( #{id}, #{pw} ) 
+	INTO MASTER_FAMILY_INFO_TBL (id, title, family_rels )
+	VALUES( #{id},#{title},#{family_rels} ) 
+	SELECT 1 from dual
+</insert>
 </mapper>

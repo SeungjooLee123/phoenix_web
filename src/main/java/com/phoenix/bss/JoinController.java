@@ -30,11 +30,13 @@ public class JoinController {
 	//회원가입처리
 	@ResponseBody
 	@RequestMapping ( value = "/user.join", produces="application/json;charset=UTF-8")
-	public UserVO userJoin (UserVO vo) {
+	public String userJoin (String vo) {
 		Gson gson = new Gson();
-		System.out.println(vo);
+		UserVO userInfo = gson.fromJson(vo, UserVO.class);
+		System.out.println(userInfo.getFamily_rels());
+		return gson.toJson( dao.userJoin(userInfo) );
 		
-		return dao.userJoin(vo) ;
+		//return gson.toJson( dao.userJoin(vo) );
 	}
 	
 	
