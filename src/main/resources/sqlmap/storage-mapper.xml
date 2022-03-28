@@ -4,4 +4,17 @@
 <select id="cntbody" resultType="storage.BabyStorVO">
 	select * from (select * from master_baby_storage_tbl where baby_id = #{baby_id, jdbcType=VARCHAR} order by stor_date desc) where rownum = 1
 </select>
+<insert id="insert">
+	insert into master_baby_storage_tbl(STOR_ID, BABY_ID, STOR_DATE, STOR_KG, STOR_CM) 
+	values(seq_stor_id.nextval, #{baby_id}, #{stor_date}, #{stor_kg}, #{stor_cm})
+</insert>
+<select id="select" resultType="storage.BabyStorVO">
+	select * from master_baby_storage_tbl where baby_id = #{id} and stor_date = #{date}
+</select>
+<update id="update">
+	update master_baby_storage_tbl set
+	STOR_KG = #{stor_kg},
+	STOR_CM = #{stor_cm}
+	where STOR_ID = #{stor_id}
+</update>
 </mapper>
