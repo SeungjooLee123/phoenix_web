@@ -14,8 +14,8 @@ public class JoinDAO {
 		return (Integer) sql.selectOne("join.mapper.id_check",id) == 0 ? true : false;
 	}
 	
-	public UserVO userJoin(UserVO vo) {
-		return vo;
+	public boolean userJoin(UserVO vo) {
+		return sql.insert("join.mapper.userjoin", vo) == 1? true: false;
 	}
 	
 	
