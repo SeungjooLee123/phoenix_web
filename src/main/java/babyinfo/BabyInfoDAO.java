@@ -27,10 +27,6 @@ public class BabyInfoDAO {
 		return sql.selectList("babyinfo.mapper.coparent", baby_id);
 	}
 	
-	public List<String> baby_info_title_list(){
-		return sql.selectList("babyinfo.mapper.titlelist");
-	}
-	
 	public boolean baby_info_update(BabyInfoVO vo) {
 		return sql.update("babyinfo.mapper.babyupdate", vo) == 1 ? true : false;
 	}
@@ -41,5 +37,9 @@ public class BabyInfoDAO {
 	
 	public boolean baby_info_delete(String baby_id) {
 		return sql.delete("babyinfo.mapper.delete", baby_id) == 1 ? true : false;
+	}
+	
+	public boolean baby_info_count(String title) {
+		return (Integer)sql.selectOne("babyinfo.mapper.count", title) > 0 ? true : false;
 	}
 }
