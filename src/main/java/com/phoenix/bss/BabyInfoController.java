@@ -30,7 +30,7 @@ public class BabyInfoController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/list.bif", produces="application/json;charset=UTF-8")
-	public String babyinfo_list(String id) throws IOException {
+	public String babyinfo_list(String id) throws IOException { //아기 리스트 불러오기
 		List<BabyInfoVO> list = dao.baby_info_list(id);
 		String data = gson.toJson(list);
 		return data;
@@ -38,7 +38,7 @@ public class BabyInfoController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/rels.bif", produces = "application/json;charset=UTF-8")
-	public String babyinfo_rels(String id, String baby_id) throws IOException{
+	public String babyinfo_rels(String id, String baby_id) throws IOException{ //해당 아기에 대한 자신과의 관계
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		map.put("baby_id", baby_id);
@@ -48,7 +48,7 @@ public class BabyInfoController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/chTitle.bif", produces = "application/json;charset=UTF-8")
-	public void babyinfo_title_change(String title, String baby_id) throws IOException{
+	public void babyinfo_title_change(String title, String baby_id) throws IOException{ //육아일기 타이틀 변경
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("title", title);
 		map.put("baby_id", baby_id);
@@ -57,14 +57,14 @@ public class BabyInfoController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/coparent.bif", produces = "application/json;charset=UTF-8")
-	public String babyinfo_coparent(String baby_id) throws IOException{
+	public String babyinfo_coparent(String baby_id) throws IOException{ //해당 아기를 공동육아하는 사람 리스트
 		List<FamilyInfoVO> coparent = dao.baby_info_co_parent(baby_id);
 		return gson.toJson(coparent);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/updatebaby.bif", produces = "application/json;charset=UTF-8")
-	public boolean babyinfo_update(String vo, String family, HttpServletRequest req, HttpSession session) throws IOException {
+	public boolean babyinfo_update(String vo, String family, HttpServletRequest req, HttpSession session) throws IOException { //아기 정보 수정
 		BabyInfoVO baby = gson.fromJson(vo, BabyInfoVO.class);
 		MultipartRequest mulReq = (MultipartRequest) req;
 		MultipartFile file = mulReq.getFile("file");
@@ -79,13 +79,36 @@ public class BabyInfoController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/babydel.bif", produces = "application/json;charset=UTF-8")
-	public String babyinfo_delete(String baby_id) {
+	public String babyinfo_delete(String baby_id) { //아기 삭제
 		return gson.toJson(dao.baby_info_delete(baby_id));
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/countbaby.bif", produces = "application/json;charset=UTF-8")
-	public String babyinfo_count(String title) {
+	public String babyinfo_count(String title) { //한 육아일기에 있는 아기 숫자
 		return gson.toJson(dao.baby_info_count(title));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/exit.family", produces = "application/json;charset=UTF-8")
+	public String family_exit(String title, String id, String baby_id) { //공동육아 포기
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("title", title);
+		map.put("id", id);
+		List<FamilyInfoVO> list = dao.baby_info_co_parent(baby_id);
+		if(list.size() == 1) { //공동육아하는 사람이 1명이면
+			dao.delete_all(title); //아기 삭제
+		} else { //공동육아하는 사람 여러명
+			for(int i=0; i<list.size(); i++) {
+				if(list.get(i).getId().equals(id)) {
+					list.remove(i);
+				}
+			}
+			HashMap<String, String> fam_map = new HashMap<String, String>();
+			fam_map.put("title", title);
+			fam_map.put("id", list.get(0).getId());
+			dao.family_change(fam_map);
+		}
+		return gson.toJson(dao.family_exit(map));
 	}
 }
