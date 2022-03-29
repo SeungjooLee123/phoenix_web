@@ -13,9 +13,9 @@ select * from MASTER_GROWTH_TBL where baby_id = #{id}
 </select>
 
 <insert id="insert">
-DECLARE V_TEMP_growth_no number
+DECLARE V_TEMP_growth_no number;
 BEGIN
-SELECT seq_growth_no.nextval INTO V_TEMP_growth_no FROM DUAL
+SELECT seq_growth_no.nextval INTO V_TEMP_growth_no FROM DUAL;
 insert all 
 INTO  MASTER_GROWTH_TBL (gro_no, gro_date, gro_content, baby_name, baby_gender, filename, filepath, baby_id) 
 VALUES (V_TEMP_growth_no, sysdate, #{gro_content, jdbcType=VARCHAR}, #{baby_name}, #{baby_gender}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR}, #{baby_id})
@@ -23,8 +23,8 @@ VALUES (V_TEMP_growth_no, sysdate, #{gro_content, jdbcType=VARCHAR}, #{baby_name
 into MASTER_GRO_IMG_TBL (sns_no,  gro_img, filename, filepath)
 values (V_TEMP_sns_no , #{item, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR})
 </foreach>
-SELECT 1 FROM DUAL
-END
+SELECT 1 FROM DUAL;
+END;
 </insert>
 
 
