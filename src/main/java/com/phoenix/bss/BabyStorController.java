@@ -64,7 +64,7 @@ public class BabyStorController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/select.stor", produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/select_graph.stor", produces = "application/json;charset=UTF-8")
 	public String select_graph(String category, String baby_id) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("baby_id", baby_id);
