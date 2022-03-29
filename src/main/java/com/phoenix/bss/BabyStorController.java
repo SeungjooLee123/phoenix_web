@@ -2,6 +2,7 @@ package com.phoenix.bss;
 
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import diary.DiaryVO;
 import storage.BabyStorDAO;
 import storage.BabyStorVO;
 
@@ -64,17 +66,12 @@ public class BabyStorController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/select.stor", produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/select_graph.stor", produces = "application/json;charset=UTF-8")
 	public String select_graph(String category, String baby_id) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("baby_id", baby_id);
-		
 		if(category.equals("heat")) {
-			
-		} else if(category.equals("height")) {
-			
-		} else if(category.equals("weight")) {
-			
+			return gson.toJson(dao.select_heat(baby_id));
+		} else if(category.equals("height") || category.equals("weight")) {
+			return gson.toJson(dao.select_hw(baby_id));
 		}
 		return "";
 	}

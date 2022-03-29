@@ -17,4 +17,10 @@
 	STOR_CM = #{stor_cm}
 	where STOR_ID = #{stor_id}
 </update>
+<select id="select_heat" resultType="diary.DiaryVO">
+	select * from MASTER_BABY_CARE_TBL where baby_id = #{baby_id} order by stor_date desc
+</select>
+<select id="select_body" resultType="storage.BabyStorVO">
+	select * from master_baby_storage_tbl where baby_id = #{baby_id} order by stor_date desc
+</select>
 </mapper>
