@@ -62,4 +62,20 @@ public class BabyStorController {
 		
 		return gson.toJson(dao.update(vo));
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/select.stor", produces = "application/json;charset=UTF-8")
+	public String select_graph(String category, String baby_id) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("baby_id", baby_id);
+		
+		if(category.equals("heat")) {
+			
+		} else if(category.equals("height")) {
+			
+		} else if(category.equals("weight")) {
+			
+		}
+		return "";
+	}
 }

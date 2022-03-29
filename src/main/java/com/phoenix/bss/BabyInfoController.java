@@ -111,4 +111,13 @@ public class BabyInfoController {
 		}
 		return gson.toJson(dao.family_exit(map));
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "deltitle.bif", produces = "application/json;charset=UTF-8")
+	public void del_title(String title, String id) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("title", title);
+		map.put("id", id);
+		dao.family_exit(map);
+	}
 }
