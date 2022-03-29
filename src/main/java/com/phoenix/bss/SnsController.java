@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 
 
 import common.CommonService;
+import sns.GrowthVO;
 import sns.SnsDAO;
 import sns.SnsVO;
 
@@ -28,6 +29,8 @@ public class SnsController {
 	Gson gson = new Gson();
 	@Autowired SnsDAO dao;
 	@Autowired CommonService common;
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/del.sn", produces="application/json;charset=UTF-8")
@@ -39,19 +42,20 @@ public class SnsController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/list.sn", produces="application/json;charset=UTF-8")
-	public List<SnsVO> sns_list(String vo) {
-		System.out.println("snsList접근");
-		SnsVO testVO = gson.fromJson(vo, SnsVO.class);
-		System.out.println(testVO.getId());
-		return dao.snsList(testVO);
+	@RequestMapping(value = "/select.sn", produces="application/json;charset=UTF-8")
+	public String gro_list(HttpServletRequest req) {
+		System.out.println("groList접근");
+		String id = req.getParameter("id");
+		System.out.println(id);
+		return gson.toJson(dao.groList(id));
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/share.sn", produces="application/json;charset=UTF-8")
 	public String sns_share(String vo, HttpSession session, HttpServletRequest req) throws Exception {
 		System.out.println("snsShare접근");
-		SnsVO imgVO = gson.fromJson(vo, SnsVO.class);
+		//SnsVO imgVO = gson.fromJson(vo, SnsVO.class);
+		GrowthVO Imgvo = gson.fromJson(vo, GrowthVO.class);
 		ArrayList<MultipartFile> fileList = new ArrayList<MultipartFile>();
 		//for(int i=0; i<=req.get)
 		//vo1~vo100 vosize = 100 ;
@@ -65,15 +69,18 @@ public class SnsController {
 		}
 		if(fileList.size() > 0) {
 			for(int i =0; i < fileList.size(); i++) {
-				imgVO.setFilename(fileList.get(i).getOriginalFilename());
-				System.out.println(imgVO.getFilename());
-				imgVO.setFilepath(common.fileUpload("sns",mreq.getFile("file"+i), session));
+				//imgVO.setFilename(fileList.get(i).getOriginalFilename());
+			//	System.out.println(imgVO.getFilename());
+			//	imgVO.setFilepath(common.fileUpload("sns",mreq.getFile("file"+i), session));
+				Imgvo.setFilename(fileList.get(i).getOriginalFilename());
+				System.out.println(Imgvo.getBaby_id());
+				Imgvo.setFilepath(common.fileUpload("gro", mreq.getFile("file"+i), session));
 			}
 		}else {
 			System.out.println("파일 없음");
 		}
 		
-		String imgsns = gson.toJson(dao.snsInsert(imgVO));
+		String imgsns = gson.toJson(dao.snsInsert(Imgvo));
 		return imgsns;
 		
 	}

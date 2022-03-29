@@ -15,12 +15,12 @@ public class SnsDAO {
 		return sql.delete("sns.mapper.delete", no) == 1 ? true : false;
 	}
 	
-	public List<SnsVO> snsList(SnsVO vo) {
-		return sql.selectList("sns.mapper.list", vo);
+	public List<GrowthVO> groList(String id) {
+		return sql.selectList("sns.mapper.list", id);
 	}
 	
-	public boolean snsInsert(SnsVO imgVO) {
-		return sql.insert("sns.mapper.insert", imgVO) == 1 ? true : false;
+	public boolean snsInsert(GrowthVO Imgvo) {
+		return sql.insert("sns.mapper.insert", Imgvo) == 1 ? true : false;
 		
 	}
 	
