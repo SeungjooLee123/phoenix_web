@@ -18,9 +18,6 @@ public class SnsDAO {
 		return sql.selectList("sns.mapper.list", baby_id);
 	}
 	
-//	public List<GrowthVO> groList(String baby_id) {
-//		return sql.selectList("sns.mapper.list", baby_id);
-//	}
 	
 	public boolean snsInsert(GrowthVO Imgvo) {
 		return sql.insert("sns.mapper.insert", Imgvo) == 1 ? true : false;

@@ -11,14 +11,6 @@ delete * from MASTER_GROWTH_TBL where GRO_NO = #{GRO_NO}
 </delete>
 
 
-
-<select id="imglist" resultType="sns.GrowthVO">
-select g.*, (select listagg(gro_img, ',') within group(order by gro_no) from MASTER_GRO_IMG_TBL where gro_no = g.gro_no) imglist
-from MASTER_GROWTH_TBL g 
-where baby_id = #{baby_id}
-order by gro_no desc
-</select>
-
 <select id="list" resultType="sns.GrowthVO">
 select g.* , i.gro_img
 from MASTER_GROWTH_TBL g left outer join MASTER_GRO_IMG_TBL i 

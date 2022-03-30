@@ -30,6 +30,7 @@ public class SnsController {
 	Gson gson = new Gson();
 	@Autowired SnsDAO dao;
 	@Autowired CommonService common;
+	//final String getLocalAddr = "";
 	
 	
 	
@@ -50,30 +51,28 @@ public class SnsController {
 		System.out.println(baby_id);
 		List<GrowthVO> list = dao.groList(baby_id);
 		List<GrowthVO> imgList = new ArrayList<GrowthVO>();
+		int oldGroNo = 0 ;
 		if(list.size() > 0 ) {
 			imgList.add(list.get(0)) ;
+			oldGroNo = list.get(0).getGro_no();
 		}
 		for(int i = 0 ; i < list.size() ; i ++) {
-			for (int j = 0; j < imgList.size(); j++) {
-				if(list.get(i).getGro_no() != imgList.get(j).getGro_no()) {
+			if(oldGroNo != list.get(i).getGro_no()) {		
 					imgList.add(list.get(i));
-					break;
+					oldGroNo = list.get(i).getGro_no();
+			}
+		}
+		int flag = 0 ;
+		for(int i = 0 ; i < imgList.size(); i++) {
+			for (int j = flag; j < list.size(); j++) {
+				if(imgList.get(i).getGro_no() == list.get(j).getGro_no()) {
+					imgList.get(i).setImgList(list.get(j).getGro_img());
+					flag = j;
 				}
 			}
 		}
-		
-		
-		System.out.println(list.get(0).getImgList());
-	
-		
-	
-//		System.out.println(list.get(0).getBaby_name());
-//		GrowthImgVO imgvo = new GrowthImgVO();
-//		for(int i =0; i<list.size(); i++) {
-//			
-//		}
-		
-		return gson.toJson(dao.groList(baby_id));
+		System.out.println(list.get(0).getImgList());	
+		return gson.toJson(imgList);
 	}
 	
 	@ResponseBody
@@ -101,8 +100,11 @@ public class SnsController {
 				Imgvo.setFilename(fileList.get(i).getOriginalFilename()+i);
 				System.out.println(Imgvo.getFilename());
 				System.out.println(Imgvo.getBaby_id());
-				Imgvo.setImgList( common.fileUpload("gro", mreq.getFile("file"+i), session) );
+				String server_path = "http://" + req.getLocalAddr() + ":" + req.getLocalPort() + req.getContextPath() + "/resources/";
+				Imgvo.setImgList(server_path + common.fileUpload("gro", mreq.getFile("file"+i), session));
 				//common.fileUpload("gro", mreq.getFile("file"+i), session);
+				
+			
 				
 			}
 		}else {
