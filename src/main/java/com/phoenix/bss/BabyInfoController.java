@@ -120,4 +120,11 @@ public class BabyInfoController {
 		map.put("id", id);
 		dao.family_exit(map);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "gettitle.bif", produces = "application/json;charset=UTF-8")
+	public String get_title(String id) {
+		
+		return gson.toJson(dao.get_title(id));
+	}
 }
