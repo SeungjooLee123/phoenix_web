@@ -68,11 +68,12 @@ public class BabyStorController {
 	@ResponseBody
 	@RequestMapping(value = "/select_graph.stor", produces = "application/json;charset=UTF-8")
 	public String select_graph(String category, String baby_id) {
-		if(category.equals("heat")) {
-			return gson.toJson(dao.select_heat(baby_id));
-		} else if(category.equals("height") || category.equals("weight")) {
-			return gson.toJson(dao.select_hw(baby_id));
-		}
-		return "";
+		return gson.toJson(dao.select_hw(baby_id));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/select_heat.stor", produces = "application/json;charset=UTF-8")
+	public String select_heat(String baby_id) {
+		return gson.toJson(dao.select_heat(baby_id));
 	}
 }
