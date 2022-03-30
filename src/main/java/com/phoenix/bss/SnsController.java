@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 
 
 import common.CommonService;
+import sns.GrowthImgVO;
 import sns.GrowthVO;
 import sns.SnsDAO;
 import sns.SnsVO;
@@ -33,7 +34,7 @@ public class SnsController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/del.sn", produces="application/json;charset=UTF-8")
+	@RequestMapping(value = "/delete.sn", produces="application/json;charset=UTF-8")
 	public void sns_delete(HttpServletRequest req) {
 		System.out.println("delete접근");
 		int no = Integer.parseInt(req.getParameter("no")+"");
@@ -45,9 +46,34 @@ public class SnsController {
 	@RequestMapping(value = "/select.sn", produces="application/json;charset=UTF-8")
 	public String gro_list(HttpServletRequest req) {
 		System.out.println("groList접근");
-		String id = req.getParameter("id");
-		System.out.println(id);
-		return gson.toJson(dao.groList(id));
+		String baby_id = req.getParameter("baby_id");
+		System.out.println(baby_id);
+		List<GrowthVO> list = dao.groList(baby_id);
+		List<GrowthVO> imgList = new ArrayList<GrowthVO>();
+		if(list.size() > 0 ) {
+			imgList.add(list.get(0)) ;
+		}
+		for(int i = 0 ; i < list.size() ; i ++) {
+			for (int j = 0; j < imgList.size(); j++) {
+				if(list.get(i).getGro_no() != imgList.get(j).getGro_no()) {
+					imgList.add(list.get(i));
+					break;
+				}
+			}
+		}
+		
+		
+		System.out.println(list.get(0).getImgList());
+	
+		
+	
+//		System.out.println(list.get(0).getBaby_name());
+//		GrowthImgVO imgvo = new GrowthImgVO();
+//		for(int i =0; i<list.size(); i++) {
+//			
+//		}
+		
+		return gson.toJson(dao.groList(baby_id));
 	}
 	
 	@ResponseBody
@@ -72,9 +98,12 @@ public class SnsController {
 				//imgVO.setFilename(fileList.get(i).getOriginalFilename());
 			//	System.out.println(imgVO.getFilename());
 			//	imgVO.setFilepath(common.fileUpload("sns",mreq.getFile("file"+i), session));
-				Imgvo.setFilename(fileList.get(i).getOriginalFilename());
+				Imgvo.setFilename(fileList.get(i).getOriginalFilename()+i);
+				System.out.println(Imgvo.getFilename());
 				System.out.println(Imgvo.getBaby_id());
-				Imgvo.setFilepath(common.fileUpload("gro", mreq.getFile("file"+i), session));
+				Imgvo.setImgList( common.fileUpload("gro", mreq.getFile("file"+i), session) );
+				//common.fileUpload("gro", mreq.getFile("file"+i), session);
+				
 			}
 		}else {
 			System.out.println("파일 없음");

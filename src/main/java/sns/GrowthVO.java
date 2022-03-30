@@ -9,18 +9,20 @@ public class GrowthVO {
     Date gro_date;
     String gro_content, baby_name, baby_gender, filename, filepath, baby_id;
     ArrayList<String> imgList = new ArrayList<String>();
-  
+    String gro_img ;
     
     
 
   
+
+
 
 	public ArrayList<String> getImgList() {
 		return imgList;
 	}
 
-	public void setImgList(ArrayList<String> imgList) {
-		this.imgList = imgList;
+	public void setImgList(String imgList) {
+		this.imgList.add(imgList);
 	}
 
 	public int getGro_no() {

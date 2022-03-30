@@ -1,6 +1,5 @@
 package sns;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,9 +14,13 @@ public class SnsDAO {
 		return sql.delete("sns.mapper.delete", no) == 1 ? true : false;
 	}
 	
-	public List<GrowthVO> groList(String id) {
-		return sql.selectList("sns.mapper.list", id);
+	public List<GrowthVO> groList(String baby_id) {
+		return sql.selectList("sns.mapper.list", baby_id);
 	}
+	
+//	public List<GrowthVO> groList(String baby_id) {
+//		return sql.selectList("sns.mapper.list", baby_id);
+//	}
 	
 	public boolean snsInsert(GrowthVO Imgvo) {
 		return sql.insert("sns.mapper.insert", Imgvo) == 1 ? true : false;
