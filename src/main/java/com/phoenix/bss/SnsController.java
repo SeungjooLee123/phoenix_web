@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
-
+import com.google.gson.GsonBuilder;
 
 import common.CommonService;
 import sns.GrowthImgVO;
@@ -27,10 +27,10 @@ import sns.SnsVO;
 
 @Controller
 public class SnsController {
-	Gson gson = new Gson();
+	Gson gson = new GsonBuilder().setDateFormat("MM-dd").create();
 	@Autowired SnsDAO dao;
 	@Autowired CommonService common;
-	//final String getLocalAddr = "";
+	private final String getLocalAddr = "121.148.239.238:5524";
 	
 	
 	
@@ -41,6 +41,11 @@ public class SnsController {
 		int no = Integer.parseInt(req.getParameter("no")+"");
 		dao.snsDelete(no);
 	}
+	
+	
+	
+	
+	
 	
 	
 	@ResponseBody
@@ -97,21 +102,21 @@ public class SnsController {
 				//imgVO.setFilename(fileList.get(i).getOriginalFilename());
 			//	System.out.println(imgVO.getFilename());
 			//	imgVO.setFilepath(common.fileUpload("sns",mreq.getFile("file"+i), session));
-				Imgvo.setFilename(fileList.get(i).getOriginalFilename()+i);
-				System.out.println(Imgvo.getFilename());
-				System.out.println(Imgvo.getBaby_id());
-				String server_path = "http://" + req.getLocalAddr() + ":" + req.getLocalPort() + req.getContextPath() + "/resources/";
-				Imgvo.setImgList(server_path + common.fileUpload("gro", mreq.getFile("file"+i), session));
-				//common.fileUpload("gro", mreq.getFile("file"+i), session);
-				
 			
-				
+				System.out.println(Imgvo.getBaby_id());
+				String server_path = "http://" + getLocalAddr + req.getContextPath() + "/resources/";
+				Imgvo.setImgList(server_path + common.fileUpload("gro", mreq.getFile("file"+i), session));
+				Imgvo.setFilename(fileList.get(i).getOriginalFilename());
+				Imgvo.setB_id(Imgvo.getBaby_id());
+			
+				//common.fileUpload("gro", mreq.getFile("file"+i), session);	
 			}
 		}else {
 			System.out.println("파일 없음");
 		}
 		
 		String imgsns = gson.toJson(dao.snsInsert(Imgvo));
+		System.out.println(imgsns);
 		return imgsns;
 		
 	}

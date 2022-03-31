@@ -16,7 +16,7 @@ select g.* , i.gro_img
 from MASTER_GROWTH_TBL g left outer join MASTER_GRO_IMG_TBL i 
 on g.baby_id = i.baby_id
 where g.baby_id = #{baby_id}
-order by g.gro_no
+order by g.gro_no desc
 </select>
 
 <insert id="insert">
@@ -27,12 +27,18 @@ insert all
 INTO  MASTER_GROWTH_TBL (gro_no, gro_date, gro_content, baby_name, baby_gender, baby_id) 
 VALUES (V_TEMP_growth_no, sysdate, #{gro_content, jdbcType=VARCHAR}, #{baby_name}, #{baby_gender}, #{baby_id})
 <foreach collection="imgList" item="item" index="i"> 
-into MASTER_GRO_IMG_TBL (gro_no,  gro_img, filename, filepath)
-values (V_TEMP_growth_no, #{item, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR})
+into MASTER_GRO_IMG_TBL (gro_no,  gro_img, filename, baby_id)
+values (V_TEMP_growth_no, #{item, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{b_id})
 </foreach>
 SELECT 1 FROM DUAL;
 END;
 </insert>
+
+<select id="check" resultType="integer">
+	SELECT COUNT(*) 
+	FROM MASTER_GRO_IMG_TBL
+	WHERE FILENAME = #{filename}
+</select>
 
 
 </mapper>

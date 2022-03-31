@@ -4,13 +4,22 @@ import java.util.ArrayList;
 
 public class GrowthImgVO {
     int gro_no;
-    String filename, filepath;
+    String filename, baby_id;
     ArrayList<String> gro_img;
+   
     
     
     
 
-    public ArrayList<String> getGro_img() {
+    public String getBaby_id() {
+		return baby_id;
+	}
+
+	public void setBaby_id(String baby_id) {
+		this.baby_id = baby_id;
+	}
+
+	public ArrayList<String> getGro_img() {
 		return gro_img;
 	}
 
@@ -35,11 +44,4 @@ public class GrowthImgVO {
         this.filename = filename;
     }
 
-    public String getFilepath() {
-        return filepath;
-    }
-
-    public void setFilepath(String filepath) {
-        this.filepath = filepath;
-    }
 }

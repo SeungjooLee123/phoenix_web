@@ -11,7 +11,7 @@ public class SnsDAO {
 	@Autowired private SqlSession sql;
 	
 	public boolean snsDelete(int no) {
-		return sql.delete("sns.mapper.delete", no) == 1 ? true : false;
+		return sql.delete("sns.mapper.delete", no) > 0 ? true : false;
 	}
 	
 	public List<GrowthVO> groList(String baby_id) {
@@ -20,7 +20,10 @@ public class SnsDAO {
 	
 	
 	public boolean snsInsert(GrowthVO Imgvo) {
-		return sql.insert("sns.mapper.insert", Imgvo) == 1 ? true : false;
+		sql.insert("sns.mapper.insert", Imgvo);
+		String filename = Imgvo.getImgList().get(0);
+		int test = sql.selectOne("sns.mapper.check", filename);
+		return false;
 		
 	}
 	
