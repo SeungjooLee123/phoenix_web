@@ -1,6 +1,7 @@
 package com.phoenix.bss;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import babyinfo.BabyInfoVO;
 import common.CommonService;
@@ -23,6 +25,7 @@ import user.UserVO;
 public class JoinController {
 	@Autowired JoinDAO dao;
 	@Autowired CommonService common;
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 	final String getLocalAddr = "121.148.239.238:5524";
 	
 	
@@ -46,9 +49,17 @@ public class JoinController {
 		
 		boolean insertchk = dao.userJoin(userInfo);
 		
+		String uuid = UUID.randomUUID().toString();
+
+        //System.out.println(uuid);
+		
+		
+		
 		BabyInfoVO babyInfoVO = gson.fromJson(vo2, BabyInfoVO.class);
 		MultipartRequest mulReq = (MultipartRequest) req;
 		MultipartFile file = mulReq.getFile("file");
+		
+		babyInfoVO.setBaby_id(uuid);
 		
 		//if( dao.userJoin(userInfo) ) {
 			if(file != null) {
@@ -86,8 +97,12 @@ public class JoinController {
 	}
 	
 	
-	
-	
+//	@ResponseBody
+//	@RequestMapping(value = "/invite_login.join", produces = "application/json;charset=UTF-8")
+//	public String select_graph(String category, String baby_id) {
+//		return gson.toJson(dao.invite_login(baby_id));
+//	}
+//	
 	
 	
 }

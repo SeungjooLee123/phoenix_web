@@ -9,9 +9,12 @@
 	
 <insert id="babyjoin">
 	INSERT INTO MASTER_BABY_INFO_TBL ( BABY_ID, TITLE, BABY_NAME, BABY_BIRTH, BABY_PHOTO, BABY_GENDER, ID )
-	VALUES ( '2f48f241-9d64-4d1634-bf56-70b9d4e0e79e' ,#{ title },#{ baby_name },#{ baby_birth },#{ baby_photo, jdbcType=VARCHAR },#{ baby_gender },#{ id } )
+	VALUES ( #{baby_id} ,#{ title },#{ baby_name },#{ baby_birth },#{ baby_photo, jdbcType=VARCHAR },#{ baby_gender },#{ id } )
 </insert>	
-	
+
+<insert id="invite_login">
+
+</insert>
 	
 	
 	<!-- insert into MASTER_USER_INFO_TBL (id, pw)

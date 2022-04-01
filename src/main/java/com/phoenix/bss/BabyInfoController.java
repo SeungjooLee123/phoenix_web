@@ -125,7 +125,8 @@ public class BabyInfoController {
 	@ResponseBody
 	@RequestMapping(value = "gettitle.bif", produces = "application/json;charset=UTF-8")
 	public String get_title(String id) {
-		
-		return gson.toJson(dao.get_title(id));
+		String str = dao.get_title(id);
+		System.out.println(dao.get_title(id));
+		return gson.toJson(str);
 	}
 }
