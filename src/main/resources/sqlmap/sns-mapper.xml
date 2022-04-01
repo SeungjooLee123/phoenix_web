@@ -2,24 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sns.mapper">  
 
-<select id="list" resultType="sns.SnsVO">
-select * from MASTER_SNS_TBL where title = (select title from master_family_info_tbl where id=#{id}) 
+<update id="update">
+
+</update>
+
+<delete id="delete">
+delete * from MASTER_GROWTH_TBL where GRO_NO = #{GRO_NO}
+</delete>
+
+
+<select id="list" resultType="sns.GrowthVO">
+select g.* , i.gro_img
+from MASTER_GROWTH_TBL g left outer join MASTER_GRO_IMG_TBL i 
+on g.baby_id = i.baby_id
+where g.baby_id = #{baby_id}
+order by g.gro_no desc
 </select>
 
 <insert id="insert">
-DECLARE V_TEMP_sns_no number;
+DECLARE V_TEMP_growth_no number;
 BEGIN
-SELECT seq_sns_no.nextval INTO V_TEMP_sns_no FROM DUAL; 
+SELECT seq_growth_no.nextval INTO V_TEMP_growth_no FROM DUAL;
 insert all 
-INTO  master_sns_tbl (sns_no, title, id, sns_date, sns_content, filename, filepath) 
-VALUES (V_TEMP_sns_no, #{title}, #{id}, sysdate, #{sns_content, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR})
+INTO  MASTER_GROWTH_TBL (gro_no, gro_date, gro_content, baby_name, baby_gender, baby_id) 
+VALUES (V_TEMP_growth_no, sysdate, #{gro_content, jdbcType=VARCHAR}, #{baby_name}, #{baby_gender}, #{baby_id})
 <foreach collection="imgList" item="item" index="i"> 
-into master_sns_img_tbl (sns_no, title, id, sns_img, filename, filepath)
-values (V_TEMP_sns_no , #{title}, #{id}, #{item, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR})
+into MASTER_GRO_IMG_TBL (gro_no,  gro_img, filename, baby_id)
+values (V_TEMP_growth_no, #{item, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{b_id})
 </foreach>
 SELECT 1 FROM DUAL;
 END;
 </insert>
+
+<select id="check" resultType="integer">
+	SELECT COUNT(*) 
+	FROM MASTER_GRO_IMG_TBL
+	WHERE FILENAME = #{filename}
+</select>
 
 
 </mapper>
