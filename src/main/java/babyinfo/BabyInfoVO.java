@@ -1,6 +1,6 @@
 package babyinfo;
 
-import java.sql.Date;
+import java.util.*;
 
 public class BabyInfoVO {
 	String baby_id, title, baby_name, baby_photo, baby_gender, id;
@@ -46,6 +46,7 @@ public class BabyInfoVO {
 		return baby_birth;
 	}
 	public void setBaby_birth(Date baby_birth) {
+		
 		this.baby_birth = baby_birth;
 	}
 }
