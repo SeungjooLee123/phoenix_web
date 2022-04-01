@@ -47,6 +47,7 @@ public class GrowthVO {
 	}
 
 	public void setImgList(String imgList) {
+		if(imgList == null) return;
 		this.imgList.add(imgList);
 	}
 
