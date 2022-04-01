@@ -109,7 +109,7 @@ padding:0 4px;}
 <div class="btns">
 	<a onclick="login()"><img src="imgs/btn_login.png" style="width:155px; height:40px; margin-right:40px; cursor: pointer;"></a><a href='<c:url value="/join"/>'><img src="imgs/btn_join.png" style="width:155px; height:40px;"></a>
 </div>
-<hr style="width:20%; height:1px; border:none; background:#B5B5B5; margin: 0 auto; margin-top: 50px; opacity: 0.3;">  
+<hr style="width:20%; height:1px; border:none; background:#B5B5B5; margin: 0 auto; margin-top: 50px; opacity: 0.6;">  
 <p class="social-text">소셜로그인</p>
 <div class="btns">
 <a><img src="imgs/kakao_login.png" style="width:155px; height:40px; margin-right:40px;"></a><a><img src="imgs/naver_login.png" style="width:155px; height:40px;"></a>

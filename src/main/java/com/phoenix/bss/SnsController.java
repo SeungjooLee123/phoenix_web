@@ -60,6 +60,8 @@ public class SnsController {
 		if(list.size() > 0 ) {
 			imgList.add(list.get(0)) ;
 			oldGroNo = list.get(0).getGro_no();
+		}else if (list.size() == 0) {
+			return gson.toJson(imgList);
 		}
 		for(int i = 0 ; i < list.size() ; i ++) {
 			if(oldGroNo != list.get(i).getGro_no()) {		
