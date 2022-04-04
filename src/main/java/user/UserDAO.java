@@ -19,4 +19,8 @@ public class UserDAO {
 	public List<String> baby_info_title_list(String id){
 		return sql.selectList("user.mapper.titlelist", id);
 	}
+	
+	public boolean user_join(UserVO vo) {
+		return sql.insert("user.mapper.join", vo) == 1? true: false ;
+	}
 }
