@@ -79,8 +79,12 @@ public class BabyInfoController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/babydel.bif", produces = "application/json;charset=UTF-8")
-	public String babyinfo_delete(String baby_id) { //아기 삭제
-		return gson.toJson(dao.baby_info_delete(baby_id));
+	public String babyinfo_delete(String baby_id, String title) { //아기 삭제
+		boolean result = dao.baby_info_delete(baby_id);
+		if(dao.baby_info_count(title)) { //육아일기에 아기 없음
+			dao.delete_title(title);
+		}
+		return gson.toJson(result);
 	}
 	
 	@ResponseBody
