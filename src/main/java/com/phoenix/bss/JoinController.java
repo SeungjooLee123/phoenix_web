@@ -27,7 +27,7 @@ public class JoinController {
 	@Autowired CommonService common;
 	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 	final String getLocalAddr = "121.148.239.238:5524";
-	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
+
 	
 	//ID 중복확인
 	@ResponseBody
@@ -49,7 +49,7 @@ public class JoinController {
 		boolean insertchk = dao.userJoin(userInfo);
 		boolean result = false; 
 		
-		String uuid = UUID.randomUUID().toString();
+		
 
         //System.out.println(uuid);
 		
@@ -59,7 +59,7 @@ public class JoinController {
 		MultipartRequest mulReq = (MultipartRequest) req;
 		MultipartFile file = mulReq.getFile("file");
 		
-		babyInfoVO.setBaby_id(uuid);
+		//babyInfoVO.setBaby_id(uuid);
 		
 		//if( dao.userJoin(userInfo) ) {
 			if(file != null) {
@@ -96,7 +96,7 @@ public class JoinController {
 		
 		//return "";
 		
-		
+		System.out.println( insertchk );
 		return gson.toJson( insertchk );
 	}
 	
