@@ -9,17 +9,14 @@
 	
 <insert id="babyjoin">
 	INSERT INTO MASTER_BABY_INFO_TBL ( BABY_ID, TITLE, BABY_NAME, BABY_BIRTH, BABY_PHOTO, BABY_GENDER, ID )
-	VALUES ( 'dfff8ff41-9ds-4d163abf5d-70d9dse0e7s' ,#{ title },#{ baby_name },#{ baby_birth },#{ baby_photo, jdbcType=VARCHAR },#{ baby_gender },#{ id } )
+	VALUES ( #{baby_id} ,#{ title },#{ baby_name },#{ baby_birth },#{ baby_photo, jdbcType=VARCHAR },#{ baby_gender },#{ id } )
 </insert>	
-<<<<<<< HEAD
 
 <insert id="invite_login">
 	insert into MASTER_FAMILY_INFO_TBL (TITLE,ID,FAMILY_RELS)
 	values (#{title} ,#{ id },#{ family_rels })
 </insert>
-=======
 	
->>>>>>> master
 	
 	
 	<!-- insert into MASTER_USER_INFO_TBL (id, pw)
