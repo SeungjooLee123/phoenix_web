@@ -3,7 +3,7 @@
 <mapper namespace="babyinfo.mapper">
 
 <select id="list" resultType="babyinfo.BabyInfoVO">
-	select * from master_baby_info_tbl where title in (select title from master_family_info_tbl where id=#{id})
+	select * from master_baby_info_tbl where title in (select title from master_family_info_tbl where id=#{id}) order by baby_birth
 </select>
 
 <select id="rels" resultType="babyinfo.FamilyInfoVO">
@@ -18,10 +18,6 @@
 	select * from master_family_info_tbl where title = (select title from master_baby_info_tbl where baby_id = #{baby_id})
 </select>
 
-<select id="titlelist" resultType="String">
-	select title from master_family_info_tbl
-</select>
-
 <update id="babyupdate">
 	update master_baby_info_tbl set baby_name = #{baby_name}, baby_gender = #{baby_gender}, baby_birth = #{baby_birth}, baby_photo = #{baby_photo, jdbcType=VARCHAR} where baby_id = #{baby_id}
 </update>
@@ -33,4 +29,23 @@
 <delete id="delete">
 	delete from master_baby_info_tbl where baby_id = #{baby_id}
 </delete>
+
+<select id="count" resultType="Integer">
+	select count(*) from master_baby_info_tbl where title = #{title}
+</select>
+
+<delete id="exit">
+	delete from master_family_info_tbl where title = #{title} and id = #{id}
+</delete>
+
+<update id="update_fam">
+	update master_baby_info_tbl set id = #{id} where title = #{title}
+</update>
+
+<delete id="del_all">
+	delete from master_baby_info_tbl where title = #{title}
+</delete>
+<select id="get_title" resultType="String">
+	select title from master_baby_info_tbl where baby_id = #{id}
+</select>
 </mapper>
