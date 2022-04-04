@@ -11,4 +11,9 @@
 	select title from master_family_info_tbl where id=#{id}
 </select>
 
+<insert id="join">
+	insert into MASTER_USER_INFO_TBL(ID,PW,NAVER_ID,KAKAO_ID)
+	values(#{id},#{pw},#{naver_id,jdbcType=VARCHAR},#{kakao_id,jdbcType=VARCHAR})
+</insert>
+
 </mapper>

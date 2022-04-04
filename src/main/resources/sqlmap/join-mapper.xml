@@ -11,6 +11,11 @@
 	INSERT INTO MASTER_BABY_INFO_TBL ( BABY_ID, TITLE, BABY_NAME, BABY_BIRTH, BABY_PHOTO, BABY_GENDER, ID )
 	VALUES ( #{baby_id} ,#{ title },#{ baby_name },#{ baby_birth },#{ baby_photo, jdbcType=VARCHAR },#{ baby_gender },#{ id } )
 </insert>	
+
+<insert id="invite_login">
+	insert into MASTER_FAMILY_INFO_TBL (TITLE,ID,FAMILY_RELS)
+	values (#{title} ,#{ id },#{ family_rels })
+</insert>
 	
 	
 	

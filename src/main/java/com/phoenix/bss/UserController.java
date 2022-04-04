@@ -63,6 +63,14 @@ public class UserController {
 		return gson.toJson(dao.baby_info_title_list(id));
 	}
 	
+	//유저 회원가입 요청
 	
+	@ResponseBody
+	@RequestMapping(value = "/user_join.us", produces = "application/json;charset=UTF-8")
+	public String user_join(String vo){
+		System.out.println("user_join접근");
+		
+		return gson.toJson(dao.user_join(gson.fromJson(vo, UserVO.class)));
+	}
 
 }

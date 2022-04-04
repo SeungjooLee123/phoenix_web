@@ -40,7 +40,7 @@ public class BabyInfoDAO {
 	}
 	
 	public boolean baby_info_count(String title) {
-		return (Integer)sql.selectOne("babyinfo.mapper.count", title) > 0 ? true : false;
+		return (Integer)sql.selectOne("babyinfo.mapper.count", title) == 0 ? true : false;
 	}
 	
 	public boolean family_exit(HashMap<String, String> map) {
@@ -57,5 +57,9 @@ public class BabyInfoDAO {
 
 	public String get_title(String id) {
 		return sql.selectOne("babyinfo.mapper.get_title",id);
+	}
+	
+	public void delete_title(String title) {
+		sql.delete("babyinfo.mapper.del_title", title);
 	}
 }
