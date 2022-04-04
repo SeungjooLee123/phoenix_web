@@ -2,14 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sns.mapper">  
 
-<update id="update">
 
-</update>
 
 <delete id="delete">
-delete * from MASTER_GROWTH_TBL where GRO_NO = #{GRO_NO}
+delete 
+from MASTER_GROWTH_TBL g
+where g.gro_no in (select i.gro_no
+                from MASTER_GRO_IMG_TBL i
+                where g.gro_no = #{gro_no})
 </delete>
 
+<update id="update">
+update 
+</update>
 
 <select id="list" resultType="sns.GrowthVO">
 select g.* , i.gro_img

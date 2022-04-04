@@ -10,8 +10,12 @@ import org.springframework.stereotype.Repository;
 public class SnsDAO {
 	@Autowired private SqlSession sql;
 	
-	public boolean snsDelete(int no) {
+	public boolean groDelete(int no) {
 		return sql.delete("sns.mapper.delete", no) > 0 ? true : false;
+	}
+	
+	public boolean groupdate(GrowthVO vo) {
+		return sql.update("sns.mapper.update", vo) > 0 ? true: false;
 	}
 	
 	public List<GrowthVO> groList(String baby_id) {
