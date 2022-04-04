@@ -13,7 +13,8 @@
 </insert>	
 
 <insert id="invite_login">
-
+	insert into MASTER_FAMILY_INFO_TBL (TITLE,ID,FAMILY_RELS)
+	values (#{title} ,#{ id },#{ family_rels })
 </insert>
 	
 	

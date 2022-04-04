@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import babyinfo.BabyInfoVO;
+import babyinfo.FamilyInfoVO;
 import common.CommonService;
 import join.JoinDAO;
 import user.UserVO;
@@ -97,12 +98,13 @@ public class JoinController {
 	}
 	
 	
-//	@ResponseBody
-//	@RequestMapping(value = "/invite_login.join", produces = "application/json;charset=UTF-8")
-//	public String select_graph(String category, String baby_id) {
-//		return gson.toJson(dao.invite_login(baby_id));
-//	}
-//	
+	@ResponseBody
+	@RequestMapping(value = "/invite_login.join", produces = "application/json;charset=UTF-8")
+	public String select_graph(String category, String baby_id) {
+		FamilyInfoVO familyInfoVO = gson.fromJson("vo", FamilyInfoVO.class);
+		return gson.toJson(dao.invite_login(familyInfoVO));
+	}
+	
 	
 	
 }
