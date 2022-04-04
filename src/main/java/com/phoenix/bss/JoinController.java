@@ -28,10 +28,7 @@ public class JoinController {
 	@Autowired CommonService common;
 	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 	final String getLocalAddr = "121.148.239.238:5524";
-<<<<<<< HEAD
 
-=======
->>>>>>> lsj_web
 	
 	//ID 중복확인
 	@ResponseBody
