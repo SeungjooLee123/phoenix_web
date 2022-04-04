@@ -14,8 +14,9 @@ delete * from MASTER_GROWTH_TBL where GRO_NO = #{GRO_NO}
 <select id="list" resultType="sns.GrowthVO">
 select g.* , i.gro_img
 from MASTER_GROWTH_TBL g left outer join MASTER_GRO_IMG_TBL i 
-on g.baby_id = i.baby_id
+on g.gro_no = i.gro_no
 where g.baby_id = #{baby_id}
+AND i.gro_img is not null
 order by g.gro_no desc
 </select>
 

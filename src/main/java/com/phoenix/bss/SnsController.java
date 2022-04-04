@@ -52,31 +52,35 @@ public class SnsController {
 	@RequestMapping(value = "/select.sn", produces="application/json;charset=UTF-8")
 	public String gro_list(HttpServletRequest req) {
 		System.out.println("groList접근");
+		
+		// baby id 가져옴
 		String baby_id = req.getParameter("baby_id");
 		System.out.println(baby_id);
+		
+		// 게시물 리스트. 
 		List<GrowthVO> list = dao.groList(baby_id);
+		
+		// 이미지게시물 ( 임시 ) 선언
 		List<GrowthVO> imgList = new ArrayList<GrowthVO>();
-		int oldGroNo = 0 ;
-		if(list.size() > 0 ) {
-			imgList.add(list.get(0)) ;
-			oldGroNo = list.get(0).getGro_no();
-		}
-		for(int i = 0 ; i < list.size() ; i ++) {
-			if(oldGroNo != list.get(i).getGro_no()) {		
-					imgList.add(list.get(i));
-					oldGroNo = list.get(i).getGro_no();
+		
+		// 게시물이 없을 때 날리기
+		if(list.size() < 1) return gson.toJson(null);
+		
+		// 이미지 리스트의 인덱스
+		int idx_imgList = 0;
+		for(int i = 0; i < list.size(); i++) {
+			// 처음엔 무조건 들어가게.
+			if(i == 0) imgList.add(list.get(i));
+			
+			
+			if(imgList.get(idx_imgList).getGro_no() == list.get(i).getGro_no()) {
+				imgList.get(idx_imgList).setImgList(list.get(i).getGro_img());
+			} else {
+				imgList.add(list.get(i));
+				imgList.get(++idx_imgList).setImgList(list.get(i).getGro_img());
 			}
 		}
-		int flag = 0 ;
-		for(int i = 0 ; i < imgList.size(); i++) {
-			for (int j = flag; j < list.size(); j++) {
-				if(imgList.get(i).getGro_no() == list.get(j).getGro_no()) {
-					imgList.get(i).setImgList(list.get(j).getGro_img());
-					flag = j;
-				}
-			}
-		}
-		System.out.println(list.get(0).getImgList());	
+		
 		return gson.toJson(imgList);
 	}
 	

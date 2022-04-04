@@ -28,12 +28,13 @@ public class JoinController {
 	@Autowired CommonService common;
 	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 	final String getLocalAddr = "121.148.239.238:5524";
-	
+	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 	
 	//ID 중복확인
 	@ResponseBody
 	@RequestMapping ( value = "/id_check.join", produces="application/json;charset=UTF-8")
 	public String id_check(String id) throws IOException {
+		System.out.println("ㅇㄹㅇㄹ");
 		Gson gson = new Gson();
 		System.out.println(id);
 		String rtn =  gson.toJson( dao.id_check(id) );
@@ -44,11 +45,10 @@ public class JoinController {
 	//회원가입처
 	@ResponseBody
 	@RequestMapping ( value = "/user.join", produces="application/json;charset=UTF-8")
-	public void userJoin (String vo , String vo2 , HttpServletRequest req , HttpSession session) {
-		Gson gson = new Gson();
+	public String userJoin (String vo , String vo2 , HttpServletRequest req , HttpSession session) {
 		UserVO userInfo = gson.fromJson(vo, UserVO.class);
-		
 		boolean insertchk = dao.userJoin(userInfo);
+		boolean result = false; 
 		
 		String uuid = UUID.randomUUID().toString();
 
@@ -75,26 +75,30 @@ public class JoinController {
 					System.out.println("--------------------------");
 				}
 				
+			}else {
+				gson.toJson( dao.babyJoin(babyInfoVO) );
 			}
-			gson.toJson( dao.babyJoin(babyInfoVO) );
+				
+			
 			
 		//}
 		
-		System.out.println(babyInfoVO.getTitle());
-		System.out.println(userInfo.getFamily_rels());
-		System.out.println(babyInfoVO.getBaby_birth() );
-		System.out.println(babyInfoVO.getBaby_name() );
-		System.out.println(babyInfoVO.getBaby_gender() );
-		System.out.println(babyInfoVO.getBaby_photo() );
-		System.out.println(babyInfoVO.getId() );
-		System.out.println(babyInfoVO.getTitle() );
-		System.out.println("ddd: " + file);
-		String aa= "";
+		/*
+		 * System.out.println(babyInfoVO.getTitle());
+		 * System.out.println(userInfo.getFamily_rels());
+		 * System.out.println(babyInfoVO.getBaby_birth() );
+		 * System.out.println(babyInfoVO.getBaby_name() );
+		 * System.out.println(babyInfoVO.getBaby_gender() );
+		 * System.out.println(babyInfoVO.getBaby_photo() );
+		 * System.out.println(babyInfoVO.getId() );
+		 * System.out.println(babyInfoVO.getTitle() ); System.out.println("ddd: " +
+		 * file); String aa= "";
+		 */
 		
 		//return "";
 		
 		
-		//return gson.toJson( dao.userJoin(vo) );
+		return gson.toJson( insertchk );
 	}
 	
 	
