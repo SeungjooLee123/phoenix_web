@@ -39,6 +39,7 @@ public class SnsController {
 	public String sns_delete(HttpServletRequest req) {
 		System.out.println("delete접근");
 		int no = Integer.parseInt(req.getParameter("no")+"");
+		System.out.println(no);
 		return gson.toJson(dao.groDelete(no));
 	}
 	
