@@ -77,6 +77,7 @@ public class BabyInfoController {
 		return dao.baby_info_update(baby) || dao.baby_info_rels_update(gson.fromJson(family, FamilyInfoVO.class));
 	}
 	
+
 	@ResponseBody
 	@RequestMapping(value = "/babydel.bif", produces = "application/json;charset=UTF-8")
 	public String babyinfo_delete(String baby_id, String title) { //아기 삭제
@@ -128,7 +129,8 @@ public class BabyInfoController {
 	@ResponseBody
 	@RequestMapping(value = "gettitle.bif", produces = "application/json;charset=UTF-8")
 	public String get_title(String id) {
-		
-		return gson.toJson(dao.get_title(id));
+		String str = dao.get_title(id);
+		System.out.println(dao.get_title(id));
+		return gson.toJson(str);
 	}
 }
