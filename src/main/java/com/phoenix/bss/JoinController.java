@@ -28,7 +28,6 @@ public class JoinController {
 	@Autowired CommonService common;
 	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 	final String getLocalAddr = "121.148.239.238:5524";
-	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 	
 	//ID 중복확인
 	@ResponseBody
@@ -104,8 +103,9 @@ public class JoinController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/invite_login.join", produces = "application/json;charset=UTF-8")
-	public String select_graph(String category, String baby_id) {
-		FamilyInfoVO familyInfoVO = gson.fromJson("vo", FamilyInfoVO.class);
+	public String invite_login(String vo) {
+		System.out.println("invite_login 접근");
+		FamilyInfoVO familyInfoVO = gson.fromJson(vo, FamilyInfoVO.class);
 		return gson.toJson(dao.invite_login(familyInfoVO));
 	}
 	
