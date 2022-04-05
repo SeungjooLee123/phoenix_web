@@ -27,10 +27,12 @@ public class BabyInfoController {
 	@Autowired BabyInfoDAO dao;
 	@Autowired private CommonService common;
 	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
+	final String getLocalAddr = "121.148.239.238:5524";
 	
 	@ResponseBody
 	@RequestMapping(value = "/list.bif", produces="application/json;charset=UTF-8")
 	public String babyinfo_list(String id) throws IOException { //아기 리스트 불러오기
+		System.out.println(id);
 		List<BabyInfoVO> list = dao.baby_info_list(id);
 		String data = gson.toJson(list);
 		return data;
@@ -71,7 +73,7 @@ public class BabyInfoController {
 		if(file != null) {
 			System.out.println(file.getOriginalFilename());
 			String path = common.fileUpload("profile", file, session);
-			String server_path = "http://" + req.getLocalAddr() + ":" + req.getLocalPort() + req.getContextPath() + "/resources/";
+			String server_path = "http://" + getLocalAddr + req.getContextPath() + "/resources/";
 			baby.setBaby_photo(server_path + path);
 		}
 		return dao.baby_info_update(baby) || dao.baby_info_rels_update(gson.fromJson(family, FamilyInfoVO.class));

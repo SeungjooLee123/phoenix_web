@@ -125,4 +125,17 @@ public class JoinController {
 		}
 		return gson.toJson(false);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/insert_baby.join", produces = "application/json;charset=UTF-8")
+	public String insert_baby(String vo) {
+		System.out.println(vo);
+		String uuid = UUID.randomUUID().toString();
+		BabyInfoVO babyvo = gson.fromJson(vo, BabyInfoVO.class);
+		babyvo.setBaby_id(uuid);
+		if(dao.babyJoin(babyvo)) {
+			return gson.toJson(true);
+		}
+		return gson.toJson(false);
+	}
 }
