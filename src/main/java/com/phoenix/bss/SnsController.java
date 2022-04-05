@@ -36,15 +36,26 @@ public class SnsController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/delete.sn", produces="application/json;charset=UTF-8")
-	public void sns_delete(HttpServletRequest req) {
+	public String sns_delete(HttpServletRequest req) {
 		System.out.println("delete접근");
 		int no = Integer.parseInt(req.getParameter("no")+"");
-		dao.snsDelete(no);
+		System.out.println(no);
+		return gson.toJson(dao.groDelete(no));
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value = "/update.sn", produces="application/json;charset=UTF-8")
+	public String gro_update(HttpServletRequest req) {
+		System.out.println("groUpdate접근");
+		String testvo =  req.getParameter("vo");
+		GrowthVO vo = gson.fromJson(testvo, GrowthVO.class);
+		dao.groupdate(vo);
 	
+		return "";
+	}
 	
+
 	
 	
 	
@@ -83,6 +94,14 @@ public class SnsController {
 		
 		return gson.toJson(imgList);
 	}
+	
+//	@ResponseBody
+//	@RequestMapping(value = "/text.sn", produces="application/json;charset=UTF-8")
+//	public String text_share(HttpServletRequest req) {
+//		System.out.println("textShare접근");
+//		return "";
+//	}
+//	
 	
 	@ResponseBody
 	@RequestMapping(value = "/share.sn", produces="application/json;charset=UTF-8")
