@@ -110,6 +110,20 @@ public class JoinController {
 		return gson.toJson(dao.invite_login(familyInfoVO));
 	}
 	
-	
-	
+	@ResponseBody
+	@RequestMapping(value = "/insert_new.join", produces = "application/json;charset=UTF-8")
+	public String insert_new(String familyvo, String babyvo) {
+		System.out.println(familyvo);
+		System.out.println(babyvo);
+		if(dao.invite_login(gson.fromJson(familyvo, FamilyInfoVO.class))) {
+			String uuid = UUID.randomUUID().toString();
+			BabyInfoVO vo = gson.fromJson(babyvo, BabyInfoVO.class);
+			vo.setBaby_id(uuid);
+			if(dao.babyJoin(vo)) {
+				return gson.toJson(true);
+			}
+			return gson.toJson(false);
+		}
+		return gson.toJson(false);
+	}
 }
