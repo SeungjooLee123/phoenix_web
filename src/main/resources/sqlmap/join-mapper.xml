@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="join.mapper">  
 	
+<select id="title_check" resultType="int">
+	select count(*) from	MASTER_FAMILY_INFO_TBL where title = #{family_id}
+</select>	
+	
 <select id="id_check" resultType="int">
 	select count(*) from	MASTER_USER_INFO_TBL where id = #{id}
 </select>

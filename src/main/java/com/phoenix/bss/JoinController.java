@@ -30,6 +30,18 @@ public class JoinController {
 	final String getLocalAddr = "121.148.239.238:5524";
 
 	
+	//Title 중복확인
+		@ResponseBody
+		@RequestMapping ( value = "/title_check.join", produces="application/json;charset=UTF-8")
+		public String title_check(String title) throws IOException {
+			System.out.println("title check");
+			Gson gson = new Gson();
+			System.out.println(title);
+			String rtn =  gson.toJson( dao.title_check(title) );
+			return rtn;
+		}
+	
+	
 	//ID 중복확인
 	@ResponseBody
 	@RequestMapping ( value = "/id_check.join", produces="application/json;charset=UTF-8")
@@ -42,19 +54,13 @@ public class JoinController {
 	}
 	
 	
-	//회원가입처
+	//회원가입
 	@ResponseBody
 	@RequestMapping ( value = "/user.join", produces="application/json;charset=UTF-8")
 	public String userJoin (String vo , String vo2 , HttpServletRequest req , HttpSession session) {
 		UserVO userInfo = gson.fromJson(vo, UserVO.class);
 		boolean insertchk = dao.userJoin(userInfo);
 		boolean result = false; 
-		
-		
-
-        //System.out.println(uuid);
-		
-		
 		
 		BabyInfoVO babyInfoVO = gson.fromJson(vo2, BabyInfoVO.class);
 		MultipartRequest mulReq = (MultipartRequest) req;
