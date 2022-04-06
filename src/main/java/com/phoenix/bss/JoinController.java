@@ -30,11 +30,21 @@ public class JoinController {
 	final String getLocalAddr = "121.148.239.238:5524";
 
 	
+	//Title 중복확인
+	@ResponseBody
+	@RequestMapping ( value = "/title_check.join", produces="application/json;charset=UTF-8")
+	public String title_check(String title) throws IOException {
+		Gson gson = new Gson();
+		System.out.println(title);
+		String rtn =  gson.toJson( dao.title_check(title) );
+		return rtn;
+	}
+	
+	
 	//ID 중복확인
 	@ResponseBody
 	@RequestMapping ( value = "/id_check.join", produces="application/json;charset=UTF-8")
 	public String id_check(String id) throws IOException {
-		System.out.println("ㅇㄹㅇㄹ");
 		Gson gson = new Gson();
 		System.out.println(id);
 		String rtn =  gson.toJson( dao.id_check(id) );
@@ -42,19 +52,13 @@ public class JoinController {
 	}
 	
 	
-	//회원가입처
+	//회원가입
 	@ResponseBody
 	@RequestMapping ( value = "/user.join", produces="application/json;charset=UTF-8")
 	public String userJoin (String vo , String vo2 , HttpServletRequest req , HttpSession session) {
 		UserVO userInfo = gson.fromJson(vo, UserVO.class);
 		boolean insertchk = dao.userJoin(userInfo);
 		boolean result = false; 
-		
-		
-
-        //System.out.println(uuid);
-		
-		
 		
 		BabyInfoVO babyInfoVO = gson.fromJson(vo2, BabyInfoVO.class);
 		MultipartRequest mulReq = (MultipartRequest) req;
@@ -73,6 +77,7 @@ public class JoinController {
 				if( insertchk ) {
 					gson.toJson( dao.babyJoin(babyInfoVO) );
 					System.out.println("--------------------------");
+					System.out.println(server_path);
 				}
 				
 			}else {
@@ -83,21 +88,22 @@ public class JoinController {
 			
 		//}
 		
+		
 		/*
-		 * System.out.println(babyInfoVO.getTitle());
-		 * System.out.println(userInfo.getFamily_rels());
-		 * System.out.println(babyInfoVO.getBaby_birth() );
-		 * System.out.println(babyInfoVO.getBaby_name() );
-		 * System.out.println(babyInfoVO.getBaby_gender() );
-		 * System.out.println(babyInfoVO.getBaby_photo() );
-		 * System.out.println(babyInfoVO.getId() );
-		 * System.out.println(babyInfoVO.getTitle() ); System.out.println("ddd: " +
-		 * file); String aa= "";
+		  System.out.println(babyInfoVO.getTitle());
+		  System.out.println(userInfo.getFamily_rels());
+		  System.out.println(babyInfoVO.getBaby_birth() );
+		  System.out.println(babyInfoVO.getBaby_name() );
+		  System.out.println(babyInfoVO.getBaby_gender() );
+		  System.out.println(babyInfoVO.getBaby_photo() );
+		  System.out.println(babyInfoVO.getId() );
+		  System.out.println(babyInfoVO.getTitle() ); System.out.println("ddd: " +
+		  file); String aa= "";
 		 */
+	
 		
 		//return "";
 		
-		System.out.println( insertchk );
 		return gson.toJson( insertchk );
 	}
 	
@@ -110,6 +116,33 @@ public class JoinController {
 		return gson.toJson(dao.invite_login(familyInfoVO));
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/insert_new.join", produces = "application/json;charset=UTF-8")
+	public String insert_new(String familyvo, String babyvo) {
+		System.out.println(familyvo);
+		System.out.println(babyvo);
+		if(dao.invite_login(gson.fromJson(familyvo, FamilyInfoVO.class))) {
+			String uuid = UUID.randomUUID().toString();
+			BabyInfoVO vo = gson.fromJson(babyvo, BabyInfoVO.class);
+			vo.setBaby_id(uuid);
+			if(dao.babyJoin(vo)) {
+				return gson.toJson(true);
+			}
+			return gson.toJson(false);
+		}
+		return gson.toJson(false);
+	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value = "/insert_baby.join", produces = "application/json;charset=UTF-8")
+	public String insert_baby(String vo) {
+		System.out.println(vo);
+		String uuid = UUID.randomUUID().toString();
+		BabyInfoVO babyvo = gson.fromJson(vo, BabyInfoVO.class);
+		babyvo.setBaby_id(uuid);
+		if(dao.babyJoin(babyvo)) {
+			return gson.toJson(true);
+		}
+		return gson.toJson(false);
+	}
 }
