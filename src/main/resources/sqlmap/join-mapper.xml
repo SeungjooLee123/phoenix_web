@@ -27,8 +27,8 @@
 	values ( #{id} , #{pw} ) -->
 <insert id="userjoin">
 	INSERT ALL 
-	INTO MASTER_USER_INFO_TBL (id, pw)
-	VALUES( #{id}, #{pw} ) 
+	INTO MASTER_USER_INFO_TBL (id, pw, naver_id, kakao_id)
+	VALUES( #{id}, #{pw, jdbcType=VARCHAR}, #{naver_id, jdbcType=VARCHAR}, #{kakao_id, jdbcType=VARCHAR} ) 
 	INTO MASTER_FAMILY_INFO_TBL (id, title, family_rels )
 	VALUES( #{id},#{title},#{family_rels} ) 
 	SELECT 1 from dual
