@@ -27,10 +27,27 @@ public class CommonService {
 			if(! dir.exists()) dir.mkdirs();
 			try {
 				file.transferTo(new File(folder , uuid));
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
 			return folder.substring(resources.length()+1) + "/" + uuid ;
+		}
+		
+		//파일 삭제 처리
+		public void fileDelete(String directory, HttpSession session) {
+			//업로드된 위치 
+			String resources = session.getServletContext().getRealPath("resources");
+			String folder = resources + "/"+ directory;
+			File dir = new File(directory);
+
+			try {
+				if(dir.exists())
+					dir.delete();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 }

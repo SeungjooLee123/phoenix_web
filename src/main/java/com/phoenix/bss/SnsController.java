@@ -2,6 +2,7 @@ package com.phoenix.bss;
 
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -33,32 +34,55 @@ public class SnsController {
 	private final String getLocalAddr = "121.148.239.238:5524";
 	
 	
-	
+	//성장일기 게시물 삭제 -> 해당 폴더에서 사진 파일 삭제
 	@ResponseBody
 	@RequestMapping(value = "/delete.sn", produces="application/json;charset=UTF-8")
-	public String sns_delete(HttpServletRequest req) {
+	public String sns_delete(HttpServletRequest req, HttpSession session) {
 		System.out.println("delete접근");
+		
 		int no = Integer.parseInt(req.getParameter("no")+"");
+		
+		List<GrowthVO> list = dao.gro_img(no);
+		
+		System.out.println(list.get(0).getGro_img());
+		if(list.size() > 0) {
+			for(int i=0; i<list.size(); i++) {
+				String test = list.get(i).getGro_img();
+				System.out.println(test);
+				common.fileDelete(test, session);
+				
+				
+//				File file = new File(test);
+//				if(file.exists()) {
+//					file.delete();
+//				}
+			}
+	//.substring(64)
+		}
+		
 		System.out.println(no);
-		return gson.toJson(dao.groDelete(no));
+		
+		String result = gson.toJson(dao.groDelete(no));
+		System.out.println(result);
+		return result;
 	}
 	
-	
+	//성장일기 게시물 수정 -> 폴더에서 사진 밀고 재입력 
 	@ResponseBody
 	@RequestMapping(value = "/update.sn", produces="application/json;charset=UTF-8")
 	public String gro_update(HttpServletRequest req) {
 		System.out.println("groUpdate접근");
 		String testvo =  req.getParameter("vo");
 		GrowthVO vo = gson.fromJson(testvo, GrowthVO.class);
-		dao.groupdate(vo);
-	
-		return "";
+		String result = gson.toJson(dao.groupdate(vo));
+		System.out.println(result);
+		return result;
 	}
 	
 
 	
 	
-	
+	//성장일기 조회
 	@ResponseBody
 	@RequestMapping(value = "/select.sn", produces="application/json;charset=UTF-8")
 	public String gro_list(HttpServletRequest req) {
@@ -82,8 +106,7 @@ public class SnsController {
 		for(int i = 0; i < list.size(); i++) {
 			// 처음엔 무조건 들어가게.
 			if(i == 0) imgList.add(list.get(i));
-			
-			
+		
 			if(imgList.get(idx_imgList).getGro_no() == list.get(i).getGro_no()) {
 				imgList.get(idx_imgList).setImgList(list.get(i).getGro_img());
 			} else {
@@ -91,54 +114,36 @@ public class SnsController {
 				imgList.get(++idx_imgList).setImgList(list.get(i).getGro_img());
 			}
 		}
-		
 		return gson.toJson(imgList);
 	}
 	
-//	@ResponseBody
-//	@RequestMapping(value = "/text.sn", produces="application/json;charset=UTF-8")
-//	public String text_share(HttpServletRequest req) {
-//		System.out.println("textShare접근");
-//		return "";
-//	}
-//	
-	
+
+	//성장일기 추가 
 	@ResponseBody
 	@RequestMapping(value = "/share.sn", produces="application/json;charset=UTF-8")
 	public String sns_share(String vo, HttpSession session, HttpServletRequest req) throws Exception {
 		System.out.println("snsShare접근");
-		//SnsVO imgVO = gson.fromJson(vo, SnsVO.class);
 		GrowthVO Imgvo = gson.fromJson(vo, GrowthVO.class);
 		ArrayList<MultipartFile> fileList = new ArrayList<MultipartFile>();
-		//for(int i=0; i<=req.get)
-		//vo1~vo100 vosize = 100 ;
-		int file_size = Integer.parseInt( req.getParameter("file_size")+"" ); //~1
+		int file_size = Integer.parseInt( req.getParameter("file_size")+"" ); 
 		MultipartRequest mreq = (MultipartRequest) req;
 		for (int i = 0; i < file_size; i++) {
 			MultipartFile file =mreq.getFile("file"+i);
-		
-			//fileList.add((MultipartFile) mreq.getFiles("file"+i));
 			fileList.add(file);
 		}
 		if(fileList.size() > 0) {
 			for(int i =0; i < fileList.size(); i++) {
-				//imgVO.setFilename(fileList.get(i).getOriginalFilename());
-			//	System.out.println(imgVO.getFilename());
-			//	imgVO.setFilepath(common.fileUpload("sns",mreq.getFile("file"+i), session));
-			
 				System.out.println(Imgvo.getBaby_id());
 				String server_path = "http://" + getLocalAddr + req.getContextPath() + "/resources/";
 				Imgvo.setImgList(server_path + common.fileUpload("gro", mreq.getFile("file"+i), session));
 				Imgvo.setFilename(fileList.get(i).getOriginalFilename());
 				Imgvo.setB_id(Imgvo.getBaby_id());
-			
-				//common.fileUpload("gro", mreq.getFile("file"+i), session);	
 			}
 		}else {
 			System.out.println("파일 없음");
-		}
-		
+		}	
 		String imgsns = gson.toJson(dao.snsInsert(Imgvo));
+		//결과 볼려공
 		System.out.println(imgsns);
 		return imgsns;
 		
