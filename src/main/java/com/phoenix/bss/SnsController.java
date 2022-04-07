@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import common.CommonService;
 import sns.GrowthImgVO;
@@ -41,7 +42,7 @@ public class SnsController {
 		System.out.println("delete접근");
 		
 		int no = Integer.parseInt(req.getParameter("no")+"");
-		
+		System.out.println(no);
 		List<GrowthVO> list = dao.gro_img(no);
 		
 		System.out.println(list.get(0).getGro_img());
@@ -50,17 +51,11 @@ public class SnsController {
 				String test = list.get(i).getGro_img();
 				System.out.println(test);
 				common.fileDelete(test, session);
-				
-				
-//				File file = new File(test);
-//				if(file.exists()) {
-//					file.delete();
-//				}
 			}
-	//.substring(64)
+
 		}
 		
-		System.out.println(no);
+		
 		
 		String result = gson.toJson(dao.groDelete(no));
 		System.out.println(result);
@@ -72,8 +67,23 @@ public class SnsController {
 	@RequestMapping(value = "/update.sn", produces="application/json;charset=UTF-8")
 	public String gro_update(HttpServletRequest req) {
 		System.out.println("groUpdate접근");
-		String testvo =  req.getParameter("vo");
-		GrowthVO vo = gson.fromJson(testvo, GrowthVO.class);
+		String testData =  req.getParameter("vo");
+		List<GrowthVO> list = gson.fromJson(testData, TypeToken )
+		
+		//List<GrowthVO> list = dao.gro_img(vo.getGro_no());
+		
+		//System.out.println();
+		
+		//날짜, 내용 수정
+		//이미지 다 지워주고 다시 넣기
+		
+		//업데이트할 정보 가져왔음
+		//1. 사진 그대로 2. 사진 지움 3. 사진 지우고 추가 4. 사진 안지우고 추가 -> 걍 다 지우고 새로 넣음
+//		List<GrowthVO> list =  dao.gro_img(no);
+//		System.out.println(list.get(0).getGro_img());
+	
+		dao.gro_update(vo);
+		String test ="";
 		String result = gson.toJson(dao.groupdate(vo));
 		System.out.println(result);
 		return result;
@@ -88,23 +98,21 @@ public class SnsController {
 	public String gro_list(HttpServletRequest req) {
 		System.out.println("groList접근");
 		
-		// baby id 가져옴
+	
 		String baby_id = req.getParameter("baby_id");
 		System.out.println(baby_id);
 		
-		// 게시물 리스트. 
+		// 성장일기 리스트 
 		List<GrowthVO> list = dao.groList(baby_id);
 		
-		// 이미지게시물 ( 임시 ) 선언
+		// 이미지게시물 따로 
 		List<GrowthVO> imgList = new ArrayList<GrowthVO>();
 		
-		// 게시물이 없을 때 날리기
 		if(list.size() < 1) return gson.toJson(null);
 		
-		// 이미지 리스트의 인덱스
 		int idx_imgList = 0;
 		for(int i = 0; i < list.size(); i++) {
-			// 처음엔 무조건 들어가게.
+			
 			if(i == 0) imgList.add(list.get(i));
 		
 			if(imgList.get(idx_imgList).getGro_no() == list.get(i).getGro_no()) {

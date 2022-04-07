@@ -39,8 +39,13 @@ public class CommonService {
 		public void fileDelete(String directory, HttpSession session) {
 			//업로드된 위치 
 			String resources = session.getServletContext().getRealPath("resources");
-			String folder = resources + "/"+ directory;
-			File dir = new File(directory);
+
+			String result = directory.substring(directory.indexOf("/upload")+1);
+			String folder = resources + "/"+ result;
+			
+			File dir = new File(folder);
+			System.out.println("common");
+			System.out.println(dir);
 
 			try {
 				if(dir.exists())

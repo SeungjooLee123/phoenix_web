@@ -35,6 +35,10 @@ public class SnsDAO {
 		return sql.selectList("sns.mapper.gro_img", no);
 	}
 	
+	public boolean gro_update(GrowthVO vo) {
+		return sql.update("sns.mapper.gro_update", vo) > 0 ? true : false;
+	}
+	
 		
 
 	
