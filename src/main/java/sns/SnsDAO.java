@@ -14,6 +14,7 @@ public class SnsDAO {
 		return sql.delete("sns.mapper.delete", no) > 0 ? true : false;
 	}
 	
+	//게시글 업데이트
 	public boolean groupdate(GrowthVO vo) {
 		return sql.update("sns.mapper.update", vo) > 0 ? true: false;
 	}

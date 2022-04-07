@@ -22,10 +22,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import common.CommonService;
-import sns.GrowthImgVO;
 import sns.GrowthVO;
 import sns.SnsDAO;
-import sns.SnsVO;
 
 @Controller
 public class SnsController {
@@ -52,11 +50,7 @@ public class SnsController {
 				System.out.println(test);
 				common.fileDelete(test, session);
 			}
-
 		}
-		
-		
-		
 		String result = gson.toJson(dao.groDelete(no));
 		System.out.println(result);
 		return result;
@@ -65,10 +59,23 @@ public class SnsController {
 	//성장일기 게시물 수정 -> 폴더에서 사진 밀고 재입력 
 	@ResponseBody
 	@RequestMapping(value = "/update.sn", produces="application/json;charset=UTF-8")
-	public String gro_update(HttpServletRequest req) {
+	public String gro_update(HttpServletRequest req, HttpSession session) {
 		System.out.println("groUpdate접근");
+		//넘겨준 vo 받아옴
 		String testData =  req.getParameter("vo");
-		List<GrowthVO> list = gson.fromJson(testData, TypeToken )
+		System.out.println(testData);
+		List<GrowthVO> list =  gson.fromJson(testData,
+				new TypeToken<List<GrowthVO>>() {}.getType()
+			);
+		System.out.println(list.get(0).getGro_no());
+		
+		//해당 번호에 글은 하나임 오류
+		 String textResult = gson.toJson(dao.groupdate(list.get(0)));
+		 System.out.println(textResult);
+		 //글 번호에 있는 img들 조회해옴
+		 dao.gro_img(list.get(0).getGro_no());
+		 
+		//List<GrowthVO> list = gson.fromJson(testData, TypeToken )
 		
 		//List<GrowthVO> list = dao.gro_img(vo.getGro_no());
 		
@@ -82,11 +89,11 @@ public class SnsController {
 //		List<GrowthVO> list =  dao.gro_img(no);
 //		System.out.println(list.get(0).getGro_img());
 	
-		dao.gro_update(vo);
-		String test ="";
-		String result = gson.toJson(dao.groupdate(vo));
-		System.out.println(result);
-		return result;
+//		dao.gro_update(vo);
+//		String test ="";
+//		String result = gson.toJson(dao.groupdate(vo));
+		//System.out.println(result);
+		return "";
 	}
 	
 
@@ -111,8 +118,9 @@ public class SnsController {
 		if(list.size() < 1) return gson.toJson(null);
 		
 		int idx_imgList = 0;
+	
 		for(int i = 0; i < list.size(); i++) {
-			
+		
 			if(i == 0) imgList.add(list.get(i));
 		
 			if(imgList.get(idx_imgList).getGro_no() == list.get(i).getGro_no()) {
