@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,15 @@ public class JoinController {
 	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 	final String getLocalAddr = "121.148.239.238:5524";
 
+	//kakao 로그인
+	@ResponseBody
+	@RequestMapping(value = "/kakaoLogin" , produces="application/json;charset=UTF-8" )
+	public String kakaoLogin(HttpServletRequest req , HttpServletResponse res) {
+		String email = req.getParameter("id");
+		System.out.println(email);
+		return gson.toJson(email);
+	}
+	
 	
 	//Title 중복확인
 	@ResponseBody
@@ -83,9 +93,6 @@ public class JoinController {
 			}else {
 				gson.toJson( dao.babyJoin(babyInfoVO) );
 			}
-				
-			
-			
 		//}
 		
 		
