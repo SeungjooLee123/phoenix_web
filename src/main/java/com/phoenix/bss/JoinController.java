@@ -29,14 +29,21 @@ public class JoinController {
 	@Autowired CommonService common;
 	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 	final String getLocalAddr = "121.148.239.238:5524";
+	UserVO vo = new UserVO();
 
+	
 	//kakao 로그인
 	@ResponseBody
-	@RequestMapping(value = "/kakaoLogin" , produces="application/json;charset=UTF-8" )
+	@RequestMapping(value = "/kakaoLoginn" , produces="application/json;charset=UTF-8" )
 	public String kakaoLogin(HttpServletRequest req , HttpServletResponse res) {
-		String email = req.getParameter("id");
-		System.out.println(email);
-		return gson.toJson(email);
+		String id = req.getParameter("id");
+		System.out.println(id);
+		/*
+		 * System.out.println(email); System.out.println(name); vo.setId( email );
+		 */
+		
+		
+		return gson.toJson(id);
 	}
 	
 	
