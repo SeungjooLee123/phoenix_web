@@ -43,6 +43,7 @@ public class DiaryController {
 	public String insert(HttpServletRequest req) {
 		System.out.println("insert접근");
 		String strVo = req.getParameter("dto");
+		System.out.println(strVo);
 		DiaryVO vo = gson.fromJson(strVo, DiaryVO.class);
 		//dao.diary_insert(vo);
 

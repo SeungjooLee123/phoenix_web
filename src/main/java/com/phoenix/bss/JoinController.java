@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,23 @@ public class JoinController {
 	@Autowired CommonService common;
 	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 	final String getLocalAddr = "121.148.239.238:5524";
+	UserVO vo = new UserVO();
 
+	
+	//kakao 로그인
+	@ResponseBody
+	@RequestMapping(value = "/kakaoLoginn" , produces="application/json;charset=UTF-8" )
+	public String kakaoLogin(HttpServletRequest req , HttpServletResponse res) {
+		String id = req.getParameter("id");
+		System.out.println(id);
+		/*
+		 * System.out.println(email); System.out.println(name); vo.setId( email );
+		 */
+		
+		
+		return gson.toJson(id);
+	}
+	
 	
 	//Title 중복확인
 	@ResponseBody
@@ -83,9 +100,6 @@ public class JoinController {
 			}else {
 				gson.toJson( dao.babyJoin(babyInfoVO) );
 			}
-				
-			
-			
 		//}
 		
 		
