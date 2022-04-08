@@ -136,9 +136,9 @@ public class JoinController {
 		System.out.println(familyvo);
 		System.out.println(babyvo);
 		if(dao.invite_login(gson.fromJson(familyvo, FamilyInfoVO.class))) {
-			String uuid = UUID.randomUUID().toString();
+			
 			BabyInfoVO vo = gson.fromJson(babyvo, BabyInfoVO.class);
-			vo.setBaby_id(uuid);
+			
 			if(dao.babyJoin(vo)) {
 				return gson.toJson(true);
 			}

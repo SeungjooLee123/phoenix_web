@@ -83,6 +83,8 @@ public class BabyInfoController {
 	@ResponseBody
 	@RequestMapping(value = "/babydel.bif", produces = "application/json;charset=UTF-8")
 	public String babyinfo_delete(String baby_id, String title) { //아기 삭제
+		System.out.println(baby_id);
+		System.out.println(title);
 		boolean result = dao.baby_info_delete(baby_id);
 		if(dao.baby_info_count(title)) { //육아일기에 아기 없음
 			dao.delete_title(title);
@@ -98,11 +100,11 @@ public class BabyInfoController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/exit.family", produces = "application/json;charset=UTF-8")
-	public String family_exit(String title, String id, String baby_id) { //공동육아 포기
+	public String family_exit(String title, String id) { //공동육아 포기
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("title", title);
 		map.put("id", id);
-		List<FamilyInfoVO> list = dao.baby_info_co_parent(baby_id);
+		List<FamilyInfoVO> list = dao.baby_info_co_parent(title);
 		if(list.size() == 1) { //공동육아하는 사람이 1명이면
 			dao.delete_all(title); //아기 삭제
 		} else { //공동육아하는 사람 여러명
@@ -126,13 +128,5 @@ public class BabyInfoController {
 		map.put("title", title);
 		map.put("id", id);
 		dao.family_exit(map);
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "gettitle.bif", produces = "application/json;charset=UTF-8")
-	public String get_title(String id) {
-		String str = dao.get_title(id);
-		System.out.println(dao.get_title(id));
-		return gson.toJson(str);
 	}
 }

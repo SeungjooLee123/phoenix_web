@@ -45,9 +45,6 @@
 <delete id="del_all">
 	delete from master_baby_info_tbl where title = #{title}
 </delete>
-<select id="get_title" resultType="String">
-	select title from master_baby_info_tbl where baby_id = #{id}
-</select>
 
 <delete id="del_title">
 	delete from master_family_info_tbl where title = #{title}

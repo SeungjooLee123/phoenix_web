@@ -54,10 +54,6 @@ public class BabyInfoDAO {
 	public void delete_all(String title) {
 		sql.delete("babyinfo.mapper.del_all", title);
 	}
-
-	public String get_title(String id) {
-		return sql.selectOne("babyinfo.mapper.get_title",id);
-	}
 	
 	public void delete_title(String title) {
 		sql.delete("babyinfo.mapper.del_title", title);
