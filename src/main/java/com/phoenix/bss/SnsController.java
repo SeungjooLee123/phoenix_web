@@ -64,27 +64,15 @@ public class SnsController {
 		System.out.println("groUpdate접근");
 		int no = Integer.parseInt(req.getParameter("no")+"");
 		System.out.println(no);
+		//수정할 글 목록 가져옴 
 		List<GrowthVO> testlist = dao.select_imgs(no);
-
-		List<GrowthVO> imgList = new ArrayList<GrowthVO>();
+		System.out.println(testlist.get(0).getGro_img());
 		
-		
-		
-		
-		int idx_imgList = 0;
-		
-		for(int i = 0; i < testlist.size(); i++) {
-		
-			if(i == 0) imgList.add(testlist.get(i));
-		
-			if(imgList.get(idx_imgList).getGro_no() == testlist.get(i).getGro_no()) {
-				imgList.get(idx_imgList).setImgList(testlist.get(i).getGro_img());
-			} else {
-				imgList.add(testlist.get(i));
-				imgList.get(++idx_imgList).setImgList(testlist.get(i).getGro_img());
-			}
+		GrowthVO testvo = testlist.get(0);
+		for(int i=0; i<testlist.size(); i++) {
+			testvo.setImgList(testlist.get(i).getGro_img());
 		}
-		return gson.toJson(imgList);
+		return gson.toJson(testvo, GrowthVO.class);
 		
 		
 		
