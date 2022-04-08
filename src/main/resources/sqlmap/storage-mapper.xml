@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="storage.mapper">  
 <select id="cntbody" resultType="storage.BabyStorVO">
-	select * from (select * from master_baby_storage_tbl where baby_id = #{baby_id, jdbcType=VARCHAR} order by stor_date desc) where rownum = 1
+	SELECT STOR_ID,BABY_ID,STOR_DATE,STOR_KG,STOR_CM FROM ( SELECT STOR_ID,BABY_ID,STOR_DATE,STOR_KG,STOR_CM
+,RANK() OVER (PARTITION BY baby_id ORDER BY stor_date DESC) AS RNK FROM master_baby_storage_tbl )
+WHERE RNK = '1'
 </select>
 <insert id="insert">
 	insert into master_baby_storage_tbl(STOR_ID, BABY_ID, STOR_DATE, STOR_KG, STOR_CM) 

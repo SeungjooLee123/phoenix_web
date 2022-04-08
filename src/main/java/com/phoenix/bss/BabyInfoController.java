@@ -50,17 +50,17 @@ public class BabyInfoController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/chTitle.bif", produces = "application/json;charset=UTF-8")
-	public void babyinfo_title_change(String title, String baby_id) throws IOException{ //육아일기 타이틀 변경
+	public void babyinfo_title_change(String title, String old_title) throws IOException{ //육아일기 타이틀 변경
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("title", title);
-		map.put("baby_id", baby_id);
+		map.put("old_title", old_title);
 		dao.baby_info_title_change(map);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/coparent.bif", produces = "application/json;charset=UTF-8")
-	public String babyinfo_coparent(String baby_id) throws IOException{ //해당 아기를 공동육아하는 사람 리스트
-		List<FamilyInfoVO> coparent = dao.baby_info_co_parent(baby_id);
+	public String babyinfo_coparent(String title) throws IOException{ //해당 아기를 공동육아하는 사람 리스트
+		List<FamilyInfoVO> coparent = dao.baby_info_co_parent(title);
 		return gson.toJson(coparent);
 	}
 	

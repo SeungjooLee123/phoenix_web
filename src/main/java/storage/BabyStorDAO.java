@@ -14,8 +14,8 @@ public class BabyStorDAO {
 	@Autowired private SqlSession sql;
 	
 	//가장 최근 날짜 키, 몸무게 조회
-	public BabyStorVO cntBody(String baby_id) {
-		return sql.selectOne("storage.mapper.cntbody", baby_id);
+	public List<BabyStorVO> cntBody() {
+		return sql.selectList("storage.mapper.cntbody");
 	}
 
 	//키 몸무게 넣기

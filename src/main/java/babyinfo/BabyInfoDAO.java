@@ -23,8 +23,8 @@ public class BabyInfoDAO {
 		sql.update("babyinfo.mapper.chtitle", map);
 	}
 	
-	public List<FamilyInfoVO> baby_info_co_parent(String baby_id){
-		return sql.selectList("babyinfo.mapper.coparent", baby_id);
+	public List<FamilyInfoVO> baby_info_co_parent(String title){
+		return sql.selectList("babyinfo.mapper.coparent", title);
 	}
 	
 	public boolean baby_info_update(BabyInfoVO vo) {
