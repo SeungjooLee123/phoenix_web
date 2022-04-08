@@ -14,6 +14,10 @@ import user.UserVO;
 public class JoinDAO {
 	@Autowired private SqlSession sql;
 
+	public boolean title_check(String title) {
+		return (Integer) sql.selectOne("join.mapper.title_check",title) == 0 ? true : false;
+	}
+	
 	public boolean id_check(String id) {
 		return (Integer) sql.selectOne("join.mapper.id_check",id) == 0 ? true : false;
 	}

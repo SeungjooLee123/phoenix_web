@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +29,39 @@ public class JoinController {
 	@Autowired CommonService common;
 	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 	final String getLocalAddr = "121.148.239.238:5524";
+	UserVO vo = new UserVO();
 
+	
+	//kakao 로그인
+	@ResponseBody
+	@RequestMapping(value = "/kakaoLoginn" , produces="application/json;charset=UTF-8" )
+	public String kakaoLogin(HttpServletRequest req , HttpServletResponse res) {
+		String id = req.getParameter("id");
+		System.out.println(id);
+		/*
+		 * System.out.println(email); System.out.println(name); vo.setId( email );
+		 */
+		
+		
+		return gson.toJson(id);
+	}
+	
+	
+	//Title 중복확인
+	@ResponseBody
+	@RequestMapping ( value = "/title_check.join", produces="application/json;charset=UTF-8")
+	public String title_check(String title) throws IOException {
+		Gson gson = new Gson();
+		System.out.println(title);
+		String rtn =  gson.toJson( dao.title_check(title) );
+		return rtn;
+	}
+	
 	
 	//ID 중복확인
 	@ResponseBody
 	@RequestMapping ( value = "/id_check.join", produces="application/json;charset=UTF-8")
 	public String id_check(String id) throws IOException {
-		System.out.println("ㅇㄹㅇㄹ");
 		Gson gson = new Gson();
 		System.out.println(id);
 		String rtn =  gson.toJson( dao.id_check(id) );
@@ -42,19 +69,13 @@ public class JoinController {
 	}
 	
 	
-	//회원가입처
+	//회원가입
 	@ResponseBody
 	@RequestMapping ( value = "/user.join", produces="application/json;charset=UTF-8")
 	public String userJoin (String vo , String vo2 , HttpServletRequest req , HttpSession session) {
 		UserVO userInfo = gson.fromJson(vo, UserVO.class);
 		boolean insertchk = dao.userJoin(userInfo);
 		boolean result = false; 
-		
-		
-
-        //System.out.println(uuid);
-		
-		
 		
 		BabyInfoVO babyInfoVO = gson.fromJson(vo2, BabyInfoVO.class);
 		MultipartRequest mulReq = (MultipartRequest) req;
@@ -73,31 +94,30 @@ public class JoinController {
 				if( insertchk ) {
 					gson.toJson( dao.babyJoin(babyInfoVO) );
 					System.out.println("--------------------------");
+					System.out.println(server_path);
 				}
 				
 			}else {
 				gson.toJson( dao.babyJoin(babyInfoVO) );
 			}
-				
-			
-			
 		//}
 		
+		
 		/*
-		 * System.out.println(babyInfoVO.getTitle());
-		 * System.out.println(userInfo.getFamily_rels());
-		 * System.out.println(babyInfoVO.getBaby_birth() );
-		 * System.out.println(babyInfoVO.getBaby_name() );
-		 * System.out.println(babyInfoVO.getBaby_gender() );
-		 * System.out.println(babyInfoVO.getBaby_photo() );
-		 * System.out.println(babyInfoVO.getId() );
-		 * System.out.println(babyInfoVO.getTitle() ); System.out.println("ddd: " +
-		 * file); String aa= "";
+		  System.out.println(babyInfoVO.getTitle());
+		  System.out.println(userInfo.getFamily_rels());
+		  System.out.println(babyInfoVO.getBaby_birth() );
+		  System.out.println(babyInfoVO.getBaby_name() );
+		  System.out.println(babyInfoVO.getBaby_gender() );
+		  System.out.println(babyInfoVO.getBaby_photo() );
+		  System.out.println(babyInfoVO.getId() );
+		  System.out.println(babyInfoVO.getTitle() ); System.out.println("ddd: " +
+		  file); String aa= "";
 		 */
+	
 		
 		//return "";
 		
-		System.out.println( insertchk );
 		return gson.toJson( insertchk );
 	}
 	

@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sns.mapper">  
 
+<select id="gro_img" resultType="sns.GrowthVO">
+	select * from MASTER_GRO_IMG_TBL
+	where gro_no = #{no}
+</select>
+
+<delete id="del_gro_img">
+delete 
+from (select i.gro_img
+	   from master_gro_img_tbl i
+	   where gro_no = #{no})
+</delete>
 
 
 <delete id="delete">
@@ -12,8 +23,11 @@ where g.gro_no in (select i.gro_no
                 where g.gro_no = #{gro_no})
 </delete>
 
-<update id="update">
-update 
+<update id="gro_update">
+update MASTER_GROWTH_TBL set
+gro_date = sysdate,
+gro_content = #{gro_content},
+where gro_no = #{gro_no}
 </update>
 
 <select id="list" resultType="sns.GrowthVO">

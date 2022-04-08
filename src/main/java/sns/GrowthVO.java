@@ -59,15 +59,17 @@ public class GrowthVO {
         this.gro_no = gro_no;
     }
 
+  
+
     public Date getGro_date() {
-        return gro_date;
-    }
+		return gro_date;
+	}
 
-    public void setGro_date(Date gro_date) {
-        this.gro_date = gro_date;
-    }
+	public void setGro_date(Date gro_date) {
+		this.gro_date = gro_date;
+	}
 
-    public String getGro_content() {
+	public String getGro_content() {
         return gro_content;
     }
 
