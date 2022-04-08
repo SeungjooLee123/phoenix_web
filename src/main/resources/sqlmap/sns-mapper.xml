@@ -2,17 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sns.mapper">  
 
+<select id="choice_all" resultType="sns.GrowthVO">
+select g.* , i.gro_img
+from MASTER_GROWTH_TBL g left outer join MASTER_GRO_IMG_TBL i 
+on g.gro_no = i.gro_no
+where g.gro_no = #{no}
+</select>
+
+<insert id="insertall">
+
+insert all
+into MASTER_GROWTH_TBL (gro_date, gro_content)
+values(sysdate, #{gro_content, jdbcType=VARCHAR})
+<foreach collection="imgList" item="item" index="i"> 
+into MASTER_GRO_IMG_TBL(gro_no, gro_img)
+values (#{gro_no}, #{item, jdbcType=VARCHAR} )
+</foreach>
+SELECT 1 from dual
+</insert>
+
+
+<select id="select_text" resultType="sns.GrowthVO">
+select * from MASTER_GROWTH_TBL where gro_no =#{no}
+</select>
+
+<update id="text_update">
+update MASTER_GROWTH_TBL
+set gro_date = sysdate,
+gro_content = #{gro_content}
+where gro_no = #{gro_no}
+</update>
+
+
+<select id="select_imgs" resultType="sns.GrowthVO">
+select g.* , i.gro_img
+from MASTER_GROWTH_TBL g left outer join MASTER_GRO_IMG_TBL i 
+on g.gro_no = i.gro_no
+where g.gro_no = #{no}
+</select>
+
+
+<delete id="del_img">
+delete from MASTER_GRO_IMG_TBL where GRO_NO = #{no}
+</delete>
+
 <select id="gro_img" resultType="sns.GrowthVO">
 	select * from MASTER_GRO_IMG_TBL
 	where gro_no = #{no}
 </select>
-
-<delete id="del_gro_img">
-delete 
-from (select i.gro_img
-	   from master_gro_img_tbl i
-	   where gro_no = #{no})
-</delete>
 
 
 <delete id="delete">
@@ -27,7 +64,7 @@ where g.gro_no in (select i.gro_no
 update MASTER_GROWTH_TBL set
 gro_date = sysdate,
 gro_content = #{gro_content},
-where gro_no = #{gro_no}
+where gro_no = #{no}
 </update>
 
 <select id="list" resultType="sns.GrowthVO">
@@ -53,6 +90,11 @@ values (V_TEMP_growth_no, #{item, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHA
 SELECT 1 FROM DUAL;
 END;
 </insert>
+
+<select id="choice" resultType="sns.GrowthVO">
+select * from MASTER_GROWTH_TBL where gro_no =#{no}
+
+</select>
 
 <select id="check" resultType="integer">
 	SELECT COUNT(*) 

@@ -44,8 +44,7 @@ public class CommonService {
 			String folder = resources + "/"+ result;
 			
 			File dir = new File(folder);
-			System.out.println("common");
-			System.out.println(dir);
+		
 
 			try {
 				if(dir.exists())
