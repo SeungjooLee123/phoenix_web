@@ -11,11 +11,11 @@
 </select>
 
 <update id="chtitle">
-	update master_family_info_tbl set title = #{title} where title = (select title from master_baby_info_tbl where baby_id = #{baby_id})
+	update master_family_info_tbl set title = #{title} where title = #{old_title}
 </update>
 
 <select id="coparent" resultType="babyinfo.FamilyInfoVO">
-	select * from master_family_info_tbl where title = (select title from master_baby_info_tbl where baby_id = #{baby_id})
+	select * from master_family_info_tbl where title = #{title}
 </select>
 
 <update id="babyupdate">
