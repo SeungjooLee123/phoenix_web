@@ -22,6 +22,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import common.CommonService;
+import sns.GrowthImgVO;
 import sns.GrowthVO;
 import sns.SnsDAO;
 
@@ -56,44 +57,74 @@ public class SnsController {
 		return result;
 	}
 	
-	//성장일기 게시물 수정 -> 폴더에서 사진 밀고 재입력 
+	//성장일기 게시물 수정
 	@ResponseBody
 	@RequestMapping(value = "/update.sn", produces="application/json;charset=UTF-8")
 	public String gro_update(HttpServletRequest req, HttpSession session) {
 		System.out.println("groUpdate접근");
-		//넘겨준 vo 받아옴
-		String testData =  req.getParameter("vo");
-		System.out.println(testData);
-		List<GrowthVO> list =  gson.fromJson(testData,
-				new TypeToken<List<GrowthVO>>() {}.getType()
-			);
-		System.out.println(list.get(0).getGro_no());
+		int no = Integer.parseInt(req.getParameter("no")+"");
+		System.out.println(no);
+		List<GrowthVO> testlist = dao.select_imgs(no);
+
+		List<GrowthVO> imgList = new ArrayList<GrowthVO>();
 		
-		//해당 번호에 글은 하나임 오류
-		 String textResult = gson.toJson(dao.groupdate(list.get(0)));
-		 System.out.println(textResult);
-		 //글 번호에 있는 img들 조회해옴
-		 dao.gro_img(list.get(0).getGro_no());
-		 
-		//List<GrowthVO> list = gson.fromJson(testData, TypeToken )
 		
-		//List<GrowthVO> list = dao.gro_img(vo.getGro_no());
 		
-		//System.out.println();
 		
-		//날짜, 내용 수정
-		//이미지 다 지워주고 다시 넣기
+		int idx_imgList = 0;
 		
-		//업데이트할 정보 가져왔음
-		//1. 사진 그대로 2. 사진 지움 3. 사진 지우고 추가 4. 사진 안지우고 추가 -> 걍 다 지우고 새로 넣음
-//		List<GrowthVO> list =  dao.gro_img(no);
-//		System.out.println(list.get(0).getGro_img());
-	
-//		dao.gro_update(vo);
-//		String test ="";
-//		String result = gson.toJson(dao.groupdate(vo));
-		//System.out.println(result);
-		return "";
+		for(int i = 0; i < testlist.size(); i++) {
+		
+			if(i == 0) imgList.add(testlist.get(i));
+		
+			if(imgList.get(idx_imgList).getGro_no() == testlist.get(i).getGro_no()) {
+				imgList.get(idx_imgList).setImgList(testlist.get(i).getGro_img());
+			} else {
+				imgList.add(testlist.get(i));
+				imgList.get(++idx_imgList).setImgList(testlist.get(i).getGro_img());
+			}
+		}
+		return gson.toJson(imgList);
+		
+		
+		
+//		List<GrowthVO> list = null;
+//		for(int i =0; i<testlist.size(); i++) {
+//			String test = gson.toJson(testlist.get(i), GrowthVO.class);
+//			System.out.println(test);
+//			 List<GrowthVO> imglist = gson.fromJson(test, new TypeToken<List<GrowthVO>>() {}.getType());
+//			list = imglist;
+//		}
+		//return gson.toJson(list);
+		
+		
+		
+		//이미지 지움
+		//dao.del_img(no); 됨
+		//해당글 이미지 목록 가져와서 파일지우기
+//		List<GrowthVO> img_list =  dao.select_imgs(no);
+//		
+//		for(int i=0; i < img_list.size(); i++) {
+//			System.out.println(img_list.get(i).getGro_img());
+//			String test = img_list.get(i).getGro_img();
+//			common.fileDelete(test, session);
+//		}
+		
+//		//해당 게시글 조회
+//		GrowthVO vo = dao.select_text(no);
+//		System.out.println(vo.getGro_no());
+//		System.out.println(vo.getGro_content());
+//		//게시글 업데이트 
+//		GrowthVO testvo = dao.text_update(vo);
+//		System.out.println(testvo.getGro_no());
+//		String test = "";
+//		
+//		//수정사항 넣어줌
+//		List<GrowthVO> list =  dao.insertall(testvo);
+//		System.out.println(list.get(no).getGro_content());
+//		
+
+		
 	}
 	
 
