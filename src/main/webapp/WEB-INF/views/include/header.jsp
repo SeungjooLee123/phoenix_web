@@ -21,7 +21,7 @@ nav ul {
 }
 
 header {
-  width: 1300px;
+  width: 1440px;
   height: 150px;
   position: relative;
   margin: 0 auto;
@@ -32,7 +32,7 @@ header img {
   position: absolute;
   width: 194px;
   height: 82px;
-  right: 60vh;
+  right: 66vh;
   top: 20%;
 }
 
@@ -66,7 +66,7 @@ header img {
                 </c:if>
             </ul>  
         </nav>
-        <a href='<c:url value="/"/>'><img src="imgs/testbss.png"></a>
+        <a href='<c:url value="/"/>'><img src="imgs/logo_ai.svg"></a>
     </header>
 
 
