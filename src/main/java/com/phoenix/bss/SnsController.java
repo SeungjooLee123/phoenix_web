@@ -83,28 +83,31 @@ public class SnsController {
 	public String gro_update(HttpServletRequest req, HttpSession session) {
 		System.out.println("groUpdate접근");
 		String testdata = req.getParameter("vo");
-		GrowthVO vo = gson.fromJson(testdata, GrowthVO.class);
-		for( int j =0; j<vo.getImgList().size(); j++) {
-			System.out.println(vo.getImgList().get(j));
+		GrowthVO test = gson.fromJson(testdata, GrowthVO.class);
+		for( int j =0; j<test.getImgList().size(); j++) {
+			System.out.println(test.getImgList().get(j));
 		}
 		
-		System.out.println(vo.getGro_content()); 
-		//이미지 먼저 지우기
-		//dao.del_img(vo.getGro_no()); 됨
-		//해당 파일 삭제
-		List<GrowthVO> img_list =  dao.select_imgs(vo.getGro_no());
+		System.out.println(test.getGro_content()); 
+		System.out.println(test.getBaby_id());
+		
+		//이전 파일 삭제
+		List<GrowthVO> img_list =  dao.select_imgs(test.getGro_no());
 		for(int i=0; i < img_list.size(); i++) {
 			System.out.println(img_list.get(i).getGro_img());
-			String test = img_list.get(i).getGro_img();
-			common.fileDelete(test, session);
+			String testStr = img_list.get(i).getGro_img();
+			common.fileDelete(testStr, session);
 		}
-		//해당 게시글 조회 - 확인용
-		vo = dao.select_text(vo.getGro_no());
-		System.out.println(vo.getGro_no());
-		System.out.println(vo.getGro_content());
+		
+		//DB에서 지우기
+		dao.del_img(test.getGro_no()); 
+		
 		//게시글 업데이트 
-		vo = dao.text_update(vo);
-		System.out.println(vo.getGro_no());
+		test = dao.text_update(test);
+		System.out.println(test.getGro_no());
+		System.out.println("업데이트");
+		System.out.println(test.getBaby_id());
+		//찍힘
 	
 
 		//사진 다시 세팅
@@ -117,17 +120,21 @@ public class SnsController {
 		}
 		if(fileList.size() > 0) {
 			for(int i =0; i < fileList.size(); i++) {
-				System.out.println(vo.getBaby_id());
+				System.out.println(test.getBaby_id());
+				//찍힘 -> 돌아오면 null
 				String server_path = "http://" + getLocalAddr + req.getContextPath() + "/resources/";
-				vo.setImgList(server_path + common.fileUpload("gro", mreq.getFile("file"+i), session));
-				vo.setFilename(fileList.get(i).getOriginalFilename());
-				vo.setB_id(vo.getBaby_id());
+				test.setImgList(server_path + common.fileUpload("gro", mreq.getFile("file"+i), session));
+				test.setFilename(fileList.get(i).getOriginalFilename());
+				test.setBaby_id(test.getB_id());
+				test.setB_id(test.getBaby_id());
+				
+				System.out.println("들어감");
 			}
 		}else {
 			System.out.println("파일 없음");
 		}	
 		
-		List<GrowthVO> list =  dao.insertall(vo);
+		List<GrowthVO> list =  dao.insertall(test);
 		System.out.println(list.get(0).getGro_no());
 		GrowthVO setvo = list.get(0);
 		for(int i =0; i <list.size(); i++) {
@@ -136,6 +143,21 @@ public class SnsController {
 		String data = gson.toJson(setvo);
 		return data;
 	}
+	@ResponseBody
+	@RequestMapping(value = "/content.sn", produces="application/json;charset=UTF-8")
+	public String gro_text(HttpServletRequest req) {
+		System.out.println("groText접근");
+		String testdata = req.getParameter("vo");
+		GrowthVO vo = gson.fromJson(testdata, GrowthVO.class);
+		System.out.println(vo.getGro_no());
+		System.out.println(vo.getGro_content());
+		
+		vo =  dao.text_update(vo);
+		String data =gson.toJson(vo);
+		System.out.println(data);
+		return data;
+	}
+	
 	
 	//성장일기 조회
 	@ResponseBody

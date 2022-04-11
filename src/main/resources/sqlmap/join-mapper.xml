@@ -33,4 +33,8 @@
 	VALUES( #{id},#{title},#{family_rels} ) 
 	SELECT 1 from dual
 </insert>
+
+<select id="family_selectid" resultType="int">
+	select count(*) from	MASTER_FAMILY_INFO_TBL where title = #{title} and id = #{id}
+</select>
 </mapper>

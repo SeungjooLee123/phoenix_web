@@ -35,6 +35,10 @@ public class JoinDAO {
 	public boolean invite_login(FamilyInfoVO familyInfoVO) {
 		return sql.insert("join.mapper.invite_login",familyInfoVO) == 1? true: false;
 	}
+
+	public boolean family_selectid(FamilyInfoVO family_vo) {
+		return (Integer) sql.selectOne("join.mapper.family_selectid", family_vo) == 0 ? false : true;
+	}
 	
 	
 	

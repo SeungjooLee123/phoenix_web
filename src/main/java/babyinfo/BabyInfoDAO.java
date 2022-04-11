@@ -62,4 +62,12 @@ public class BabyInfoDAO {
 	public String get_title(String id) {
 		return sql.selectOne("babyinfo.mapper.get_title",id);
 	}
+	
+	public boolean secession(String id) {
+		return sql.delete("babyinfo.mapper.secession", id) == 1 ? true : false;
+	}
+	
+	public List<String> title(String id){
+		return sql.selectList("babyinfo.mapper.title", id);
+	}
 }
