@@ -71,10 +71,11 @@ public class BabyInfoController {
 		MultipartRequest mulReq = (MultipartRequest) req;
 		MultipartFile file = mulReq.getFile("file");
 		if(file != null) {
-			System.out.println(file.getOriginalFilename());
 			String path = common.fileUpload("profile", file, session);
 			String server_path = "http://" + getLocalAddr + req.getContextPath() + "/resources/";
 			baby.setBaby_photo(server_path + path);
+		} else {
+			baby.setBaby_photo(null);
 		}
 		return dao.baby_info_update(baby) || dao.baby_info_rels_update(gson.fromJson(family, FamilyInfoVO.class));
 	}
@@ -131,10 +132,34 @@ public class BabyInfoController {
 	}
 	
 	@ResponseBody
-	   @RequestMapping(value = "gettitle.bif", produces = "application/json;charset=UTF-8")
-	   public String get_title(String id) {
-	      String str = dao.get_title(id);
-	      System.out.println(dao.get_title(id));
-	      return gson.toJson(str);
-	   }
+	@RequestMapping(value = "gettitle.bif", produces = "application/json;charset=UTF-8")
+	public String get_title(String id) {
+		String str = dao.get_title(id);
+		System.out.println(dao.get_title(id));
+		return gson.toJson(str);
+	}
+	
+	//회원 탈퇴
+	@ResponseBody
+	@RequestMapping(value = "/secession.bif", produces = "application/json;charset=UTF-8")
+	public String secession(String id) {
+		List<String> title = dao.title(id);
+		for(int i=0; i<title.size(); i++) {
+			List<FamilyInfoVO> list = dao.baby_info_co_parent(title.get(i));
+			if(list.size() == 1) {
+				dao.delete_all(title.get(i));
+			} else {
+				for(int j=0; j<list.size(); j++) {
+					if(list.get(j).getId().equals(id)) {
+						list.remove(j);
+					}
+				}
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("title", title.get(i));
+				map.put("id", list.get(0).getId());
+				dao.family_change(map);
+			}
+		}
+		return gson.toJson(dao.secession(id));
+	}
 }

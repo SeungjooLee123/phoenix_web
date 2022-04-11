@@ -35,7 +35,4 @@ public class JoinDAO {
 	public boolean invite_login(FamilyInfoVO familyInfoVO) {
 		return sql.insert("join.mapper.invite_login",familyInfoVO) == 1? true: false;
 	}
-	
-	
-	
 }
