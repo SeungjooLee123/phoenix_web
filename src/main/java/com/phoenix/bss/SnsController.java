@@ -31,9 +31,9 @@ public class SnsController {
 	Gson gson = new GsonBuilder().setDateFormat("MM-dd").create();
 	@Autowired SnsDAO dao;
 	@Autowired CommonService common;
-	private final String getLocalAddr = "192.168.219.173";
+	private final String getLocalAddr = "121.148.239.238:5524";
 	
-	//http://192.168.219.173 121.148.239.238:5524
+	//
 	
 	//성장일기 게시물 삭제 -> 해당 폴더에서 사진 파일 삭제
 	@ResponseBody
