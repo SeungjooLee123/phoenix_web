@@ -31,9 +31,9 @@ public class SnsController {
 	Gson gson = new GsonBuilder().setDateFormat("MM-dd").create();
 	@Autowired SnsDAO dao;
 	@Autowired CommonService common;
-	private final String getLocalAddr = "121.148.239.238:5524";
+	private final String getLocalAddr = "192.168.219.173";
 	
-	//
+	//http://192.168.219.173 121.148.239.238:5524
 	
 	//성장일기 게시물 삭제 -> 해당 폴더에서 사진 파일 삭제
 	@ResponseBody
@@ -156,6 +156,21 @@ public class SnsController {
 		String data =gson.toJson(vo);
 		System.out.println(data);
 		return data;
+	}
+	
+	//성장일기 디테일
+	@ResponseBody
+	@RequestMapping(value="/detail.sn", produces="application/json;charset=UTF-8")
+	public String gro_detail(HttpServletRequest req) {
+		System.out.println("groDetail접근");
+		int no = Integer.parseInt( req.getParameter("no")+"");
+		List<GrowthVO> list =  dao.select_imgs(no);
+		System.out.println(list.get(0).getGro_img());
+		GrowthVO vo = list.get(0);
+		for(int i=0; i<list.size(); i++) {
+			vo.setImgList(list.get(i).getGro_img());
+		}
+		return gson.toJson(vo);
 	}
 	
 	//성장일기 조회
