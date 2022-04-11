@@ -23,6 +23,8 @@ public class UserController {
 	@Autowired UserDAO dao;
 	Gson gson = new Gson();
 	
+	
+	
 	//회원가입 화면 요청
 	@RequestMapping("/join")
 	public String join() {
@@ -51,6 +53,7 @@ public class UserController {
 		return vo == null? false : true;
 	}
 	
+	//로그인!!
 	@ResponseBody
 	@RequestMapping("/bssLoginn")
 	public String loginn(String id, String pw) {
@@ -71,6 +74,18 @@ public class UserController {
 		 return "";
 		
 	}
+	
+	
+	//소셜로그인
+	@ResponseBody
+	@RequestMapping("/social_login.user")
+	public String social_login(String id) {
+		
+		
+		
+		return gson.toJson( dao.social_login(id) );
+	}
+	
 	
 	//로그인 화면 요청
 	@RequestMapping("/login")
