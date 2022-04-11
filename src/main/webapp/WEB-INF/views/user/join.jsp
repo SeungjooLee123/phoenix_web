@@ -3,6 +3,10 @@
 <html>
 <head>
 <style type="text/css">
+
+#container {
+width:1440px;
+margin:0 auto;}
 .id-text{
 text-align: center;
 margin-top: 30px;
@@ -45,6 +49,7 @@ z-index: 5;
 <title>Insert title here</title>
 </head>
 <body>
+<div id="container">
 <form action="join" method="post">
 <div class="id-text">아이디</div>
 <div class="input-id">
@@ -65,5 +70,6 @@ z-index: 5;
 
 
 </form>
+</div>
 </body>
 </html>

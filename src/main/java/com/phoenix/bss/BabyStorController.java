@@ -32,7 +32,9 @@ public class BabyStorController {
 		 * if(list.get(0) == null) { return gson.toJson("키, 몸무게 기록이 없습니다."); }
 		 */
 		/* return gson.toJson(vo.getStor_cm() + "cm, " + vo.getStor_kg() + "kg"); */
-		return gson.toJson(list);
+		String data = gson.toJson(list);
+		System.out.println(data);
+		return data;
 	}
 	
 	@ResponseBody

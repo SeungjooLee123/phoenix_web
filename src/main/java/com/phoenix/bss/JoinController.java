@@ -1,6 +1,8 @@
 package com.phoenix.bss;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import com.google.gson.GsonBuilder;
 import babyinfo.BabyInfoVO;
 import babyinfo.FamilyInfoVO;
 import common.CommonService;
+import diary.DiaryVO;
 import join.JoinDAO;
 import user.UserVO;
 
@@ -160,5 +163,11 @@ public class JoinController {
 		return gson.toJson(false);
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value =  "/family_selectid.join", produces="application/json;charset=UTF-8" )
+	public String family_selectid(String vo) {
+		FamilyInfoVO family_vo = gson.fromJson(vo, FamilyInfoVO.class);
+		
+		return gson.toJson(dao.family_selectid(family_vo));
+	}
 }

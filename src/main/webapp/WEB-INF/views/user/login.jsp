@@ -15,6 +15,10 @@ a:visited {
   color: inherit;
 }
 
+#container {
+width: 1440px;
+margin :0 auto;}
+
 .login-logo{
 margin-bottom: 60px;
 margin-top: 100px;
@@ -93,9 +97,10 @@ padding:0 4px;}
 <title>Login</title>
 </head>
 <body>
+<div id ="container">
 <header>
 	<nav class="login-logo">
-		   <a href='<c:url value="/"></c:url>'><img src="imgs/testbss.png"></a>
+		   <a href='<c:url value="/"></c:url>'><img src="imgs/logo_ai.svg" style="width:194px; height:82px;"></a>
 	</nav>
 </header>
 <article>
@@ -112,7 +117,7 @@ padding:0 4px;}
 <hr style="width:20%; height:1px; border:none; background:#B5B5B5; margin: 0 auto; margin-top: 50px; opacity: 0.6;">  
 <p class="social-text">소셜로그인</p>
 <div class="btns">
-<a><img src="imgs/kakao_login.png" style="width:155px; height:40px; margin-right:40px;"></a><a><img src="imgs/naver_login.png" style="width:155px; height:40px;"></a>
+<a><img src="imgs/kakao_login_final.svg" style="width:155px; height:40px; margin-right:40px;"></a><a><img src="imgs/naver_login_final.svg" style="width:155px; height:40px;"></a>
 </div>	
 <nav>
 	<ul class="tnb">
@@ -162,5 +167,6 @@ padding:0 4px;}
 	</script>
 
 </article>
+</div>
 </body>
 </html>

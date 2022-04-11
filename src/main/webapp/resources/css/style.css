@@ -15,7 +15,7 @@ nav ul {
 }
 
 header {
-  width: 1300px;
+  width: 1440px;
   height: 150px;
   position: relative;
   margin: 0 auto;
@@ -26,7 +26,7 @@ header img {
   position: absolute;
   width: 194px;
   height: 82px;
-  right: 60vh;
+  right: 66vh;
   top: 20%;
 }
 
@@ -67,7 +67,7 @@ header img {
 }
 
 section {
-  width: 1300px;
+  width: 1440px;
   margin: 0 auto;
 }
 
@@ -90,11 +90,12 @@ section {
 #slide > a:first-child {
   left: 0;
 }
-
+/*
 footer {
-  width: 100%;
+  width: 1440px;
   margin: 0 auto;
 }
+*/
 
 #notice {
   display: flex;
