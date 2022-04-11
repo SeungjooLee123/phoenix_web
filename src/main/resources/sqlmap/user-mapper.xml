@@ -16,4 +16,13 @@
 	values(#{id},#{pw},#{naver_id,jdbcType=VARCHAR},#{kakao_id,jdbcType=VARCHAR})
 </insert>
 
+<select id="loginn" resultType="user.UserVO">
+	select * from MASTER_USER_INFO_TBL where id = #{ id } and pw =#{ pw }
+</select>
+
+<select id="social_login" resultType="Integer">
+	select count(*) from MASTER_USER_INFO_TBL where id = #{ id }
+</select>
+
+
 </mapper>

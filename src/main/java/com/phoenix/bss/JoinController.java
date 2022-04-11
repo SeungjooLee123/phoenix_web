@@ -35,7 +35,7 @@ public class JoinController {
 	UserVO vo = new UserVO();
 
 	
-	//kakao 로그인
+	//kakao 가입
 	@ResponseBody
 	@RequestMapping(value = "/kakaoLoginn" , produces="application/json;charset=UTF-8" )
 	public String kakaoLogin(HttpServletRequest req , HttpServletResponse res) {
@@ -48,6 +48,11 @@ public class JoinController {
 		
 		return gson.toJson(id);
 	}
+	//카카오 or 네이버 -> 이메일 받아옴 -> db에 user table에 해당 컬럼에 있는지 확인
+	//없으면 가입으로 던짐
+	
+	//있으면 그 정보로 타이틀 만들기 -> 아기 만들기 
+	
 	
 	
 	//Title 중복확인

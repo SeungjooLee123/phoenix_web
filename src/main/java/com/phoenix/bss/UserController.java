@@ -23,6 +23,8 @@ public class UserController {
 	@Autowired UserDAO dao;
 	Gson gson = new Gson();
 	
+	
+	
 	//회원가입 화면 요청
 	@RequestMapping("/join")
 	public String join() {
@@ -45,8 +47,45 @@ public class UserController {
 		map.put("pw", pw);
 		UserVO vo = dao.user_login(map);
 		session.setAttribute("loginInfo", vo);
+		System.out.println("--ss--ss-ss--ss--ss----");
+		System.out.println(id);
+		System.out.println(pw);
 		return vo == null? false : true;
 	}
+	
+	//로그인!!
+	@ResponseBody
+	@RequestMapping("/bssLoginn")
+	public String loginn(String id, String pw) {
+		System.out.println(id);
+		System.out.println(pw);
+		HashMap<String,  String > loginmap = new HashMap<String, String>();
+		loginmap.put("id" , id);
+		loginmap.put("pw" , pw);
+		System.out.println(loginmap);
+		UserVO loginvo = dao.user_loginn ( loginmap );
+		System.out.println(loginvo.getId());
+		try {
+			return gson.toJson(loginvo);			
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			System.out.println("nullpoint");
+		}
+		 return "";
+		
+	}
+	
+	
+	//소셜로그인
+	@ResponseBody
+	@RequestMapping("/social_login.user")
+	public String social_login(String id) {
+		
+		
+		
+		return gson.toJson( dao.social_login(id) );
+	}
+	
 	
 	//로그인 화면 요청
 	@RequestMapping("/login")
@@ -64,7 +103,6 @@ public class UserController {
 	}
 	
 	//유저 회원가입 요청
-	
 	@ResponseBody
 	@RequestMapping(value = "/user_join.us", produces = "application/json;charset=UTF-8")
 	public String user_join(String vo){
