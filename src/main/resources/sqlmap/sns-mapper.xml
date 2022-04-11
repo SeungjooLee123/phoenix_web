@@ -53,8 +53,9 @@ select * from MASTER_GROWTH_TBL where gro_no =#{no}
 <update id="text_update">
 update MASTER_GROWTH_TBL
 set gro_date = sysdate,
-gro_content = #{gro_content}
+gro_content = #{gro_content, jdbcType=VARCHAR}
 where gro_no = #{gro_no}
+and baby_id = #{baby_id}
 </update>
 <!-- 업데이트 글 조회 -->
 <select id="choice" resultType="sns.GrowthVO">
