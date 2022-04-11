@@ -23,4 +23,10 @@ public class UserDAO {
 	public boolean user_join(UserVO vo) {
 		return sql.insert("user.mapper.join", vo) == 1? true: false ;
 	}
+	
+	public UserVO user_loginn(HashMap<String, String> loginmap) {
+		System.out.println("dao!");
+		return sql.selectOne("user.mapper.loginn" , loginmap );
+		
+	}
 }
