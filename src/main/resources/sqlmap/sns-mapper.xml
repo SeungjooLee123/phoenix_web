@@ -65,8 +65,8 @@ select * from MASTER_GROWTH_TBL where gro_no =#{no}
 <insert id="insertall">
 insert all
 <foreach collection="imgList" item="item" index="i"> 
-into MASTER_GRO_IMG_TBL(gro_no, gro_img)
-values (#{gro_no}, #{item, jdbcType=VARCHAR} )
+into MASTER_GRO_IMG_TBL(gro_no, gro_img, filename, baby_id)
+values (#{gro_no}, #{item, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{baby_id})
 </foreach>
 SELECT 1 from dual
 </insert>

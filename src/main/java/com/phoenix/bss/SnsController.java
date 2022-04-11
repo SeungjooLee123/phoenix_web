@@ -125,7 +125,6 @@ public class SnsController {
 				String server_path = "http://" + getLocalAddr + req.getContextPath() + "/resources/";
 				test.setImgList(server_path + common.fileUpload("gro", mreq.getFile("file"+i), session));
 				test.setFilename(fileList.get(i).getOriginalFilename());
-				test.setBaby_id(test.getB_id());
 				test.setB_id(test.getBaby_id());
 				
 				System.out.println("들어감");
@@ -143,6 +142,7 @@ public class SnsController {
 		String data = gson.toJson(setvo);
 		return data;
 	}
+	//글만 업데이트 
 	@ResponseBody
 	@RequestMapping(value = "/content.sn", produces="application/json;charset=UTF-8")
 	public String gro_text(HttpServletRequest req) {
@@ -157,7 +157,6 @@ public class SnsController {
 		System.out.println(data);
 		return data;
 	}
-	
 	
 	//성장일기 조회
 	@ResponseBody
