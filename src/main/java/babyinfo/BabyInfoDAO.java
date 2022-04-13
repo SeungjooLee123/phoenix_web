@@ -70,4 +70,8 @@ public class BabyInfoDAO {
 	public List<String> title(String id){
 		return sql.selectList("babyinfo.mapper.title", id);
 	}
+	
+	public BabyInfoVO curbaby(String baby_id) {
+		return sql.selectOne("babyinfo.mapper.curbaby", baby_id);
+	}
 }
