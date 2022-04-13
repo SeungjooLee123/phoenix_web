@@ -94,7 +94,7 @@ public class JoinController {
 		//if( dao.userJoin(userInfo) ) {
 			if(file != null) {
 				System.out.println(file.getOriginalFilename());
-				String path = common.fileUpload("join", file, session);
+				String path = common.fileUpload("profile", file, session);
 				String server_path = "http://" + getLocalAddr + req.getContextPath() + "/resources/";
 				//baby.setBaby_photo(server_path + path);
 				

@@ -75,12 +75,13 @@ public class UserController {
 		
 	}
 	
+
 	
 	//소셜로그인
 	@ResponseBody
 	@RequestMapping("/social_login.user")
 	public String social_login(String id) {
-		
+		System.out.println("/social_login.user");
 		
 		
 		return gson.toJson( dao.social_login(id) );
