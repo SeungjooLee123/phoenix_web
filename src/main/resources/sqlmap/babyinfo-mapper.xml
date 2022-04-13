@@ -65,4 +65,8 @@
 <select id="curbaby" resultType="babyinfo.BabyInfoVO">
 	select * from master_baby_info_tbl where baby_id = #{baby_id}
 </select>
+
+<select id="photo" resultType="String">
+	select baby_photo from master_baby_info_tbl where title = #{title}
+</select>
 </mapper>

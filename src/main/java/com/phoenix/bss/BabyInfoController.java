@@ -83,16 +83,23 @@ public class BabyInfoController {
 		} else {
 			baby.setBaby_photo(null);
 		}
-		return dao.baby_info_update(baby) || dao.baby_info_rels_update(gson.fromJson(family, FamilyInfoVO.class));
+		FamilyInfoVO famvo = gson.fromJson(family, FamilyInfoVO.class);
+		dao.baby_info_rels_update(famvo);
+		return dao.baby_info_update(baby);
 	}
 	
 
 	@ResponseBody
 	@RequestMapping(value = "/babydel.bif", produces = "application/json;charset=UTF-8")
-	public String babyinfo_delete(String baby_id, String title) { //아기 삭제
-		System.out.println(baby_id);
-		System.out.println(title);
+	public String babyinfo_delete(String baby_id, String title, HttpSession session) { //아기 삭제
+		BabyInfoVO curbaby = dao.curbaby(baby_id);
+		try {
+			common.fileDelete(curbaby.getBaby_photo(), session);
+		} catch(Exception e) {
+			
+		}
 		boolean result = dao.baby_info_delete(baby_id);
+		
 		if(dao.baby_info_count(title)) { //육아일기에 아기 없음
 			dao.delete_title(title);
 		}
@@ -107,13 +114,17 @@ public class BabyInfoController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/exit.family", produces = "application/json;charset=UTF-8")
-	public String family_exit(String title, String id) { //공동육아 포기
+	public String family_exit(String title, String id, HttpSession session) { //공동육아 포기
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("title", title);
 		map.put("id", id);
 		List<FamilyInfoVO> list = dao.baby_info_co_parent(title);
 		if(list.size() == 1) { //공동육아하는 사람이 1명이면
+			List<String> temp = dao.photo(title);
 			dao.delete_all(title); //아기 삭제
+			for(int i=0; i<temp.size(); i++) {
+				common.fileDelete(temp.get(i), session);
+			}
 		} else { //공동육아하는 사람 여러명
 			for(int i=0; i<list.size(); i++) {
 				if(list.get(i).getId().equals(id)) {
@@ -148,13 +159,18 @@ public class BabyInfoController {
 	//회원 탈퇴
 	@ResponseBody
 	@RequestMapping(value = "/secession.bif", produces = "application/json;charset=UTF-8")
-	public String secession(String id) {
-		List<String> title = dao.title(id);
+	public String secession(String id, HttpSession session) {
+		List<String> title = dao.title(id); //해당 유저가 가입한 육아일기 타이틀
 		for(int i=0; i<title.size(); i++) {
-			List<FamilyInfoVO> list = dao.baby_info_co_parent(title.get(i));
-			if(list.size() == 1) {
-				dao.delete_all(title.get(i));
-			} else {
+			List<FamilyInfoVO> list = dao.baby_info_co_parent(title.get(i)); //해당 육아일기에 가입한 사람 리스트
+			if(list.size() == 1) { //공동육아하는 사람 1명
+				List<String> temp = dao.photo(title.get(i));
+				for(int j=0; j<temp.size(); j++) {
+					common.fileDelete(temp.get(j), session);
+				}
+				dao.delete_all(title.get(i)); //아기 지워
+				
+			} else { //해당 육아일기에 가입한 사람 여러명
 				for(int j=0; j<list.size(); j++) {
 					if(list.get(j).getId().equals(id)) {
 						list.remove(j);
@@ -166,6 +182,6 @@ public class BabyInfoController {
 				dao.family_change(map);
 			}
 		}
-		return gson.toJson(dao.secession(id));
+		return gson.toJson(dao.secession(id)); //다 지워
 	}
 }
