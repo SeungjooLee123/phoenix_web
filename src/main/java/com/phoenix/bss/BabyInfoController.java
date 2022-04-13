@@ -68,8 +68,14 @@ public class BabyInfoController {
 	@RequestMapping(value = "/updatebaby.bif", produces = "application/json;charset=UTF-8")
 	public boolean babyinfo_update(String vo, String family, HttpServletRequest req, HttpSession session) throws IOException { //아기 정보 수정
 		BabyInfoVO baby = gson.fromJson(vo, BabyInfoVO.class);
+		BabyInfoVO curbaby = dao.curbaby(baby.getBaby_id());
 		MultipartRequest mulReq = (MultipartRequest) req;
 		MultipartFile file = mulReq.getFile("file");
+		try {
+			common.fileDelete(curbaby.getBaby_photo(), session);
+		} catch(Exception e) {
+			
+		}
 		if(file != null) {
 			String path = common.fileUpload("profile", file, session);
 			String server_path = "http://" + getLocalAddr + req.getContextPath() + "/resources/";

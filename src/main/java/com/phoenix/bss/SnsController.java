@@ -125,7 +125,6 @@ public class SnsController {
 				String server_path = "http://" + getLocalAddr + req.getContextPath() + "/resources/";
 				test.setImgList(server_path + common.fileUpload("gro", mreq.getFile("file"+i), session));
 				test.setFilename(fileList.get(i).getOriginalFilename());
-				test.setBaby_id(test.getB_id());
 				test.setB_id(test.getBaby_id());
 				
 				System.out.println("들어감");
@@ -143,6 +142,7 @@ public class SnsController {
 		String data = gson.toJson(setvo);
 		return data;
 	}
+	//글만 업데이트 
 	@ResponseBody
 	@RequestMapping(value = "/content.sn", produces="application/json;charset=UTF-8")
 	public String gro_text(HttpServletRequest req) {
@@ -158,6 +158,20 @@ public class SnsController {
 		return data;
 	}
 	
+	//성장일기 디테일
+	@ResponseBody
+	@RequestMapping(value="/detail.sn", produces="application/json;charset=UTF-8")
+	public String gro_detail(HttpServletRequest req) {
+		System.out.println("groDetail접근");
+		int no = Integer.parseInt( req.getParameter("no")+"");
+		List<GrowthVO> list =  dao.select_imgs(no);
+		System.out.println(list.get(0).getGro_img());
+		GrowthVO vo = list.get(0);
+		for(int i=0; i<list.size(); i++) {
+			vo.setImgList(list.get(i).getGro_img());
+		}
+		return gson.toJson(vo);
+	}
 	
 	//성장일기 조회
 	@ResponseBody
