@@ -14,11 +14,11 @@
     <div id="article">
         <nav>
             <ul id="gnb">
-                <li><a href="#">직원소개</a></li>
                 <li><a href="#">공지사항</a></li>
+                <li><a href="#">정책소개</a></li>
                 <li><a href="#">커뮤니티</a></li>
                 <li><a href="#">나눔게시판</a></li>
-                <li><a href="#">정책소개</a></li>
+                <li><a href="#">고객센터</a></li>
             </ul>
         </nav>
     </div>
