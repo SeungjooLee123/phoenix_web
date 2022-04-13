@@ -47,8 +47,6 @@ header img {
   color: #9a9a9a;
 }
 
-
-
 </style>
     <header>
         <nav>

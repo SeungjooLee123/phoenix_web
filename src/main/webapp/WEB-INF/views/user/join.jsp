@@ -44,6 +44,15 @@ text-align: center;
 outline: 1px solid  #A5A0F0;
 z-index: 5;
 }
+
+.btns{
+text-align: center;
+margin-top: 15px;
+}
+
+.join_btns {
+text-align: center;
+margin-top: 20px;}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -53,21 +62,25 @@ z-index: 5;
 <form action="join" method="post">
 <div class="id-text">아이디</div>
 <div class="input-id">
-<input type="text" name="id" id="userId" autofocus style="width:350px; height:40px; margin-bottom:13px; border:1px solid #dadada; border-radius:6px; padding-left:10px;"/>
+	<input type="text" name="id" id="userId" autofocus style="width:350px; height:40px; margin-bottom:13px; border:1px solid #dadada; border-radius:6px; padding-left:10px;"/>
 </div>
-<div class="valid">아이디는 영문소문자와 숫자만 입력 가능합니다.</div>
+<div class="valid">영문소문자와 숫자만 입력 가능합니다.</div>
 <div class="pw-text">비밀번호</div>
 <div class="input-pw">
-<input type="password" name="pw"  id="userPw" style="width:350px; height:40px; margin-bottom:13px; border:1px solid #dadada; border-radius:6px; padding-left:10px;"/>
+	<input type="password" name="pw"  id="userPw" style="width:350px; height:40px; margin-bottom:13px; border:1px solid #dadada; border-radius:6px; padding-left:10px;"/>
 </div>
-<div class="valid">비밀번호는 영문대/소문자와 숫자를 모두 포함해야 합니다.</div>
+<div class="valid">영문대/소문자와 숫자를 모두 포함해야 합니다.</div>
 <div class="pw-check-text">비밀번호 확인</div>
 <div class="input-pw-check">
-<input type="password" name="pwcheck"  id="userPwChk" style="width:350px; height:40px; margin-bottom:13px; border:1px solid #dadada; border-radius:6px; padding-left:10px;"/>
+	<input type="password" name="pwcheck"  id="userPwChk" style="width:350px; height:40px; margin-bottom:13px; border:1px solid #dadada; border-radius:6px; padding-left:10px;"/>
 </div>
 <div class="valid">비밀번호를 다시 입력하세요</div>
-<a>회원가입</a>
-
+<div class="btns">
+	<a href=""><img src="imgs/naver_join.svg" style="width:155px; height:40px; margin-right:40px;"></a><a href=""><img src="imgs/kakao_join.svg"  style="width:155px; height:40px;"></a>
+</div>
+<div class="join_btns">
+	<a href=""><img src="imgs/join_btn_check.svg" style="height:43px;"></a>
+</div>
 
 </form>
 </div>

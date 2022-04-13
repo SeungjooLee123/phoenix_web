@@ -121,10 +121,12 @@ public class BabyInfoController {
 		List<FamilyInfoVO> list = dao.baby_info_co_parent(title);
 		if(list.size() == 1) { //공동육아하는 사람이 1명이면
 			List<String> temp = dao.photo(title);
-			dao.delete_all(title); //아기 삭제
+			
 			for(int i=0; i<temp.size(); i++) {
 				common.fileDelete(temp.get(i), session);
 			}
+			
+			dao.delete_all(title); //아기 삭제
 		} else { //공동육아하는 사람 여러명
 			for(int i=0; i<list.size(); i++) {
 				if(list.get(i).getId().equals(id)) {
