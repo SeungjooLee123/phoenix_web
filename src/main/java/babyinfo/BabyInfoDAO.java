@@ -74,4 +74,8 @@ public class BabyInfoDAO {
 	public BabyInfoVO curbaby(String baby_id) {
 		return sql.selectOne("babyinfo.mapper.curbaby", baby_id);
 	}
+	
+	public List<String> photo(String title){
+		return sql.selectList("babyinfo.mapper.photo", title);
+	}
 }
