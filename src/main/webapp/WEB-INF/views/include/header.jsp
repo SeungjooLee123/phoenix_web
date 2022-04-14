@@ -21,50 +21,78 @@ nav ul {
 }
 
 header {
-  width: 1440px;
-  height: 150px;
-  position: relative;
-  margin: 0 auto;
-  margin-top: 20px;
+position : fixed;
+width: 100%;
+z-index: 2000;
+top: 0;
+left: 0;
+right:0;
+border:0;
+background: #fff;
+transition: top .2s ease-in-out;
 }
 
-header img {
-  position: absolute;
-  width: 194px;
-  height: 82px;
-  right: 66vh;
-  top: 20%;
+.header_wrap {
+max-width: 1300px;
+margin : 0 auto;
+height: 72px;
 }
 
-#tnb {
-  display: flex;
-  column-gap: 1rem;
-  list-style: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 13px;
-  color: #9a9a9a;
+.gnbContent{
+text-align: center;
+}
+
+.list_gnb{
+display: inline-block;
+margin-left: -74px;
+font-size: 16px;
+letter-spacing: -.5px;}
+
+.menu{
+display: block;
+padding: 0 28px;
+line-height: 72px;
+font-weight: 700;
 }
 
 </style>
     <header>
-        <nav>
-            <ul id="tnb">
-                <li><a href='<c:url value="/"/>'>홈</a></li>
+        <nav class="header_wrap">
+        	<h1 class="logo"><a><img src="imgs/logo_ai.svg" style="width: 194px; padding-top:24px;"></a></h1>
+         		<nav class="gnbContent">
+         			<ul class="list_gnb">
+         				<li><a href='<c:url value="/"/>'></a>공지사항</li>
+         				<li><a href='<c:url value="/"/>'></a>육아정보</li>
+         				<li><a href='<c:url value="/"/>'></a>커뮤니티</li>
+         				<li><a href='<c:url value="/"/>'></a>나눔하기</li>
+         				<li class="menu"><a href='<c:url value="/"/>'></a>고객센터</li>
+         			</ul>
+         		</nav>
+         		  <div class="utill">
+        			<img src="imgs/gis_globe-earth-alt.png" style="width:36px; height:36px;">
+        			<img src="imgs/clarity_moon-line.png" style="width:36px; height:36px;">
+       			  </div>
+        </nav>
+        <hr>
+        
+ 		<nav>
+ 			<ul id="tnb">
+ 			<li>베시시</li>
                 <!-- 로그인 하지 않은 경우 -->
                 <c:if test="${empty loginInfo }">
+                	<li><a href='<c:url value="/join"/>'>회원가입</a></li>
                		 <li><a href='<c:url value="/login"/>'>로그인</a></li>
-               		 <li><a href='<c:url value="/join"/>'>회원가입</a></li>
                 </c:if>
                 <!-- 로그인의 경우 -->
                     <c:if test="${!empty loginInfo }">
-               			 <li>${loginInfo.id }님</li>
+               			 <li><a href='<c:url value=""/>'>마이페이지</a></li>
                    		<li><a href='<c:url value="/logout"/>'>로그아웃</a></li>
                 </c:if>
-            </ul>  
-        </nav>
-        <a href='<c:url value="/"/>'><img src="imgs/logo_ai.svg"></a>
+            
+                
+ 				</ul>
+ 		</nav>
+ 		<hr style="width:100%;">
     </header>
 
 

@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-  <link rel="stylesheet" href="css/style.css?v=<%=new Date().getTime()%>">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>BSS</title>
 
@@ -15,10 +14,11 @@
         <nav>
             <ul id="gnb">
                 <li><a href="#">공지사항</a></li>
-                <li><a href="#">정책소개</a></li>
+                <li><a href="#">육아정보</a></li>
                 <li><a href="#">커뮤니티</a></li>
-                <li><a href="#">나눔게시판</a></li>
+                <li><a href="#">나눔하기</a></li>
                 <li><a href="#">고객센터</a></li>
+       
             </ul>
         </nav>
     </div>
