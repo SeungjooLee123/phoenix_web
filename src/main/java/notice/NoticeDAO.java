@@ -2,47 +2,44 @@ package notice;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class NoticeDAO implements NoticeService {
+	@Autowired private SqlSession sql;
 
 	@Override
 	public List<NoticeVO> notice_list() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean notice_insert(NoticeVO vo) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean notice_update(NoticeVO vo) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean notice_detail(int id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public NoticePage notice_list(NoticePage page) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean notice_delete(int id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void notice_count(int id) {
-		// TODO Auto-generated method stub
-		
+
 	}
 }
