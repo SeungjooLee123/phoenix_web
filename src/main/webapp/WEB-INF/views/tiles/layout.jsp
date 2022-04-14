@@ -21,7 +21,7 @@
 <style type="text/css">
 	#wrap {display: flex; flex-direction: column;}
 	/* flex 방향 지정 flex-dircetion : column (가로) */
-	.content {width: 1440px; margin:0 auto;}
+	#content {width: 1440px; margin:0 auto; padding-top: 5%;}
 
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>

@@ -17,6 +17,11 @@
 	<definition name="*" extends="layout">
 		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp"/>
 	</definition>
+	
+	<definition name="main" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/views/main.jsp"/>
+	</definition>
+	
 	<!-- login으로 들어오면 template을 타라 -->
 	<definition name="user/login" template="/WEB-INF/views/tiles/default.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/user/login.jsp"/>
