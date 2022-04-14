@@ -33,7 +33,7 @@
     <footer>
         <nav>
             <ul id="notice">
-                <li><a href="#">공지사항</a></li>
+                <li><a href='<c:url value="/notice"/>'>공지사항</a></li>
             </ul>
         </nav>
     </footer>
