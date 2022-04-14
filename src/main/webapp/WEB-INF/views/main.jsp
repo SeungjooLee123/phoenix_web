@@ -14,7 +14,7 @@
     <div id="article">
         <nav>
             <ul id="gnb">
-                <li><a href="notice.bss">공지사항</a></li>
+                <li><a href='<c:url value="/notice"/>'>공지사항</a></li>
                 <li><a href="#">정책소개</a></li>
                 <li><a href='<c:url value="/comunity"/>'>커뮤니티</a></li>
                 <li><a href="#">나눔게시판</a></li>
