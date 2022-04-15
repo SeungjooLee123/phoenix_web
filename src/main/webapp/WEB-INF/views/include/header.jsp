@@ -115,7 +115,7 @@ margin-top: 75px;;}
          		<nav class="gnbContent">
          			<ul class="list_gnb">
          				<li><a href='<c:url value="/notice"/>'>공지사항</a></li>
-         				<li><a href='<c:url value="/"/>'>육아정보</a></li>
+         				<li><a href='<c:url value="/welfare"/>'>육아정보</a></li>
          				<li><a href='<c:url value="/community"/>'>커뮤니티</a></li>
          				<li><a href='<c:url value="/"/>'>나눔하기</a></li>
          				<li><a href='<c:url value="/"/>'>고객센터</a></li>
