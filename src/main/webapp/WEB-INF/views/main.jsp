@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+
 <style type="text/css">
 
 * {
@@ -20,7 +24,6 @@ nav ul {
   list-style: none;
 } 
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
 
 #bss{
 margin-top:10%;}
@@ -39,6 +42,7 @@ font-size: 18px;}
 font-size: 42px;
 line-height: 1.29;
 letter-spacing: -.8px;
+font-family: 'Noto Sans KR', sans-serif;
 }
 
 .icons {
@@ -72,6 +76,13 @@ letter-spacing: .8px;
 font-family: 'Noto Sans KR', sans-serif;
 }
 
+
+#third-content{
+text-align: center;}
+
+
+.bss-control{
+}
 </style>
 <meta charset="UTF-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -94,6 +105,7 @@ font-family: 'Noto Sans KR', sans-serif;
 	<img src="imgs/bss_ad_pick.png" style="width:100%; height:770px;">
 </div>	
 </section>
+<section>
 <div id="seconde-container">
 <div class="seconde-img">
 	<img src="imgs/tmdwn_boy.png" style="width:300px; height:300px;">
@@ -112,5 +124,20 @@ font-family: 'Noto Sans KR', sans-serif;
 아이와 함께 사용해보세요.
 </p>
 </div>
+</section>
+<section>
+<div id="third-content">
+<h2 class="bss-control">베시시 기능 소개</h2>
+<br>
+<h4 class="seconde-main-text">간단한 사용법과 심플한 디자인으로 행복한 육아의 완성</h4>
+<div class="row">
+
+
+
+</div>
+
+
+</div>
+</section>
 </body>
 </html>
