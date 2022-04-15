@@ -26,7 +26,7 @@ nav ul {
 
 
 #bss{
-margin-top:10%;}
+margin-top:5%;}
 
 
 #container{

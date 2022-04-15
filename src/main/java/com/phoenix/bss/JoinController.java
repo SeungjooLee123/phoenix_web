@@ -58,54 +58,75 @@ public class JoinController {
 //		String access_Token = common.getAccessToken(code);
 //		System.out.println("###access_Token#### : " + access_Token);
 		
-		return "redirect:/ + url.toString()"; //위에서 설정한 url로 이동시킴
+		return "redirect:" + url.toString(); //위에서 설정한 url로 이동시킴
 	}
+	
 	@RequestMapping("/kakaocallback")
-	public String kakaocallback(@RequestParam(required = false) String code, @RequestParam(required = false) String error, HttpSession session) {
+	public String kakaocallback(@RequestParam(value = "code", required = false) String code, @RequestParam(required = false) String error, HttpSession session) {
 		if(error != null) {//토큰 발급 불가일 때
 			return "redirect:/";
 		}
-		UserVO vo;
-		HashMap<String, Object> userInfo = new HashMap<String, Object>();
-		String reqURL = "https://kapi.kakao.com/v2/user/me";
-		try {
-			URL url = new URL(reqURL);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-
-			// 요청에 필요한 Header에 포함될 내용
-			conn.setRequestProperty("Authorization", "Bearer "  /*access_Token*/);
-
-			int responseCode = conn.getResponseCode();
-			System.out.println("responseCode : " + responseCode);
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-			String line = "";
-			String result = "";
-
-			while ((line = br.readLine()) != null) {
-				result += line;
-			}
-			System.out.println("response body : " + result);
-
-			JsonParser parser = new JsonParser();
-			JsonElement element = parser.parse(result);
-
-			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
-
-			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-			String email = kakao_account.getAsJsonObject().get("email").getAsString();
-
-			userInfo.put("nickname", nickname);
-			userInfo.put("email", email);
-
-		} catch (IOException e) {
-			e.printStackTrace();
+		System.out.println("#########" + code);
+        String access_Token = common.getAccessToken(code);
+        System.out.println("###access_Token#### : " + access_Token);
+        
+        
+        UserVO vo = getUserInfo(access_Token);
+        System.out.println("###access_Token#### : " + access_Token);
+        System.out.println("###userInfo#### : " + vo.getId());
+        session.setAttribute("loginInfo", vo);
+       
+        if(service.id_check(vo.getId())) {
+			service.member_join(vo);
 		}
-		return "redirect:/";
+        
+        
+        return "redirect:/"; 
 	}
+	
+	public UserVO getUserInfo (String access_Token) {
+
+        //    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+		UserVO vo = new UserVO();
+        String reqURL = "https://kapi.kakao.com/v2/user/me";
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            //    요청에 필요한 Header에 포함될 내용
+            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            String line = "";
+            String result = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            System.out.println("response body : " + result);
+
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+
+            JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+
+            String email = kakao_account.getAsJsonObject().get("email").getAsString();
+            
+            vo.setId(email);
+            vo.setKakao_id("Y");
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return vo;
+    }
 	
 	@RequestMapping("/naverLogin")
 	public String naverLogin(HttpSession session) {
