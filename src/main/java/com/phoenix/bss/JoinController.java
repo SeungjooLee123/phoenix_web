@@ -59,37 +59,45 @@ public class JoinController {
 			return "redirect:/";
 		}
 		
-		StringBuffer url = new StringBuffer("https://nid.naver.com/oauth2.0/token?grant_type=authorization_code");
-		url.append("&client_id=").append(naver_client_id);
-		url.append("&client_secret=").append("U3LRpxH6Tq");
-		url.append("&code=").append(code);
-		url.append("&state=").append(state);
-		
-		JSONObject json = new JSONObject(common.requestAPI(url));
-		
-		String token = json.getString("access_token");
-		String type = json.getString("token_type");
-		
-		
-		url = new StringBuffer("https://openapi.naver.com/v1/nid/me");		// => 예시 첫줄
-		json = new JSONObject(common.requestAPI(url, type + " " + token));			//type과 token 사이에 무조건 한 칸 띄우기
-		
-		
-		if(json.getString("resultcode").equals("00")) {
-			json = json.getJSONObject("response");
-			UserVO vo = new UserVO();
-			vo.setId(json.getString("email"));
-			vo.setNaver_id("Y");
-			
-			session.setAttribute("loginInfo", vo);
-			
-			System.out.println(gson.toJson(vo));
-			if(service.id_check(vo.getId())) {
-				System.out.println(gson.toJson(vo)+"if");
-				service.member_join(vo);
+		HashMap<String, Object> userInfo = new HashMap<String, Object>();
+		String reqURL = "https://kapi.kakao.com/v2/user/me";
+		try {
+			URL url = new URL(reqURL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+
+			// 요청에 필요한 Header에 포함될 내용
+			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode);
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			String line = "";
+			String result = "";
+
+			while ((line = br.readLine()) != null) {
+				result += line;
 			}
-		}	
-		return "redirect:/";	//로그인 처리가 되며 홈으로 이동
+			System.out.println("response body : " + result);
+
+			JsonParser parser = new JsonParser();
+			JsonElement element = parser.parse(result);
+
+			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+
+			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+			String email = kakao_account.getAsJsonObject().get("email").getAsString();
+
+			userInfo.put("nickname", nickname);
+			userInfo.put("email", email);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return userInfo;
 	}
 	
 	@RequestMapping("/naverLogin")

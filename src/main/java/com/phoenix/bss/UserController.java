@@ -26,7 +26,7 @@ public class UserController {
 	
 	
 	//회원가입 화면 요청
-	@RequestMapping("/join.bss")
+	@RequestMapping("/join")
 	public String join() {
 		return "user/join";
 	}
@@ -91,7 +91,7 @@ public class UserController {
 	
 	
 	//로그인 화면 요청
-	@RequestMapping("/login.bss")
+	@RequestMapping("/login")
 	public String login() {
 		return "user/login";
 	}
