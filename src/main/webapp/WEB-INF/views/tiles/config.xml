@@ -46,6 +46,11 @@
 		<put-attribute name="content" value="/WEB-INF/views/notice/notice.jsp"/>
 	</definition>
 	
+	<!-- comunity로 들어오면 template을 타라 -->
+	<definition name="welfare/welfare" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/views/welfare/welfare.jsp"/>
+	</definition>
+	
 	<!-- login으로 들어오면 template을 타라 -->
 	<definition name="user/login" extends="default">
 		<put-attribute name="content" value="/WEB-INF/views/user/login.jsp"/>
