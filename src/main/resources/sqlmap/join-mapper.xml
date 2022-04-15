@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="join.mapper">  
-	
+
+<insert id="userjoin_web">
+insert into MASTER_USER_INFO_TBL (id, pw, naver_id, kakao_id)
+values(#{id}, #{pw, jdbcType=VARCHAR}, #{naver_id, jdbcType=VARCHAR}, #{kakao_id, jdbcType=VARCHAR})
+</insert>
+
+
+
+<!-- 공용================================================================== -->
+<select id="id_check" resultType="int">
+	select count(*) from MASTER_USER_INFO_TBL where id = #{id}
+</select>
+
+
+
+
+
+<!-- 안드로이드============================================================ -->
 <select id="title_check" resultType="int">
 	select count(*) from	MASTER_FAMILY_INFO_TBL where title = #{family_id}
 </select>	
 	
-<select id="id_check" resultType="int">
-	select count(*) from	MASTER_USER_INFO_TBL where id = #{id}
-</select>
-	
-	
+
 <insert id="babyjoin">
 	INSERT INTO MASTER_BABY_INFO_TBL ( BABY_ID, TITLE, BABY_NAME, BABY_BIRTH, BABY_PHOTO, BABY_GENDER, ID )
 	VALUES ( #{baby_id} ,#{ title },#{ baby_name },#{ baby_birth },#{ baby_photo, jdbcType=VARCHAR },#{ baby_gender },#{ id } )

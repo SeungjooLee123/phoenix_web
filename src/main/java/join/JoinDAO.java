@@ -11,16 +11,14 @@ import babyinfo.FamilyInfoVO;
 import user.UserVO;
 
 @Repository
-public class JoinDAO {
+public class JoinDAO implements JoinService{
 	@Autowired private SqlSession sql;
 
 	public boolean title_check(String title) {
 		return (Integer) sql.selectOne("join.mapper.title_check",title) == 0 ? true : false;
 	}
 	
-	public boolean id_check(String id) {
-		return (Integer) sql.selectOne("join.mapper.id_check",id) == 0 ? true : false;
-	}
+	
 	
 	public boolean userJoin(UserVO vo) {
 		//int a = sql.insert("join.mapper.userjoin", vo);
@@ -40,6 +38,19 @@ public class JoinDAO {
 		return (Integer) sql.selectOne("join.mapper.family_selectid", family_vo) == 0 ? false : true;
 	}
 	
+	//공용=============================================================
 	
+	public boolean id_check(String id) {
+		return (Integer) sql.selectOne("join.mapper.id_check",id) == 0 ? true : false;
+	}
+	
+	
+	//WEB=============================================================
+
+	@Override
+	public boolean member_join(UserVO vo) {
+		return sql.insert("join.mapper.userjoin_web", vo) == 1 ? true: false;
+	}
+
 	
 }

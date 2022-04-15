@@ -5,8 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-  <link rel="stylesheet" href="css/style.css?v=<%=new Date().getTime()%>">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="css/style.css?v=<%=new Date().getTime()%>">
 <title>Comunity</title>
 </head>
 <body>
