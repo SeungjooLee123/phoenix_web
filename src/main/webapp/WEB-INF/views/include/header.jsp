@@ -30,9 +30,11 @@ right:0;
 border:0;
 background: #fff;
 transition: top .2s ease-in-out;
+height: 150px;
 }
 
 .header_wrap {
+position: relative;
 max-width: 1300px;
 margin : 0 auto;
 height: 72px;
@@ -43,29 +45,80 @@ text-align: center;
 }
 
 .list_gnb{
-display: inline-block;
+font-weight: 700;
+right: 29%;
+top: 5px;
+position: absolute;
+display: flex;
+justify-content: center;
 margin-left: -74px;
 font-size: 16px;
-letter-spacing: -.5px;}
+letter-spacing: -.5px;
+}
 
-.menu{
+.list_gnb > li {
 display: block;
-padding: 0 28px;
-line-height: 72px;
+padding: 20px 20px;
+cursor: pointer;}
+
+.list_gnb >li>a:hover, active {
+color: #eee;}
+
+hr {
+opacity: 0.3; 
+}
+
+.utill {
+position: absolute;
+right: 0;
+top: 0;
+padding-top: 18px;}
+
+
+#tnb_wrap {
+list-style: none;
+width: 1300px;
+margin: 0 auto;
+}
+
+#tnb {
+position: absolute;
+display: flex;
+}
+
+.logo_text{
+color: #000;
+font-weight: 700;
+font-size: 16px;
+padding: 25px 0px 0px 50px;
+}
+
+.my_info{
+display: flex;
+padding: 25px 29px 0px 50px;
+position: absolute;
+right: 14.3%;
+column-gap: 2rem;
 font-weight: 700;
 }
+
+.line{
+margin-top: 75px;;}
+
+
+
 
 </style>
     <header>
         <nav class="header_wrap">
-        	<h1 class="logo"><a><img src="imgs/logo_ai.svg" style="width: 194px; padding-top:24px;"></a></h1>
+        	<h1 class="logo"><a href='<c:url value="/"/>/'><img src="imgs/logo_ai.svg" style="width: 150px; padding-top:5px;"></a></h1>
          		<nav class="gnbContent">
          			<ul class="list_gnb">
          				<li><a href='<c:url value="/"/>'></a>공지사항</li>
          				<li><a href='<c:url value="/"/>'></a>육아정보</li>
          				<li><a href='<c:url value="/"/>'></a>커뮤니티</li>
          				<li><a href='<c:url value="/"/>'></a>나눔하기</li>
-         				<li class="menu"><a href='<c:url value="/"/>'></a>고객센터</li>
+         				<li><a href='<c:url value="/"/>'></a>고객센터</li>
          			</ul>
          		</nav>
          		  <div class="utill">
@@ -74,26 +127,26 @@ font-weight: 700;
        			  </div>
         </nav>
         <hr>
-        
- 		<nav>
+ 		<nav id="tnb_wrap">
  			<ul id="tnb">
- 			<li>베시시</li>
+ 					<li class="logo_text">베시시</li>
+ 				</ul>
+ 				<div class="my_info">
                 <!-- 로그인 하지 않은 경우 -->
                 <c:if test="${empty loginInfo }">
                 	<li><a href='<c:url value="/join"/>'>회원가입</a></li>
                		 <li><a href='<c:url value="/login"/>'>로그인</a></li>
                 </c:if>
-                <!-- 로그인의 경우 -->
+                      <!-- 로그인의 경우 -->
                     <c:if test="${!empty loginInfo }">
                			 <li><a href='<c:url value=""/>'>마이페이지</a></li>
                    		<li><a href='<c:url value="/logout"/>'>로그아웃</a></li>
                 </c:if>
-            
-                
- 				</ul>
+                </div>
  		</nav>
- 		<hr style="width:100%;">
+ 		<hr class="line">
     </header>
+     		
 
 
 
