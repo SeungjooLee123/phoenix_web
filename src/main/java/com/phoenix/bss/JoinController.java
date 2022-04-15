@@ -1,6 +1,10 @@
 package com.phoenix.bss;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -20,6 +24,9 @@ import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import babyinfo.BabyInfoVO;
 import babyinfo.FamilyInfoVO;
@@ -58,7 +65,7 @@ public class JoinController {
 		if(error != null) {//토큰 발급 불가일 때
 			return "redirect:/";
 		}
-		
+		UserVO vo;
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
 		try {
@@ -67,7 +74,7 @@ public class JoinController {
 			conn.setRequestMethod("GET");
 
 			// 요청에 필요한 Header에 포함될 내용
-			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+			conn.setRequestProperty("Authorization", "Bearer "  /*access_Token*/);
 
 			int responseCode = conn.getResponseCode();
 			System.out.println("responseCode : " + responseCode);
@@ -97,7 +104,7 @@ public class JoinController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return userInfo;
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/naverLogin")
