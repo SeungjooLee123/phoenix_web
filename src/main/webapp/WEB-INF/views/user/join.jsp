@@ -95,7 +95,7 @@ margin-top: 20px;}
 	
 	<div class="btns">
 	   <a href="naverLogin"><img src="imgs/naver_join.svg" style="width:155px; height:40px; margin-right:40px;"></a>
-	   <a onclick="kakao_join()"><img src="imgs/kakao_join.svg"  style="width:155px; height:40px; cursor: pointer;"></a>
+	   <a href="kakaoLogin"><img src="imgs/kakao_join.svg"  style="width:155px; height:40px; cursor: pointer;"></a>
 	</div>
 	
 	<div class="join_btns">

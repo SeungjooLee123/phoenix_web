@@ -1,15 +1,19 @@
 package notice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class NoticeDAO implements NoticeService {
 	@Autowired private SqlSession sql;
 
 	@Override
 	public List<NoticeVO> notice_list() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -42,4 +46,6 @@ public class NoticeDAO implements NoticeService {
 	public void notice_count(int id) {
 
 	}
+
+
 }
