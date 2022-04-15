@@ -23,7 +23,7 @@ nav ul {
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
 
 #bss{
-margin-top:10%;}
+margin-top:5%;}
 
 
 #container{
