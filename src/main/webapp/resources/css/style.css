@@ -1,4 +1,4 @@
-@charset "UTF-8";
+/* @charset "UTF-8";
 
 * {
   margin: 0;
@@ -12,8 +12,8 @@ a:visited {
 }
 nav ul {
   list-style: none;
-}
-
+} */
+/* 
 header {
   width: 1440px;
   height: 150px;
@@ -90,12 +90,12 @@ section {
 #slide > a:first-child {
   left: 0;
 }
-/*
+
 footer {
   width: 1440px;
   margin: 0 auto;
 }
-*/
+
 
 #notice {
   display: flex;
@@ -123,4 +123,4 @@ footer {
 #copy p {
   display: flex;
   padding: 30px 10px;
-}
+} */

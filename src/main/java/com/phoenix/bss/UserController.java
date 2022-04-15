@@ -31,6 +31,8 @@ public class UserController {
 		return "user/join";
 	}
 	
+	
+	
 	//로그아웃 요청
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {

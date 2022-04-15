@@ -1,6 +1,10 @@
 package com.phoenix.bss;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -9,31 +13,200 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import babyinfo.BabyInfoVO;
 import babyinfo.FamilyInfoVO;
 import common.CommonService;
 import diary.DiaryVO;
 import join.JoinDAO;
+import join.JoinServiceImpl;
 import user.UserVO;
 
 @Controller
 public class JoinController {
+	@Autowired private JoinServiceImpl service;
 	@Autowired JoinDAO dao;
 	@Autowired CommonService common;
 	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 	final String getLocalAddr = "121.148.239.238:5524";
-	UserVO vo = new UserVO();
 
+	private String naver_client_id = "uR4I8FNC11hwqTB3Fr6l";
+	
+	
+	@RequestMapping("/kakaoLogin")
+	public String kakaoLogin() {
+		StringBuffer url = new StringBuffer("https://kauth.kakao.com/oauth/authorize?response_type=code");
+		url.append("&client_id=").append("4b12573ac9cb8199a62e031d7c2e1808");
+		url.append("&redirect_uri=").append("http://localhost/bss/kakaocallback");
+		
+//		System.out.println("code = "+code);
+//		
+//		String access_Token = common.getAccessToken(code);
+//		System.out.println("###access_Token#### : " + access_Token);
+		
+		return "redirect:" + url.toString(); //위에서 설정한 url로 이동시킴
+	}
+	
+	@RequestMapping("/kakaocallback")
+	public String kakaocallback(@RequestParam(value = "code", required = false) String code, @RequestParam(required = false) String error, HttpSession session) {
+		if(error != null) {//토큰 발급 불가일 때
+			return "redirect:/";
+		}
+		System.out.println("#########" + code);
+        String access_Token = common.getAccessToken(code);
+        System.out.println("###access_Token#### : " + access_Token);
+        
+        
+        UserVO vo = getUserInfo(access_Token);
+        System.out.println("###access_Token#### : " + access_Token);
+        System.out.println("###userInfo#### : " + vo.getId());
+        session.setAttribute("loginInfo", vo);
+       
+        if(service.id_check(vo.getId())) {
+			service.member_join(vo);
+		}
+        
+        
+        return "redirect:/"; 
+	}
+	
+	public UserVO getUserInfo (String access_Token) {
+
+        //    요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+		UserVO vo = new UserVO();
+        String reqURL = "https://kapi.kakao.com/v2/user/me";
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            //    요청에 필요한 Header에 포함될 내용
+            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            String line = "";
+            String result = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            System.out.println("response body : " + result);
+
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+
+            JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+
+            String email = kakao_account.getAsJsonObject().get("email").getAsString();
+            
+            vo.setId(email);
+            vo.setKakao_id("Y");
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return vo;
+    }
+	
+	@RequestMapping("/naverLogin")
+	public String naverLogin(HttpSession session) {
+		String state = UUID.randomUUID().toString();
+		session.setAttribute("state", state);
+		
+		StringBuffer url = new StringBuffer("https://nid.naver.com/oauth2.0/authorize?response_type=code");
+		url.append("&client_id=").append(naver_client_id);
+		url.append("&state=").append(state);
+		url.append("&redirect_uri=").append("http://localhost/bss/navercallback");
+		
+		return "redirect:" + url.toString(); //위에서 설정한 url로 이동시킴
+	}
+	
+	@RequestMapping("/navercallback")
+	public String navercallback(@RequestParam(required = false) String code, String state, @RequestParam(required = false) String error, HttpSession session) {
+		if(! state.equals(session.getAttribute("state")) || error != null) {//토큰 발급 불가일 때
+			return "redirect:/";
+		}
+		
+		StringBuffer url = new StringBuffer("https://nid.naver.com/oauth2.0/token?grant_type=authorization_code");
+		url.append("&client_id=").append(naver_client_id);
+		url.append("&client_secret=").append("U3LRpxH6Tq");
+		url.append("&code=").append(code);
+		url.append("&state=").append(state);
+		
+		JSONObject json = new JSONObject(common.requestAPI(url));
+		
+		String token = json.getString("access_token");
+		String type = json.getString("token_type");
+		
+		
+		url = new StringBuffer("https://openapi.naver.com/v1/nid/me");		// => 예시 첫줄
+		json = new JSONObject(common.requestAPI(url, type + " " + token));			//type과 token 사이에 무조건 한 칸 띄우기
+		
+		
+		if(json.getString("resultcode").equals("00")) {
+			json = json.getJSONObject("response");
+			UserVO vo = new UserVO();
+			vo.setId(json.getString("email"));
+			vo.setNaver_id("Y");
+			
+			session.setAttribute("loginInfo", vo);
+			
+			System.out.println(gson.toJson(vo));
+			if(service.id_check(vo.getId())) {
+				System.out.println(gson.toJson(vo)+"if");
+				service.member_join(vo);
+			}
+		}	
+		return "redirect:/";	//로그인 처리가 되며 홈으로 이동
+	}
+	
+	//=========================================================================================================
+	
+
+	//회원가입 처리 요청
+	@ResponseBody
+	@RequestMapping(value = "/member_insert.bss", produces="text/html; charset=UTF-8")
+	public String member_insert(UserVO vo, HttpServletRequest req, HttpSession session) {
+		StringBuffer msg = new StringBuffer("<script>");
+		if(!service.member_join(vo)) {
+			msg.append("alert('회원가입 실패');").append("location='member';");
+		}else {
+			msg.append("alert('회원가입을 축하드립니다.');").append("location='").append(req.getContextPath()).append("';");
+		}
+		msg.append("</script>");
+		session.setAttribute("loginInfo", vo);
+		return msg.toString();
+	}
+
+	//아이디 중복확인
+	@ResponseBody
+	@RequestMapping("/id_check.bss")
+	public boolean id_cheack(String id) {
+		return service.id_check(id);
+	}
+	
+	
+	//android==========================================================================
 	
 	//kakao 가입
 	@ResponseBody

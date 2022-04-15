@@ -1,8 +1,11 @@
 package common;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -13,6 +16,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 @Service
 public class CommonService {
@@ -53,5 +59,127 @@ public class CommonService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		
+		public String requestAPI(StringBuffer url) {
+			String result = "";			//<= 나중에 결과를 보내기 위한 변수 선언
+			try {
+			      HttpURLConnection con = (HttpURLConnection) new URL(url.toString()).openConnection();
+			      con.setRequestMethod("GET"); //통신 방법 = get
+			      int responseCode = con.getResponseCode(); //통신하고 응답 코드를 가져옴
+			      
+			      BufferedReader br;
+			      System.out.print("responseCode="+responseCode);
+			      if(responseCode==200) { // 정상 호출
+			        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			      } else {  // 에러 발생
+			        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			      }
+			      
+			      String inputLine;
+			      StringBuffer res = new StringBuffer();
+			      while ((inputLine = br.readLine()) != null) {//몇 개의 정보가 있을지 모르므로 while로 반복문 돌린다(=>rs.next()랑 비슷함)
+			        res.append(inputLine);//가져온 정보가 null이 아닐 때 StringBuffer에 추가함
+			      }
+			      br.close();
+			      con.disconnect();
+			      result = res.toString();	//Buffer를 스트링으로 바꿔 리턴시킨다.
+			      	      
+			    } catch (Exception e) {
+			      System.out.println(e.getMessage()); //에러 메시지 처리
+			    }
+			return result;
+		}
+		
+		public String requestAPI(StringBuffer url, String property) {
+			String result = "";			//<= 나중에 결과를 보내기 위한 변수 선언
+			try {
+				
+			      HttpURLConnection con = (HttpURLConnection) new URL(url.toString()).openConnection();
+			      con.setRequestMethod("GET"); //통신 방법 = get
+			      
+			      con.setRequestProperty("Authorization", property);
+			      int responseCode = con.getResponseCode(); //통신하고 응답 코드를 가져옴
+			      
+			      BufferedReader br;
+			      System.out.print("responseCode="+responseCode);
+			      if(responseCode==200) { // 정상 호출
+			        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			      } else {  // 에러 발생
+			        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			      }
+			      
+			      String inputLine;
+			      StringBuffer res = new StringBuffer();
+			      while ((inputLine = br.readLine()) != null) {//몇 개의 정보가 있을지 모르므로 while로 반복문 돌린다(=>rs.next()랑 비슷함)
+			        res.append(inputLine);//가져온 정보가 null이 아닐 때 StringBuffer에 추가함
+			      }
+			      br.close();
+			      con.disconnect();
+			      result = res.toString();	//Buffer를 스트링으로 바꿔 리턴시킨다.
+			      	      
+			    } catch (Exception e) {
+			      System.out.println(e.getMessage()); //에러 메시지 처리
+			    }
+			return result;
+		}
+		
+		
+		public String getAccessToken (String authorize_code) {
+			String access_Token = "";
+			String refresh_Token = "";
+			String reqURL = "https://kauth.kakao.com/oauth/token";
+
+			try {
+				URL url = new URL(reqURL);
+	            
+				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+				// POST 요청을 위해 기본값이 false인 setDoOutput을 true로
+	            
+				conn.setRequestMethod("POST");
+				conn.setDoOutput(true);
+				// POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
+	            
+				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+				StringBuilder sb = new StringBuilder();
+				sb.append("grant_type=authorization_code");
+	            
+				sb.append("&client_id=4b12573ac9cb8199a62e031d7c2e1808"); //본인이 발급받은 key
+				sb.append("&redirect_uri=http://localhost/bss/kakaocallback"); // 본인이 설정한 주소
+	            
+				sb.append("&code=" + authorize_code);
+				bw.write(sb.toString());
+				bw.flush();
+	            
+				// 결과 코드가 200이라면 성공
+				int responseCode = conn.getResponseCode();
+				System.out.println("responseCode : " + responseCode);
+	            
+				// 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				String line = "";
+				String result = "";
+	            
+				while ((line = br.readLine()) != null) {
+					result += line;
+				}
+				System.out.println("response body : " + result);
+	            
+				// Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+				JsonParser parser = new JsonParser();
+				JsonElement element = parser.parse(result);
+	            
+				access_Token = element.getAsJsonObject().get("access_token").getAsString();
+				refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
+	            
+				System.out.println("access_token : " + access_Token);
+				System.out.println("refresh_token : " + refresh_Token);
+	            
+				br.close();
+				bw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return access_Token;
 		}
 }

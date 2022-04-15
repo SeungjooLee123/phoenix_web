@@ -21,51 +21,132 @@ nav ul {
 }
 
 header {
-  width: 1440px;
-  height: 150px;
-  position: relative;
-  margin: 0 auto;
-  margin-top: 20px;
+position : fixed;
+width: 100%;
+z-index: 2000;
+top: 0;
+left: 0;
+right:0;
+border:0;
+background: #fff;
+transition: top .2s ease-in-out;
+height: 150px;
 }
 
-header img {
-  position: absolute;
-  width: 194px;
-  height: 82px;
-  right: 66vh;
-  top: 20%;
+.header_wrap {
+position: relative;
+max-width: 1300px;
+margin : 0 auto;
+height: 72px;
+}
+
+.gnbContent{
+text-align: center;
+}
+
+.list_gnb{
+font-weight: 700;
+right: 29%;
+top: 5px;
+position: absolute;
+display: flex;
+justify-content: center;
+margin-left: -74px;
+font-size: 16px;
+letter-spacing: -.5px;
+}
+
+.list_gnb > li {
+display: block;
+padding: 20px 20px;
+cursor: pointer;}
+
+.list_gnb >li>a:hover, active {
+color: #eee;}
+
+hr {
+opacity: 0.3; 
+}
+
+.utill {
+position: absolute;
+right: 0;
+top: 0;
+padding-top: 18px;}
+
+
+#tnb_wrap {
+list-style: none;
+width: 1300px;
+margin: 0 auto;
 }
 
 #tnb {
-  display: flex;
-  column-gap: 1rem;
-  list-style: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 13px;
-  color: #9a9a9a;
+position: absolute;
+display: flex;
 }
+
+.logo_text{
+color: #000;
+font-weight: 700;
+font-size: 16px;
+padding: 25px 0px 0px 50px;
+}
+
+.my_info{
+display: flex;
+padding: 25px 29px 0px 50px;
+position: absolute;
+right: 14.3%;
+column-gap: 2rem;
+font-weight: 700;
+}
+
+.line{
+margin-top: 75px;;}
+
+
+
 
 </style>
     <header>
-        <nav>
-            <ul id="tnb">
-                <li><a href='<c:url value="/"/>'>홈</a></li>
+        <nav class="header_wrap">
+        	<h1 class="logo"><a href='<c:url value="/"/>/'><img src="imgs/logo_ai.svg" style="width: 150px; padding-top:5px;"></a></h1>
+         		<nav class="gnbContent">
+         			<ul class="list_gnb">
+         				<li><a href='<c:url value="/notice"/>'>공지사항</a></li>
+         				<li><a href='<c:url value="/"/>'>육아정보</a></li>
+         				<li><a href='<c:url value="/comunity"/>'>커뮤니티</a></li>
+         				<li><a href='<c:url value="/"/>'>나눔하기</a></li>
+         				<li><a href='<c:url value="/"/>'>고객센터</a></li>
+         			</ul>
+         		</nav>
+         		  <div class="utill">
+        			<img src="imgs/gis_globe-earth-alt.png" style="width:36px; height:36px;">
+        			<img src="imgs/clarity_moon-line.png" style="width:36px; height:36px;">
+       			  </div>
+        </nav>
+        <hr>
+ 		<nav id="tnb_wrap">
+ 			<ul id="tnb">
+ 					<li class="logo_text">베시시</li>
+ 				</ul>
+ 				<div class="my_info">
                 <!-- 로그인 하지 않은 경우 -->
                 <c:if test="${empty loginInfo }">
+                	<li><a href='<c:url value="/join"/>'>회원가입</a></li>
                		 <li><a href='<c:url value="/login"/>'>로그인</a></li>
-               		 <li><a href='<c:url value="/join"/>'>회원가입</a></li>
                 </c:if>
-                <!-- 로그인의 경우 -->
+                      <!-- 로그인의 경우 -->
                     <c:if test="${!empty loginInfo }">
-               			 <li>${loginInfo.id }님</li>
+               			 <li><a href='<c:url value=""/>'>마이페이지</a></li>
                    		<li><a href='<c:url value="/logout"/>'>로그아웃</a></li>
                 </c:if>
-            </ul>  
-        </nav>
-        <a href='<c:url value="/"/>'><img src="imgs/logo_ai.svg"></a>
+                </div>
+ 		</nav>
+ 		<hr class="line">
     </header>
+     		
 
 
 
