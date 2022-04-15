@@ -23,17 +23,11 @@ public class NoticeController {
 	
 	@Autowired private NoticeServiceImpl service;
 	@Autowired private CommonService common;
-//	@Autowired private NoticePage page;
+	@Autowired private NoticePage page;
+
 	
-	//공지 화면 요청
-	@RequestMapping("/notice")
-	public String join() {
-		return "notice/notice";
-	}
-	
-	
-	//방명록 목록화면 요청
-	@RequestMapping("/list.bo")
+	//공지 화면 (목록)요청
+	@RequestMapping("/notice.no")
 	public String list(HttpSession session, Model model, 
 			           @RequestParam(defaultValue = "1") int curPage, String search, String keyword, 
 			           @RequestParam(defaultValue = "10")int pageList,
@@ -42,14 +36,14 @@ public class NoticeController {
 		
 		
 		//페이징 처리되면서 데이터 가져오기
-//		page.setCurPage(curPage);
-//		page.setSearch(search);
-//		page.setKeyword(keyword);
-//		page.setPageList(pageList);
-//		page.setViewType(viewType);
-//		model.addAttribute("page", service.notice_list(page));
+		page.setCurPage(curPage);
+		page.setSearch(search);
+		page.setKeyword(keyword);
+		page.setPageList(pageList);
+		page.setViewType(viewType);
+		model.addAttribute("page", service.notice_list(page));
 		
-		return "board/list";
+		return "notice/notice";
 	}
 	
 //	//방명록 신규 글 작성화면 요청

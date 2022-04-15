@@ -2,6 +2,7 @@ package notice;
 
 import java.util.List;
 
+
 public interface NoticeService {
 	//공지글 목록 조회
 	List<NoticeVO> notice_list();

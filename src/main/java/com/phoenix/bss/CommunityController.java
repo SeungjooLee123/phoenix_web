@@ -10,6 +10,10 @@ public class CommunityController {
 	//커뮤 화면 요청
 	@RequestMapping("/community")
 	public String join() {
+		
+		
+		
+		
 		return "community/community";
 	}
 	

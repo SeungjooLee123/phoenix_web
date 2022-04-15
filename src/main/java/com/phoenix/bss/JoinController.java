@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -62,7 +63,7 @@ public class JoinController {
 	}
 	
 	@RequestMapping("/kakaocallback")
-	public String kakaocallback(@RequestParam(value = "code", required = false) String code, @RequestParam(required = false) String error, HttpSession session) {
+	public String kakaocallback(@RequestParam(value = "code", required = false) String code, @RequestParam(required = false) String error, HttpServletRequest request, HttpSession session) {
 		if(error != null) {//토큰 발급 불가일 때
 			return "redirect:/";
 		}
@@ -72,16 +73,18 @@ public class JoinController {
         
         
         UserVO vo = getUserInfo(access_Token);
-        System.out.println("###access_Token#### : " + access_Token);
-        System.out.println("###userInfo#### : " + vo.getId());
-        session.setAttribute("loginInfo", vo);
-       
-        if(service.id_check(vo.getId())) {
-			service.member_join(vo);
-		}
-        
-        
-        return "redirect:/"; 
+//        System.out.println("###access_Token#### : " + access_Token);
+//        System.out.println("###userInfo#### : " + vo.getId());
+        if(vo != null) {
+        	if(service.id_check(vo.getId())) {
+    			service.member_join(vo);
+    		}	
+        	session.setAttribute("loginInfo", vo);        	
+        	return "redirect:/"; 
+        }else {
+        	System.out.println("null로 넘어옴");
+        	return "redirect:/";
+        }
 	}
 	
 	public UserVO getUserInfo (String access_Token) {
@@ -115,17 +118,19 @@ public class JoinController {
 
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-            String email = kakao_account.getAsJsonObject().get("email").getAsString();
-            
-            vo.setId(email);
-            vo.setKakao_id("Y");
-
+            boolean agree = kakao_account.getAsJsonObject().get("email_needs_agreement").getAsBoolean();
+            String email = null;
+            if(!agree) {
+            	email = kakao_account.getAsJsonObject().get("email").getAsString();            	
+            	vo.setKakao_id("Y");
+            	vo.setId(email);
+            	return vo;
+            }
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        return vo;
+        return null;
     }
 	
 	@RequestMapping("/naverLogin")
