@@ -78,11 +78,33 @@ font-family: 'Noto Sans KR', sans-serif;
 
 
 #third-content{
-text-align: center;}
-
+padding-top: 50px;
+position: relative;
+text-align: center;
+background: #3a549f;
+}
 
 .bss-control{
+color: white;
 }
+
+.third-main-text {
+color: #fff;
+font-weight: 300;
+
+}
+
+.row {
+margin-top: 10%;
+margin-left: 10%;
+margin-right: 10%;
+}
+
+.row-left{
+padding-top: 100%;
+padding-bottom: 13%;
+}
+
 </style>
 <meta charset="UTF-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -129,9 +151,13 @@ text-align: center;}
 <div id="third-content">
 <h2 class="bss-control">베시시 기능 소개</h2>
 <br>
-<h4 class="seconde-main-text">간단한 사용법과 심플한 디자인으로 행복한 육아의 완성</h4>
+<h4 class="third-main-text">간단한 사용법과 심플한 디자인으로 행복한 육아의 완성</h4>
 <div class="row">
-
+	<div class="row-left">
+		<div class="left-one">
+			
+		</div>
+	</div>
 
 
 </div>
