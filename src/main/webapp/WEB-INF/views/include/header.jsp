@@ -116,7 +116,7 @@ margin-top: 75px;;}
          			<ul class="list_gnb">
          				<li><a href='<c:url value="/"/>'></a>공지사항</li>
          				<li><a href='<c:url value="/"/>'></a>육아정보</li>
-         				<li><a href='<c:url value="/"/>'></a>커뮤니티</li>
+         				<li><a href='<c:url value="list.comu"/>'></a>커뮤니티</li>
          				<li><a href='<c:url value="/"/>'></a>나눔하기</li>
          				<li><a href='<c:url value="/"/>'></a>고객센터</li>
          			</ul>

@@ -37,8 +37,8 @@
 	</definition>
 	
 	<!-- comunity로 들어오면 template을 타라 -->
-	<definition name="comunity/comunity" extends="layout">
-		<put-attribute name="content" value="/WEB-INF/views/comunity/comunity.jsp"/>
+	<definition name="community/list" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/views/community/list.jsp"/>
 	</definition>
 	
 	<!-- login으로 들어오면 template을 타라 -->
