@@ -30,17 +30,17 @@
 	
 
 	<!-- 추가2. ysb : tiles -->
-		<!-- 화면에 레이아웃을 지정하는 순서를 정하는 곳 -->
-		<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
-			<beans:property name="order" value="0" />
-		</beans:bean>
-		
-		<!-- tiles 설정부를 별도 파일로 지정하여 정의 -->
-		<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-			<beans:property name="definitions" value="/WEB-INF/views/tiles/config.xml" />
-		</beans:bean>
+	<!-- 화면에 레이아웃을 지정하는 순서를 정하는 곳 -->
+	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+		<beans:property name="order" value="0" />
+	</beans:bean>
+	
+	<!-- tiles 설정부를 별도 파일로 지정하여 정의 -->
+	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions" value="/WEB-INF/views/tiles/config.xml" />
+	</beans:bean>
 	<!-- 여기까지 tiles -->
-
+	
 	
 	<context:component-scan base-package="com.phoenix.bss" />
 	
