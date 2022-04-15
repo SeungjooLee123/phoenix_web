@@ -112,7 +112,7 @@ padding:0 4px;}
 	onkeypress = "if(event.keyCode ==13 ) login()"/>
 </div>
 <div class="btns">
-	<a onclick="login()"><img src="imgs/login_btn.svg" style="width:155px; height:40px; margin-right:40px; cursor: pointer;"></a><a href='<c:url value="/join.bss"/>'><img src="imgs/join_btn.svg" style="width:155px; height:40px;"></a>
+	<a onclick="login()"><img src="imgs/login_btn.svg" style="width:155px; height:40px; margin-right:40px; cursor: pointer;"></a><a href='<c:url value="/join"/>'><img src="imgs/join_btn.svg" style="width:155px; height:40px;"></a>
 </div>
 <hr style="width:20%; height:1px; border:none; background:#B5B5B5; margin: 0 auto; margin-top: 50px; opacity: 0.6;">  
 <p class="social-text">소셜로그인</p>

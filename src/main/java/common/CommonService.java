@@ -144,8 +144,8 @@ public class CommonService {
 				StringBuilder sb = new StringBuilder();
 				sb.append("grant_type=authorization_code");
 	            
-				sb.append("&client_id=REST_API키"); //본인이 발급받은 key
-				sb.append("&redirect_uri=REDIRECT_URI"); // 본인이 설정한 주소
+				sb.append("&client_id=4b12573ac9cb8199a62e031d7c2e1808"); //본인이 발급받은 key
+				sb.append("&redirect_uri=http://localhost/bss/kakaocallback"); // 본인이 설정한 주소
 	            
 				sb.append("&code=" + authorize_code);
 				bw.write(sb.toString());
