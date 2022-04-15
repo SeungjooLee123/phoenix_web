@@ -26,6 +26,8 @@
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
+<!-- jQuery 연결 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<div id="wrap">

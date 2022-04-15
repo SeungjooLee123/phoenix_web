@@ -7,6 +7,9 @@
 		<put-attribute name="header" value="/WEB-INF/views/include/header.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp"/>
 	</definition>
+	
+	<definition name="default" template="/WEB-INF/views/tiles/default.jsp">
+	</definition>
 
 	<!-- extends="layout" 위 지정한 "layout"을 상속함 -->
 	<definition name="*/*" extends="layout">
@@ -18,16 +21,38 @@
 		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp"/>
 	</definition>
 	
+	<!-- extends="default" 위 지정한 "default"을 상속함 -->
+	<definition name="*/*" extends="default">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"/>
+	</definition>
+	
+	<!-- extends="default" 위 지정한 "default"을 상속함 -->
+	<definition name="*" extends="default">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp"/>
+	</definition>
+	
+	<!-- main으로 들어오면 template을 타라 -->
 	<definition name="main" extends="layout">
 		<put-attribute name="content" value="/WEB-INF/views/main.jsp"/>
 	</definition>
 	
+	<!-- comunity로 들어오면 template을 타라 -->
+	<definition name="comunity/comunity" extends="layout">
+		<put-attribute name="content" value="/WEB-INF/views/comunity/comunity.jsp"/>
+	</definition>
+	
 	<!-- login으로 들어오면 template을 타라 -->
-	<definition name="user/login" template="/WEB-INF/views/tiles/default.jsp">
+	<definition name="user/login" extends="default">
 		<put-attribute name="content" value="/WEB-INF/views/user/login.jsp"/>
 	</definition>
+	
+	<definition name="user/join" extends="default">
+		<put-attribute name="content" value="/WEB-INF/views/user/join.jsp"/>
+	</definition>
+	
+	
 	<!--  default가 현제 헤더와 푸터가 없는 형태기 때문에 사용 -->
-	<definition name="error/*" template="/WEB-INF/views/tiles/default.jsp">
+	<definition name="error/*" extends="/WEB-INF/views/tiles/default.jsp">
 		<put-attribute name="content" value="/WEB-INF/views/error/{1}.jsp"/>
 	</definition>
 	
