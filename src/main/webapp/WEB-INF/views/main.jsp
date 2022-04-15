@@ -4,39 +4,67 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+#bss{
+margin-top:10%;}
+
+
+#container{
+text-align: center;}
+
+.app_name{
+margin-top: 70px;
+margin-bottom: 30px;
+color: #333;
+font-size: 18px;}
+
+.main_text{
+font-size: 42px;
+line-height: 1.29;
+letter-spacing: -.8px;
+}
+
+.icons {
+margin-top: 50px;
+display: flex;
+justify-content: center;
+}
+
+.icons > a {
+display: block;
+padding: 0 1px 0 9px;
+margin-bottom: 70px;}
+
+.show > li:hover {
+transform: scale (0.8);
+}
+
+
+</style>
+
+
+
 <meta charset="UTF-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>BSS</title>
-
 </head>
 <body>
-    <div id="article">
-        <nav>
-            <ul id="gnb">
-                <li><a href="#">공지사항</a></li>
-                <li><a href="#">육아정보</a></li>
-                <li><a href="#">커뮤니티</a></li>
-                <li><a href="#">나눔하기</a></li>
-                <li><a href="#">고객센터</a></li>
-       
-            </ul>
-        </nav>
-    </div>
-    <section>
-        <div id="slide">
-            <a href="#"><img src="imgs/hero.png"></a>
-            <a href="#"><img src="imgs/hero.png"></a>
-            <a href="#"><img src="imgs/hero.png"></a>
-            <a href="#"><img src="imgs/hero.png"></a>
-        </div>
-    </section>
-    <footer>
-        <nav>
-            <ul id="notice">
-                <li><a href="#">공지사항</a></li>
-            </ul>
-        </nav>
-    </footer>
+<section id="bss">
+	<div id="container">
+		<h4 class="app_name">베시시</h4>
+			<h2 class="main_text">아이와 부모를 위한
+	<br/>
+			모든 육아의 시작, 베시시</h2>
+<div class="icons">
+	<a href=""><img src="imgs/icon_naver.png" style="width:24px; height: 24px;"></a>
+	<a href=""><img src="imgs/icon_naver.png" style="width:24px; height: 24px;"></a>
+	<a href=""><img src="imgs/icon_naver.png" style="width:24px; height: 24px;"></a>
+</div>
+	</div>
+<div class="show">
+	<img src="imgs/bss_ad_pick.png" style=" height:770px;">
+</div>	
+
     <script type="text/javascript">
 	$(document).ready(function() {
 	    var idx = 0;
@@ -47,5 +75,7 @@
 	    }, 3000);
 	});
 	</script>
+
+</section>
 </body>
 </html>
