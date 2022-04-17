@@ -115,7 +115,7 @@ opacity: 0.2;
 </style>
     <header>
         <nav class="header_wrap">
-        	<h1 class="logo"><a href='<c:url value="/"/>/'><img src="imgs/logo_ai.svg" style="width: 150px; padding-top:5px;"></a></h1>
+        	<h1 class="logo"><a href='/bss/'><img src="imgs/logo_ai.svg" style="width: 150px; padding-top:5px;"></a></h1>
          		<nav class="gnbContent">
          			<ul class="list_gnb">
          				<li><a href='<c:url value="/notice.no"/>'>공지사항</a></li>
