@@ -105,6 +105,10 @@ font-weight: 700;
 .line{
 margin-top: 75px;}
 
+.Info-line{
+opacity: 0.2;
+}
+
 
 
 
@@ -135,13 +139,14 @@ margin-top: 75px;}
                 <!-- 로그인 하지 않은 경우 -->
                 <c:if test="${empty loginInfo }">
                 	<li><a href='<c:url value="/join"/>'>회원가입</a></li>
-                	<li><i class="fa-solid fa-pipe"></i></li>
+                	<li class="Info-line">|</li>
                		 <li><a href='<c:url value="/login"/>'>로그인</a></li>
                 </c:if>
                       <!-- 로그인의 경우 -->
                     <c:if test="${!empty loginInfo }">
                			 <li><a href='<c:url value=""/>'>마이페이지</a></li>
                			 <li><i class="fa-solid fa-pipe"></i></li>
+               			 <li  class="Info-line">|</li>
                    		<li><a href='<c:url value="/logout"/>'>로그아웃</a></li>
                 </c:if>
                 </div>
