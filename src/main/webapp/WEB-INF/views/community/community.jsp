@@ -29,19 +29,19 @@
 				<td colspan="6">방명록 정보가 없습니다.</td>
 			</tr>
 		</c:if>
-			<c:forEach items="${page.list}" var="vo">
+			 <c:forEach items="${page.list}" var="vo">
 				<tr>
-					<td>${vo.no}</td>
-					<td class="left"><a onclick='go_detail(${vo.id})'>${vo.title}</a></td>
-					<%-- <td class='left'><a onclick='go_detail(${vo.id})'>${vo.title }</a></td> --%>
-					<td>${vo.name}</td>
-					<td>${vo.writedate}</td>
-					<td>${vo.readcnt}</td>
-					<td>${empty vo.filename ? '' : '<img src="imgs/attach.png" class="file-img" />'}</td>
+					<td>${vo.id}</td>
+					<td class="left"><a o nclick='go_detail(${vo.id})'>${vo.title}</a></td>
+					<td>${vo.user_id}</td>
+					<td>${vo.web_date}</td>
+					<td>${vo.cnt}</td>
+					<td>${empty vo.web_file ? '' : '<img src="imgs/attach.png" class="file-img" />'}</td>
 				</tr>
-			</c:forEach>
+			</c:forEach> 
 		</tbody>
 	</table>
+	
 </div>
 
 <br>
