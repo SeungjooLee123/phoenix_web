@@ -10,9 +10,13 @@
 <script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
 <title>맵</title>
 <style type="text/css">
-#map-ul{display: flex; position: absolute;}
+#map-ul{display: flex; position: relative;}
 #map-ul>li{margin-top: 30px;}
-#map-ul>li>a{display: block;}
+#map-ul>li>a{display: block; font-size: 14px;}
+.map-main{margin-top: 30px;}
+#map-ul li > a{display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
+#map-ul li > a.btn-fill{background: #c3bfff; color: #fff;}
+#map-ul li > a.btn-empty{background: #f5f5f5;}
 
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -102,14 +106,9 @@
 			var sigugun = "";
 			var dong = "";
 			
-			var parent = document.querySelector("#map-search");
+			var parent = document.querySelector("#baby-welfare");
 			var leftparent = parent.getBoundingClientRect().left;
 			$('#map-ul').css('left', leftparent);
-			parent = document.querySelector("#map-ul");
-			var topparent = window.pageYOffset + parent.getBoundingClientRect().top;
-			console.log(topparent);
-			console.log(window.pageYOffset + document.querySelector(".map-main").getBoundingClientRect().top);
-			$(".map-main").css('top', topparent+100);
 			
 			jQuery(document).ready(function(){
 				jQuery("#sido").empty();
@@ -242,6 +241,7 @@
 			// 키워드 검색을 요청하는 함수입니다
 			function searchPlaces(category, address) {
 			    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+			    placeOverlay.setMap(null);
 			    ps.keywordSearch(address + " " + category, placesSearchCB); 
 			}
 
