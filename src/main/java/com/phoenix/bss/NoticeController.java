@@ -32,7 +32,7 @@ public class NoticeController {
 			           @RequestParam(defaultValue = "1") int curPage, String search, String keyword, 
 			           @RequestParam(defaultValue = "10")int pageList,
 			           @RequestParam(defaultValue = "list") String viewType) {
-		session.setAttribute("category", "bo");
+		session.setAttribute("category", "no");
 		
 		
 		//페이징 처리되면서 데이터 가져오기

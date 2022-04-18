@@ -8,6 +8,7 @@
 		<put-attribute name="footer" value="/WEB-INF/views/include/footer.jsp"/>
 	</definition>
 	
+	<!-- default는 Login & Join View 에서만 사용함 -->
 	<definition name="default" template="/WEB-INF/views/tiles/default.jsp">
 	</definition>
 
@@ -21,37 +22,8 @@
 		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp"/>
 	</definition>
 	
-	<!-- extends="default" 위 지정한 "default"을 상속함 -->
-	<definition name="*/*" extends="default">
-		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"/>
-	</definition>
 	
-	<!-- extends="default" 위 지정한 "default"을 상속함 -->
-	<definition name="*" extends="default">
-		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp"/>
-	</definition>
-	
-	<!-- main으로 들어오면 template을 타라 -->
-	<definition name="main" extends="layout">
-		<put-attribute name="content" value="/WEB-INF/views/main.jsp"/>
-	</definition>
-	
-	<!-- comunity로 들어오면 template을 타라 -->
-	<definition name="community/community" extends="layout">
-		<put-attribute name="content" value="/WEB-INF/views/community/community.jsp"/>
-	</definition>
-
-	<!-- comunity로 들어오면 template을 타라 -->
-	<definition name="notice/notice" extends="layout">
-		<put-attribute name="content" value="/WEB-INF/views/notice/notice.jsp"/>
-	</definition>
-	
-	<!-- comunity로 들어오면 template을 타라 -->
-	<definition name="welfare/welfare" extends="layout">
-		<put-attribute name="content" value="/WEB-INF/views/welfare/welfare.jsp"/>
-	</definition>
-	
-	<!-- login으로 들어오면 template을 타라 -->
+	<!-- header & footer를 사용하지 않는 View -->
 	<definition name="user/login" extends="default">
 		<put-attribute name="content" value="/WEB-INF/views/user/login.jsp"/>
 	</definition>

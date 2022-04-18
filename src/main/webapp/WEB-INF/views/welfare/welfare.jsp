@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/style.css?v=<%=new Date().getTime()%>">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>육아정보</title>
 <style type="text/css">
@@ -15,14 +15,13 @@
 }
 #cate-ul{display: flex;}
 #cate-ul>li{margin-top: 40px;}
-#cate_ul > li > a{display: block;}
-a{
+#cate_ul>li>a{ display: block; 
 	text-align: center;
 	padding: 10px 13px;
 	border-radius: 20px;
 	margin: 0 10px;
 	cursor: pointer;
-}
+} 
 a.btn-empty{background: #f5f5f5;}
 a.btn-fill{background: #335495;color: #fff;}
 </style>
