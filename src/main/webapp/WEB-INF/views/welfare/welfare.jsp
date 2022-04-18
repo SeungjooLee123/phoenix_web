@@ -31,7 +31,7 @@ a.btn-fill{background: #335495;color: #fff;}
 		<h3>육아정보</h3>
 		<div id="wrap_cate">
 			<ul id="cate-ul">
-				<li><a class="btn-empty">출산정책</a></li>
+				<li><a class="btn-fill">출산정책</a></li>
 				<li><a class="btn-empty">육아정책</a></li>
 				<li><a class="btn-empty">통계자료</a></li>
 				<li><a class="btn-empty" id="map-search">주변장소검색</a></li>
@@ -45,11 +45,12 @@ a.btn-fill{background: #335495;color: #fff;}
 		</div>
 	</div>
 	<script type="text/javascript">
+		$("#main-content>div").eq(1).show().siblings('div').hide();
 		$(function(){
 			$("#cate-ul li").click(function(){
 				var tabItem = $(this).index();
+				$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
 				$("#cate-ul li>a").eq(tabItem).attr("class", "btn-fill");
-				$("#cate-ul>li>a").not("a.btn-fill").attr("class", "btn-empty");
 				$("#main-content>div").eq(tabItem).show().siblings('div').hide();
 			});
 		});
