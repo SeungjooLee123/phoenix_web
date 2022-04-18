@@ -143,6 +143,21 @@ display: flex;}
 transform: translate(0, -15px);
 transition-duration: .4s;
 }
+
+#topBtn {
+  position: fixed;
+  right: 2%;
+  bottom: 2%;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  display: block;
+  background: #000;
+  color: #fff;
+  font-size: 10px;
+  text-align: center;
+  border-radius: 5px;
+}
     
 
 </style>
@@ -159,9 +174,9 @@ transition-duration: .4s;
 						<br/>
 			모든 육아의 시작, 베시시</h2>
 <div class="icons">
-	<a href=""><img src="imgs/icon_naver.png" style="width:24px; height: 24px;"></a>
-	<a href=""><img src="imgs/icon_naver.png" style="width:24px; height: 24px;"></a>
-	<a href=""><img src="imgs/icon_naver.png" style="width:24px; height: 24px;"></a>
+	<a href="<c:url value='login'/>"><img src="imgs/icon_naver.png" style="width:30px; height: 30px;"></a>
+	<a href="<c:url value='login'/>"><img src="imgs/simple-kakao.png" style="width:30px; height: 30px;"></a>
+	<a href="<c:url value='login'/>"><img src="imgs/simple-android.png" style="width:30px; height: 30px;"></a>
 </div>
 	</div>
 <div class="show">
@@ -320,7 +335,7 @@ transition-duration: .4s;
 				</span>
 				<a href="" style="display: block; margin: 0 -24px;">
 				<div>
-					<h2 class="card-text" style="height: 80px; font-size: 30px; line-height: 40px; padding-left: 20px; margin-top: 20px; margin-bottom: 20px; padding-right: 20px;">
+					<h2 class="card-text" style="height: 80px; font-size: 27px; line-height: 40px; padding-left: 20px; margin-top: 20px; margin-bottom: 20px; padding-right: 20px;">
 					베시시, 베시시어플 양육자와 아이 행복 추구
 					</h2>
 				</div>
@@ -350,7 +365,7 @@ transition-duration: .4s;
 				</span>
 				<a href="" style="display: block; margin: 0 -24px;">
 				<div>
-					<h2 class="card-text" style="height: 80px; font-size: 30px; line-height: 40px; padding-left: 20px; margin-top: 20px; margin-bottom: 20px; padding-right: 20px;">
+					<h2 class="card-text" style="height: 80px; font-size: 27px; line-height: 40px; padding-left: 20px; margin-top: 20px; margin-bottom: 20px; padding-right: 20px;">
 					베시시, 베시시어플 양육자와 아이 행복 추구
 					</h2>
 				</div>
@@ -380,7 +395,7 @@ transition-duration: .4s;
 				</span>
 				<a href="" style="display: block; margin: 0 -24px;">
 				<div>
-					<h2 class="card-text" style="height: 80px; font-size: 30px; line-height: 40px; padding-left: 20px; margin-top: 20px; margin-bottom: 20px; padding-right: 20px;">
+					<h2 class="card-text" style="height: 80px; font-size: 27px; line-height: 40px; padding-left: 20px; margin-top: 20px; margin-bottom: 20px; padding-right: 20px;">
 					베시시, 베시시어플 양육자와 아이 행복 추구
 					</h2>
 				</div>
@@ -400,15 +415,24 @@ transition-duration: .4s;
 			</span><!-- wrap -->
 		</div>
 	</div><!-- card-view -->
+<div>
+	<span id="topBtn">top</span>
+</div>	
 
 
 
 
 
-</div>
 
 
 
 </section>
+<script type="text/javascript">
+var topEle =$('#topBtn');
+var delay =1000;
+topEle.on('click', function(){
+	$('html, body').stop().animate({scrollTop:0}, delay);
+});
+</script>
 </body>
 </html>
