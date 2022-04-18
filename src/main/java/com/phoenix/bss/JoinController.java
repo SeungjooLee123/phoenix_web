@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.http.HttpRequest;
-import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +29,6 @@ import com.google.gson.JsonParser;
 import babyinfo.BabyInfoVO;
 import babyinfo.FamilyInfoVO;
 import common.CommonService;
-import diary.DiaryVO;
 import join.JoinDAO;
 import join.JoinServiceImpl;
 import user.UserVO;
