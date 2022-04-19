@@ -26,7 +26,7 @@ public class CommunityController {
 					, Model model, String search, String keyword
 					, @RequestParam(defaultValue = "10") int pageList
 					, @RequestParam(defaultValue = "list") String viewType) {
-		session.setAttribute("category", "comu");
+		session.setAttribute("category", "co");
 		page.setCurPage(curPage);	//현재 페이지 담음
 		page.setSearch(search);
 		page.setKeyword(keyword);	//검색어

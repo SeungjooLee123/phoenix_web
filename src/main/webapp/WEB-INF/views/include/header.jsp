@@ -145,7 +145,6 @@ opacity: 0.2;
                       <!-- 로그인의 경우 -->
                     <c:if test="${!empty loginInfo }">
                			 <li><a href='<c:url value=""/>'>마이페이지</a></li>
-               			 <li><i class="fa-solid fa-pipe"></i></li>
                			 <li  class="Info-line">|</li>
                    		<li><a href='<c:url value="/logout"/>'>로그아웃</a></li>
                 </c:if>

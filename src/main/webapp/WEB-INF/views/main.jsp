@@ -300,7 +300,7 @@ transition-duration: .4s;
 			<img src="imgs/review.png" style="width:60px;">
 				<div class="writer-two" style="margin-top:8px; margin-left:14px;"> 
 					<h4 style="color: #000; font-size: 18px;">이승주</h4>
-					<p style="opacity: 0.5; font-size: 14px;">상민 엄마</p>
+					<p style="opacity: 0.5; font-size: 14px;">규형 엄마</p>
 				</div>
 		</figcaption>
 	</figure>

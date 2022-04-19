@@ -37,6 +37,7 @@ public class HomeController {
 		//주석달았다.
 		
 		session.removeAttribute("category");
+		session.setAttribute("category", "");
 		
 		return "main";
 	}
