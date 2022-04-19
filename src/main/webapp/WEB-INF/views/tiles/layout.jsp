@@ -20,9 +20,9 @@
 <meta charset="UTF-8">
 <title>${title }</title>
 <style type="text/css">
-	#wrap {display: flex; flex-direction: column;}
+	#wrap {display: flex; flex-direction: column; width:1440px; margin: 0 auto;}
 	/* flex 방향 지정 flex-dircetion : column (가로) */
-	#content {width: 1440px; margin:0 auto; padding-top: 10%;}
+	#content {width: 1440px; margin:0 auto; padding-top: 10.5%;}
 
 </style>
 <link rel="stylesheet" href="css/style.css?v=<%=new Date().getTime()%>">
