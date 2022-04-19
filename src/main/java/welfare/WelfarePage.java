@@ -2,8 +2,11 @@ package welfare;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import common.PageVO;
 
+@Component
 public class WelfarePage extends PageVO {
 	private List<WelfareVO> list;
 

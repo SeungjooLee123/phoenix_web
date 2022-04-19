@@ -2,7 +2,15 @@ package user;
 
 
 public class UserVO {
-	private String title, family_rels, id, pw,pw_chk, naver_id, kakao_id;
+	private String title, family_rels, id, pw,pw_chk, naver_id, kakao_id, admin;
+
+	public String getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(String admin) {
+		this.admin = admin;
+	}
 
 	public String getTitle() {
 		return title;

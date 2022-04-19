@@ -10,9 +10,13 @@
 <script type="application/javascript" src="https://zelkun.tistory.com/attachment/cfile8.uf@99BB7A3D5D45C065343307.js"></script>
 <title>맵</title>
 <style type="text/css">
-#map-ul{display: flex;}
+#map-ul{display: flex; position: relative;}
 #map-ul>li{margin-top: 30px;}
-#map-ul>li>a{display: block;}
+#map-ul>li>a{display: block; font-size: 14px;}
+.map-main{margin-top: 30px;}
+#map-ul li > a{display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
+#map-ul li > a.btn-fill{background: #c3bfff; color: #fff;}
+#map-ul li > a.btn-empty{background: #f5f5f5;}
 
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -70,35 +74,41 @@
 	<div id="mapcontainer">
 		<div>
 			<ul id='map-ul'>
-				<li><a class="btn-empty">병원</a></li>
+				<li><a class="btn-fill">소아과</a></li>
 				<li><a class="btn-empty">키즈카페</a></li>
 				<li><a class="btn-empty">어린이집</a></li>
 				<li><a class="btn-empty">유아용품</a></li>
 			</ul>
-			<div id="address">
-				<select id="sido"><option value="11">서울특별시</option></select>
-				<select id="sigugun"><option value="">선택</option></select>
-				<select id="dong"><option value="">선택</option></select>
-			</div>
-			<div class="map_wrap">
-			    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-			
-			    <div id="menu_wrap" class="bg_white">
-			        <div class="option">
-			            <div>
-			                <form onsubmit="searchPlaces('소아과', '서울특별시'); return false;"></form>
-			            </div>
-			        </div>
-			        <hr>
-			        <ul id="placesList"></ul>
-			        <div id="pagination"></div> <!-- 페이지 번호 -->
-			    </div>
+			<div class="map-main">
+				<div id="address">
+					<select id="sido"><option value="11">서울특별시</option></select>
+					<select id="sigugun"><option value="">선택</option></select>
+					<select id="dong"><option value="">선택</option></select>
+				</div>
+				<div class="map_wrap">
+				    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+				
+				    <div id="menu_wrap" class="bg_white">
+				        <div class="option">
+				            <div>
+				                <form onsubmit="searchPlaces('소아과', '서울특별시'); return false;"></form>
+				            </div>
+				        </div>
+				        <hr>
+				        <ul id="placesList"></ul>
+				        <div id="pagination"></div> <!-- 페이지 번호 -->
+				    </div>
+				</div>
 			</div>
 			<script type="text/javascript">
-			var category = "";
+			var category = "소아과";
 			var sido = "";
 			var sigugun = "";
 			var dong = "";
+			
+			var parent = document.querySelector("#baby-welfare");
+			var leftparent = parent.getBoundingClientRect().left;
+			$('#map-ul').css('left', leftparent);
 			
 			jQuery(document).ready(function(){
 				jQuery("#sido").empty();
@@ -106,6 +116,7 @@
 					jQuery("#sido").append(fn_option(code.sido, code.codeNm));
 				});
 				sido = jQuery("#sido option:selected");
+				jQuery("#sigugun").empty();
 				jQuery("#sigugun").append(fn_option('', '선택'));
 				jQuery.each(hangjungdong.sigugun, function(idx, code){
 					if(jQuery("#sido > option:selected").val() == code.sido){
@@ -142,12 +153,20 @@
 					jQuery("#dong").prepend(fn_option('', '선택'));
 					jQuery("#dong option:eq('')").attr('selected', 'selected');
 					sigugun = jQuery("#sigugun option:selected");
-					searchPlaces(category, sido.text() + " " + sigugun.text());
+					if(sigugun.text()=="선택"){
+						searchPlaces(category, sido.text());
+					} else{
+						searchPlaces(category, sido.text() + " " + sigugun.text());
+					}
 				});
 				//행정동
 				jQuery("#dong").change(function(){
 					dong = jQuery("#dong option:selected");
-					searchPlaces(category, sido.text() + " " + sigugun.text() + " " + dong.text());
+					if(dong.text()=="선택"){
+						searchPlaces(category, sido.text() + " " + sigugun.text());
+					} else{
+						searchPlaces(category, sido.text() + " " + sigugun.text() + " " + dong.text());
+					}
 				});
 			});
 			
@@ -160,6 +179,7 @@
 			$(function(){
 				$("#map-ul li").click(function(){
 					var mapItem = $(this).index();
+					$("#map-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
 					$("#map-ul li>a").eq(mapItem).attr("class", "btn-fill");
 					if(mapItem == 0){
 						category = "소아과";
@@ -170,9 +190,9 @@
 					} else{
 						category = "유아용품";
 					}
-					if(!sigugun){
+					if(!sigugun || sigugun.text() == "선택"){
 						searchPlaces(category, sido.text());
-					} else if(!dong){
+					} else if(!dong || dong.text() == "선택"){
 						searchPlaces(category, sido.text() + " " + sigugun.text());
 					} else{
 						searchPlaces(category, sido.text() + " " + sigugun.text() + " " + dong.text());
@@ -221,6 +241,7 @@
 			// 키워드 검색을 요청하는 함수입니다
 			function searchPlaces(category, address) {
 			    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+			    placeOverlay.setMap(null);
 			    ps.keywordSearch(address + " " + category, placesSearchCB); 
 			}
 

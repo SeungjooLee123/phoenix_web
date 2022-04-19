@@ -10,12 +10,20 @@ a:visited {
   color: inherit;
 }
 .footer { 
-color: #707070;
+font-weight:700;
+color: #000;
 margin-bottom: 10px;
 display: flex;  
- column-gap: 1rem;
+ column-gap: 14rem;
  justify-content: center;
   }
+  
+.footer-two{
+margin-top: 30px;
+display: flex;
+column-gap: 14rem;
+justify-content: center;
+}
 
 ul {list-style:  none;}
 
@@ -25,6 +33,7 @@ ul {list-style:  none;}
   justify-content: center;
   margin-bottom: 15px;
 }
+
 .footer-logo{
 margin-right: 10px;
 width: 70px;
@@ -43,17 +52,30 @@ padding: 0 4px;
 font-weight: 500;
 color: #000;
 }
+ 
 </style>
 
 <html>
 <footer>
+<div style="border-top :1px solid #eee; margin-bottom:40px; margin-top: 150px;"></div>
+
+
 <ul class="footer">
-	<li>전체서비스</li>
-	<li>이용약관</li>
-	<li class="footer-corp">개인정보처리방침</li>
+	<li>공지사항</li>
+	<li>육아정보</li>
+	<li>커뮤니티</li>
+	<li>나눔하기</li>
 	<li>고객센터</li>
-	<li class="footer-corp">© BSS Corp.</li>
 </ul>
+
+<ul class="footer-two">
+	<li>베시시 소식</li>
+	<li>출산 정책 정보</li>
+	<li></li>
+	<li>육아용품 나눔</li>
+	<li>베시시 고객센터</li>
+</ul>
+
 
 <div class="footer-copy">
 <a href="<c:url value='/'/>"><span class="footer-logo"><img src="imgs/testbss.png" width="70" height="15"></span></a>
