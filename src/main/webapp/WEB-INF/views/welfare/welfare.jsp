@@ -22,31 +22,12 @@
 		<h3>육아정보</h3>
 		<div id="wrap_cate">
 			<ul id="cate-ul">
-				<li><a class="btn-fill">출산정책</a></li>
-				<li><a class="btn-empty" id="baby-welfare">육아정책</a></li>
-				<li><a class="btn-empty">통계자료</a></li>
-				<li><a class="btn-empty" id="map-search">주변장소검색</a></li>
+				<li><a class="btn-fill" href="list.wel?category=childbirth">출산정책</a></li>
+				<li><a class="btn-empty" href="list.wel?category=parenting">육아정책</a></li>
+				<li><a class="btn-empty" href="graph.wel">통계자료</a></li>
+				<li><a class="btn-empty" id="map-search" href="map.wel">주변장소검색</a></li>
 			</ul>
 		</div>
-		<div id="main-content">
-			<div id="div1"></div>
-			<div id="div2"></div>
-			<div><jsp:include page="/WEB-INF/views/welfare/graph.jsp"/></div>
-			<div><jsp:include page="/WEB-INF/views/welfare/map.jsp"/></div>
-		</div>
 	</div>
-	<script type="text/javascript">
-		$("#main-content>div").eq(0).show().siblings('div').hide();
-		$(function(){
-			$("#cate-ul li").click(function(){
-				var tabItem = $(this).index();
-				$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-				$("#cate-ul li>a").eq(tabItem).attr("class", "btn-fill");
-				$("#main-content>div").eq(tabItem).show().siblings('div').hide();
-				if(tabItem == 0) $("#div1").load("list.wel?category='childbirth'");
-				else if(tabItem == 1) $("#div2").load("list.wel?category='parenting'");
-			});
-		});
-	</script>
 </body>
 </html>

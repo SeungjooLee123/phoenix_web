@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="welfare.mapper">
-	<select id="list" resultType="welfare.WelfareVO">
-		select * from MASTER_WEB_WELFARE_TBL where category = 'childbirth'
+	<sql id="where_search">
+		<if test="search == 'title' or search == 'content'">
+			where ${search} like '%'||#{keyword}||'%'
+		</if>
+		<if test="search=='all'">
+			where title like '%'||#{keyword}||'%'
+			or content like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+	
+	<!-- 페이징 처리해서 조회하기 + 검색 조건에 따라 조회-->
+	<select id="totalList" resultType="Integer">
+		SELECT COUNT(*) FROM MASTER_WEB_WELFARE_TBL <include refid="where_search" />
 	</select>
+
+	<select id="list" resultType="welfare.WelfareVO">
+		SELECT *
+		FROM (SELECT ROWNUM NO, N.* 
+			  FROM (SELECT * FROM MASTER_WEB_WELFARE_TBL <include refid="where_search" /> ORDER BY id) N where category = #{category}
+		      ORDER BY no DESC)
+		WHERE no BETWEEN TO_NUMBER(#{beginList}) and TO_NUMBER(#{endList})
+	</select>
+	
+	<!-- 상세 내용 조회 -->
+	<select id="detail" resultType="welfare.WelfareVO">
+		select * from master_web_welfare_tbl where id = #{id}
+	</select>
+	
+	<!-- 글 생성 -->
+	<insert id="insert">
+		insert into master_web_welfare_tbl (id, title, content, category, filename, filepath, user_id, wel_date) values (seq_welfare_id.nextval, #{title}, #{content}, #{category}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR}, #{user_id}, sysdate)
+	</insert>
+	
+	<!-- 글 삭제 -->
+	<delete id="delete">
+		delete from master_web_welfare_tbl where id = #{id}
+	</delete>
 </mapper>
