@@ -3,9 +3,17 @@ package welfare;
 import java.sql.Date;
 
 public class WelfareVO {
-	int id;
+	int id, no;
 	String title, content, category, filename, filepath, user_id;
 	Date wel_date;
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
 
 	public int getId() {
 		return id;
