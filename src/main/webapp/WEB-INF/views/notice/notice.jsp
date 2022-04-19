@@ -82,7 +82,7 @@ table th{
 				</c:forEach>
 			</c:if>
 			<c:if test="${page.list.size() eq 0}">
-				<tr><td colspan="6">방명록 정보가 없습니다.</td></tr>
+				<tr><td colspan="6">정보가 없습니다.</td></tr>
 			</c:if>
 		</tbody>    
 	</table>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <style type="text/css">
@@ -29,24 +28,28 @@ table th{
 <title>Insert title here</title>
 </head>
 <body>
-		<%-- <jsp:include page="/WEB-INF/views/include/header.jsp" /> 
+	<%-- <jsp:include page="/WEB-INF/views/include/header.jsp" /> 
 	<div id="content"> --%>
-		<h3>유용한 도움말</h3>
-		<table class="w-pct60">
+	<form action="update.cu" method="post">
+	<input type="hidden" name="id" value="${vo.id}">
+		<table class="w-pct50">
 			<tr>
-				<th class="w-pct10">번호</th>
 				<th class="w-pct30">제목</th>
+				<td>
+					<input type="text" name="title" value="${vo.title}" />		
+				</td>
 			</tr>
-			<c:forEach var="vo" items="${list}">
-				<tr>
-					<td>${vo.no}</td>
-					<td><a href='detail.cu?id=${vo.id}'>${vo.title}</a></td>
-				</tr>
-			</c:forEach>
+			<tr>
+				<th>내용</th>
+				<td><input type="text" name="content" value="${vo.content}" /></td>
+			</tr>
 		</table>
+	</form>
+	<div class="btnSet">
+		<a class="btn-fill" onclick="$('form').submit()">저장</a>
+		<a class="btn-empty" href="detail.cu?id=${vo.id}">취소</a>
+	</div>
 	<%-- </div>
 	 <jsp:include page="/WEB-INF/views/include/footer.jsp" /> --%>
-	 
-	 <a class="btn-fill" href="new.cu">문의하기</a>
 </body>
 </html>
