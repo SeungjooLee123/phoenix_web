@@ -3,17 +3,22 @@ package customer;
 import java.sql.Date;
 
 public class CustomerVO {
-	int id        ;
+	int id, no      ;
 	String user_id   ;
 	String content   ;
 	Date share_date;
 	String filename  ;
 	String filepath  ;
-	int cnt       ;
 	String title     ;
 	String reply     ;
 	
 	
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public int getId() {
 		return id;
 	}
@@ -49,12 +54,6 @@ public class CustomerVO {
 	}
 	public void setFilepath(String filepath) {
 		this.filepath = filepath;
-	}
-	public int getCnt() {
-		return cnt;
-	}
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
 	}
 	public String getTitle() {
 		return title;

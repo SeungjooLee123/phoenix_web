@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="customer.mapper">
+	<!-- 고객정보 조회 -->
+	<select id="list" resultType="customer.CustomerVO">
+		select rownum no, c.* 
+		from (select cs.* from MASTER_WEB_CS_TBL cs where user_id = (select id from MASTER_USER_INFO_TBL where admin = 'Y')) c
+		order by no
+	</select>
+	
+	<!-- 고객 정보 상세 조회 -->
+	<select id="detail" resultType="customer.CustomerVO">
+		SELECT * FROM MASTER_WEB_CS_TBL WHERE ID = #{id}
+	</select>
+	
+	<!-- 신규 고객 정보 저장 -->
+	<insert id="insert">
+		INSERT INTO MASTER_WEB_CS_TBL (id, title, content, user_id, share_date) VALUES (seq_cs_id.nextval, #{title}, #{content}, #{user_id}, sysdate)
+	</insert>
+	
+	<!-- 고객 정보 수정 -->
+	<update id="update">
+		UPDATE MASTER_WEB_CS_TBL SET title = #{title}, content = #{content} WHERE ID = #{id}
+	</update>
+	
+	<!-- 고객 삭제 -->
+	<delete id="delete">
+		DELETE FROM MASTER_WEB_CS_TBL WHERE ID = #{id}
+	</delete>
+</mapper>
