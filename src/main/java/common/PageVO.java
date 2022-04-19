@@ -45,6 +45,7 @@ public class PageVO {
 	public void setTotalList(int totalList) {
 		this.totalList = totalList;
 		totalPage = totalList / pageList;
+		
 		// 512건 / 10개 = 51.. 총 페이지 51...
 		// 나머지 발생한 경우 1페이지를 증가...
 		if (totalList % pageList > 0)
@@ -53,7 +54,7 @@ public class PageVO {
 		totalBlock = totalPage / blockPage;
 		if (totalPage % blockPage > 0)
 			++totalBlock;
-
+		
 		// 각 페이지의 끝 목록번호 : 총 목록수 - (페이지번호-1) * 페이지당 보여질 목록수
 		endList = totalList - (curPage - 1) * pageList;
 		// 각 페이지의 시작 목록번호 : 끝 목록번호 - (페이지당 보여질 목록수 - 1)
