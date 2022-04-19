@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/style.css?v=<%=new Date().getTime()%>">
 <title>Community</title>
 </head>
 <body>

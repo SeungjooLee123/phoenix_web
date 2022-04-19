@@ -6,12 +6,27 @@ public class CommunityVO {
 
 	
 	private int id, cnt;
-	private String title, content, web_file, web_path, user_id;
+	private String title, content, web_file, web_path, user_id, prev_title, next_title;;
 	private Date  web_date;
 	
 	
 	
 	
+	
+	
+	
+	public String getPrev_title() {
+		return prev_title;
+	}
+	public void setPrev_title(String prev_title) {
+		this.prev_title = prev_title;
+	}
+	public String getNext_title() {
+		return next_title;
+	}
+	public void setNext_title(String next_title) {
+		this.next_title = next_title;
+	}
 	public int getId() {
 		return id;
 	}

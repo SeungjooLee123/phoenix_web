@@ -27,7 +27,8 @@ public class UserController {
 	
 	//회원가입 화면 요청
 	@RequestMapping("/join")
-	public String join() {
+	public String join(HttpSession session) {
+		session.setAttribute("category", "join");
 		return "user/join";
 	}
 	
@@ -92,7 +93,8 @@ public class UserController {
 	
 	//로그인 화면 요청
 	@RequestMapping("/login")
-	public String login() {
+	public String login(HttpSession session) {
+		session.setAttribute("category", "login");
 		return "user/login";
 	}
 	
