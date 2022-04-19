@@ -25,7 +25,8 @@ public class CustomerController {
 	//방명록 목록화면 요청
 	@RequestMapping("/list.cu")
 	public String list(HttpSession session, Model model) {
-		//session.setAttribute("category", "cu");
+		//cs -> 마음에 안 들면 변경
+		session.setAttribute("category", "cs");
 		List<CustomerVO> list = service.customer_list();
 		model.addAttribute("list", list);
 		return "customer/list";

@@ -37,7 +37,7 @@ public class NoticeController {
 			           @RequestParam(defaultValue = "1") int curPage, String search, String keyword, 
 			           @RequestParam(defaultValue = "10")int pageList
 			           ) {
-		//session.setAttribute("category", "no");
+		session.setAttribute("category", "no");
 
 		//페이징 처리되면서 데이터 가져오기
 		page.setCurPage(curPage);

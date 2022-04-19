@@ -22,7 +22,8 @@ public class WelfareController {
 	@Autowired private WelfarePage page;
 	
 	@RequestMapping("/welfare")
-	public String wel_home() {
+	public String wel_home(HttpSession session) {
+		session.setAttribute("category", "we");
 		return "welfare/welfare";
 	}
 	
