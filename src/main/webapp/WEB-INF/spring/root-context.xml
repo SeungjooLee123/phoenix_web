@@ -10,7 +10,7 @@ xmlns:context="http://www.springframework.org/schema/context"
 	
 
 	<!-- 패키지 생성 시 추가 기재 (패키지 생성시 기재 바람) -->
-    <context:component-scan base-package="babyinfo, sns, join, diary, user, common, storage, notice, welfare, community"/>
+    <context:component-scan base-package="babyinfo, sns, join, diary, user, common, storage, notice, welfare, community, customer"/>
 <!-- 추가1 ysb : default.xml과 연결하는 부분 ▼ -->
 		<import resource="classpath:data/default.xml"/>
 </beans>

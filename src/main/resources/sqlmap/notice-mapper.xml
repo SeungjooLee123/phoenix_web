@@ -1,5 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice.mapper">
-
+	<insert id="insert">	<!-- 답글 기능 추가하면서 ROOT 추가함 -->
+		INSERT INTO MASTER_WEB_NOTICE_TBL (ID, TITLE, CONTENT,CNT,NOTI_DATE, USER_ID, FILENAME, FILEPATH)
+		       VALUES ( seq_notice_id.NEXTVAL, #{title}, #{content},0,sysdate, #{user_id}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR} )
+	</insert>
+	
+	<select id="detail" resultType="notice.NoticeVO">
+		select notice.*
+		from 
+			(select n.*, 
+				lag(id, 1, 0) over (order by id desc) as prev,
+				lag(title, 1, '이전글 없음') over (order by id desc) as prev_title,				
+				lead(id, 1, 0) over (order by id desc) as next,
+				lead(title, 1, '다음글 없음') over (order by id desc) as next_title			
+			 from MASTER_WEB_NOTICE_TBL n
+			 order by id desc) notice
+		where id = #{id}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="count">
+		UPDATE MASTER_WEB_NOTICE_TBL SET CNT = CNT+1 WHERE ID = #{id}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM MASTER_WEB_NOTICE_TBL WHERE ID = #{id}
+	</delete>
+	
+	<update id="update">
+		UPDATE MASTER_WEB_NOTICE_TBL SET TITLE = #{title}, CONTENT = #{content}, FILENAME = #{filename, jdbcType=VARCHAR}, FILEPATH = #{filepath, jdbcType=VARCHAR} 
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 페이징 처리해서 조회하기 + 검색 조건에 따라 조회-->
+	<select id="totalList" resultType="Integer">
+		SELECT COUNT(*) FROM MASTER_WEB_NOTICE_TBL <include refid="where_search" />
+	</select>
+	
+	<select id="list" resultType="notice.NoticeVO">	 <!-- 답글 기능 추가하면서 ORDER BY ID > ROOT 로 변경 + STEP DESC (정렬을 2번 하겠다) -->
+		SELECT *
+		FROM (SELECT ROWNUM NO, N.* 
+			  FROM (SELECT * FROM MASTER_WEB_NOTICE_TBL <include refid="where_search" /> ORDER BY id) N
+		      ORDER BY NO DESC)
+		WHERE no BETWEEN #{beginList} and #{endList}    
+	</select>
+	
+	
+	<!-- 검색조건 sql 따로 빼기 -->
+	<sql id="where_search">
+		<if test="search == 'title' or search == 'content'">
+			WHERE ${search} LIKE '%'||#{keyword}||'%'
+		</if>
+		<if test="search == 'writer'">
+			WHERE USER_ID IN (SELECT ID FROM MASTER_USER_INFO_TBL WHERE ID LIKE '%'||#{keyword}||'%')  
+		</if>
+		<if test="search == 'all'">
+			WHERE TITLE LIKE '%'||#{keyword}||'%'
+				  OR CONTENT LIKE '%'||#{keyword}||'%'
+				  OR USER_ID IN (SELECT ID FROM MASTER_USER_INFO_TBL WHERE ID LIKE '%'||#{keyword}||'%')  
+		</if>
+	</sql>
 </mapper>

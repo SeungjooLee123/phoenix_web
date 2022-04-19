@@ -3,14 +3,46 @@ package notice;
 import java.sql.Date;
 
 public class NoticeVO {
-	private int id       ;
-	private String title    ;
+	private int id, no, prev, next;
+	private String title, prev_title, next_title;
 	private String content  ;
 	private int cnt      ;
 	private Date noti_date;
 	private String user_id  ;
 	private String filename ;
-	private String filefath ;
+	private String filepath ;
+	
+	
+	public String getPrev_title() {
+		return prev_title;
+	}
+	public void setPrev_title(String prev_title) {
+		this.prev_title = prev_title;
+	}
+	public String getNext_title() {
+		return next_title;
+	}
+	public void setNext_title(String next_title) {
+		this.next_title = next_title;
+	}
+	public int getPrev() {
+		return prev;
+	}
+	public void setPrev(int prev) {
+		this.prev = prev;
+	}
+	public int getNext() {
+		return next;
+	}
+	public void setNext(int next) {
+		this.next = next;
+	}
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public int getId() {
 		return id;
 	}
@@ -53,11 +85,11 @@ public class NoticeVO {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-	public String getFilefath() {
-		return filefath;
+	public String getFilepath() {
+		return filepath;
 	}
-	public void setFilefath(String filefath) {
-		this.filefath = filefath;
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
 	}
 	
 	

@@ -3,18 +3,23 @@ package common;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonElement;
@@ -59,6 +64,31 @@ public class CommonService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		
+		//파일 다운로드
+		public void fileDownload(String filename, String filepath, HttpSession session, HttpServletResponse res) {
+			//실제 파일의 위치와 파일을 찾아 file 처리
+			File file = new File(session.getServletContext().getRealPath("resources")+ "/" + filepath);
+			
+			String mine = session.getServletContext().getMimeType(filename); //마인타입 가져오기
+			
+			res.setContentType(mine);	//응답처리할 마인타입 설정
+			
+			try {
+			filename = URLEncoder.encode(filename, "utf-8").replaceAll("\\+", "%20");//파일이름 인코딩 처리+공백 처리(+일 때 공백으로)
+				//%20==공백
+			res.setHeader("content-disposition", "attachment; filename="+filename);	//헤더에 파일정보 담기
+			
+			//응답(출력)시 문자 타입은 printWriter, 그외 타입은 inputStream, outputStream 사용
+				ServletOutputStream out = res.getOutputStream();
+				FileCopyUtils.copy(new FileInputStream(file), out);
+				out.flush();//비우기
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("fileDownload 오류");
+			}
+			
 		}
 		
 		public String requestAPI(StringBuffer url) {
@@ -182,4 +212,6 @@ public class CommonService {
 			}
 			return access_Token;
 		}
+		
+		
 }
