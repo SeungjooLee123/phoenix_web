@@ -69,7 +69,7 @@ table th{
 		<th>내용</th>
 		<td>
 			<!-- <textarea name="content" id="summernote" class='chk' title="내용"></textarea> -->
-			<textarea id="summernote" name="editarea"></textarea>
+			<textarea id="summernote" name="content"></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -96,8 +96,7 @@ table th{
 				  minHeight: null,             // 최소 높이
 				  maxHeight: null,             // 최대 높이
 				  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-				  lang: "ko-KR",					// 한글 설정
-				  placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
+				  lang: "ko-KR"
 			});
 		});
 		

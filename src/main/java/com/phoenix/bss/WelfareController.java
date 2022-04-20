@@ -42,7 +42,7 @@ public class WelfareController {
 	
 	//신규 입력 화면 요청
 	@RequestMapping("/new.wel")
-	public String wel_new(String category, Model model) {
+	public String wel_new(Model model) {
 		return "welfare/new";
 	}
 	
@@ -100,6 +100,7 @@ public class WelfareController {
 	@RequestMapping("/insert.wel")
 	public String wel_insert(WelfareVO vo, MultipartFile file, HttpSession session) {
 		vo.setUser_id(((UserVO) session.getAttribute("loginInfo")).getId());
+		System.out.println(vo.getContent());
 		if(!file.isEmpty()) { //첨부파일이 있는 경우
 			vo.setFilename(file.getOriginalFilename());
 			vo.setFilepath(common.fileUpload("welfare", file, session));
