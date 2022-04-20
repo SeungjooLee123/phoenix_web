@@ -16,7 +16,8 @@ table tr td a:hover, ul.grid li a:hover {font-weight: bold; color: coral;}
 </style>
 </head>
 <body>
-	<form action="list.wel" method="post">
+	<jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/>
+	<form action="list.wel?category=" + ${category } method="post">
 	<input type="hidden" name="curPage" value="1" />
 	<div id = 'list-top'>
 		<div>
@@ -35,7 +36,7 @@ table tr td a:hover, ul.grid li a:hover {font-weight: bold; color: coral;}
 			<ul>
 				<!-- 관리자로 로그인된 경우만 글쓰기 가능 -->
 				<c:if test="${loginInfo.admin eq 'Y' }">
-					<li><a class='btn-fill' href='new.wel'>글쓰기</a></li>
+					<li><a class='btn-fill' href='new.wel?category=${category }'>글쓰기</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -52,19 +53,31 @@ table tr td a:hover, ul.grid li a:hover {font-weight: bold; color: coral;}
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list }" var="vo">
-				<tr>
-					<td>${vo.id }</td>
-					<td class='left'>${vo.title }</td>
-					<td>${vo.user_id }</td>
-					<td>${vo.writedate }</td>
-					<td>${empty vo.filename ? '' : '<img src="imgs/attach.png" class="file-img" />' }</td>
-				</tr>
-			</c:forEach>
+			<c:if test="${page.list.size() ne 0}">
+				<c:forEach var="vo" items="${page.list}">
+					<tr>
+						<td>${vo.no}</td>
+						<td class="left"><a href="detail.wel?id=${vo.id }">${vo.title}</a></td>
+						<td>${vo.user_id}</td>
+						<td>${vo.wel_date}</td>
+						<td>${empty vo.filename ? '' : '<img src="imgs/attach.png" class="file-img"/>' }</td>
+					</tr>
+				</c:forEach>
+			</c:if>
 		</tbody>
 	</table>
+	<input type="hidden" id = "category" value="${category }"/>
 	<div class='btnSet'>
 		<jsp:include page="/WEB-INF/views/include/page.jsp" />
 	</div>
+	<script type="text/javascript">
+		if($("#category").val() == "childbirth"){
+			$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
+			$("#cate-ul li>a").eq(0).attr("class", "btn-fill");
+		} else{
+			$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
+			$("#cate-ul li>a").eq(1).attr("class", "btn-fill");
+		}
+	</script>
 </body>
 </html>

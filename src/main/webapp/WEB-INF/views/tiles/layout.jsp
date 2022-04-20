@@ -5,12 +5,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:choose>
+	<c:when test="${category eq '' }"><c:set var="title" value="베시시"/> </c:when>
 	<c:when test="${category eq 'no' }"><c:set var='title' value="공지사항"/></c:when> 
-	<c:when test="${category eq 'hr' }"><c:set var='title' value="사원목록"/></c:when>	
+	<c:when test="${category eq 'we' }"><c:set var='title' value="육아정보"/></c:when>	
 	<c:when test="${category eq 'co' }"><c:set var='title' value="커뮤니티"/></c:when>	
-	<c:when test="${category eq 'bo' }"><c:set var='title' value="방명록"/></c:when>	
-	<c:when test="${category eq 'da' }"><c:set var='title' value="공공 데이터"/></c:when>	
-	<c:when test="${category eq 'join' }"><c:set var='title' value="회원가입"/></c:when>
+	<c:when test="${category eq 'bo' }"><c:set var='title' value="나눔하기"/></c:when>	
+	<c:when test="${category eq 'cs' }"><c:set var='title' value="고객센터"/></c:when>	
 </c:choose>
 
   
@@ -22,6 +22,7 @@
 <style type="text/css">
 	#wrap {display: flex; flex-direction: column; width:1440px; margin: 0 auto;}
 	/* flex 방향 지정 flex-dircetion : column (가로) */
+	/* header가 떠있기 때문에 content에서 윗부분 공간 만듬 */
 	#content {width: 1440px; margin:0 auto; padding-top: 10.5%;}
 
 </style>

@@ -6,6 +6,7 @@
 
 <c:choose>
 	<c:when test="${category eq 'login' }"><c:set var='title' value="로그인"/></c:when>
+	<c:when test="${category eq 'join' }"><c:set var='title' value="회원가입"/></c:when>
 	<c:when test="${category eq 'error' }"><c:set var='title' value="오류페이지"/></c:when>
 	
 </c:choose>
