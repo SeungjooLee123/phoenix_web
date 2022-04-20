@@ -37,6 +37,7 @@ public class WelfareDAO implements WelfareService {
 
 	@Override
 	public void wel_delete(int id) {
-		sql.delete("welfare.mapper.delete", id);
+		 sql.delete("welfare.mapper.delete", id);
 	}
+	
 }
