@@ -32,7 +32,8 @@ public class WelfareDAO implements WelfareService {
 	@Override
 	public WelfarePage wel_list(HashMap<String, String> map) {
 		WelfarePage page = gson.fromJson(map.get("page"), WelfarePage.class);
-		page.setTotalList(sql.selectOne("welfare.mapper.totalList", map));
+		int a = sql.selectOne("welfare.mapper.totalList", map);
+		page.setTotalList(a);
 		
 		HashMap<String, String> temp = new HashMap<String, String>();
 		map.put("category", map.get("category"));
