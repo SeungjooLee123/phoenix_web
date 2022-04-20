@@ -32,8 +32,8 @@ public class NoticeDAO implements NoticeService {
 		//전체 게시글 수 조회
 		System.out.println("asd"+page.getBeginList());
 		System.out.println(page.getEndList());
-		
-		page.setTotalList(sql.selectOne("notice.mapper.totalList", page));
+		int a = sql.selectOne("notice.mapper.totalList", page);
+		page.setTotalList(a);
 		
 		//페이징 처리된 전체 게시글 조회
 		List<NoticeVO> list = sql.selectList("notice.mapper.list", page); 

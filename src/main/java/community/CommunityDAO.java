@@ -16,35 +16,31 @@ public class CommunityDAO implements CommunityService {
 	public int Community_insert(CommunityVO vo) {
 		return sql.insert("community.mapper.insert", vo);
 	}
-
-	/*
-	 * @Override public CommunityPage Community_list(CommunityPage page) { //전체 게시글
-	 * 수 조회 int a = sql.selectOne( "community.mapper.totalList" , page);
-	 * page.setTotalList( a); System.out.println(a); //페이징 처리된 전체 게시글 조회
-	 * //page.setList( sql.selectList("board.mapper.list" , page ) ); return page; }
-	 */
 	
 	@Override
 	public CommunityPage Community_list(CommunityPage page) {
 		//전체 게시글 수 조회
 		int a = sql.selectOne( "community.mapper.islist" , page);
 		page.setTotalList( a);
-		System.out.println(a);
+		//System.out.println("TotalList : " + a);
+		
 		//페이징 처리된 전체 게시글 조회
-		//page.setList( sql.selectList("board.mapper.list"  , page ) );
+		List<CommunityVO> list = sql.selectList("community.mapper.list", page); 
+		page.setList( list );
+		for(int i =0; i<list.size(); i++) {
+			//System.out.println("글번호 : " + list.get(i).getId());
+		}
 		return page;
 	}
 
 	@Override
 	public CommunityVO Community_detail(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return sql.selectOne("community.mapper.detail", id);
 	}
 
 	@Override
 	public int Community_read(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sql.update("community.mapper.count", id);
 	}
 
 	@Override
