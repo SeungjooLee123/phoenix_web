@@ -11,13 +11,11 @@
 <title>맵</title>
 <style type="text/css">
 #map-ul{display: flex; position: relative;}
-#map-ul>li{margin-top: 30px;}
 #map-ul>li>a{display: block; font-size: 14px;}
 .map-main{margin-top: 30px;}
 #map-ul li > a{display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
 #map-ul li > a.btn-fill{background: #c3bfff; color: #fff;}
 #map-ul li > a.btn-empty{background: #f5f5f5;}
-
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
 .map_wrap {position:relative;width:100%;height:650px;}

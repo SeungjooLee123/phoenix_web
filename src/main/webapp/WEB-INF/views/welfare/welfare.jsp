@@ -10,7 +10,7 @@
 <style type="text/css">
 #wel_container {width: 1440px; margin :0 auto;}
 #cate-ul{display: flex;}
-#cate-ul>li{margin-top: 40px;}
+#cate-ul>li{margin-top: 40px; margin-bottom: 20px;}
 #cate-ul li > a{display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
 #cate-ul li > a.btn-fill{background: #c3bfff; color: #fff;}
 #cate-ul li > a.btn-empty{background: #f5f5f5;}
