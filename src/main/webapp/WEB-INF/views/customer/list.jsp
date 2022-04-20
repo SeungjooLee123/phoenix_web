@@ -47,6 +47,9 @@ table th{
 	<%-- </div>
 	 <jsp:include page="/WEB-INF/views/include/footer.jsp" /> --%>
 	 
-	 <a class="btn-fill" href="new.cu">문의하기</a>
+	 <c:if test="${! empty loginInfo}">
+			<a class="btn-fill" href="new.cu">문의하기</a>
+	</c:if>
+	
 </body>
 </html>

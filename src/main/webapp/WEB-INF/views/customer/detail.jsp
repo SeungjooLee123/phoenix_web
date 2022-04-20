@@ -54,16 +54,20 @@ table th{
 			</td>
 			</tr>
 		</table>
+		<script type="text/javascript" src='js/file_check.js?v<%=new Date().getTime() %>'></script>  <!--파일 미리보기 필요함  -->
 		<div class="btnSet">
 			<a class="btn-fill" href="list.cu">목록</a>
 			<!-- <a class="btn-fill" href="new.cu">신규 고객</a>  -->
+			<c:if test="${loginInfo.admin eq 'Y'}">
 			<a class="btn-fill" href="modify.cu?id=${vo.id}">수정</a>
 			<a class="btn-fill" onclick="fnDelete()">삭제</a>
+			</c:if>
+			
 		</div>
 	<%-- </div>
 	 <jsp:include page="/WEB-INF/views/include/footer.jsp" /> --%>
 </body>
-<script type="text/javascript" src='js/file_check.js?v<%=new Date().getTime() %>'></script>  <!--파일 미리보기 필요함  -->
+
 <script type="text/javascript">
 	function fnDelete() {
 		if(confirm("정말 삭제하시겠습니까?")){

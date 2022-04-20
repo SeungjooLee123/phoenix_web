@@ -54,9 +54,8 @@ table th{
 		</td>
 	</tr>
 </table>
-<input type="hidden" id = "category" value="${vo.category }"/>
 <div class='btnSet'>
-	<a class='btn-fill' href='list.wel?curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}&category=${vo.category}'>목록으로</a>
+	<a class='btn-fill' href='list.wel?curPage=${page.curPage}&search=${page.search}&keyword=${page.keyword}'>목록으로</a>
 	<!-- 목록 버튼 클릭시 현재 선택한 페이지값과 검색 항목 그리고 키워드를 가진 상태에서 목록 화면으로 이동 -->
 	
 	<c:if test="${vo.user_id eq loginInfo.id }">
@@ -65,13 +64,8 @@ table th{
 	</c:if>
 </div>
 <script type="text/javascript">
-	if($("#category").val() == 'childbirth'){
-		$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-		$("#cate-ul li>a").eq(0).attr("class", "btn-fill");
-	} else{
-		$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-		$("#cate-ul li>a").eq(1).attr("class", "btn-fill");
-	}
+	$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
+	$("#cate-ul li>a").eq(0).attr("class", "btn-fill");
 </script>
 </body>
 </html>

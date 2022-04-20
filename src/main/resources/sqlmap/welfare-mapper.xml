@@ -19,8 +19,8 @@
 	<select id="list" resultType="welfare.WelfareVO">
 		SELECT *
 		FROM (SELECT ROWNUM NO, N.* 
-			  FROM (SELECT * FROM MASTER_WEB_WELFARE_TBL <include refid="where_search" /> ORDER BY id) N where category = #{category}
-		      ORDER BY no DESC)
+			  FROM (SELECT * FROM MASTER_WEB_WELFARE_TBL <include refid="where_search" /> ORDER BY id desc) N
+		      ORDER BY no)
 		WHERE no BETWEEN TO_NUMBER(#{beginList}) and TO_NUMBER(#{endList})
 	</select>
 	
@@ -31,11 +31,17 @@
 	
 	<!-- 글 생성 -->
 	<insert id="insert">
-		insert into master_web_welfare_tbl (id, title, content, category, filename, filepath, user_id, wel_date) values (seq_welfare_id.nextval, #{title}, #{content}, #{category}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR}, #{user_id}, sysdate)
+		insert into master_web_welfare_tbl (id, title, content, filename, filepath, user_id, wel_date) values (seq_welfare_id.nextval, #{title}, #{content, jdbcType=VARCHAR}, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR}, #{user_id}, sysdate)
 	</insert>
 	
 	<!-- 글 삭제 -->
 	<delete id="delete">
 		delete from master_web_welfare_tbl where id = #{id}
 	</delete>
+	
+	<!-- 글 수정 -->
+	<update id="update">
+		update master_web_welfare_tbl set title = #{title}, content = #{content}, filename = #{filename, jdbcType=VARCHAR}, filepath = #{filepath, jdbcType=VARCHAR} where id = #{id}
+	</update>
+	
 </mapper>

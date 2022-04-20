@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.Date"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,16 +9,15 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/style.css?v=<%=new Date().getTime()%>">
 <style type="text/css">
-table { width: 80%; margin: 0 auto; border: 1px solid; border-collapse: collapse;}
-table tr { height: 46px;}
-table th, table td {border: 1px solid; padding : 5px 10px;}
-table th { background: #f6f6f6;}
-table tr td a:hover, ul.grid li a:hover {font-weight: bold; color: coral;}
+body{width:1440px; margin:0 auto;}
+#list-top{text-align: right;}
+.title_list{width:20%; float:left;}
+.content_main{width:80%; float:right;}
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/>
-	<form action="list.wel?category=" + ${category } method="post">
+	<form action="list.wel" method="post">
 	<input type="hidden" name="curPage" value="1" />
 	<div id = 'list-top'>
 		<div>
@@ -36,48 +36,35 @@ table tr td a:hover, ul.grid li a:hover {font-weight: bold; color: coral;}
 			<ul>
 				<!-- 관리자로 로그인된 경우만 글쓰기 가능 -->
 				<c:if test="${loginInfo.admin eq 'Y' }">
-					<li><a class='btn-fill' href='new.wel?category=${category }'>글쓰기</a></li>
+					<li><a class='btn-fill' href='new.wel'>글쓰기</a></li>
 				</c:if>
 			</ul>
 		</div>
 	</div>
 	</form>
-	<table>
-		<thead>
-			<tr>
-				<th class='w-px70'>번호</th>
-				<th>제목</th>
-				<th class='w-px100'>작성자</th>
-				<th class='w-px100'>작성일자</th>
-				<th class='w-px80'>첨부파일</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:if test="${page.list.size() ne 0}">
-				<c:forEach var="vo" items="${page.list}">
-					<tr>
-						<td>${vo.no}</td>
-						<td class="left"><a href="detail.wel?id=${vo.id }">${vo.title}</a></td>
-						<td>${vo.user_id}</td>
-						<td>${vo.wel_date}</td>
-						<td>${empty vo.filename ? '' : '<img src="imgs/attach.png" class="file-img"/>' }</td>
-					</tr>
+	<div class="title_list">
+		<ul>
+			<c:if test="${page.list.size() ne 0 }">
+				<c:forEach var="vo" items="${page.list }">
+					<li><a><span>${vo.title }</span></a></li>
 				</c:forEach>
 			</c:if>
-		</tbody>
-	</table>
-	<input type="hidden" id = "category" value="${category }"/>
-	<div class='btnSet'>
-		<jsp:include page="/WEB-INF/views/include/page.jsp" />
+		</ul>
+	</div>
+	<div class="content_main">
+		<div id="content_here"></div>
 	</div>
 	<script type="text/javascript">
-		if($("#category").val() == "childbirth"){
-			$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-			$("#cate-ul li>a").eq(0).attr("class", "btn-fill");
-		} else{
-			$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-			$("#cate-ul li>a").eq(1).attr("class", "btn-fill");
-		}
+		jQuery(document).ready(function(){
+			document.getElementById("content_here").innerHTML = "<p>" +'${page.list[0].content}'+ "</p>";
+		});
+		
+		$(".title_list ul>li").click(function(){
+			var title_index = $(this).index();
+			<c:forEach var = "vo" items = "${page.list}">
+				if("${vo.no}" == title_index+1) document.getElementById("content_here").innerHTML = "<p>" +'${vo.content}'+ "</p>";
+			</c:forEach>
+		});
 	</script>
 </body>
 </html>

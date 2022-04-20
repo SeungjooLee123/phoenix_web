@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class WelfareVO {
 	int id, no;
-	String title, content, category, filename, filepath, user_id;
+	String title, content, filename, filepath, user_id;
 	Date wel_date;
 
 	public int getNo() {
@@ -37,14 +37,6 @@ public class WelfareVO {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
 	}
 
 	public String getFilename() {

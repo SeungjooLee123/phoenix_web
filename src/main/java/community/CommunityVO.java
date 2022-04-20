@@ -5,8 +5,8 @@ import java.sql.Date;
 public class CommunityVO {
 
 	
-	private int id, cnt;
-	private String title, content, web_file, web_path, user_id, prev_title, next_title;;
+	private int id, cnt, prev, next;
+	private String title, content, web_file, web_path, user_id, prev_title, next_title;
 	private Date  web_date;
 	
 	
@@ -15,6 +15,18 @@ public class CommunityVO {
 	
 	
 	
+	public int getPrev() {
+		return prev;
+	}
+	public void setPrev(int prev) {
+		this.prev = prev;
+	}
+	public int getNext() {
+		return next;
+	}
+	public void setNext(int next) {
+		this.next = next;
+	}
 	public String getPrev_title() {
 		return prev_title;
 	}

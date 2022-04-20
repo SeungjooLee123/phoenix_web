@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date"%>
 <!DOCTYPE html>
 <html>
 <style type="text/css">
@@ -36,17 +37,18 @@ table th{
 			<tr>
 				<th class="w-pct30">제목</th>
 				<td>
-					<input type="text" name="title" value="${vo.title}" />		
+					<input type="text" class='chk' title='제목' name="title" value="${vo.title}" />		
 				</td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><input type="text" name="content" value="${vo.content}" /></td>
+				<td><input type="text" class='chk' title='제목' name="content" value="${vo.content}" /></td>
 			</tr>
 		</table>
 	</form>
 	<div class="btnSet">
-		<a class="btn-fill" onclick="$('form').submit()">저장</a>
+	<script type="text/javascript" src='js/common.js?v<%=new Date().getTime() %>'></script>
+		<a class="btn-fill" onclick="if( emptyCheck() ) $('form').submit()">저장</a>
 		<a class="btn-empty" href="detail.cu?id=${vo.id}">취소</a>
 	</div>
 	<%-- </div>
