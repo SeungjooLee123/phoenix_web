@@ -74,7 +74,7 @@ table th{
 	<div class="btnSet">
 		<a class="btn-fill" onclick="$('form').submit()" >목록으로</a>
 		<%-- 글쓴이만 수정 삭제 권한을 가질 수 있으므로 비교 먼저 해야 함 --%>
-		<c:if test="${loginInfo.id eq vo.user_id}">
+		<c:if test="${loginInfo.admin eq 'Y'}">
 			<a class="btn-fill" onclick="$('form').attr('action', 'modify.no'); $('form').submit()">수정하기</a>
 			<a class="btn-fill" onclick='if(confirm("정말 삭제?")) {href="delete.no?id=${vo.id}"}'>삭제하기</a>
 		</c:if>

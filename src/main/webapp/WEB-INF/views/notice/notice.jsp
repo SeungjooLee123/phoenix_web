@@ -50,7 +50,7 @@ table th{
 					<li><a class="btn-fill" onclick="$('form').submit()">검색</a></li>
 				</ul>
 				<ul>
-					<c:if test="${not empty loginInfo}">
+					<c:if test="${loginInfo.admin eq 'Y'}">
 						<li><a class="btn-fill" href="new.no">글쓰기</a></li>
 					</c:if>		
 				</ul>

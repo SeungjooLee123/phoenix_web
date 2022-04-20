@@ -36,6 +36,7 @@ public class CustomerController {
 	public String detail(int id, Model model) {
 		//선택한 고객 정보를 db에서 조회하고 보냄
 		model.addAttribute("vo", service.customer_detail(id));
+		model.addAttribute("crlf", "\r\n"); 
 		return "customer/detail";
 	}
 	
