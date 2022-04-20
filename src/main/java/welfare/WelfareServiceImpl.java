@@ -1,8 +1,5 @@
 package welfare;
 
-import java.util.HashMap;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +23,8 @@ public class WelfareServiceImpl implements WelfareService {
 	}
 
 	@Override
-	public WelfarePage wel_list(HashMap<String, String> map) {
-		return dao.wel_list(map);
+	public WelfarePage wel_list(WelfarePage page) {
+		return dao.wel_list(page);
 	}
 
 	@Override

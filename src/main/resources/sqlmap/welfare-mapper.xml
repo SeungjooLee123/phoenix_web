@@ -19,7 +19,7 @@
 	<select id="list" resultType="welfare.WelfareVO">
 		SELECT *
 		FROM (SELECT ROWNUM NO, N.* 
-			  FROM (SELECT * FROM MASTER_WEB_WELFARE_TBL <include refid="where_search" /> ORDER BY id) N where category = #{category}
+			  FROM (SELECT * FROM MASTER_WEB_WELFARE_TBL <include refid="where_search" /> ORDER BY id) N
 		      ORDER BY no DESC)
 		WHERE no BETWEEN TO_NUMBER(#{beginList}) and TO_NUMBER(#{endList})
 	</select>

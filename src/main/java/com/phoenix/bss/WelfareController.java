@@ -2,7 +2,6 @@ package com.phoenix.bss;
 
 
 import java.io.File;
-import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,8 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.google.gson.Gson;
 
 import common.CommonService;
 import user.UserVO;
@@ -27,22 +24,16 @@ public class WelfareController {
 	@Autowired private WelfareServiceImpl service;
 	@Autowired private CommonService common;
 	@Autowired private WelfarePage page;
-	Gson gson = new Gson();
 	
 	//정책 화면 요청
 	@RequestMapping("/list.wel")
-	public String list(HttpSession session, Model model, @RequestParam(defaultValue = "1")int curPage, @RequestParam(defaultValue = "10")int pageList, String search, String keyword, String category) {
+	public String list(HttpSession session, Model model, @RequestParam(defaultValue = "1")int curPage, @RequestParam(defaultValue = "10")int pageList, String search, String keyword) {
 		page.setCurPage(curPage);
 		page.setSearch(search);
 		page.setKeyword(keyword);
 		page.setPageList(pageList);
 		
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("category", category);
-		map.put("page", gson.toJson(page));
-		
-		model.addAttribute("page", service.wel_list(map));
-		model.addAttribute("category", category);
+		model.addAttribute("page", service.wel_list(page));
 		
 		return "welfare/list";
 	}
@@ -50,7 +41,6 @@ public class WelfareController {
 	//신규 입력 화면 요청
 	@RequestMapping("/new.wel")
 	public String wel_new(String category, Model model) {
-		model.addAttribute("category", category);
 		return "welfare/new";
 	}
 	
@@ -114,7 +104,7 @@ public class WelfareController {
 		}
 		service.wel_insert(vo);
 		
-		return "redirect:list.wel?category=" + vo.getCategory();
+		return "redirect:list.wel";
 	}
 	
 	//글 삭제 요청
@@ -128,7 +118,7 @@ public class WelfareController {
 			if(file.exists()) file.delete();
 		}
 		service.wel_delete(id);
-		return "redirect:list.wel?category=" + vo.getCategory();
+		return "redirect:list.wel";
 	}
 	
 	//첨부파일 다운로드 요청
@@ -136,6 +126,12 @@ public class WelfareController {
 	public void download(int id, HttpSession session, HttpServletResponse response) {
 		WelfareVO vo = service.wel_detail(id);
 		common.fileDownload(vo.getFilename(), vo.getFilepath(), session, response);
+	}
+	
+	//동영상 화면 요청
+	@RequestMapping("/video.wel")
+	public String wel_video() {
+		return "welfare/video";
 	}
 	
 	//통계자료 화면 요청
