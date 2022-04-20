@@ -38,4 +38,9 @@
 	<delete id="delete">
 		delete from master_web_welfare_tbl where id = #{id}
 	</delete>
+	
+	<!-- 글 수정 -->
+	<update id="update">
+		update master_web_welfare_tbl set title = #{title}, content = #{content}, filename = #{filename, jdbcType=VARCHAR}, filepath = #{filepath, jdbcType=VARCHAR} where id = #{id}
+	</update>
 </mapper>

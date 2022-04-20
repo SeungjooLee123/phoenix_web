@@ -21,7 +21,7 @@ public class WelfareDAO implements WelfareService {
 
 	@Override
 	public boolean wel_update(WelfareVO vo) {
-		return false;
+		return sql.update("welfare.mapper.update", vo) == 1 ? true : false;
 	}
 
 	@Override

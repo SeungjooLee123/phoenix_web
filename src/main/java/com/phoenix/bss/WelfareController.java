@@ -37,8 +37,6 @@ public class WelfareController {
 		page.setKeyword(keyword);
 		page.setPageList(pageList);
 		
-		System.out.println(category);
-		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("category", category);
 		map.put("page", gson.toJson(page));
@@ -76,6 +74,33 @@ public class WelfareController {
 	//수정한 내용 저장 요청
 	@RequestMapping("/update.wel")
 	public String wel_update(WelfareVO vo, String attach, MultipartFile file, HttpSession session) {
+		WelfareVO before = service.wel_detail(vo.getId());
+		String uuid = session.getServletContext().getRealPath("resources") + "/" + before.getFilepath();
+		
+		if(!file.isEmpty()) { //파일 첨부한 경우
+			//첨부파일 없었는데 수정 시 첨부한 상황
+			vo.setFilename(file.getOriginalFilename());
+			vo.setFilepath(common.fileUpload("welfare", file, session));
+			//첨부파일 있었는데 수정 시 바꿔 첨부한 상황
+			if(before.getFilename() != null) {
+				File f = new File(uuid);
+				if(f.exists()) f.delete();
+			}
+		} else { //파일 첨부하지 않은 경우
+			//첨부파일 없었고 수정 시 첨부하지 않은 경우
+			if(attach.isEmpty()) {
+				if(before.getFilename() != null) {
+					File f = new File(uuid);
+					if(f.exists()) f.delete();
+				}
+			} else {
+				//원래 첨부파일 그래도 사용하는 경우
+				vo.setFilename(before.getFilename());
+				vo.setFilepath(before.getFilepath());
+			}
+		}
+		
+		service.wel_update(vo);
 		return "redirect:detail.wel?id=" + vo.getId();
 	}
 	
