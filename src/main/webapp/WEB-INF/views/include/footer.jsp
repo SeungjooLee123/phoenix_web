@@ -62,7 +62,7 @@ color: #000;
 
 
 <ul class="footer">
-	<a href='<c:url value="/notice.no"/>'><li>공지사항</li></a>
+	<a href='<c:url value="/calendar"/>'><li>공지사항</li></a>
 	<a href='<c:url value="/welfare"/>'><li>육아정보</li></a>
 	<a href='<c:url value="/community"/>'><li>커뮤니티</li></a>
 	<a href='<c:url value="/"/>'><li>나눔하기</li></a>
