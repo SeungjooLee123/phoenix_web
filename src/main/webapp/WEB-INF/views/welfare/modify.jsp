@@ -59,7 +59,6 @@ table th{
 		</table>
 		<input type="hidden" name="attach"/>  <%-- 첨부파일에 대한 정보를 숨겨서 가져갈 예정 --%>
 	</form>
-	<input type="hidden" id = "category" value="${vo.category }"/>
 	<script type="text/javascript" src='js/common.js?v<%=new Date().getTime() %>'></script>
 	<div class="btnSet">
 		<a class="btn-fill" style="cursor: pointer;" onclick="if( emptyCheck() ){ $( '[name=attach]' ).val( $('#file-name').text() ); $('form').submit() }">저장</a>
@@ -67,13 +66,8 @@ table th{
 	</div>
 	<script type="text/javascript" src='js/file_check.js?v<%=new Date().getTime() %>'></script>  <!--파일 미리보기 필요함  -->
 	<script type="text/javascript">
-		if($("#category").val() == 'childbirth'){
-			$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-			$("#cate-ul li>a").eq(0).attr("class", "btn-fill");
-		} else{
-			$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-			$("#cate-ul li>a").eq(1).attr("class", "btn-fill");
-		}
+		$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
+		$("#cate-ul li>a").eq(0).attr("class", "btn-fill");
 	</script>
 </body>
 </html>

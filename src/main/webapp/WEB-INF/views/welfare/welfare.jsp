@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/style.css?v=<%=new Date().getTime()%>">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>육아정보</title>
 <style type="text/css">
@@ -22,8 +21,8 @@
 		<h3>육아정보</h3>
 		<div id="wrap_cate">
 			<ul id="cate-ul">
-				<li><a class="btn-fill" href="list.wel?category=childbirth">출산정책</a></li>
-				<li><a class="btn-empty" href="list.wel?category=parenting">육아정책</a></li>
+				<li><a class="btn-fill" href="list.wel">지원정책</a></li>
+				<li><a class="btn-empty" href="video.wel">동영상</a></li>
 				<li><a class="btn-empty" href="graph.wel">통계자료</a></li>
 				<li><a class="btn-empty" id="map-search" href="map.wel">주변장소검색</a></li>
 			</ul>

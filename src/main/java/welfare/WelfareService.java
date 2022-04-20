@@ -1,11 +1,8 @@
 package welfare;
 
-import java.util.HashMap;
-import java.util.List;
-
 public interface WelfareService {
 	//정책 전체 목록 조회
-	WelfarePage wel_list(HashMap<String, String> map);
+	WelfarePage wel_list(WelfarePage page);
 	
 	//정책 신규 저장
 	boolean wel_insert(WelfareVO vo);

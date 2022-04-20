@@ -19,7 +19,7 @@
 	<select id="list" resultType="welfare.WelfareVO">
 		SELECT *
 		FROM (SELECT ROWNUM NO, N.* 
-			  FROM (SELECT * FROM MASTER_WEB_WELFARE_TBL <include refid="where_search" /> ORDER BY id) N where category = #{category}
+			  FROM (SELECT * FROM MASTER_WEB_WELFARE_TBL <include refid="where_search" /> ORDER BY id) N
 		      ORDER BY no DESC)
 		WHERE no BETWEEN TO_NUMBER(#{beginList}) and TO_NUMBER(#{endList})
 	</select>
@@ -38,4 +38,9 @@
 	<delete id="delete">
 		delete from master_web_welfare_tbl where id = #{id}
 	</delete>
+	
+	<!-- 글 수정 -->
+	<update id="update">
+		update master_web_welfare_tbl set title = #{title}, content = #{content}, filename = #{filename, jdbcType=VARCHAR}, filepath = #{filepath, jdbcType=VARCHAR} where id = #{id}
+	</update>
 </mapper>
