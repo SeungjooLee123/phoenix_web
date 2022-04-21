@@ -280,7 +280,7 @@ transition-duration: .4s;
 <section>
 <div id="fourth-container" style="text-align: center;">
 	<div style= "background: #f0f4f7; padding-bottom: 70px;">
-	<h2 style="padding-bottom: 100px; padding-top: 10%; font-size: 40px; font-family: 'Jua', sans-serif; letter-spacing: 3px;">베시시 사용자 리뷰</h2>
+	<h3 style="padding-bottom: 100px; padding-top: 10%; font-size: 40px; font-family: 'Jua', sans-serif; letter-spacing: 3px; font-weight: 550px;">베시시 사용자 리뷰</h3>
 <div id="review" style="margin-left: 10%; margin-right: 10%; display: flex;">
 	<figure class="review-one" style="text-align: left; width: 380px;">
 		<p style="line-height: 150%; font-weight: 500; color: #868686;">"좋아요 신생아 때부터 쭉 쓰고 있어요 수유<br>
@@ -349,13 +349,13 @@ transition-duration: .4s;
 				<span class="info_cate" style="display: block; height: 36px; margin-top: -1px; padding-right: 20px; font-size: 0;">
 					<img src="imgs/main_icon.png" style="width:36px; height: 36px; display: inline-block; margin-right: 8px; vertical-align: top;">
 						<span style="display: inline-block; position: relative; height: 34px; margin-top: 1px; padding: 0 13px; border-radius: 13px; font-size:13px; line-height: 34px; color: #000; background-color: #eee; vertical-align: top;">
-						공지사항
+						이벤트
 						</span>
 				</span>
 				<a href="" style="display: block; margin: 0 -24px;">
 				<div>
 					<h2 class="card-text" style="height: 80px; font-size: 27px; line-height: 40px; padding-left: 20px; margin-top: 20px; margin-bottom: 20px; padding-right: 20px;">
-					베시시, 베시시어플 양육자와 아이 행복 추구
+					베시시, 5월 가정의 달 맞이 &nbsp 이벤트 게시!
 					</h2>
 				</div>
 				
@@ -363,7 +363,7 @@ transition-duration: .4s;
 							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#베시시</span>
 							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#육아어플</span>
 							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#초보육아</span>
-							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#공지사항</span>
+							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#이벤트</span>
 						</span>
 				<div style="margin-top:25px;">
 						<span class="wrap_imgs" style="height: 306px; margin-top: 71px;">

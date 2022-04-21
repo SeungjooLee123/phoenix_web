@@ -51,9 +51,7 @@ top: 5px;
 position: absolute;
 display: flex;
 justify-content: center;
-margin-left: -74px;
 font-size: 16px;
-letter-spacing: -.5px;
 }
 
 .list_gnb > li {
