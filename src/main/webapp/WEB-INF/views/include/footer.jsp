@@ -16,7 +16,7 @@ margin-bottom: 10px;
 display: flex;  
  column-gap: 14rem;
  justify-content: center;
- padding-left: 40px;
+ padding-left: 23px;
   }
   
 .footer-two{
@@ -62,7 +62,7 @@ color: #000;
 
 
 <ul class="footer">
-	<a href='<c:url value="/calendar"/>'><li>공지사항</li></a>
+	<a href='<c:url value="/calendar"/>'><li>이벤트</li></a>
 	<a href='<c:url value="/welfare"/>'><li>육아정보</li></a>
 	<a href='<c:url value="/community"/>'><li>커뮤니티</li></a>
 	<a href='<c:url value="/"/>'><li>나눔하기</li></a>
@@ -70,17 +70,17 @@ color: #000;
 </ul>
 <div class="footer-wrap" style="width:1300px; margin-left: 133px; display: flex; margin-top: 40px; font-size: 13px; color:#888888; font-weight:500; line-height: 2; ">
 	<div class="footer-notice">
-		<p>베시시 소식</p>
+		<p>이벤트 소식</p>
 		<p>히스토리</p>
 	</div>
 
-	<div class="footer-welfare" style="margin-left:220px;">
+	<div class="footer-welfare" style="margin-left:202px;">
 		<p>출산 정책 정보</p>
 		<p>어린이집 정보</p>
 		<p>주변 소아과 정보</p>
 	</div>
 	
-	<div class="footer-community" style="margin-left:186px;">
+	<div class="footer-community" style="margin-left:188px;">
 		<p>이번 달 인기 글</p>
 		<p>육아 정보 나눔</p>
 		<p>동네 키즈 카페</p>
@@ -91,7 +91,7 @@ color: #000;
 		<p>
 	</div>
 	
-	<div class="footer-cs" style="margin-left: 208px;">
+	<div class="footer-cs" style="margin-left: 205px;">
 		<p>베시시 고객센터</p>
 		<p>베시시 계정</p>
 		<br>

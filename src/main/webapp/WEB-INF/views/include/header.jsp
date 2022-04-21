@@ -118,7 +118,7 @@ opacity: 0.2;
         	<h1 class="logo"><a href='/bss/'><img src="imgs/logo_ai.svg" style="width: 150px; padding-top:5px;"></a></h1>
          		<nav class="gnbContent">
          			<ul class="list_gnb">
-         				<li><a href='<c:url value="/list.no"/>'>공지사항</a></li>
+         				<li><a href='<c:url value="/calendar"/>'>이벤트</a></li>
          				<li><a href='<c:url value="/list.wel" />'>육아정보</a></li>
          				<li><a href='<c:url value="/community"/>'>커뮤니티</a></li>
          				<li><a href='<c:url value="/" />'>나눔하기</a></li>

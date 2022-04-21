@@ -14,7 +14,7 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 <style>
 
-html, body {
+body{
 font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
 font-size: 14px;
 }

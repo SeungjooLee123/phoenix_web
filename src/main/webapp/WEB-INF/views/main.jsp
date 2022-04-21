@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@500&family=Poor+Story&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 <style type="text/css">
 
@@ -23,6 +24,13 @@ a:visited {
 nav ul {
   list-style: none;
 } 
+
+#line-chart-setting{
+display: block;
+width: 1300px;
+height: 1000px;
+margin: 0 auto;
+}
 
 
 #bss{
@@ -317,12 +325,23 @@ transition-duration: .4s;
 					<p style="opacity: 0.5; font-size: 14px;">승주 엄마</p>	
 				</div>
 			</figcaption>
-			
 	</figure>
-</div>	
 </div>
-	<h2 class="color" style="text-align: left; margin-top:50px; margin-left: 75px;">관련 콘텐츠</h2>
 </div>
+</div>
+<div class="chart-section" style="margin-top: 100px; padding-bottom: 170px; ">
+	<h2 class="chart-text" style="text-align: left; margin-top:50px; margin-left: 75px; margin-bottom: 50px;">시각화 자료</h2>
+		<h3 style="text-align: center; font-size: 17px; margin-bottom: 50px; color:#898989;">베시시 서비스 사용자 현황</h3>
+			<div style="width: 1300px; margin: 0 auto; display: flex;">	
+				<div style="float: left">
+					<canvas id="pie-chart" width="650" height="450"></canvas>
+				</div>
+				<div style="float:right;">
+					<canvas id="bar-chart-horizontal" width="650" height="450"></canvas>
+				</div>
+			</div>
+</div>
+<h2 class="color" style="text-align: left; margin-top:50px; margin-left: 75px;">관련 콘텐츠</h2>
 	<div class="card-view" style="display:flex; text-align: left; margin-top: 45px; margin-left: 5%; width: 1330px;">
 	<!-- first -->
 		<div class="card" style="width:408px; height:530px; overflow: hidden; background: #fff; border-radius: 14px; position: relative; box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);" >
@@ -419,19 +438,51 @@ transition-duration: .4s;
 	<span id="topBtn">top</span>
 </div>	
 
-
-
-
-
-
-
-
 </section>
 <script type="text/javascript">
 var topEle =$('#topBtn');
 var delay =1000;
 topEle.on('click', function(){
 	$('html, body').stop().animate({scrollTop:0}, delay);
+});
+
+new Chart(document.getElementById("pie-chart"), {
+    type: 'pie',
+    data: {
+      labels: ["웹 사용자", "앱 사용자", "앱 미사용자"],
+      datasets: [{
+        label: "Population (millions)",
+        backgroundColor: ["#ffc81b", "#5b6777","#f15628"],
+        data: [2478,5267,234]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: ''
+      }
+    }
+});
+
+new Chart(document.getElementById("bar-chart-horizontal"), {
+    type: 'horizontalBar',
+    data: {
+      labels: ["앱 사용자", "웹 사용자", "앱 미사용자"],
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#5b6777", "#ffc81b","#f15628"],
+          data: [5267,2478,234]
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: ''
+      }
+    }
 });
 </script>
 </body>
