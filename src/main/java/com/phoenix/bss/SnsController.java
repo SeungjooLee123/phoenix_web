@@ -212,17 +212,20 @@ public class SnsController {
 	@ResponseBody
 	@RequestMapping(value = "/share.sn", produces="application/json;charset=UTF-8")
 	public String sns_share(String vo, HttpSession session, HttpServletRequest req) throws Exception {
+		req.setCharacterEncoding("utf-8");
 		System.out.println("snsShare접근");
 		GrowthVO Imgvo = gson.fromJson(vo, GrowthVO.class);
 		ArrayList<MultipartFile> fileList = new ArrayList<MultipartFile>();
 		int file_size = Integer.parseInt( req.getParameter("file_size")+"" ); 
 		MultipartRequest mreq = (MultipartRequest) req;
+		
 		for (int i = 0; i < file_size; i++) {
 			MultipartFile file =mreq.getFile("file"+i);
 			fileList.add(file);
 		}
 		if(fileList.size() > 0) {
 			for(int i =0; i < fileList.size(); i++) {
+				
 				System.out.println(Imgvo.getBaby_id());
 				String server_path = "http://" + getLocalAddr + req.getContextPath() + "/resources/";
 				Imgvo.setImgList(server_path + common.fileUpload("gro", mreq.getFile("file"+i), session));

@@ -1,5 +1,7 @@
 package welfare;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,4 +33,5 @@ public class WelfareServiceImpl implements WelfareService {
 	public void wel_delete(int id) {
 		dao.wel_delete(id);
 	}
+
 }

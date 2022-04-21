@@ -29,21 +29,23 @@ import com.google.gson.JsonParser;
 public class CommonService {
 		//파일 업로드 처리
 		public String fileUpload(String category, MultipartFile file, HttpSession session) {
-			//업로드할 위치
+			//업로드file.
 			String resources = session.getServletContext().getRealPath("resources");
 			String folder = resources + "/upload/" + category + "/" + new SimpleDateFormat("yyyy/MM/dd").format(new Date());
-			String uuid = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+			//String uuid = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+			String name = file.getOriginalFilename();
 			
 			File dir = new File(folder);
+		
 			if(! dir.exists()) dir.mkdirs();
 			try {
-				file.transferTo(new File(folder , uuid));
+				file.transferTo(new File(folder , name));
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-			return folder.substring(resources.length()+1) + "/" + uuid ;
+			return folder.substring(resources.length()+1) + "/" + name ;
 		}
 		
 		//파일 삭제 처리

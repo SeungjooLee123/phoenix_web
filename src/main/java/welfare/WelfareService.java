@@ -1,5 +1,7 @@
 package welfare;
 
+import java.util.List;
+
 public interface WelfareService {
 	//정책 전체 목록 조회
 	WelfarePage wel_list(WelfarePage page);
