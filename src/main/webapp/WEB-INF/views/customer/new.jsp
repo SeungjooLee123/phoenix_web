@@ -35,6 +35,17 @@ table th{
 		<form action="insert.cu" method="post" enctype="multipart/form-data">
 			<table class="w-pct50">
 				<tr>
+					<th>문의분류</th>
+					<td>
+						<select id="body" name="category">
+							<option value="nomal" selected="selected">일반문의</option>
+							<option value="app">어플리케이션</option>
+							<option value="web">BSS 웹</option>
+							<option value="account">계정/로그인/탈퇴</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
 					<th>제목</th>
 					<td>
 						<input class='chk' title='제목' type="text" name="title" />
@@ -42,7 +53,7 @@ table th{
 				</tr>
 				<tr>
 					<th>문의사항</th>
-					<td><input class='chk' title='문의사항' type="text" name="content" /></td>
+					<td><textarea class='chk' title='문의사항' name="content" ></textarea></td>
 				</tr>
 				<tr>
 				<th>첨부파일</th>
@@ -54,7 +65,7 @@ table th{
 					<span id="file-name"></span>
 					<%-- 이미지 파일 미리보기 적용 --%>
 					<span id="preview"></span>
-					<a id="delete-file">삭제</a>
+					<a id="delete-file" style="display:none;">삭제</a>
 				</td>
 			</tr>
 			</table>

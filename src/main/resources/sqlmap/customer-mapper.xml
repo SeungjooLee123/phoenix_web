@@ -4,7 +4,7 @@
 	<!-- 고객정보 조회 -->
 	<select id="list" resultType="customer.CustomerVO">
 		select rownum no, c.* 
-		from (select cs.* from MASTER_WEB_CS_TBL cs where user_id = (select id from MASTER_USER_INFO_TBL where admin = 'Y')) c
+		from (select cs.* from MASTER_WEB_CS_TBL cs where user_id = (select id from MASTER_USER_INFO_TBL where admin = 'Y') and category = #{category}) c
 		order by no
 	</select>
 	
@@ -15,7 +15,7 @@
 	
 	<!-- 신규 고객 정보 저장 -->
 	<insert id="insert">
-		INSERT INTO MASTER_WEB_CS_TBL (id, title, content, user_id, share_date, filename, filepath) VALUES (seq_cs_id.nextval, #{title}, #{content}, #{user_id}, sysdate, #{filename}, #{filepath})
+		INSERT INTO MASTER_WEB_CS_TBL (id, title, content, user_id, share_date, filename, filepath, category) VALUES (seq_cs_id.nextval, #{title}, #{content}, #{user_id}, sysdate, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR}, #{category})
 	</insert>
 	
 	<!-- 고객 정보 수정 -->

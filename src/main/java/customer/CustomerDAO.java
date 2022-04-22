@@ -17,8 +17,8 @@ public class CustomerDAO implements CustomerService{
 	}
 
 	@Override
-	public List<CustomerVO> customer_list() {
-		return sql.selectList("customer.mapper.list");
+	public List<CustomerVO> customer_list(String category) {
+		return sql.selectList("customer.mapper.list", category);
 	}
 
 	@Override

@@ -24,11 +24,13 @@ public class CustomerController {
 	
 	//방명록 목록화면 요청
 	@RequestMapping("/list.cu")
-	public String list(HttpSession session, Model model) {
+	public String list(HttpSession session, Model model, String category) {
 		//cs -> 마음에 안 들면 변경
 		session.setAttribute("category", "cs");
-		List<CustomerVO> list = service.customer_list();
+		category = category == null ? "nomal" : category;
+		List<CustomerVO> list = service.customer_list(category);
 		model.addAttribute("list", list);
+		model.addAttribute("cu_category", category);
 		return "customer/list";
 	}
 	

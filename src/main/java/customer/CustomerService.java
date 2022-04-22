@@ -8,7 +8,7 @@ public interface CustomerService {
 	void customer_insert(CustomerVO vo);
 	
 	//목록 조회
-	List<CustomerVO> customer_list();
+	List<CustomerVO> customer_list(String category);
 	
 	//상세 조회
 	CustomerVO customer_detail(int id);

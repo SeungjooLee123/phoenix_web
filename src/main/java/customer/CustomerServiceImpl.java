@@ -17,8 +17,8 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public List<CustomerVO> customer_list() {
-		return dao.customer_list();
+	public List<CustomerVO> customer_list(String category) {
+		return dao.customer_list(category);
 	}
 
 	@Override

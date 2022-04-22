@@ -35,6 +35,17 @@ table th{
 	<input type="hidden" name="id" value="${vo.id}">
 		<table class="w-pct50">
 			<tr>
+				<th>문의분류</th>
+				<td>
+					<select id="body" name="category">
+						<option value="nomal" selected="selected">일반문의</option>
+						<option value="app">어플리케이션</option>
+						<option value="web">BSS 웹</option>
+						<option value="account">계정/로그인/탈퇴</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<th class="w-pct30">제목</th>
 				<td>
 					<input type="text" class='chk' title='제목' name="title" value="${vo.title}" />		
@@ -42,7 +53,7 @@ table th{
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><input type="text" class='chk' title='제목' name="content" value="${vo.content}" /></td>
+				<td><textarea class='chk' title='제목' name="content" value="${vo.content}" ></textarea></td>
 			</tr>
 		</table>
 	</form>

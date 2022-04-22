@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class CustomerVO {
 	int id, no      ;
+	String category;
 	String user_id   ;
 	String content   ;
 	Date share_date;
@@ -13,6 +14,12 @@ public class CustomerVO {
 	String reply     ;
 	
 	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public int getNo() {
 		return no;
 	}
