@@ -1,6 +1,13 @@
 package com.phoenix.bss;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.Base64;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,8 +30,51 @@ public class UserController {
 	
 	@Autowired UserDAO dao;
 	Gson gson = new Gson();
-	
-	
+	String a = "";
+    
+    @ResponseBody
+    @RequestMapping("/music_check2")
+    public void music_check2() {
+       a = "";
+    }
+    
+    @ResponseBody
+    @RequestMapping("/music_check")
+    public String music_check() {
+		System.out.println(a.substring(0,9)); 
+        return  gson.toJson(a);
+    }
+    
+    @ResponseBody
+    @RequestMapping("/music")
+    public void music(String musicfile) throws UnsupportedEncodingException {
+       a = musicfile;
+     
+       //byte[] base64data1 = Base64Utils.decodeFromUrlSafeString(musicfile);
+       //byte[] base64data1 = Base64.getUrlDecoder().decode(musicfile);
+       
+//       char[] base64data3 = URLDecoder.decode(new String(musicfile), "utf-8").toCharArray();
+//       byte[] base64data1 = new byte[base64data3.length];
+//       for(int i=0; i<base64data3.length; i++) {
+//    	   base64data1[i] =  (byte) ( base64data3[i] );
+//       }
+       
+       byte[] base64data1 = Base64.getUrlDecoder().decode(musicfile);
+       
+       FileOutputStream fos;
+       //File target = new File("C:\\aa\\");
+		try {
+			fos = new FileOutputStream("C:\\aa\\ccc.mp3");
+		    fos.write(base64data1);
+		    fos.close();
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+       
+       System.out.println(musicfile.length());
+    }
+ 
 	
 	//회원가입 화면 요청
 	@RequestMapping("/join")
