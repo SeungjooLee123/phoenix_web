@@ -4,6 +4,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 <style type="text/css">
 table{
 	width: 80%;
@@ -39,7 +46,7 @@ table th{
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea name="content" class="chk" title="내용" >${vo.content}</textarea></td>
+				<td><textarea class="chk" title="내용" name="content" id="summernote">${vo.content}</textarea></td>
 			</tr>
 			<tr>
 				<th>첨부파일</th>
@@ -66,6 +73,46 @@ table th{
 	</div>
 	<script type="text/javascript" src='js/file_check.js?v<%=new Date().getTime() %>'></script>  <!--파일 미리보기 필요함  -->
 	<script type="text/javascript">
+		$('#summernote').summernote({
+		    width: 800,
+		   height: 300,
+		   lang: "ko-KR",
+		      callbacks: {   //여기 부분이 이미지를 첨부하는 부분
+		          onImageUpload : function(files) {
+		             uploadSummernoteImageFile(files,this);
+		          },
+		          onPaste: function (e) {
+		             var clipboardData = e.originalEvent.clipboardData;
+		             if (clipboardData && clipboardData.items && clipboardData.items.length) {
+		                var item = clipboardData.items[0];
+		                if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+		                   e.preventDefault();
+		                }
+		             }
+		          }
+		       }
+		 });
+		 function uploadSummernoteImageFile(files, editor) {
+		    data = new FormData();
+		    for(var i = 0 ; i<files.length ; i ++){
+		       data.append("file"+i, files[i]);
+		    }
+		    data.append("length",files.length);
+		    $.ajax({
+		       enctype: 'multipart/form-data', 
+		       data : data,
+		       type : "POST",
+		       url : "insert.te",
+		       contentType : false,
+		       processData : false,
+		       success : function(data) {
+		             //항상 업로드된 파일의 url이 있어야 한다.
+		          for(var i = 0 ; i<data.length ; i ++){
+		             $(editor).summernote('insertImage', data[i]);
+		          }
+		       }
+		    });
+		 }
 		$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
 		$("#cate-ul li>a").eq(0).attr("class", "btn-fill");
 	</script>

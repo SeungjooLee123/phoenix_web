@@ -64,6 +64,47 @@ table th{
 	</c:if>
 </div>
 <script type="text/javascript">
+	$('#summernote').summernote({
+	    width: 800,
+	   height: 300,
+	   lang: "ko-KR",
+	      callbacks: {   //여기 부분이 이미지를 첨부하는 부분
+	          onImageUpload : function(files) {
+	             uploadSummernoteImageFile(files,this);
+	          },
+	          onPaste: function (e) {
+	             var clipboardData = e.originalEvent.clipboardData;
+	             if (clipboardData && clipboardData.items && clipboardData.items.length) {
+	                var item = clipboardData.items[0];
+	                if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+	                   e.preventDefault();
+	                }
+	             }
+	          }
+	       }
+	 });
+	 function uploadSummernoteImageFile(files, editor) {
+	    data = new FormData();
+	    for(var i = 0 ; i<files.length ; i ++){
+	       data.append("file"+i, files[i]);
+	    }
+	    data.append("length",files.length);
+	    $.ajax({
+	       enctype: 'multipart/form-data', 
+	       data : data,
+	       type : "POST",
+	       url : "insert.te",
+	       contentType : false,
+	       processData : false,
+	       success : function(data) {
+	             //항상 업로드된 파일의 url이 있어야 한다.
+	          for(var i = 0 ; i<data.length ; i ++){
+	             $(editor).summernote('insertImage', data[i]);
+	          }
+	       }
+	    });
+	 }
+ 
 	$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
 	$("#cate-ul li>a").eq(0).attr("class", "btn-fill");
 </script>

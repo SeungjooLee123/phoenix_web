@@ -8,7 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <title>육아정보</title>
 <style type="text/css">
-#wel_container {width: 1440px; margin :0 auto;}
+#wel_container {max-width: 1300px; margin :0 auto;}
 #cate-ul{display: flex;}
 #cate-ul>li{margin-top: 40px; margin-bottom: 20px;}
 #cate-ul li > a{display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}

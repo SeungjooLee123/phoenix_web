@@ -66,6 +66,7 @@
 #address{text-align: right;}
 .map_wrap{margin: 15px 0;}
 #address select{height: 30px;}
+#mapcontainer{max-width: 1300px; margin: 0 auto;}
 </style>
 </head>
 <body>

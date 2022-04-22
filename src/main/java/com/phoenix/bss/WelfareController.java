@@ -1,9 +1,20 @@
 package com.phoenix.bss;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import common.CommonService;
 import user.UserVO;
@@ -93,22 +105,34 @@ public class WelfareController {
 		}
 		
 		service.wel_update(vo);
-		return "redirect:detail.wel?id=" + vo.getId();
+		return "redirect:list.wel";
 	}
 	
 	//새로운 글 저장 요청
-	@RequestMapping("/insert.wel")
-	public String wel_insert(WelfareVO vo, MultipartFile file, HttpSession session) {
-		vo.setUser_id(((UserVO) session.getAttribute("loginInfo")).getId());
-		System.out.println(vo.getContent());
-		if(!file.isEmpty()) { //첨부파일이 있는 경우
-			vo.setFilename(file.getOriginalFilename());
-			vo.setFilepath(common.fileUpload("welfare", file, session));
+	 @RequestMapping("/insert.wel") public String wel_insert(WelfareVO vo,
+	 MultipartFile file, HttpSession session) {
+		 vo.setUser_id(((UserVO) session.getAttribute("loginInfo")).getId());
+		 System.out.println(vo.getContent());
+		 if(!file.isEmpty()) { //첨부파일이 있는 경우
+			 vo.setFilename(file.getOriginalFilename());
+			 vo.setFilepath(common.fileUpload("welfare", file, session));
 		}
-		service.wel_insert(vo);
-		
-		return "redirect:list.wel";
-	}
+		 service.wel_insert(vo);
+		 return "redirect:list.wel";
+	 }
+	 
+	@ResponseBody
+	@RequestMapping("insert.te")
+	public List<String> testtB(MultipartHttpServletRequest req , HttpSession session) {
+		System.out.println();
+		int fileLength =Integer.parseInt( req.getParameter("length") );
+		List<MultipartFile> files = new ArrayList<MultipartFile>();
+		List<String> rtnList = new ArrayList<String>();
+		for(int i = 0 ; i<fileLength ; i++) {
+			rtnList.add("resources/" + common.fileUpload(  "temp" , req.getFile("file"+i) , session ));
+		}
+		return rtnList ;
+   }
 	
 	//글 삭제 요청
 	@RequestMapping("/delete.wel")
