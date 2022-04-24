@@ -5,20 +5,19 @@
 <html>
 <style type="text/css">
 table{
-	width: 80%;
-	margin: 0 auto;
-	border: 1px solid;
 	border-collapse: collapse;
+}
+table, tr, td{
+	border : none;
 }
 table tr{
 	height: 46px;
 }
 table th, table td{
-	border : 1px solid;
 	padding: 5px 10px;
 }
 table th{
-	background: #f6f6f6;
+	text-align: left;
 }
 .btnSet{
 	margin-top: 20px;
@@ -29,13 +28,13 @@ table th{
 <title>Insert title here</title>
 </head>
 <body>
-		<%-- <jsp:include page="/WEB-INF/views/include/header.jsp" /> 
-	<div id="content"> --%>
-		<h3>신규 고객 입력</h3>
+	<div id="content" style="width:1000px;">
+		<h1 style="margin-bottom: 50px;">문의하기</h1>
+		<hr>
 		<form action="insert.cu" method="post" enctype="multipart/form-data">
-			<table class="w-pct50">
+			<table>
 				<tr>
-					<th>문의분류</th>
+					<th>문의분류*</th>
 					<td>
 						<select id="body" name="category">
 							<option value="nomal" selected="selected">일반문의</option>
@@ -46,13 +45,13 @@ table th{
 					</td>
 				</tr>
 				<tr>
-					<th>제목</th>
+					<th>제목*</th>
 					<td>
 						<input class='chk' title='제목' type="text" name="title" />
 					</td>
 				</tr>
 				<tr>
-					<th>문의사항</th>
+					<th>문의사항*</th>
 					<td><textarea class='chk' title='문의사항' name="content" ></textarea></td>
 				</tr>
 				<tr>
@@ -70,13 +69,13 @@ table th{
 			</tr>
 			</table>
 		</form>
+		<hr>
 		<div class="btnSet">
 		<script type="text/javascript" src='js/common.js?v<%=new Date().getTime() %>'></script>
 			<a class="btn-fill" onclick="if( emptyCheck() ) $('form').submit()">저장</a>
 			<a class="btn-empty" href="list.cu">취소</a>
 		</div>
-	<%-- </div>
-	 <jsp:include page="/WEB-INF/views/include/footer.jsp" /> --%>
+	</div>
 	 <script src="js/file_check.js?v<%=new Date().getTime() %>" ></script>	<%-- java.util의 date --%>
 </body>
 </html>
