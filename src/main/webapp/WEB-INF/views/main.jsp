@@ -349,10 +349,10 @@ transition-duration: .4s;
 				<span class="info_cate" style="display: block; height: 36px; margin-top: -1px; padding-right: 20px; font-size: 0;">
 					<img src="imgs/main_icon.png" style="width:36px; height: 36px; display: inline-block; margin-right: 8px; vertical-align: top;">
 						<span style="display: inline-block; position: relative; height: 34px; margin-top: 1px; padding: 0 13px; border-radius: 13px; font-size:13px; line-height: 34px; color: #000; background-color: #eee; vertical-align: top;">
-						이벤트
+						이벤트정보
 						</span>
 				</span>
-				<a href="" style="display: block; margin: 0 -24px;">
+				<a href="calendar" style="display: block; margin: 0 -24px;">
 				<div>
 					<h2 class="card-text" style="height: 80px; font-size: 27px; line-height: 40px; padding-left: 20px; margin-top: 20px; margin-bottom: 20px; padding-right: 20px;">
 					베시시, 5월 가정의 달 맞이 &nbsp 이벤트 게시!

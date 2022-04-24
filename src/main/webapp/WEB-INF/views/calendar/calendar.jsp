@@ -42,12 +42,27 @@ color: #000;
 border: 1px solid #8d8ac2;
 }
 
+    @keyframes fadeInDown {
+        0% {
+            opacity: 0;
+            transform: translate3d(0, -100%, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+ 
+    .show {
+        position: relative;
+        animation: fadeInDown 1s;
+    }
+
 </style>
 </head>
 <body style="padding:30px;">
 <section id="notice" style="width:1300px; margin: 0 auto;">
-  <img src="imgs/bss_ad_pick.png" style="width:1300px; height: 400px;">
-
+  <img src="imgs/bss_event_img.jpg" style="width:1300px; height: 400px; margin-bottom: 50px;">
 <div id='calendar-container'>
 <div id='calendar'></div>
 </div>
