@@ -15,6 +15,7 @@
 }
 .answer {
 	display: none;
+	margin-left: 60px;
 }
 .qna-wrap{
 	width: 750px;
@@ -39,9 +40,13 @@ table th, table td{
 table th{
 	background: #f6f6f6;
 }
-.btnSet{
-	margin-top: 20px;
-}
+.btn_style{
+display: block;
+ font-size: 15px;
+  background: #f5f5f5;
+   cursor: pointer;
+    text-align: center; 
+    margin: 0 10px; padding: 10px 13px;}
 </style>
 <head>
 <meta charset="UTF-8">
@@ -67,7 +72,7 @@ table th{
 		<h1  style="margin: 50px 0;">유용한 도움말</h1>
 		
 		<hr  style="opacity: 0.7; height: 2px; background: #000; border: 0px;"/>
-		<div style="margin: 20px 20px;">일반문의</div>
+		<div class='li_title' style="margin: 20px 20px;">일반문의</div>
 		<div style="border-top: solid 3px #000; opacity: 0.7;"></div>
 		
 		<div class="qna_list">
@@ -77,18 +82,20 @@ table th{
 					<div class="question">
 						<div style="margin-right: 50px;">${vo.no}</div>
 						<!-- <div><a href='detail.cu?id=${vo.id}'>${vo.title}</a></div> -->
-						<div><a>${vo.title}</a></div>
+						<div class="q_title"><a>${vo.title}</a></div>
 					</div>
 					<div class="answer">
-						<div style="margin-right: 50px;"></div>
+						<div style="margin-right: 50px;">${vo.content}</div>
 					</div>
 					<hr>
 				</li>
 			</c:forEach>
 			</ul>
 		</div>
-		<p>원하시는 답변을 찾지못하셨다면, 고객센터로 문의해 주세요.</p>
-		<a class="btn-fill" onclick="contact()" style="cursor: pointer;">문의하기</a>
+		<div style="display: flex; justify-content: space-between; align-items: center;">
+			<p style="font-size: 14px; vertical-align: middle;">원하시는 답변을 찾지못하셨다면, 고객센터로 문의해 주세요.</p>
+			<a class="btn_style" onclick="contact()" style="cursor: pointer;">문의하기</a>
+		</div>
 	</div>
 	</div>
 </section>
@@ -97,6 +104,8 @@ table th{
 $(function () {
 	var cate = '#'+'${cu_category}';
 	$(cate).addClass('active');
+	//alert(cate.text());
+	$('.li_title').text($(cate).text());
 });
 function contact() {
 	var info = '${loginInfo}'
@@ -109,10 +118,13 @@ function contact() {
 	//alert(info);
 }
 $('.qna_list ul li').on('click', function() {
-	var idx = $(this).index();
-	alert(idx);
+	//var idx = $(this).index();
+	//alert(idx);
 	//$('.answer').css('display','block');
-	
+	var content = $(this).children('.answer');
+	var title = $(this).children('.question').children('.q_title');
+	if(content.css('display') == 'block') {content.css('display','none'); title.css('font-weight','400');}
+	else {content.css('display','block'); title.css('font-weight','600');}
 })
 $(document).on('click', '#tabs li', function () {
 	var idx = $(this).index();
