@@ -34,9 +34,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<CustomerVO> customer_list() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CustomerVO> customer_list(String category) {
+		return dao.customer_list(category);
 	}
 
 	

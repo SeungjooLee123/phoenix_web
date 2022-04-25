@@ -44,9 +44,8 @@ public class Admin_UserDAO  implements AdminService{
 
 	//문의 사항 ㅈ회
 	@Override
-	public List<CustomerVO> customer_list() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CustomerVO> customer_list(String category) {
+		return sql.selectList("admin.mapper.cs_list", category);
 	}
 
 	

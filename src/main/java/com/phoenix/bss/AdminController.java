@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import admin.AdminPage;
 import admin.AdminServiceImpl;
 import admin.Admin_UserVO;
+import customer.CustomerVO;
 
 @Controller
 public class AdminController {
@@ -22,22 +23,22 @@ public class AdminController {
 	@Autowired private AdminPage page;
 	
 	//admin
-	@RequestMapping("/admin")
-	public String userList(Model model, HttpSession session, @RequestParam(defaultValue = "1")int curPage, @RequestParam(defaultValue = "20")int pageList, 
-			@RequestParam(defaultValue = "id") String search,
-			@RequestParam(defaultValue = "all") String keyword) {
-	session.setAttribute("category", "ad");
-	page.setCurPage(curPage);
-	page.setSearch(search);
-	page.setKeyword(keyword);
-	page.setPageList(pageList);
-	model.addAttribute("page", service.admin_user_list(page));
-	
-//	List<Admin_UserVO> list = service.admin_user_list();
-//	model.addAttribute("list", list);
-	//전체 회원 조회
-		return "mypage/admin-list";
-	}
+//	@RequestMapping("/admin")
+//	public String userList(Model model, HttpSession session, @RequestParam(defaultValue = "1")int curPage, @RequestParam(defaultValue = "20")int pageList, 
+//			@RequestParam(defaultValue = "id") String search,
+//			@RequestParam(defaultValue = "all") String keyword) {
+//	session.setAttribute("category", "ad");
+//	page.setCurPage(curPage);
+//	page.setSearch(search);
+//	page.setKeyword(keyword);
+//	page.setPageList(pageList);
+//	model.addAttribute("page", service.admin_user_list(page));
+//	
+////	List<Admin_UserVO> list = service.admin_user_list();
+////	model.addAttribute("list", list);
+//	//전체 회원 조회
+//		return "mypage/admin-list";
+//	}
 	
 	
 	
@@ -57,18 +58,25 @@ public class AdminController {
 //		return "";
 //	}
 	
-	@RequestMapping("/detail.ad")
-	public String datailuser(Model model, String id) {
-		Admin_UserVO vo = service.admin_user_detail(id);
-		model.addAttribute("vo", vo);
-		//특정 회원 조회
-		return "mypage/detail_user";
-	}
+//	@RequestMapping("/detail.ad")
+//	public String datailuser(Model model, String id) {
+//		Admin_UserVO vo = service.admin_user_detail(id);
+//		model.addAttribute("vo", vo);
+//		//특정 회원 조회
+//		return "mypage/detail_user";
+//	}
 
-	@RequestMapping("/list.qu")
-	public String questionList(Model model) {
+	//문의사항 화면 요청
+	@RequestMapping("/admin")
+	public String questionList(Model model, HttpSession session, String categroy) {
+		session.setAttribute("categroy", "ad");
+		categroy = categroy == null ? "nomal" : categroy;
+		List<CustomerVO> list = service.customer_list(categroy);
+		model.addAttribute("list", list);
+		String test = "";
 		
-		return "";
+		
+		return "mypage/question-list";
 	}
 	
 	

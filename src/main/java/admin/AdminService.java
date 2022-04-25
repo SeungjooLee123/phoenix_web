@@ -19,7 +19,7 @@ public interface AdminService {
 	void admin_user_delete(String id);
 	
 	//문의사항 조회
-	List<CustomerVO> customer_list();
+	List<CustomerVO> customer_list(String category);
 	
 	
 

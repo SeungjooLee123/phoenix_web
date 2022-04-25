@@ -14,6 +14,18 @@ public class CustomerVO {
 	String reply     ;
 	
 	
+	
+	String reply_chk;
+	
+	
+	
+	
+	public String getReply_chk() {
+		return reply_chk;
+	}
+	public void setReply_chk(String reply_chk) {
+		this.reply_chk = reply_chk;
+	}
 	public String getCategory() {
 		return category;
 	}

@@ -21,10 +21,11 @@ border: 1px solid #000;}
 <section id="container" style="width:1300px; margin: 0 auto;">
 <div style="margin-top: 50px; width: 1300px;">
 <ul class="list" style="display: flex; justify-content: center;">
-	<li>사용자 관리</li>
-	<li>사용자 목록</li>
-	<li>사용자 조회</li>
-	<li>사용자 탈퇴</li>
+	<li>전체문의</li>
+	<li>일반문의</li>
+	<li>어플리케이션</li>
+	<li>BSS 웹</li>
+	<li>계정문의</li>
 </ul>
 </div>
 
