@@ -32,14 +32,12 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public int Community_update(CommunityVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.Community_update(vo);
 	}
 
 	@Override
 	public int Community_delete(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.Community_delete(id);
 	}
 
 	@Override
@@ -65,5 +63,6 @@ public class CommunityServiceImpl implements CommunityService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

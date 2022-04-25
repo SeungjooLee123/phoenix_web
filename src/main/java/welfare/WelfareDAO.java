@@ -27,7 +27,8 @@ public class WelfareDAO implements WelfareService {
 
 	@Override
 	public WelfarePage wel_list(WelfarePage page) {
-		page.setTotalList(sql.selectOne("welfare.mapper.totalList", page));
+		int a = sql.selectOne("welfare.mapper.totalList", page);
+		page.setTotalList( a );
 		
 		List<WelfareVO> list = sql.selectList("welfare.mapper.list", page);
 		page.setList(list);

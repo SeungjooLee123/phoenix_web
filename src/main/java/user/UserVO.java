@@ -1,8 +1,21 @@
 package user;
 
+import java.sql.Date;
 
 public class UserVO {
 	private String title, family_rels, id, pw,pw_chk, naver_id, kakao_id, admin;
+	private Date join_date;
+	
+	
+	
+
+	public Date getJoin_date() {
+		return join_date;
+	}
+
+	public void setJoin_date(Date join_date) {
+		this.join_date = join_date;
+	}
 
 	public String getAdmin() {
 		return admin;

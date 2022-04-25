@@ -30,13 +30,13 @@ table th{
 <title>Insert title here</title>
 </head>
 <body>
-<img src="imgs/bss_ad_pick.png" style="width:70%; height:300px; display: block; margin: auto; padding: 50px;">
+<img src="imgs/bss_ad_pick.png" style="width: 1400px; height: 400px; margin: 50px; ">
 <div class="btnSet">
 		<a class="btn-fill" onclick="$('form').submit()" >목록으로</a>
 		<%-- 글쓴이만 수정 삭제 권한을 가질 수 있으므로 비교 먼저 해야 함 --%>
 		<c:if test="${loginInfo.admin eq 'Y'}">
-			<a class="btn-fill" onclick="$('form').attr('action', 'modify.no'); $('form').submit()">수정하기</a>
-			<a class="btn-fill" onclick='if(confirm("정말 삭제?")) {href="delete.no?id=${vo.id}"}'>삭제하기</a>
+			<a class="btn-fill" onclick="$('form').attr('action', 'modify.co'); $('form').submit()">수정하기</a>
+			<a class="btn-fill" onclick='if(confirm("정말 삭제?")) {href="delete.co?id=${vo.id}"}'>삭제하기</a>
 		</c:if>
 	</div>
 	<%-- <c:if test="${vo.prev_title ne 0 }">
@@ -71,7 +71,7 @@ table th{
 				<c:if test="${ ! empty vo.web_file }">  <!--파일 있을 때  -->
 				<!-- 파일 보이기  -->
 				<a id='preview'></a>
-				<a href="download.no?id=${vo.id }" >다운</a>
+				<a href="download.co?id=${vo.id }" >다운</a>
 				</c:if>
 			</td>
 		</tr>
@@ -90,7 +90,7 @@ table th{
 	
 	
 	
-	<form action="list.no" method="post">
+	<form action="community" method="post">
 		<input type="hidden" name="id" value="${vo.id}" /> <%-- 검색 조건 --%>
 		<input type="hidden" name="search" value="${page.search}" /> <%-- 검색 조건 --%>
 		<input type="hidden" name="keyword" value="${page.keyword}" /> <%-- 검색어 --%>

@@ -21,7 +21,7 @@ public class CommunityDAO implements CommunityService {
 	public CommunityPage Community_list(CommunityPage page) {
 		//전체 게시글 수 조회
 		int a = sql.selectOne( "community.mapper.islist" , page);
-		page.setTotalList( a);
+		page.setTotalList(a);
 		//System.out.println("TotalList : " + a);
 		
 		//페이징 처리된 전체 게시글 조회
@@ -45,14 +45,12 @@ public class CommunityDAO implements CommunityService {
 
 	@Override
 	public int Community_update(CommunityVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sql.update("community.mapper.update", vo);
 	}
 
 	@Override
 	public int Community_delete(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sql.delete("community.mapper.delete", id);
 	}
 
 	@Override
@@ -79,4 +77,5 @@ public class CommunityDAO implements CommunityService {
 		return null;
 	}
 
+	
 }

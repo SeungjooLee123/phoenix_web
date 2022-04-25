@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="community.mapper">  
 
+<delete id="delete">
+	delete from MASTER_WEB_BOARD_TBL where id = #{id}
+</delete>
+
+
+<update id="update">
+      UPDATE MASTER_WEB_BOARD_TBL SET TITLE = #{title}, CONTENT = #{content}, WEB_FILE = #{web_file, jdbcType=VARCHAR}, WEB_PATH = #{web_path, jdbcType=VARCHAR} 
+      WHERE ID = #{id}
+   </update>
+
+
 <select id="detail" resultType="community.CommunityVO">
 	select board.*
       from 
@@ -63,19 +74,19 @@
 	
 	<if test="search == 'writer' ">
 		where <include refid="search_writer"/>
-		where writer in ( select id from s_member where name like '%'||#{keyword}||'%'  )
+		<!-- where user_id in ( select id from MASTER_WEB_BOARD_TBL where name like '%'||#{keyword}||'%'  ) -->
 	</if>
 	<if test="search == 'all' ">
 		where title like '%'||#{keyword}||'%'
 		or content like '%'||#{keyword}||'%'
 		or <include refid="search_writer"/>
-		or writer in ( select id from s_member where name like '%'||#{keyword}||'%'  )
+		or writer in ( select id from MASTER_WEB_BOARD_TBL where name like '%'||#{keyword}||'%'  )
 	</if>
 </sql>
 
 
 <sql id="search_writer">
-	writer in ( select id from s_member where name like '%'||#{keyword}||'%'  )
+	user_id in ( select id from MASTER_USER_INFO_TBL where user_id like '%'||#{keyword}||'%'  )
 </sql>
 
 
@@ -83,6 +94,7 @@
 
 
 <!-- 
+
 
 
 댓글 저장 처리 _ 내용, 작성자, 원글정보를 저장
@@ -103,10 +115,7 @@
 
 
 
-해당 글의 정보를 삭제
-<delete id="delete">
-	delete from board where id = #{id}
-</delete>
+
 
 
 해당 id 글의 조회수 증가

@@ -1,45 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<div class="page_list">
-	
+<div class="page_list">
 		<%-- 왼쪽 화살표 gt == > --%>
 		<c:if test="${page.curBlock gt 1 }">
 			<a class="page_first" title="처음" onclick="go_page(1)">처음</a>
 			<a class="page_prev" title="이전" onclick="go_page(${page.beginPage-page.blockPage})">이전</a>
 		</c:if>
 		
-		<c:forEach var="no" begin="${page.beginPage}" end="${page.endPage}">
-		<%-- 현재 페이지인 경우 --%>
-		<c:if test="${no eq page.curPage}">
-			<span class="page_on">${no}</span>
-		</c:if>
+<c:forEach var="no" begin="${page.beginPage}" end="${page.endPage}">
+	<%-- 현재 페이지인 경우 --%>
+	<c:if test="${no eq page.curPage}">
+		<span class="page_on">${no}</span>
+	</c:if>
+	
+	<%-- 현재 페이지가 아닌 경우 --%>
+	<c:if test="${no ne page.curPage}">
+		<a class="page_off" onclick="go_page(${no})">${no}</a>
+	</c:if>	
+</c:forEach>
 		
-		<%-- 현재 페이지가 아닌 경우 --%>
-		<c:if test="${no ne page.curPage}">
-			<a class="page_off" onclick="go_page(${no})">${no}</a>
-		</c:if>	
-		</c:forEach>
-		
-		<%-- 오른쪽 화살표 => lt == < --%>
-		<c:if test="${page.curBlock lt page.totalBlock }">
-			<a class="page_next" title="다음" onclick="go_page(${page.endPage+1})">다음</a>
-			<a class="page_last" title="마지막으로" onclick="go_page(${page.totalPage})">마지막</a>
-		</c:if>
-		
-	</div>
+<%-- 오른쪽 화살표 => lt == < --%>
+<c:if test="${page.curBlock lt page.totalBlock }">
+	<a class="page_next" title="다음" onclick="go_page(${page.endPage+1})">다음</a>
+	<a class="page_last" title="마지막으로" onclick="go_page(${page.totalPage})">마지막</a>
+</c:if>		
+</div>
+
+
 <script type="text/javascript">
 	function go_page(page) {
 		$('[name=curPage]').val(page);
 		$('form').submit();
 	}
 </script>	
+
+
 <style>
 	.page_on, .page_off, .page_next, .page_last, .page_first, .page_prev{
 		display: inline-block;
@@ -76,5 +71,3 @@
 		background: url("imgs/page_prev.jpg") center no-repeat;
 	}
 </style>
-</body>
-</html>
