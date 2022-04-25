@@ -2,13 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin.mapper">
 
-	<!-- 사용자 목록 조회 -->
+
+
+	<select id="totalList" resultType="integer">
+		SELECT COUNT(*) FROM MASTER_USER_INFO_TBL <include refid="and_search" /> 
+	</select>
+
 	<select id="list" resultType="admin.Admin_UserVO">
+		SELECT z.*
+		FROM (select ROWNUM NO, B.*
+             from (select a.*, nvl(a.naver_id, '일반') naver_id_chk, nvl(a.kakao_id, '일반') kakao_id_chk
+                    from master_user_info_tbl a
+                    <include refid="and_search" /> 
+                    order by join_date desc) B
+		      ORDER BY no) z
+		WHERE z.no BETWEEN #{beginList} and #{endList}
+	</select>
+	
+	   
+   <sql id="where_search">
+      <if test="search == 'title' or search == 'content'">
+         WHERE ${search} LIKE '%'||#{keyword}||'%'
+      </if>
+      <if test="search == 'id'">
+         WHERE ID IN (SELECT ID FROM MASTER_USER_INFO_TBL WHERE ID LIKE '%'||#{keyword}||'%')  
+      </if>
+   </sql>
+   
+   <sql id="and_search">
+      <if test="search == 'title' or search == 'content'">
+         where admin='N' 
+         and ${search} LIKE '%'||#{keyword}||'%'
+      </if>
+      <if test="search == 'id' and keyword != 'all'">
+         where admin='N' 
+         and ID IN (SELECT ID FROM MASTER_USER_INFO_TBL WHERE ID LIKE '%'||#{keyword}||'%')  
+      </if>
+      <if test="search == 'id' and keyword == 'all'">
+         where admin='N'   
+      </if>
+   </sql>
+   
+   
+	
+	<!-- 사용자 목록 조회 
+	<select id="adlist" resultType="admin.Admin_UserVO">
 	select a.*, nvl(a.naver_id, '일반') naver_id_chk, nvl(a.kakao_id, '일반') kakao_id_chk
 	from master_user_info_tbl a
 	where admin='N'
 	order by join_date desc
-	</select>
+	</select>-->
 
 	<!-- 	select rownum no, c.* 
 		from (select cs.* from MASTER_WEB_CS_TBL cs where user_id = (select id from MASTER_USER_INFO_TBL where admin = 'Y') and category = #{category}) c

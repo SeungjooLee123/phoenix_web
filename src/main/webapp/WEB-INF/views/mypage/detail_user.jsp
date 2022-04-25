@@ -6,7 +6,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>어우 하기 싫어</h3>
 <h3>${vo.id} </h3>
 </body>
 </html>
