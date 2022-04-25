@@ -20,9 +20,10 @@ public class CommunityDAO implements CommunityService {
 	@Override
 	public CommunityPage Community_list(CommunityPage page) {
 		//전체 게시글 수 조회
-		int a = sql.selectOne( "community.mapper.islist" , page);
+		int a = sql.selectOne( "community.mapper.totalList" , page);
 		page.setTotalList(a);
 		//System.out.println("TotalList : " + a);
+		/* System.out.println(page.getBeginList() + "/" + page.getEndList()); */
 		
 		//페이징 처리된 전체 게시글 조회
 		List<CommunityVO> list = sql.selectList("community.mapper.list", page); 

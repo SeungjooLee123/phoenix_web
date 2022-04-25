@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,11 +37,13 @@ public class CommunityController {
 	//커뮤 목록 화면 요청
 	@RequestMapping("/community")
 	public String join(HttpSession session, @RequestParam(defaultValue = "1") int curPage
-					, Model model, String search, String keyword
+					, Model model, @RequestParam(defaultValue = "all") String search
+					, @RequestParam(defaultValue = "all") String keyword
 					, @RequestParam(defaultValue = "10") int pageList
 					, @RequestParam(defaultValue = "list") String viewType) {
 		session.setAttribute("category", "co");
 		page.setCurPage(curPage);	//현재 페이지 담음
+		
 		page.setSearch(search);
 		page.setKeyword(keyword);	//검색어
 		page.setPageList(pageList);

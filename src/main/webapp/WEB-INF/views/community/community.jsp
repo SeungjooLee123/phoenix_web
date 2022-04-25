@@ -57,7 +57,12 @@ thead {
 						<option value="writer" ${page.search eq 'writer' ? 'selected' : '' }>작성자</option>
 					</select>
 				</li>
-				<li><input type="text" name="keyword" class="w-px200" value="${page.keyword}"></li>
+				<c:if test="${page.keyword eq 'all'}">
+					<li><input type="text" name="keyword" class="w-px200"></li>
+				</c:if>
+				<c:if test="${page.keyword ne 'all'}">
+					<li><input type="text" name="keyword" class="w-px200" value="${page.keyword}"></li>
+				</c:if>
 				<li><a class="btn_style" onclick="$('form').submit()">검색</a></li>
 			</ul>
 			<ul>

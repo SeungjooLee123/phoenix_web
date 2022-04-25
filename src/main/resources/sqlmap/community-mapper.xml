@@ -39,12 +39,14 @@
   
 
 <select id="list" resultType="community.CommunityVO">
-	select * 
+	select c.* 
 	from ( select rownum no , b.* 
-			from (select * from MASTER_WEB_BOARD_TBL <include refid="where_search" />
-					order by id) b			
-			order by no desc )		
-	where no between #{beginList} and #{endList}
+			from (select * 
+			      from MASTER_WEB_BOARD_TBL 
+			      <include refid="where_search" />
+				  order by id) b			
+			order by no desc ) c		
+	where c.no between #{beginList} and #{endList}
 </select>
 
 
@@ -62,11 +64,6 @@
 </select>
 
 
-<select id="islist" resultType="integer">
-	select count(*) from MASTER_WEB_BOARD_TBL 
-</select>
-
-
 <sql id="where_search">
 	<if test="search =='title' or search == 'content' ">
 		where ${search} like '%'||#{keyword}||'%'
@@ -76,11 +73,14 @@
 		where <include refid="search_writer"/>
 		<!-- where user_id in ( select id from MASTER_WEB_BOARD_TBL where name like '%'||#{keyword}||'%'  ) -->
 	</if>
-	<if test="search == 'all' ">
+	<if test="search == 'all' and  keyword != 'all'  ">
 		where title like '%'||#{keyword}||'%'
 		or content like '%'||#{keyword}||'%'
 		or <include refid="search_writer"/>
-		or writer in ( select id from MASTER_WEB_BOARD_TBL where name like '%'||#{keyword}||'%'  )
+		<!-- or writer in ( select id from MASTER_WEB_BOARD_TBL where name like '%'||#{keyword}||'%'  ) -->
+	</if>
+	<if test="search == 'all' and  keyword == 'all' ">
+		
 	</if>
 </sql>
 
