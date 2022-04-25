@@ -18,7 +18,6 @@
 </head>
 <body>
 	<div id='wel_container'>
-		<h3>육아정보</h3>
 		<div id="wrap_cate">
 			<ul id="cate-ul">
 				<li><a class="btn-fill" id="wel-tab" href="list.wel">지원정책</a></li>

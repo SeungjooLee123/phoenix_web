@@ -12,6 +12,12 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 <style type="text/css">
+	#wel_container {width: 1300px; margin :0 auto;}
+   #cate-ul{display: flex;}
+   #cate-ul>li{margin-top: 30px;}
+   #cate-ul li > a{display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
+   #cate-ul li > a.btn-fill{background: #c3bfff; color: #fff;}
+   #cate-ul li > a.btn-empty{background: #f5f5f5;}
    table{
       width: 80%;
       margin: 20px auto;
@@ -35,15 +41,25 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div id='wel_container'>
+	      <div id="wrap_cate">
+	         <ul id="cate-ul">
+	            <li><a class="btn-fill" href="list.wel">지원정책</a></li>
+	            <li><a class="btn-empty" href="video.wel">동영상</a></li>
+	            <li><a class="btn-empty" href="graph.wel">통계자료</a></li>
+	            <li><a class="btn-empty" id="map-search" href="map.wel">주변장소검색</a></li>
+	         </ul>
+	      </div>
+   </div>
    <div class="modi_main">
    <form action="update.wel" method="post" enctype="multipart/form-data">
    <input type="hidden" name="id" value="${vo.id}">
       <table>
          <tr>
-            <td><input type="text" style="width: 95%; padding: 5px;" name="title" class="chk" value="${vo.title}" title="제목" /></td>
+            <td><input type="text" style="width: 100%; padding: 5px;" name="title" class="chk" value="${vo.title}" title="제목" /></td>
          </tr>
          <tr>
-            <td><textarea class="chk" title="내용" name="content" id="summernote">${vo.content}</textarea></td>
+            <td><textarea class="chk" title="내용" name="content" id="summernote"><c:out value="${vo.content }" escapeXml="true"/></textarea></td>
          </tr>
          <tr>
             <td class="left middle">
@@ -71,7 +87,7 @@
    <script type="text/javascript" src='js/file_check.js?v<%=new Date().getTime() %>'></script>  <!--파일 미리보기 필요함  -->
    <script type="text/javascript">
       $('#summernote').summernote({
-          width: 900,
+          width: 1300,
          height: 300,
          lang: "ko-KR",
             callbacks: {   //여기 부분이 이미지를 첨부하는 부분

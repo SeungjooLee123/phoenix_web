@@ -45,7 +45,6 @@
 </head>
 <body>
    <div id='wel_container'>
-      <p style="color: #000; font-weight: 700; font-size: 18.72px;">육아정보</p>
       <div id="wrap_cate">
          <ul id="cate-ul">
             <li><a class="btn-fill" href="list.wel">지원정책</a></li>
@@ -61,7 +60,7 @@
          <table>
             <tr>
                <td>
-                  <input type="text" style="width: 95%; padding: 5px;" id="title" title="제목" name="title" class="chk" placeholder="제목을 입력하세요." />
+                  <input type="text" style="width: 100%; padding: 5px;" id="title" title="제목" name="title" class="chk" placeholder="제목을 입력하세요." />
                </td>
             </tr>
             <tr>
@@ -89,7 +88,7 @@
       
    <script type="text/javascript">
    $('#summernote').summernote({
-         width: 900,
+         width: 1300,
         height: 300,
         lang: "ko-KR",
            callbacks: {   //여기 부분이 이미지를 첨부하는 부분
