@@ -6,45 +6,64 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	.test{max-width: 1300px; margin: 0 auto;}
-	.wrap_video{width: 1300px; margin: 0 auto;}
-	#popup-background{
-	position: absolute; left: 0; top: 0; width: 100%; height: 100%;
-	background-color: #000; opacity: 0.3; display: none;
-	}
-	iframe{margin: 10px;}
-	.slick-track{height: 315px;}
-	.slick-prev, .slick-next{background: #333;}
+   .test{max-width: 1200px; margin: 0 auto;}
+   .wrap_video, .wrap_video2{width: 1300px; margin: 0 auto; margin-top: 10px;}
+   #popup-background{
+   position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+   background-color: #000; opacity: 0.3; display: none;
+   }
+   iframe{margin: 10px;}
+   .slick-track{height: 315px;}
+   .slick-prev, .slick-next{background: #333;}
 </style>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 </head>
 <body>
-		<jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/>
-		<div class="test">
-			<div class="wrap_video">
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/PAReMirO5Y8" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/UVbrNhaXoZc" title="youTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/GQzqbnuLfbI" title="youTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/nBw4pDTf1Y8" title="youTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>
-		</div>
-		<div id='popup-background'></div>
-		<div id="popup"></div>
-		<script type="text/javascript">
-			$.noConflict();
-			$('.wrap_video').slick({
-				lazyLoad: 'ondemand',
-				slidesToShow: 2,
-				slidesToScroll: 1,
-				autoplay: true,
-				autoplaySpeed: 2000
-			});
-			
-			$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-			$("#cate-ul li>a").eq(1).attr("class", "btn-fill");
-		</script>
-	
+      <jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/>
+      
+      <div class="test">
+         <h4>출산 전 정보</h4>
+         <div class="wrap_video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/lc1fVIK17Bg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/E-uz3mCcYhc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Oj5auH3MT20" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/ThlhSwqFv88" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/IZkJNZCqOyM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/gG_2_TJhHhQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         </div>
+         <h4 style="margin-top: 20px;">육아 정보</h4>
+         <div class="wrap_video2">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/PAReMirO5Y8" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/UVbrNhaXoZc" title="youTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/GQzqbnuLfbI" title="youTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/nBw4pDTf1Y8" title="youTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         </div>
+      </div>
+      
+      <div id='popup-background'></div>
+      <div id="popup"></div>
+      <script type="text/javascript">
+         $.noConflict();
+         $('.wrap_video').slick({
+            lazyLoad: 'ondemand',
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000
+         });
+         $('.wrap_video2').slick({
+            lazyLoad: 'ondemand',
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000
+         });
+         
+         $("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
+         $("#cate-ul li>a").eq(1).attr("class", "btn-fill");
+      </script>
+   
 </body>
 </html>

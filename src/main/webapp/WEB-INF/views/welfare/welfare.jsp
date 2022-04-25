@@ -21,7 +21,7 @@
 		<h3>육아정보</h3>
 		<div id="wrap_cate">
 			<ul id="cate-ul">
-				<li><a class="btn-fill" href="list.wel">지원정책</a></li>
+				<li><a class="btn-fill" id="wel-tab" href="list.wel">지원정책</a></li>
 				<li><a class="btn-empty" href="video.wel">동영상</a></li>
 				<li><a class="btn-empty" href="graph.wel">통계자료</a></li>
 				<li><a class="btn-empty" id="map-search" href="map.wel">주변장소검색</a></li>

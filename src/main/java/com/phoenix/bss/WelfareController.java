@@ -112,11 +112,10 @@ public class WelfareController {
 	 @RequestMapping("/insert.wel") public String wel_insert(WelfareVO vo,
 	 MultipartFile file, HttpSession session) {
 		 vo.setUser_id(((UserVO) session.getAttribute("loginInfo")).getId());
-		 System.out.println(vo.getContent());
 		 if(!file.isEmpty()) { //첨부파일이 있는 경우
 			 vo.setFilename(file.getOriginalFilename());
 			 vo.setFilepath(common.fileUpload("welfare", file, session));
-		}
+			 }
 		 service.wel_insert(vo);
 		 return "redirect:list.wel";
 	 }
@@ -129,7 +128,7 @@ public class WelfareController {
 		List<MultipartFile> files = new ArrayList<MultipartFile>();
 		List<String> rtnList = new ArrayList<String>();
 		for(int i = 0 ; i<fileLength ; i++) {
-			rtnList.add("resources/" + common.fileUpload(  "temp" , req.getFile("file"+i) , session ));
+			rtnList.add("resources/" + common.fileUpload(  "welfare" , req.getFile("file" + i) , session ));
 		}
 		return rtnList ;
    }
@@ -139,9 +138,8 @@ public class WelfareController {
 	public String wel_delete(int id, HttpSession session) {
 		//첨부파일 있을 경우 디스크에서 첨부파일 삭제
 		WelfareVO vo = service.wel_detail(id);
-		String uuid = session.getServletContext().getRealPath("resource") + "/" + vo.getFilepath();
 		if(vo.getFilename() != null) {
-			File file = new File(uuid);
+			File file = new File(session.getServletContext().getRealPath("resources") + "/" + vo.getFilepath());
 			if(file.exists()) file.delete();
 		}
 		service.wel_delete(id);

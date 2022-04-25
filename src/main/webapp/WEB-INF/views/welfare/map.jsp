@@ -109,9 +109,9 @@
 			$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
 			$("#cate-ul li>a").eq(3).attr("class", "btn-fill");
 			
-			/* var parent = document.querySelector("#baby-welfare");
+			var parent = document.querySelector("#wel-tab");
 			var leftparent = parent.getBoundingClientRect().left;
-			$('#map-ul').css('left', leftparent); */
+			$('#map-ul').css('left', leftparent);
 			
 			jQuery(document).ready(function(){
 				jQuery("#sido").empty();

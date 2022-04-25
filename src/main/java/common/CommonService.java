@@ -32,20 +32,20 @@ public class CommonService {
 			//업로드file.
 			String resources = session.getServletContext().getRealPath("resources");
 			String folder = resources + "/upload/" + category + "/" + new SimpleDateFormat("yyyy/MM/dd").format(new Date());
-			//String uuid = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+			String uuid = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
 			String name = file.getOriginalFilename();
 			
 			File dir = new File(folder);
 		
 			if(! dir.exists()) dir.mkdirs();
 			try {
-				file.transferTo(new File(folder , name));
+				file.transferTo(new File(folder , uuid));
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-			return folder.substring(resources.length()+1) + "/" + name ;
+			return folder.substring(resources.length()+1) + "/" + uuid ;
 		}
 		
 		//파일 삭제 처리
