@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="video.mapper">
+	<sql id="where_search">
+		<if test="search=='all'">
+			where explain like '%'||#{keyword}||'%'
+		</if>
+	</sql>
+
+	<!-- 리스트 불러오기 -->
+	<select id="list" resultType="welfare.VideoVO">
+		select rownum id, v.* from (select * from master_web_welfare_youtube_tbl <include refid="where_search"/> order by no desc) v order by id desc
+	</select>
+	
+	<!-- 동영상 추가 -->
+	<insert id="insert">
+		insert into master_web_welfare_youtube_tbl (no, videopath, category, explain) values (seq_youtube_no.nextval, #{videopath}, #{category}, #{explain})
+	</insert>
+	
+	<!-- 동영상 삭제 -->
+	<delete id="delete">
+		delete from master_web_welfare_youtube_tbl where no = #{no}
+	</delete>
+</mapper>

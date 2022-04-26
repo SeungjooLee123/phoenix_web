@@ -1,20 +1,9 @@
 package com.phoenix.bss;
 
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -29,6 +18,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import common.CommonService;
 import user.UserVO;
+import welfare.VideoServiceImpl;
+import welfare.VideoVO;
 import welfare.WelfarePage;
 import welfare.WelfareServiceImpl;
 import welfare.WelfareVO;
@@ -38,6 +29,7 @@ public class WelfareController {
 	@Autowired private WelfareServiceImpl service;
 	@Autowired private CommonService common;
 	@Autowired private WelfarePage page;
+	@Autowired private VideoServiceImpl video;
 	
 	//정책 화면 요청
 	@RequestMapping("/list.wel")
@@ -155,7 +147,13 @@ public class WelfareController {
 	
 	//동영상 화면 요청
 	@RequestMapping("/video.wel")
-	public String wel_video() {
+	public String wel_video(HttpSession session, Model model, String search, String keyword) {
+		page.setSearch(search);
+		page.setKeyword(keyword);
+		
+		List<VideoVO> list = video.video_list(page);
+		model.addAttribute("list", list);
+		
 		return "welfare/video";
 	}
 	
