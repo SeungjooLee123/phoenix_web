@@ -23,8 +23,8 @@ public class AdminServiceImpl implements AdminService {
 //	}
 
 	@Override
-	public Admin_UserVO admin_user_detail(String id) {
-		return dao.admin_user_detail(id);
+	public CustomerVO admin_qanda_detail(String title) {
+		return dao.admin_qanda_detail(title);
 	}
 
 	@Override
@@ -36,6 +36,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<CustomerVO> customer_list(String category) {
 		return dao.customer_list(category);
+	}
+
+	@Override
+	public CustomerVO admin_file(int id) {
+		return dao.admin_file(id);
 	}
 
 	

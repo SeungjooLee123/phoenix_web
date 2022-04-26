@@ -62,11 +62,11 @@ color: #000;
 
 
 <ul class="footer">
-	<a href='<c:url value="/calendar"/>'><li>이벤트</li></a>
-	<a href='<c:url value="/welfare"/>'><li>육아정보</li></a>
-	<a href='<c:url value="/community"/>'><li>커뮤니티</li></a>
-	<a href='<c:url value="/"/>'><li>나눔하기</li></a>
-	<a href='<c:url value="/"/>'><li>고객센터</li></a>
+	<li><a href='<c:url value="/calendar"/>'></a>이벤트</li>
+	<li><a href='<c:url value="/welfare"/>'></a>육아정보</li>
+	<li><a href='<c:url value="/community"/>'></a>커뮤니티</li>
+	<li><a href='<c:url value="/"/>'></a>나눔하기</li>
+	<li><a href='<c:url value="/"/>'></a>고객센터</li>
 </ul>
 <div class="footer-wrap" style="width:1300px; margin-left: 133px; display: flex; margin-top: 40px; font-size: 13px; color:#888888; font-weight:500; line-height: 2; ">
 	<div class="footer-notice">
@@ -95,7 +95,7 @@ color: #000;
 		<p>베시시 고객센터</p>
 		<p>베시시 계정</p>
 		<br>
-		<a href="https://github.com/eor8451/phoenix_web"><h2 style="color:#000; font-weight: 700;">인재영입</h2></a>
+		<h2 style="color:#000; font-weight: 700;"><a href="https://github.com/eor8451/phoenix_web">인재영입</a></h2>
 	</div>
 </div><!-- footer-wrap -->
 <div class="footer-info" style="margin-left: 132px; font-size: 12px; margin-top: 120px;">
@@ -105,7 +105,7 @@ color: #000;
 	<li style="color: #333; font-weight: 700;">개인정보처리방침</li>
 	<li style="color:#888;">운영정책</li>
 	<li style="color:#888;">권리침해신고안내</li>
-	<a href="https://github.com/eor8451/phoenix_web"><li style="color:#888;">Contact Us</li></a>
+	<li style="color:#888;"><a href="https://github.com/eor8451/phoenix_web"></a>Contact Us</li>
 </ul>
 <br>
 <ul>

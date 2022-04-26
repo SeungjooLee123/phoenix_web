@@ -11,6 +11,8 @@ public class IotController {
    String picture = "";
    Gson gson = new Gson();
    String base_code ="";
+   String test_shake = ""; 
+		  
    
    @ResponseBody
    @RequestMapping("/iot_cap.io")
@@ -41,6 +43,20 @@ public class IotController {
    @RequestMapping("/base_to_img.io")
    public String base_to_img() {
       return gson.toJson(base_code);
+   }
+   
+   @ResponseBody
+   @RequestMapping("/biking.io")
+   public void shake_biking(String biking) {
+      test_shake = biking;   
+   }
+   
+   @ResponseBody
+   @RequestMapping("/shake.io")
+   public String biking_jyp() {
+        
+      return gson.toJson(test_shake);
+            
    }
    
 }

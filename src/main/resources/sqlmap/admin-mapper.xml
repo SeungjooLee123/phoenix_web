@@ -65,12 +65,20 @@
 		from (select cs.* from MASTER_WEB_CS_TBL cs where user_id = (select id from MASTER_USER_INFO_TBL where admin = 'Y') and category = #{category}) c
 		order by no -->
 	
-	<!-- 사용자 정보 상세 조회 -->
-	<select id="detail" resultType="admin.Admin_UserVO">
-	select * 
-	from master_user_info_tbl
-	where id = #{id}
+	<!-- 문의사항 상세 조회 -->
+	<select id="detail" resultType="customer.CustomerVO">
+	select *
+	from master_web_cs_tbl
+	where title = #{title}
 	</select>
+	
+	<select id="file" resultType="customer.CustomerVO">
+	select *
+	from master_web_cs_tbl
+	where id = #{id}
+	
+	</select>
+	
 	
 	<!-- 고객 삭제 -->
 	<delete id="delete">

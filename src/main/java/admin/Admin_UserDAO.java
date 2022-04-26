@@ -32,8 +32,8 @@ public class Admin_UserDAO  implements AdminService{
 //	}
 
 	@Override
-	public Admin_UserVO admin_user_detail(String id) {
-		return sql.selectOne("admin.mapper.detail", id);
+	public CustomerVO admin_qanda_detail(String title) {
+		return sql.selectOne("admin.mapper.detail", title);
 	}
 
 	@Override
@@ -46,6 +46,14 @@ public class Admin_UserDAO  implements AdminService{
 	@Override
 	public List<CustomerVO> customer_list(String category) {
 		return sql.selectList("admin.mapper.cs_list", category);
+	}
+
+
+
+	//파일 조회
+	@Override
+	public CustomerVO admin_file(int id) {
+		return sql.selectOne("admin.mapper.file", id);
 	}
 
 	
