@@ -5,7 +5,7 @@
 	select * from master_baby_care_tbl where BABY_ID=#{id} and DIARY_DATE = #{date} order by END_TIME DESC, DIARY_ID DESC
 </select>
 <select id="list_cate" resultType="diary.DiaryVO">
-	select * from master_baby_care_tbl where BABY_ID=#{id} and DIARY_DATE = #{date} and DIARY_DATE = #{diary_date} order by END_TIME DESC, DIARY_ID DESC
+	select * from master_baby_care_tbl where BABY_ID=#{baby_id} and DIARY_DATE = #{diary_date} and baby_category = #{baby_category} order by END_TIME DESC, DIARY_ID DESC
 </select>
 <insert id="insert">
 	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,AMOUNT,START_TIME,TEMPERATURE,MEMO,END_TIME,BABY_CATEGORY,DIARY_TYPE)

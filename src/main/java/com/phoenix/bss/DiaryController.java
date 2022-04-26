@@ -50,7 +50,7 @@ public class DiaryController {
 		vo.setBaby_id(id);
 		vo.setDiary_date(strDate);
 		vo.setBaby_category(baby_category);
-		
+		System.out.println("set");
 		List<DiaryVO> list = dao.diary_list_cate(vo);
 		//System.out.println(list.get(0).getBaby_category());
 		String data = gson.toJson(list);
