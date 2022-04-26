@@ -6,37 +6,56 @@
 <style type="text/css">
 table{
 	border-collapse: collapse;
+	margin: 10px;
 }
 table, tr, td{
 	border : none;
 }
-table tr{
-	height: 46px;
-}
-table th, table td{
-	padding: 5px 10px;
-}
 table th{
+	width: 150px;
+	padding: 10px 0;
 	text-align: left;
+}
+table td{
+	width: 650px;
+	padding: 10px 0;
 }
 .btnSet{
 	margin-top: 20px;
+	display: flex;
+	float: right;
 }
+.btn_style{
+	display: block;
+	font-size: 15px;
+	background: #f5f5f5;
+	cursor: pointer;
+	text-align: center; 
+	padding: 10px 13px;}
+.btn_fill{
+	font-weight: 700;
+	display: block;
+	font-size: 15px;
+	background: #c3bfff;
+	cursor: pointer;
+	text-align: center; 
+	padding: 10px 30px;
+	margin-right: 10px;}
 </style>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="content" style="width:1000px;">
-		<h1 style="margin-bottom: 50px;">문의하기</h1>
-		<hr>
+	<div id="container" style="width:820px; margin: 0 auto;">
+		<h1 style="margin: 50px 0;">문의하기</h1>
+		<hr style="opacity: 0.7; height: 2px; background: #000; border: 0px; margin: 20px 0;">
 		<form action="insert.cu" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
-					<th>문의분류*</th>
+					<th>문의 분류 *</th>
 					<td>
-						<select id="body" name="category">
+						<select id="body" name="category" style="width: 280px; height: 38px; font-size: 15px; margin-left: 20px;">
 							<option value="nomal" selected="selected">일반문의</option>
 							<option value="app">어플리케이션</option>
 							<option value="web">BSS 웹</option>
@@ -45,19 +64,19 @@ table th{
 					</td>
 				</tr>
 				<tr>
-					<th>제목*</th>
+					<th>제목 *</th>
 					<td>
-						<input class='chk' title='제목' type="text" name="title" />
+						<input class='chk' title='제목' type="text" name="title" style="width: 620px; height: 38px; font-size: 15px; margin-left: 20px;"/>
 					</td>
 				</tr>
 				<tr>
-					<th>문의사항*</th>
-					<td><textarea class='chk' title='문의사항' name="content" ></textarea></td>
+					<th>문의 내용 *</th>
+					<td><textarea class='chk' title='문의사항' name="content" style="width: 620px; height: 260px; font-size: 15px; margin-left: 20px;"></textarea></td>
 				</tr>
 				<tr>
-				<th>첨부파일</th>
+				<th>파일 첨부</th>
 				<td class="left middle" >
-					<label>
+					<label style=" margin-left: 20px;">
 						<input type="file" name="file" id="attach-file" />
 						<a><img src="imgs/select.png" class="file-img"></a>
 					</label>
@@ -69,11 +88,11 @@ table th{
 			</tr>
 			</table>
 		</form>
-		<hr>
+		<div style="border-top: solid 3px #000; opacity: 0.7; margin: 20px 0;"></div>
 		<div class="btnSet">
 		<script type="text/javascript" src='js/common.js?v<%=new Date().getTime() %>'></script>
-			<a class="btn-fill" onclick="if( emptyCheck() ) $('form').submit()">저장</a>
-			<a class="btn-empty" href="list.cu">취소</a>
+			<a class="btn_fill" onclick="if( emptyCheck() ) $('form').submit()"><i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;문의접수</a>
+			<a class="btn_style" href="list.cu">취소</a>
 		</div>
 	</div>
 	 <script src="js/file_check.js?v<%=new Date().getTime() %>" ></script>	<%-- java.util의 date --%>

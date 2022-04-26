@@ -94,7 +94,7 @@ display: block;
 		</div>
 		<div style="display: flex; justify-content: space-between; align-items: center;">
 			<p style="font-size: 14px; vertical-align: middle;">원하시는 답변을 찾지못하셨다면, 고객센터로 문의해 주세요.</p>
-			<a class="btn_style" onclick="contact()" style="cursor: pointer;">문의하기</a>
+			<a class="btn_style" onclick="contact()" style="cursor: pointer;"><i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;문의하기</a>
 		</div>
 	</div>
 	</div>

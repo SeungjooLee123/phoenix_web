@@ -4,50 +4,13 @@
 <select id="list" resultType="diary.DiaryVO">
 	select * from master_baby_care_tbl where BABY_ID=#{id} and DIARY_DATE = #{date} order by END_TIME DESC, DIARY_ID DESC
 </select>
+<select id="list_cate" resultType="diary.DiaryVO">
+	select * from master_baby_care_tbl where BABY_ID=#{id} and DIARY_DATE = #{date} and DIARY_DATE = #{diary_date} order by END_TIME DESC, DIARY_ID DESC
+</select>
 <insert id="insert">
 	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,AMOUNT,START_TIME,TEMPERATURE,MEMO,END_TIME,BABY_CATEGORY,DIARY_TYPE)
 VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{amount,jdbcType=VARCHAR},#{start_time},#{temperature,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR},#{end_time},#{baby_category},#{diary_type,jdbcType=VARCHAR})
 </insert>
-<!-- <insert id="insert_mou">
-	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,DIARY_TYPE,MEMO)
-VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'모유',#{diary_type,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR})
-</insert>
-<insert id="insert_bunu">
-	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,AMOUNT,MEMO)
-VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'분유',#{amount},#{memo,jdbcType=VARCHAR})
-</insert>
-<insert id="insert_eat">
-	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,AMOUNT,MEMO)
-VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'이유식',#{amount},#{memo,jdbcType=VARCHAR})
-</insert>
-<insert id="insert_toilet">
-	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,BABY_CATEGORY,DIARY_TYPE,MEMO)
-VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},'기저귀',#{diary_type,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR})
-</insert>
-<insert id="insert_sleep">
-	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,DIARY_TYPE,MEMO)
-VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'수면',#{diary_type,jdbcType=VARCHAR},#{memo,jdbcType=VARCHAR})
-</insert>
-<insert id="insert_bath">
-	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,MEMO)
-VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'목욕',#{memo,jdbcType=VARCHAR})
-</insert>
-<insert id="insert_temp">
-	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,BABY_CATEGORY,TEMPERATURE,MEMO)
-VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},'체온',#{temperature},#{memo,jdbcType=VARCHAR})
-</insert>
-<insert id="insert_water">
-	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,AMOUNT,MEMO)
-VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'물',#{amount},#{memo,jdbcType=VARCHAR})
-</insert>
-<insert id="insert_pills">
-	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,AMOUNT,MEMO)
-VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'투약',#{amount},#{memo,jdbcType=VARCHAR})
-</insert>
-<insert id="insert_danger">
-	insert into MASTER_BABY_CARE_TBL(DIARY_ID,BABY_ID,DIARY_DATE,START_TIME,END_TIME,BABY_CATEGORY,AMOUNT,MEMO)
-VALUES (seq_diary_id.nextval,#{baby_id},#{diary_date},#{start_time},#{end_time},'간식',#{amount},#{memo,jdbcType=VARCHAR})
-</insert> -->
 <select id="detail" resultType="diary.DiaryVO">
 	select * from master_baby_care_tbl where DIARY_ID=#{no}
 </select>

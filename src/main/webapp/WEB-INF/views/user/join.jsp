@@ -6,7 +6,7 @@
 <style type="text/css">
 
 #container {
-width:1440px;
+width:360px;
 margin:0 auto;
 
 }
@@ -45,8 +45,9 @@ z-index: 5;
 }
 
 .btns{
-text-align: center;
-margin-top: 15px;
+margin: 20px auto;
+justify-content: center;
+display: flex;
 }
 
 .join_btns {
@@ -58,6 +59,22 @@ margin-top: 20px;}
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
+}
+
+.invalid, .valid{
+	font-size: 14px;
+	text-align: left;
+	margin: 0 0 20px 5px;
+}
+.invalid{
+	color: red;
+}
+.valid{
+	color: green;
+}
+.input-text{
+	text-align: left;
+	margin: 0 0 5px 5px;
 }
 </style>
 <meta charset="UTF-8">
@@ -74,27 +91,27 @@ margin-top: 20px;}
 	<div class="input-info">
 		<div class="input-text">아이디</div>
 		<div>
-		    <input type="text" class="chk" name="id" id="userId" autofocus style="width:350px; height:40px; margin-bottom:13px; border:1px solid #dadada; border-radius:6px; padding-left:10px;"/>
-			<div class="valid">아이디를 입력하세요(영문소문자, 숫자만 입력 가능)</div>
+		    <input type="text" class="chk" name="id" id="userId" autofocus style="width:340px; height:40px; border:1px solid #dadada; border-radius:6px; padding: 0 10px;"/>
+			<div class="invalid" >아이디를 입력하세요(영문소문자, 숫자만 입력 가능)</div>
 		</div>
 	</div>
 	<div class="input-info">
 		<div class="input-text">비밀번호</div>
 		<div>
-		    <input type="password" class="chk" name="pw"  id="userPw" style="width:350px; height:40px; margin-bottom:13px; border:1px solid #dadada; border-radius:6px; padding-left:10px;"/>
-			<div class="valid">비밀번호를 입력하세요(영문소문자, 숫자만 입력 가능)</div>
+		    <input type="password" class="chk" name="pw"  id="userPw" style="width:350px; height:40px; border:1px solid #dadada; border-radius:6px; padding-left:10px;"/>
+			<div class="invalid">비밀번호를 입력하세요(영문소문자, 숫자만 입력 가능)</div>
 		</div>
 	</div>
 	<div class="input-info">
 		<div class="input-text">비밀번호 확인</div>
 		<div>
-	 	    <input type="password" class="chk" name="pwcheck"  id="userPwChk" style="width:350px; height:40px; margin-bottom:13px; border:1px solid #dadada; border-radius:6px; padding-left:10px;"/>
-			<div class="valid">비밀번호를 다시 입력하세요</div>
+	 	    <input type="password" class="chk" name="pwcheck"  id="userPwChk" style="width:350px; height:40px; border:1px solid #dadada; border-radius:6px; padding-left:10px;"/>
+			<div class="invalid">비밀번호를 다시 입력하세요</div>
 		</div>
 	</div>
 	
 	<div class="btns">
-	   <a href="naverLogin"><img src="imgs/naver_join.svg" style="width:155px; height:40px; margin-right:40px;"></a>
+	   <a href="naverLogin"><img src="imgs/naver_join.svg" style="width:155px; height:40px; margin-right:10px;"></a>
 	   <a href="kakaoLogin"><img src="imgs/kakao_join.svg"  style="width:155px; height:40px; cursor: pointer;"></a>
 	</div>
 	

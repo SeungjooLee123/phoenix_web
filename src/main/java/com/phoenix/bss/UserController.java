@@ -35,44 +35,38 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/music_check2")
     public void music_check2() {
+    	//System.out.println("asaa");
        a = "";
     }
-    
+    //Cursor cursor = getContentResolver().query(selected, columns, null, null, null);
     @ResponseBody
     @RequestMapping("/music_check")
     public String music_check() {
-		System.out.println(a.substring(0,9)); 
+		//System.out.println(a.substring(0,9)); 
         return  gson.toJson(a);
     }
     
     @ResponseBody
     @RequestMapping("/music")
-    public void music(String musicfile) throws UnsupportedEncodingException {
+    public void music(String musicfile) throws IOException {
+    	//System.out.println("asd");
        a = musicfile;
-     
-       //byte[] base64data1 = Base64Utils.decodeFromUrlSafeString(musicfile);
-       //byte[] base64data1 = Base64.getUrlDecoder().decode(musicfile);
-       
-//       char[] base64data3 = URLDecoder.decode(new String(musicfile), "utf-8").toCharArray();
-//       byte[] base64data1 = new byte[base64data3.length];
-//       for(int i=0; i<base64data3.length; i++) {
-//    	   base64data1[i] =  (byte) ( base64data3[i] );
-//       }
-       
-       byte[] base64data1 = Base64.getUrlDecoder().decode(musicfile);
-       
-       FileOutputStream fos;
-       //File target = new File("C:\\aa\\");
-		try {
-			fos = new FileOutputStream("C:\\aa\\ccc.mp3");
-		    fos.write(base64data1);
-		    fos.close();
-		}catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-       
-       System.out.println(musicfile.length());
+//       System.out.println(musicfile.length());
+//       byte[] base64data1 = Base64.getUrlDecoder().decode(musicfile);
+//       
+//       FileOutputStream fos;
+//       File t = new File("C:\\aa\\asd.mp3");
+//       t.createNewFile();
+//      try {
+//          fos = new FileOutputStream(t);
+//          fos.write(base64data1);
+//          fos.flush();
+//          fos.close();
+//          
+//      }catch (Exception e) {
+//         // TODO: handle exception
+//         e.printStackTrace();
+//      }
     }
  
 	

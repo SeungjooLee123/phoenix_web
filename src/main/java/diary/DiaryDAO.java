@@ -17,34 +17,13 @@ public class DiaryDAO {
 	public List<DiaryVO> diary_list(HashMap<String, String> map) {
 		return sql.selectList("diary.mapper.list",map);
 	}
+	public List<DiaryVO> diary_list_cate(DiaryVO vo) {
+		return sql.selectList("diary.mapper.list_cate",vo);
+	}
 	public boolean diary_insert(DiaryVO vo) {
-		//if(vo.getBaby_category().equals(""))
 		int result = 0;
 		result = sql.insert("diary.mapper.insert",vo);
-//		if(vo.getBaby_category().equals("모유")){
-//			result = sql.insert("diary.mapper.insert",vo);
-//        } else if(vo.getBaby_category().equals("분유")){
-//        	result = sql.insert("diary.mapper.insert_bunu",vo);
-//        } else if(vo.getBaby_category().equals("이유식")){
-//        	result = sql.insert("diary.mapper.insert_eat",vo);
-//        } else if(vo.getBaby_category().equals("기저귀")){
-//        	result = sql.insert("diary.mapper.insert_toilet",vo);
-//        } else if(vo.getBaby_category().equals("수면")){
-//        	result = sql.insert("diary.mapper.insert_sleep",vo);
-//        } else if(vo.getBaby_category().equals("목욕")){
-//        	result = sql.insert("diary.mapper.insert_bath",vo);
-//        } else if(vo.getBaby_category().equals("체온")){
-//        	result = sql.insert("diary.mapper.insert_temp",vo);
-//        } else if(vo.getBaby_category().equals("물")){
-//        	result = sql.insert("diary.mapper.insert_water",vo);
-//        } else if(vo.getBaby_category().equals("투약")){
-//        	result = sql.insert("diary.mapper.insert_pills",vo);
-//        } else if(vo.getBaby_category().equals("간식")){
-//        	result = sql.insert("diary.mapper.insert_danger",vo);
-//        }
-		
 		return result == 1 ? true : false;
-		//System.out.println(sql.insert("diary.mapper.insert",vo));
 		
 	}
 	public DiaryVO diary_detail(int no) {
@@ -56,4 +35,5 @@ public class DiaryDAO {
 	public boolean diary_update(DiaryVO vo) {
 		return sql.update("diary.mapper.update",vo) == 1 ? true : false;
 	}
+	
 }
