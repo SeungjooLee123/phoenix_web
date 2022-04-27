@@ -9,13 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
 import common.CommonService;
+import community.CommunityCommentVO;
 import community.CommunityPage;
 import community.CommunityService;
 import community.CommunityServiceImpl;
@@ -109,53 +112,53 @@ public class CommunityController {
 		}
 	
 	
-		//게시글 업데이트
-		@RequestMapping("/update.co")
-		public String update(CommunityVO vo, MultipartFile file, HttpSession session, String attach, Model model) {
-			System.out.println("controller");
-			//원글에 첨부파일이 있는지 확인 + 물리적인 파일 저장 위치 찾기  => 분기를 나누기 위해
-			CommunityVO community = service.Community_detail(vo.getId());
-			String uuid = session.getServletContext().getRealPath("resources") + "/" + community.getWeb_path();
-			
-			System.out.println(gson.toJson(vo));
-			//분기 나누기		
-			if(file.isEmpty()) {//파일을 첨부하지 않은 경우
-				//원래부터 첨부된 파일이 없는 경우 => 처리할 거 없음
-				
-				//원래 첨부된 파일을 삭제했을 경우 => 물리적 영역에서 삭제해야 함
-				if(attach.isEmpty()) {
-					if(community.getWeb_file() != null) {
-						File f = new File(uuid);	//io의 filed을 import시키기
-						if(f.exists()) f.delete();
-					}
-				
-				//원래 첨부된 파일을 그대로 사용하는 경우
-				}else {
-					vo.setWeb_file( community.getWeb_file() );
-					vo.setWeb_path( community.getWeb_path() );
-				}
-				
-			}else {//파일이 있는 경우 => 새로 첨부했거나, 변경한 경우
-				//파일을 새로 첨부한 경우
-				vo.setWeb_file(file.getOriginalFilename());
-				vo.setWeb_path(common.fileUpload("notice", file, session));
-				
-				//파일을 변경한 경우
-				if(community.getWeb_file() != null) {//서버에 파일이 있는지 확인
-					File f = new File(uuid);
-					if(f.exists()) f.delete();	
-				}
+//게시글 업데이트
+@RequestMapping("/update.co")
+public String update(CommunityVO vo, MultipartFile file, HttpSession session, String attach, Model model) {
+	System.out.println("controller");
+	//원글에 첨부파일이 있는지 확인 + 물리적인 파일 저장 위치 찾기  => 분기를 나누기 위해
+	CommunityVO community = service.Community_detail(vo.getId());
+	String uuid = session.getServletContext().getRealPath("resources") + "/" + community.getWeb_path();
+	
+	System.out.println(gson.toJson(vo));
+	//분기 나누기		
+	if(file.isEmpty()) {//파일을 첨부하지 않은 경우
+		//원래부터 첨부된 파일이 없는 경우 => 처리할 거 없음
+		
+		//원래 첨부된 파일을 삭제했을 경우 => 물리적 영역에서 삭제해야 함
+		if(attach.isEmpty()) {
+			if(community.getWeb_file() != null) {
+				File f = new File(uuid);	//io의 filed을 import시키기
+				if(f.exists()) f.delete();
 			}
-			
-			
-			//화면에서 수정한 정보들을 DB에 업데이트한 후 상세화면 연결
-			service.Community_update(vo);
-			return "redirect:detail.co?id="+vo.getId();
-			//값이 노출되지 않고 보내기 위해
-//			model.addAttribute("uri", "detail.bo");
-//			model.addAttribute("id", vo.getId());
-//			return "board/redirect";
+		
+		//원래 첨부된 파일을 그대로 사용하는 경우
+		}else {
+			vo.setWeb_file( community.getWeb_file() );
+			vo.setWeb_path( community.getWeb_path() );
 		}
+		
+	}else {//파일이 있는 경우 => 새로 첨부했거나, 변경한 경우
+		//파일을 새로 첨부한 경우
+		vo.setWeb_file(file.getOriginalFilename());
+		vo.setWeb_path(common.fileUpload("notice", file, session));
+		
+		//파일을 변경한 경우
+		if(community.getWeb_file() != null) {//서버에 파일이 있는지 확인
+			File f = new File(uuid);
+			if(f.exists()) f.delete();	
+		}
+	}
+	
+	
+	//화면에서 수정한 정보들을 DB에 업데이트한 후 상세화면 연결
+	service.Community_update(vo);
+	return "redirect:detail.co?id="+vo.getId();
+	//값이 노출되지 않고 보내기 위해
+//	model.addAttribute("uri", "detail.bo");
+//	model.addAttribute("id", vo.getId());
+//	return "board/redirect";
+}
 		
 		
 		//방명록 삭제 요청
@@ -186,13 +189,62 @@ public class CommunityController {
 		}
 		
 		
-		//게시글 첨부파일 다운로드 요청
-		@RequestMapping("/download.co")   //기본정보 HttpSession, HttpServletResponse   = 이 파일의 타입을 확인하고 
-		public void download(int id, HttpSession session, HttpServletResponse response) {  
-			//아이디만 가져와서
-			// 해당 글의 첨부파일 정보를 DB에서 조회해와 해당 파일을 서버로부터 다운로드 함(상세화면에서)
-		  CommunityVO Community =	service.Community_detail(id);   //vo타입이라서 	  
-		  common.fileDownload(Community.getWeb_file(), Community.getWeb_path(), session , response);
-		}
+	//게시글 첨부파일 다운로드 요청
+	@RequestMapping("/download.co")   //기본정보 HttpSession, HttpServletResponse   = 이 파일의 타입을 확인하고 
+	public void download(int id, HttpSession session, HttpServletResponse response) {  
+		//아이디만 가져와서
+		// 해당 글의 첨부파일 정보를 DB에서 조회해와 해당 파일을 서버로부터 다운로드 함(상세화면에서)
+	  CommunityVO Community =	service.Community_detail(id);   //vo타입이라서 	  
+	  common.fileDownload(Community.getWeb_file(), Community.getWeb_path(), session , response);
+	}
+	
+	
+	//커뮤 글에 대한 댓글목록조회 요청
+	@RequestMapping("/community/comment/list/{id}")
+	public String comment_list( @PathVariable int pid, Model model ) {//경로에 있눈 값이다
+		//해당 글애 대한 댓글들을 DB에서 조회해 온다,
+		model.addAttribute("list",  service.Community_comment_list(pid) );
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
+		return "community/comment/commentlist";
+	}
+	
+	
+	//방명록 글에 대한 댓글저장처리 요청
+	@ResponseBody
+	@RequestMapping("/community/comment/regist")
+	public boolean comment_regist(int pid, String content, HttpSession session) {
+		//작성자의 경우 s_member의 id값을 담아야 하므로 로그인 정보 확인
+		System.out.println(pid + "/" + content);
+		UserVO member = (UserVO) session.getAttribute("loginInfo");
+		CommunityCommentVO vo = new CommunityCommentVO();
+		vo.setUser_id( member.getId() );
+		vo.setId( pid );
+		vo.setContent( content );
+		//화면에서 입력한 댓글 정보를 DB에 저장..
+		return service.Community_comment_insert( vo ) == 1 ? true : false ;
+		//비동기 통신을 할떄에는 responsebody를 이용해야한다 ex 안드 어싱크테스크 
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+		
 		
 }

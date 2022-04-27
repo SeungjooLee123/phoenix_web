@@ -41,7 +41,7 @@ thead {
 <title>Community</title>
 </head>
 <body>
-<img src="imgs/bss_ad_pick.png" style="width: 1400px; height: 400px; margin: 50px; ">
+<img src="imgs/bss_ad_pick.png" style="width: 1440px; height: 400px; margin: 50px auto; ">
 
 <form action="community" method="post" id="btns" >
 		<input type="hidden" name="curPage" value="1" />

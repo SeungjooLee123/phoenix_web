@@ -24,6 +24,17 @@ table th{
 .btnSet{
 	margin-top: 20px;
 }
+.comment {
+	margin-top 50;
+	text-align: center;
+}
+.btnSet{
+	text-align: right;
+}
+#comment_regist{
+	margin-top: 50px;
+}
+
 </style>
 <head>
 <meta charset="UTF-8">
@@ -86,6 +97,17 @@ table th{
 			</td>
 		</tr>
 	</table>
+
+	<!-- 댓글 입력 처리 부분 -->
+	<div class="comment">
+		<div id="comment_regist">						<!-- 댓글 등록 부 -->
+			<span class="left">댓글작성</span>
+			<span class="right"><a class='btn-fill-s' onclick="comment_regist()">댓글등록</a></span>
+			<textarea id="comment"></textarea>			<!-- 댓글 작성 부분 -->
+		</div>
+		<div id="comment_list"></div>
+	</div>
+	
 	
 	
 	
@@ -100,5 +122,56 @@ table th{
 	
 	
 	<script type="text/javascript" src='js/file_check.js?v<%=new Date().getTime() %>'></script>  <!--파일 미리보기 필요함  -->
+<script type="text/javascript">
+//댓글등록
+function comment_regist(){
+	//로그인 정보가 없으면
+	if( ${ empty loginInfo }){
+		alert('댓글을 등록하려면 로그인하세용');
+		return;
+	//로그인 정보가 있다면	
+	}else if( $.trim ( $('#comment').val() ) == '' ){
+		alert('댓글을 입력하세용');		
+		$('#comment').val('');
+		$('#comment').focus();
+		return;
+	}
+	var id = ${vo.id};
+	var con = $('#comment').val()
+	$.ajax ({
+		/* 경로 형태로 url  지정할꺼양 */
+		url :	'community/comment/regist'			/* controller 호출  주소 형식 맵핑 */
+		, data:	{ pid : id , content : con }
+				/* pid : 원 글의 id, 입력한 댓글  */
+		, success : function ( res ) {
+			if( res ){	//true == true T , false == true F
+				alert('댓글이 등록되었습니다.')	;
+				$('#comment').val('');
+//				comment_list();		//댓글 목록 조회 요청
+			} else {
+				alert('댓글 등록을 실패하였습니다.');
+			}
+		}, 	error : function(req, text) {
+			alert(text + " : " + req.status );
+		}
+	});
+}
+/* 댓글 목록 조회()  */
+function comment_list(){
+	var id = ${ vo.id }
+	$.ajax({
+		url : "community/comment/list/${vo.id}"
+		, data : {pid : 383 }
+		, success : function ( res) {
+			$('#comment_list').html( res );
+		}, error : function (req, text){
+			alert(text + ':' + req.status);
+		}
+	});
+}
+</script>
+
+
+	
 </body>
 </html>

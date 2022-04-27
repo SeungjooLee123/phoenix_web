@@ -56,8 +56,7 @@ public class CommunityDAO implements CommunityService {
 
 	@Override
 	public int Community_comment_insert(CommunityCommentVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sql.insert("community.mapper.comment_insert", vo);
 	}
 
 	@Override
@@ -74,8 +73,7 @@ public class CommunityDAO implements CommunityService {
 
 	@Override
 	public List<CommunityCommentVO> Community_comment_list(int pid) {
-		// TODO Auto-generated method stub
-		return null;
+		return sql.selectList("community.mapper.comment_list",pid);
 	}
 
 	

@@ -8,9 +8,12 @@ public class CommunityCommentVO {
 	private int step;
 	private int indent;
 	private int id;
-	private Date user_id;
+	private Date write_date;
 	private String content;
-	private String write_date;
+	private String user_id;
+	
+	
+	
 	
 	
 	
@@ -44,11 +47,11 @@ public class CommunityCommentVO {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getUser_id() {
-		return user_id;
+	public Date getWrite_date() {
+		return write_date;
 	}
-	public void setUser_id(Date user_id) {
-		this.user_id = user_id;
+	public void setWrite_date(Date write_date) {
+		this.write_date = write_date;
 	}
 	public String getContent() {
 		return content;
@@ -56,15 +59,13 @@ public class CommunityCommentVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getWrite_date() {
-		return write_date;
+	public String getUser_id() {
+		return user_id;
 	}
-	public void setWrite_date(String write_date) {
-		this.write_date = write_date;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
-	
-	
-	
+		
 	
 	
 }
