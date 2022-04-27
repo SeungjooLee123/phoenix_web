@@ -1,6 +1,7 @@
 package com.phoenix.bss;
 
 import java.io.File;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -199,16 +200,6 @@ public String update(CommunityVO vo, MultipartFile file, HttpSession session, St
 	}
 	
 	
-	//커뮤 글에 대한 댓글목록조회 요청
-	@RequestMapping("/community/comment/list/{id}")
-	public String comment_list( @PathVariable int pid, Model model ) {//경로에 있눈 값이다
-		//해당 글애 대한 댓글들을 DB에서 조회해 온다,
-		model.addAttribute("list",  service.Community_comment_list(pid) );
-		model.addAttribute("crlf", "\r\n");
-		model.addAttribute("lf", "\n");
-		return "community/comment/commentlist";
-	}
-	
 	
 	//방명록 글에 대한 댓글저장처리 요청
 	@ResponseBody
@@ -227,9 +218,42 @@ public String update(CommunityVO vo, MultipartFile file, HttpSession session, St
 	}
 	
 	
+	//커뮤 글에 대한 댓글목록조회 요청
+	@RequestMapping("/community/comment/list/{id}")
+	public String comment_list( @PathVariable int id, Model model ) {//경로에 있눈 값이다
+		//해당 글애 대한 댓글들을 DB에서 조회해 온다,
+		model.addAttribute("list",  service.Community_comment_list(id) );
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
+		System.out.println("id : "+id);
+		
+		return "community/comment/commentlist";
+	}
 	
 	
+	//커뮤 글에 대한 댓글 삭제
+	@RequestMapping("/comment_delete.co")
+	public String comment_delete (int comment_id, int id) {
+		service.Community_comment_delete(comment_id);
+		
+		
+		return "redirect:detail.co?id="+id;
+	}
 	
+	
+	//커뮤 글에 대한 댓글 수정
+	@RequestMapping("/comment_update.co")
+	public String comment_update (int comment_id, String content, int id) {
+		System.out.println(comment_id);
+		System.out.println(content);
+		CommunityCommentVO vo = new CommunityCommentVO();
+		vo.setComment_id( comment_id );
+		vo.setContent( content );
+		
+		service.Community_comment_update(vo);
+		
+		return "redirect:detail.co?id="+id+"";
+	}
 	
 	
 	

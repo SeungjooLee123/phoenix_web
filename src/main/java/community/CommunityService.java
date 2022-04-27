@@ -1,5 +1,6 @@
 package community;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public interface CommunityService {
 	
 	int Community_comment_insert(CommunityCommentVO vo);		//방명록 댓글 신규 저장 처리
 	
-	int Community_comment_update(CommunityVO vo);				//방명록 댓글 변경 저장 처리
+	int Community_comment_update(CommunityCommentVO vo);	//방명록 댓글 변경 저장 처리
 	
 	int Community_comment_delete(int id);					//방명록 댓글 삭제처리
 	

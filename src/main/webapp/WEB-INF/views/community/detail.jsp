@@ -42,14 +42,18 @@ table th{
 </head>
 <body>
 <img src="imgs/bss_ad_pick.png" style="width: 1400px; height: 400px; margin: 50px; ">
+
+
+
 <div class="btnSet">
-		<a class="btn-fill" onclick="$('form').submit()" >목록으로</a>
+		<a class="btn-fill" onclick="$('#comu_form').submit()" >목록으로</a>
 		<%-- 글쓴이만 수정 삭제 권한을 가질 수 있으므로 비교 먼저 해야 함 --%>
 		<c:if test="${loginInfo.admin eq 'Y'}">
 			<a class="btn-fill" onclick="$('form').attr('action', 'modify.co'); $('form').submit()">수정하기</a>
 			<a class="btn-fill" onclick='if(confirm("정말 삭제?")) {href="delete.co?id=${vo.id}"}'>삭제하기</a>
 		</c:if>
-	</div>
+</div>
+
 	<%-- <c:if test="${vo.prev_title ne 0 }">
 		<a href='detail.no?id=${vo.prev_title }'>[이전 글] ${vo.prev_title }</a> <br />
 	</c:if>
@@ -96,7 +100,7 @@ table th{
 				</c:if>
 			</td>
 		</tr>
-	</table>
+</table>
 
 	<!-- 댓글 입력 처리 부분 -->
 	<div class="comment">
@@ -112,17 +116,23 @@ table th{
 	
 	
 	
-	<form action="community" method="post">
-		<input type="hidden" name="id" value="${vo.id}" /> <%-- 검색 조건 --%>
-		<input type="hidden" name="search" value="${page.search}" /> <%-- 검색 조건 --%>
-		<input type="hidden" name="keyword" value="${page.keyword}" /> <%-- 검색어 --%>
-		<input type="hidden" name="pageList" value="${page.pageList}" /> <%-- 페이지당 보여질 목록 수 --%>
-		<input type="hidden" name="curPage" value="${page.curPage}" /> <%-- 현재페이지 --%>
-	</form>
+<form id="comu_form" action="community" method="post">
+	<input type="hidden" name="id" value="${vo.id}" /> <%-- 검색 조건 --%>
+	<input type="hidden" name="search" value="${page.search}" /> <%-- 검색 조건 --%>
+	<input type="hidden" name="keyword" value="${page.keyword}" /> <%-- 검색어 --%>
+	<input type="hidden" name="pageList" value="${page.pageList}" /> <%-- 페이지당 보여질 목록 수 --%>
+	<input type="hidden" name="curPage" value="${page.curPage}" /> <%-- 현재페이지 --%>
+</form>
 	
 	
 	<script type="text/javascript" src='js/file_check.js?v<%=new Date().getTime() %>'></script>  <!--파일 미리보기 필요함  -->
 <script type="text/javascript">
+//댓글 뿌리기
+$(function () {
+	comment_list();
+});
+
+
 //댓글등록
 function comment_regist(){
 	//로그인 정보가 없으면
@@ -136,18 +146,18 @@ function comment_regist(){
 		$('#comment').focus();
 		return;
 	}
-	var id = ${vo.id};
+	var pid = ${vo.id};
 	var con = $('#comment').val()
 	$.ajax ({
 		/* 경로 형태로 url  지정할꺼양 */
 		url :	'community/comment/regist'			/* controller 호출  주소 형식 맵핑 */
-		, data:	{ pid : id , content : con }
+		, data:	{ pid : pid , content : con }
 				/* pid : 원 글의 id, 입력한 댓글  */
 		, success : function ( res ) {
 			if( res ){	//true == true T , false == true F
 				alert('댓글이 등록되었습니다.')	;
 				$('#comment').val('');
-//				comment_list();		//댓글 목록 조회 요청
+				comment_list();		//댓글 목록 조회 요청
 			} else {
 				alert('댓글 등록을 실패하였습니다.');
 			}
@@ -156,6 +166,8 @@ function comment_regist(){
 		}
 	});
 }
+
+
 /* 댓글 목록 조회()  */
 function comment_list(){
 	var id = ${ vo.id }
@@ -169,6 +181,11 @@ function comment_list(){
 		}
 	});
 }
+
+
+
+
+
 </script>
 
 

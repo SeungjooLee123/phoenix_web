@@ -1,5 +1,6 @@
 package community;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -60,20 +61,18 @@ public class CommunityDAO implements CommunityService {
 	}
 
 	@Override
-	public int Community_comment_update(CommunityVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int Community_comment_update(CommunityCommentVO vo) {
+		return sql.update("community.mapper.comment_update", vo);
 	}
 
 	@Override
 	public int Community_comment_delete(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sql.delete("community.mapper.comment_delete", id);
 	}
 
 	@Override
-	public List<CommunityCommentVO> Community_comment_list(int pid) {
-		return sql.selectList("community.mapper.comment_list",pid);
+	public List<CommunityCommentVO> Community_comment_list(int id) {
+		return sql.selectList("community.mapper.comment_list",id);
 	}
 
 	
