@@ -3,21 +3,21 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- 댓글뿌리기 -->
 <c:forEach items="${list}" var="vo" varStatus="status">
-<form id="coment_form" action="comment_update.co" method="post">
+
 
 	<input type="hidden" name="comment_id" value="${vo.comment_id }">
 	<input type="hidden" name="id" value="${vo.id }">
-
-	
 	
 	${status.index eq 0 ? '<hr>' : '' }	<!-- 첫 번째 순서 값에 hr 태그 부여 -->
-	<div class="left">
+	<div class="left" >
 		${vo.user_id} [${vo.write_date }]
 		
 		<!-- 로그인한 사용자가 작성한 댓글인 경우 수정/삭제 가능 -->
 		<c:if test="${loginInfo.id eq vo.user_id }">
 			<span style=" float: right; ">
-				<a class="btn-fill-s btn-modify-save"   >수정</a>
+				<a class="btn-fill-s btn-modify-save"
+				onclick="saveLog(this,${vo.comment_id},${vo.id});"
+				>수정</a>
 				<a class="btn-fill-s btn-delete-cancel" 
 				   onclick="test(this,${vo.comment_id},${vo.id});">삭제</a>
 			</span>
@@ -28,10 +28,34 @@
 		
 	</div>
 	<hr>
-</form>
 </c:forEach>
 
  <script type="text/javascript">
+ 
+ function saveLog(tag , comment , id) {
+
+	var $div = $(tag).closest('div');
+	var thistext = $(tag).text();
+	alert(thistext);
+	/* .closest() 메소드는 자신을 포함한 상위 요소 주에서 전달받은
+		선택자에 해당하는 요소의 집합에서 가장 첫 번째 요소를 선택! */
+		
+	if( thistext == '수정'){
+		var tag = "<textarea name=content style='width:96%; height:90%;' >"
+		+ $div.children('.original').html().replace(/<br>/g,'\n') + "</textarea>"
+		$div.children('.modify').html(tag);
+		// 수정 상태(false) : 저장/취소 , 보기/상태(true) : 수정/삭제 버튼
+		display_button(false, $div);
+	}else if( thistext == '저장'){
+		alert($div.children('.modify').children('textarea').val());
+		location.href='comment_update.co?comment_id='+comment +
+						'&content='+ $div.children('.modify').children('textarea').val() +
+						'&id=' + id;
+		//var vo = '${vo.id}';
+	//	$('#comment_form').submit();
+	}
+ }
+ 
  function test(tag , comment , id) {
 	 	var $div = $(tag).closest('div');
 		var thistext = $(tag).text();
@@ -48,24 +72,7 @@
 	 //alert(tag.text);
 	}
 
- $('.btn-modify-save').on('click', function (){
-	var $div = $(this).closest('div');
-	var thistext = $(this).text();
-	/* .closest() 메소드는 자신을 포함한 상위 요소 주에서 전달받은
-		선택자에 해당하는 요소의 집합에서 가장 첫 번째 요소를 선택! */
-		
-	if( thistext == '수정'){
-		var tag = "<textarea name=content style='width:96%; height:90%;' >"
-		+ $div.children('.original').html().replace(/<br>/g,'\n') + "</textarea>"
-		$div.children('.modify').html(tag);
-		// 수정 상태(false) : 저장/취소 , 보기/상태(true) : 수정/삭제 버튼
-		display_button(false, $div);
-	}else if( thistext == '저장'){
-		alert("save");
-		//var vo = '${vo.id}';
-		$('#coment_form').submit();
-	}
-});
+
 
  $('.btn-modify-cancel').on('click', function (){
 		var $div = $(this).closest('div');

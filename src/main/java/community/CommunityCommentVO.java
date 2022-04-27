@@ -1,10 +1,13 @@
 package community;
 
 import java.sql.Date;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 
 public class CommunityCommentVO {
+	//SimpleDateFormat sdp = new SimpleDateFormat("YYYY-MM-DD HH:MI");
+
 	private int comment_id;
-	private int root;
 	private int step;
 	private int indent;
 	private int id;
@@ -16,18 +19,11 @@ public class CommunityCommentVO {
 	
 	
 	
-	
 	public int getComment_id() {
 		return comment_id;
 	}
 	public void setComment_id(int comment_id) {
 		this.comment_id = comment_id;
-	}
-	public int getRoot() {
-		return root;
-	}
-	public void setRoot(int root) {
-		this.root = root;
 	}
 	public int getStep() {
 		return step;

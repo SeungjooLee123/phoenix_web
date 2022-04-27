@@ -1,7 +1,9 @@
 package com.phoenix.bss;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -222,7 +224,10 @@ public String update(CommunityVO vo, MultipartFile file, HttpSession session, St
 	@RequestMapping("/community/comment/list/{id}")
 	public String comment_list( @PathVariable int id, Model model ) {//경로에 있눈 값이다
 		//해당 글애 대한 댓글들을 DB에서 조회해 온다,
-		model.addAttribute("list",  service.Community_comment_list(id) );
+		
+		List<CommunityCommentVO> list = service.Community_comment_list(id);
+		
+		model.addAttribute("list", list  );
 		model.addAttribute("crlf", "\r\n");
 		model.addAttribute("lf", "\n");
 		System.out.println("id : "+id);

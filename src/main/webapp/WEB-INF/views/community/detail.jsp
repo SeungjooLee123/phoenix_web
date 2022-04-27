@@ -93,10 +93,10 @@ table th{
 		<tr>
 			<td class='left' colspan="6">
 				<c:if test="${vo.prev ne 0 }">
-					<a href='detail.no?id=${vo.prev }'>[이전 글] ${vo.prev_title }</a> <br />
+					<a href='detail.co?id=${vo.prev }'>[이전 글] ${vo.prev_title }</a> <br />
 				</c:if>
 				<c:if test="${vo.next ne 0 }">
-					<a href='detail.no?id=${vo.next }'>[다음 글] ${vo.next_title }</a>
+					<a href='detail.co?id=${vo.next }'>[다음 글] ${vo.next_title }</a>
 				</c:if>
 			</td>
 		</tr>
@@ -107,7 +107,7 @@ table th{
 		<div id="comment_regist">						<!-- 댓글 등록 부 -->
 			<span class="left">댓글작성</span>
 			<span class="right"><a class='btn-fill-s' onclick="comment_regist()">댓글등록</a></span>
-			<textarea id="comment"></textarea>			<!-- 댓글 작성 부분 -->
+			<textarea id="comment" placeholder="내용을 입력하세요"></textarea>			<!-- 댓글 작성 부분 -->
 		</div>
 		<div id="comment_list"></div>
 	</div>
