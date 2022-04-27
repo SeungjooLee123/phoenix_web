@@ -11,17 +11,9 @@ public class IotController {
    String picture = "";
    Gson gson = new Gson();
    String base_code ="";
-<<<<<<< Updated upstream
    String test_shake = ""; 
-		  
-=======
-<<<<<<< HEAD
-   String test_shake ="";
-=======
-   String test_shake = ""; 
-		  
->>>>>>> 272430874c9e1180f08b9935f8087aed4d925249
->>>>>>> Stashed changes
+        
+        
    
    @ResponseBody
    @RequestMapping("/iot_cap.io")
@@ -43,8 +35,8 @@ public class IotController {
    @ResponseBody
    @RequestMapping("/img_to_base")
    public void img_to_base(String base) {
-	   System.out.println("라즈 접근");
-	   System.out.println(base);
+      System.out.println("라즈 접근");
+      System.out.println(base);
       base_code = base;
    } 
    
@@ -54,48 +46,20 @@ public class IotController {
       return gson.toJson(base_code);
    }
    
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
    //안드에서 받는 역할 
    @ResponseBody
    @RequestMapping("/biking.io")
    public void shake_biking(String biking) {
-	   test_shake = biking;   
-=======
->>>>>>> Stashed changes
-   @ResponseBody
-   @RequestMapping("/biking.io")
-   public void shake_biking(String biking) {
       test_shake = biking;   
-<<<<<<< Updated upstream
-=======
->>>>>>> 272430874c9e1180f08b9935f8087aed4d925249
->>>>>>> Stashed changes
    }
+   
    
    @ResponseBody
    @RequestMapping("/shake.io")
    public String biking_jyp() {
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-	     
-	   return test_shake;
-	   		
-   }
-   
-   
-   
-=======
->>>>>>> Stashed changes
-        
+      
       return gson.toJson(test_shake);
             
    }
    
-<<<<<<< Updated upstream
-=======
->>>>>>> 272430874c9e1180f08b9935f8087aed4d925249
->>>>>>> Stashed changes
 }
