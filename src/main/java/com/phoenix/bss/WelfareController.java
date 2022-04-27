@@ -157,6 +157,23 @@ public class WelfareController {
 		return "welfare/video";
 	}
 	
+	//동영상 추가 요청
+	@RequestMapping("/video_add.wel")
+	public String video_add(HttpSession session, Model model, VideoVO vo) {
+		String main_id = vo.getVideopath().split("be/")[1];
+		vo.setVideopath(main_id);
+		
+		video.video_insert(vo);
+		return "redirect:video.wel";
+	}
+	
+	//동영상 삭제 요청
+	@RequestMapping("/delete_video.wel")
+	public String delete_video(HttpSession session, Model model, int no) {
+		video.video_delete(no);
+		return "redirect:video.wel";
+	}
+	
 	//통계자료 화면 요청
 	@RequestMapping("/graph.wel")
 	public String wel_graph() {

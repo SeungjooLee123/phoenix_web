@@ -60,7 +60,7 @@
          <table>
             <tr>
                <td>
-                  <input type="text" style="width: 100%; padding: 5px;" id="title" title="제목" name="title" class="chk" placeholder="제목을 입력하세요." />
+                  <input type="text" style="width: 100%; padding: 5px;" id="title" title="제목" name="title" class="chk" placeholder="제목을 입력하세요." required="required" />
                </td>
             </tr>
             <tr>

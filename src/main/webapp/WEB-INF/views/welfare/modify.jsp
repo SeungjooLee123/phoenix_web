@@ -56,7 +56,7 @@
    <input type="hidden" name="id" value="${vo.id}">
       <table>
          <tr>
-            <td><input type="text" style="width: 100%; padding: 5px;" name="title" class="chk" value="${vo.title}" title="제목" /></td>
+            <td><input type="text" style="width: 100%; padding: 5px;" name="title" class="chk" value="${vo.title}" title="제목" required="required"/></td>
          </tr>
          <tr>
             <td><textarea class="chk" title="내용" name="content" id="summernote"><c:out value="${vo.content }" escapeXml="true"/></textarea></td>

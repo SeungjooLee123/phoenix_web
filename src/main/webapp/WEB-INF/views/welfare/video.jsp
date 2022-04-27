@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,12 +13,12 @@
    position: absolute; left: 0; top: 0; width: 100%; height: 100%;
    background-color: #000; opacity: 0.3; display: none; margin: 0 auto;
    }
-   .slick-track{height: 200px;} 
+   .slick-track{height: 210px;} 
    .slick-prev:before, .slick-next:before{color: #8c88c9 !important; opacity: 1 ; }
    .wrap-video div>img{width: 200px; height: 157px;}
    .wrap-video2 div>img{width: 280px; height: 157px;}
    .addVideo{position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); visibility: hidden; transform: scale(1.1); transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; }
-   .video-main{position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 1rem 1.5rem; width: 500px; height: 350px; border-radius: 0.5rem;}
+   .video-main{position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 1rem 1.5rem; width: 500px; height: 400px; border-radius: 0.5rem;}
    .video-main div{font-size: 13px;}
    
    .center {position: absolute; left:50%; top:50%; transform:translate(-50%, -50%); }
@@ -36,6 +37,8 @@
 #list-top ul li:not(:first-child) { margin-left: 3px; }
 #list-top ul:first-child { float: left;}
 #list-top ul:last-child { float: right;}
+.btn-fill{border-radius: 5px; background: #8c88c9; color: #fff;}
+.btn-empty{background: #f5f5f5;}
 </style>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
@@ -44,65 +47,72 @@
 <body>
       <jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/>
       <div class="search">
-	   <form action="video.wel" method="post" style="margin-top: 20px;">
+	   <form action="video.wel" method="post" style="margin-top: 20px;" id="search_form">
 	   <div id = 'list-top'>
 	      <div>
 	         <!-- 항목별 검색 처리 -->
 	         <ul id="search_main">
 	         	<li><input type="hidden" value="all" name="search"/></li>
 	            <li><input type="text" style="padding: 10px; font: 16px;" name='keyword' value='${page.keyword }' class='w-px300' /></li>
-	            <li class="btn-fill" style="padding: 10px;"><input type="submit" value="검색"></li>         
+	            <li class="btn-fill" style="padding: 10px; margin-left: 10px;"><a style='vertical-align: center; font: 16px;' onclick="$('#search_form').submit()">검색</a></li>         
 	         </ul>
 	      </div>
 	   </div>
 	   </form>
 	   </div>
       <div class="wrap_test">
-         <h4>출산 정보</h4>
+         <h4 style="font-size: 25px; margin-left: 15px;">출산 정보</h4>
          <div class="wrap_video">
          	<c:forEach var="vo" items="${list }">
          		<c:if test="${vo.category eq 'CHILDBIRTH' }">
-         			<div style="margin-left: 15px; width: 280px;">
+         			<div style="margin-left: 15px; width: 280px; margin-top: 35px;">
 	         			<img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 280px; height: 157px;" class="img${vo.id }"/>
-	         			<h4 style="margin-left: 5px;">${vo.explain }</h4>
+	         			<h4 style="margin-left: 5px; margin-top: 5px;">${fn:substring(vo.explain , 0, 19) }</h4>
+	         			<c:if test="${loginInfo.admin eq 'Y' }">
+         					<a style="float: right; display: inline-block;" href="delete_video.wel?no=${vo.no }">삭제</a>
+         				</c:if>
 	         		</div>
          		</c:if>
          	</c:forEach>
          </div>
          
-         <h4 style="margin-top: 50px;">육아 정보</h4>
+         <h4 style="margin-top: 50px; font-size: 25px; margin-left: 15px;">육아 정보</h4>
          <div class="wrap_video2">
             <c:forEach var="vo" items="${list }">
          		<c:if test="${vo.category eq 'PARENTING' }">
-         			<div style="margin-left: 15px; width: 280px;">
+         			<div style="margin-left: 15px; width: 280px; margin-top: 35px;">
          				<img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 280px; height: 157px;" class="img${vo.id }"/>
-         				<p style="margin-left: 5px;">${vo.explain }</p>
+         				<h4 style="margin-left: 5px; margin-top: 5px;">${fn:substring(vo.explain , 0, 19) }</h4>
+         				<c:if test="${loginInfo.admin eq 'Y' }">
+         					<a style="float: right; display: inline-block;" href="delete_video.wel?no=${vo.no }">삭제</a>
+         				</c:if>
          			</div>
          		</c:if>
          	</c:forEach>
          </div>
          
          <c:if test="${loginInfo.admin eq 'Y' }">
-         	<button id="new_video" style="float: right; padding: 5px; border: 1px solid #e6e6e6; border-radius: 3px; margin-top: 40px;">동영상 추가하기</button>
+         	<a id="new_video" style="float: right; padding: 5px; border: 1px solid #e6e6e6; border-radius: 3px; margin-top: 50px;" class="btn-fill">동영상 추가하기</a>
       </c:if>
       </div>
       <div class="addVideo">
-      	<div class="video-main">
+      	<div class="video-main" style="text-align: center;">
       		<span class="close-button">&times;</span>
       		<h2 style="color: #030303; font-size: 16px;">동영상 추가</h2>
-      		<div style="margin-top: 10px;">카테고리</div>
-      		<form action="video_add.wel">
-      			<input type="hidden" name="category" id="category" />
-	      		<ul id="category-ul" style="list-style: none;">
-	      			<li><a>출산</a></li>
-	      			<li><a>육아</a></li>
+      		<div style="margin-top: 10px; width: 40%; margin-top: 15px;">카테고리</div>
+      		<form action="video_add.wel" id="add_video" style="text-align: center;">
+      			<input type="hidden" name="category" id="category"/>
+	      		<ul id="category-ul" style="list-style: none; justify-content: space-around;  margin-top: 10px;">
+	      			<li><a style="font-size: 16px;" class="btn-empty">출산</a></li>
+	      			<li><a style="font-size: 16px;" class="btn-empty">육아</a></li>
 	      		</ul>
-	      		<div style="margin-top: 10px;">동영상 링크</div>
-	      		<input type="text" placeholder="https://youtu.be/phwsjdmrb6w" id="videopath" name="videopath" style="padding: 8px; margin-top: 5px; width: 80%;"/>
-	      		<div style="margin-top: 10px;">설명</div>
-	      		<textarea placeholder="동영상에 대한 설명을 작성해주세요(100자 이내)" id="explain" name="explain" style="padding: 8px; margin-top: 5px; width: 80%; height: 100px; resize: none;"></textarea>
+	      		<div style="margin-top: 10px; width: 40%;  margin-top: 15px;">동영상 링크</div>
+	      		<input type="text" placeholder="https://youtu.be/phwsjdmrb6w" id="videopath" name="videopath" style="padding: 8px; margin-top: 5px; width: 80%;  margin-top: 5px;" required="required"/>
+	      		<div style="margin-top: 15px; width: 30%;">설명</div>
+	      		<textarea placeholder="동영상에 대한 설명을 작성해주세요(100자 이내)" id="explain" name="explain" style="padding: 8px; margin-top: 5px; width: 80%; height: 100px; resize: none;" required="required"></textarea>
+	      		<a style='display: inherit; margin: 0 auto; margin-top: 20px; width: 60px; padding: 5px;' onclick="insert_video()" class="btn-fill">추가</a>
       		</form>
-      		<a id="btn_add">확인</a>
+      		
       	</div>
       </div>
       <div id="popup-background"></div>
@@ -167,7 +177,29 @@
         	 var index_ca = $(this).index();
        		 $("#category-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
              $("#category-ul li>a").eq(index_ca).attr("class", "btn-fill");
+             
+             if(index_ca == 0){
+            	 var cate = document.getElementById('category');
+            	 cate.value = "CHILDBIRTH";
+            	 //$('input[name="category"]').value = "CHILDBIRTH";
+            	 console.log("출산");
+             } else{
+            	 var cate = document.getElementById('category');
+            	 cate.value = "PARENTING";
+            	 //$('input[name="category"]').value = "PARENTING";
+            	 console.log("육아");
+             }
          });
+         
+         function insert_video(){
+        	 var cate = document.getElementById('category');
+        	 if(cate.value == ''){
+        		 alert("카테고리를 선택하세요!");
+        		 return
+        	 } else{
+        		 $("#add_video").submit();
+        	 }
+         }
       </script>
    
 </body>
