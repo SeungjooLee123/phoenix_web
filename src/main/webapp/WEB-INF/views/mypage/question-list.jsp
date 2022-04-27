@@ -11,14 +11,14 @@
 #tabs > li {
 font-weight:600;
 display: block;
-padding: 20px;
+padding: 10px;
 margin-top: 20px;
 cursor: pointer;
 color: #888888;}
 
 #tabs > li:hover {
 color: #000;
-border-bottom: 3px solid #c3bfff;
+border-bottom: 2px solid #c3bfff;
 }
 
 .list {
@@ -53,7 +53,7 @@ background: rgba(195, 191, 255, .45);
 <form action="admin" method="post">
 <input type="hidden" name="category">
 	<ul id='tabs' style="display: flex; justify-content: center;">
-	<li id='nomal'>일반문의</li>
+	<li id='normal'>일반문의</li>
 	<li id='app'>어플리케이션</li>
 	<li id='web'>BSS 웹</li>
 	<li id='account'>계정문의</li>
@@ -65,10 +65,10 @@ background: rgba(195, 191, 255, .45);
 <thead>
 	<tr>
 		<th>번호</th>
-		<th>분류</th>
+		<th>서비스분류</th>
 		<th>제목</th>
-		<th>글쓴이</th>
-		<th>상태</th>
+		<th>작성자</th>
+		<th>답변여부</th>
 		<th>등록일</th>
 	</tr>
 	</thead>
@@ -93,7 +93,7 @@ $(document).on('click', '#tabs li', function () {
 	var idx = $(this).index();
 
 	
-	if(idx==0) $('input[name=category]').val('nomal');
+	if(idx==0) $('input[name=category]').val('normal');
 	else if(idx==1) $('input[name=category]').val('app');
 	else if(idx==2) $('input[name=category]').val('web');
 	else $('input[name=category]').val('account');

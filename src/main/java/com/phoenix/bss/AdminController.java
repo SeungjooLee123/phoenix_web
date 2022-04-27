@@ -1,5 +1,6 @@
 package com.phoenix.bss;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import admin.AdminServiceImpl;
 import admin.Admin_UserVO;
 import common.CommonService;
 import customer.CustomerVO;
+import user.UserVO;
 
 @Controller
 public class AdminController {
@@ -43,31 +45,11 @@ public class AdminController {
 //		return "mypage/admin-list";
 //	}
 	
-	
-	
-	
-//	@RequestMapping("/admin")
-//	public String userList(Model model, HttpSession session) {
-//		session.setAttribute("category", "ad");
-//		List<Admin_UserVO> list =  service.admin_user_list();
-//		model.addAttribute("list", list);
-//		return "mypage/admin-list";
-//	}
-	
-//	@RequestMapping("search.ad")
-//	public String userSearch(String search, String keyword, Model model) {
-//		page.setKeyword(keyword);
-//		page.setSearch(search);
-//		return "";
-//	}
-	
-
-
 	//(카테고리별) 문의사항 화면 요청
 	@RequestMapping("/admin")
 	public String questionList(Model model, HttpSession session, String category) {
 		session.setAttribute("category", "ad");
-		category = category == null ? "nomal" : category;
+		category = category == null ? "normal" : category;
 		List<CustomerVO> list = service.customer_list(category);
 		model.addAttribute("list", list);
 		return "mypage/question-list";
@@ -81,21 +63,41 @@ public class AdminController {
 		return "mypage/detail_qanda";
 	}
 	
-	//방명록 첨부파일 다운로드 요청
+	//문의사항 첨부파일 다운로드 요청
 	@RequestMapping("/download.bo")
 	public void download(int id, HttpSession session, HttpServletResponse req) {
-		//	해당 글의 첨부파일 정보를 DB에서 조회해와 해당 파일을 서버로부터 다운로드함.
 		CustomerVO vo = service.admin_file(id);
-		common.fileDownload(vo.getFilename(), vo.getFilepath(), session, req); //현제 프로젝트가 돌아가는 서버 추출 - 세션
-		//첨부파일의 타입을 지정 - 헤더
-		
+		common.fileDownload(vo.getFilename(), vo.getFilepath(), session, req);
+	}
+	
+	//해당 문의사항 글 조회 후 답변 처리 
+	@RequestMapping("/replyre")
+	public String replyre(CustomerVO vo, String reply, int id) {
+		CustomerVO testvo = service.admin_customer_detail(id);
+		testvo.setReply(reply);
+		service.admin_reply(testvo);
+		return "redirect:admin";
 	}
 	
 	
-	
+	//마이페이지
 	@RequestMapping("/mypage")
-	public String mypage() {
+	public String mypage(Model model, HttpSession session, String user_id) {
+		session.setAttribute("category", "us");
+		user_id =  ((UserVO)session.getAttribute("loginInfo")).getId();
+	
+		List<CustomerVO> list = service.user_cs_list(user_id);
+		model.addAttribute("list", list);
 		return "mypage/mypage";
+	}
+	
+	@RequestMapping("/my_detail")
+	public String my_detail(Model model, int id) {
+		CustomerVO vo = service.admin_reply_detail(id);
+		//여기서 널 
+		model.addAttribute("vo", vo);
+		String test = "";
+		return "mypage/my_detail";
 	}
 	
 }
