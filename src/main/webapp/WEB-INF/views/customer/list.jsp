@@ -5,7 +5,7 @@
 <html>
 <style type="text/css">
 
-#tabs li.active { color: red;}
+#tabs li.active { font-weight: 700;}
 #tabs li{
 	margin: 10px 10px;
 }
@@ -15,7 +15,7 @@
 }
 .answer {
 	display: none;
-	margin-left: 60px;
+	margin-left: 80px;
 }
 .qna-wrap{
 	width: 750px;
@@ -80,12 +80,17 @@ display: block;
 			<c:forEach var="vo" items="${list}">
 				<li>
 					<div class="question">
-						<div style="margin-right: 50px;">${vo.no}</div>
-						<!-- <div><a href='detail.cu?id=${vo.id}'>${vo.title}</a></div> -->
-						<div class="q_title"><a>${vo.title}</a></div>
+						<div class="t_no" style="margin-right: 50px;">${vo.no}</div>
+						<div class="q_title">${vo.title}</div>
 					</div>
 					<div class="answer">
 						<div style="margin-right: 50px;">${vo.content}</div>
+						<c:if test="${loginInfo.admin eq 'Y'}">
+							<div style="display: flex; padding: 10px 0px 10px 470px;">
+								<a class="btn_style" href="modify.cu?id=${vo.id}" style="cursor: pointer;">수정</a>
+								<a class="btn_style" onclick="fnDelete()" style="cursor: pointer;">삭제</a>
+							</div>
+						</c:if>
 					</div>
 					<hr>
 				</li>
@@ -107,6 +112,11 @@ $(function () {
 	//alert(cate.text());
 	$('.li_title').text($(cate).text());
 });
+function fnDelete() {
+	if(confirm("정말 삭제하시겠습니까?")){
+		location.href = "delete.cu?id=" + '${vo.id}'
+	}
+}
 function contact() {
 	var info = '${loginInfo}'
 	if(info == ''){
@@ -123,8 +133,9 @@ $('.qna_list ul li').on('click', function() {
 	//$('.answer').css('display','block');
 	var content = $(this).children('.answer');
 	var title = $(this).children('.question').children('.q_title');
-	if(content.css('display') == 'block') {content.css('display','none'); title.css('font-weight','400');}
-	else {content.css('display','block'); title.css('font-weight','600');}
+	var no = $(this).children('.question').children('.t_no');
+	if(content.css('display') == 'block') {content.css('display','none'); title.css('font-weight','400').css('font-size','16px'); no.css('font-weight','400').css('font-size','16px');}
+	else {content.css('display','block'); title.css('font-weight','600').css('font-size','20px'); no.css('font-weight','600').css('font-size','20px'); }
 })
 $(document).on('click', '#tabs li', function () {
 	var idx = $(this).index();

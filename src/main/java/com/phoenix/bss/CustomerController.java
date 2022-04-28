@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import common.CommonService;
 import customer.CustomerServiceImpl;
 import customer.CustomerVO;
@@ -52,41 +54,14 @@ public class CustomerController {
 	
 	//업데이트
 	@RequestMapping("/update.cu")
-	public String update(CustomerVO vo, MultipartFile file, HttpSession session, String attach) {
-		CustomerVO cus = service.customer_detail(vo.getId());
-		String uuid = session.getServletContext().getRealPath("resources") + "/" + cus.getFilepath();
-		
-		if(file.isEmpty()) {//파일을 첨부하지 않은 경우
-			//원래부터 첨부된 파일이 없는 경우 => 처리할 거 없음
-			
-			//원래 첨부된 파일을 삭제했을 경우 => 물리적 영역에서 삭제해야 함
-			if(attach.isEmpty()) {
-				if(cus.getFilename() != null) {
-					File f = new File(uuid);	//io의 filed을 import시키기
-					if(f.exists()) f.delete();
-				}
-			
-			//원래 첨부된 파일을 그대로 사용하는 경우
-			}else {
-				vo.setFilename(cus.getFilename());
-				vo.setFilepath(cus.getFilepath());
-			}
-			
-		}else {//파일이 있는 경우 => 새로 첨부했거나, 변경한 경우
-			//파일을 새로 첨부한 경우
-			vo.setFilename(file.getOriginalFilename());
-			vo.setFilepath(common.fileUpload("customer", file, session));
-			
-			//파일을 변경한 경우
-			if(cus.getFilename() != null) {//서버에 파일이 있는지 확인
-				File f = new File(uuid);
-				if(f.exists()) f.delete();	
-			}
-		}
-		
+	public String update(CustomerVO vo) {
+		System.out.println("update");
+		//CustomerVO cus = service.customer_detail(vo.getId());
+		Gson gson = new Gson();
+		System.out.println(gson.toJson(vo));
 		//수정된 정보를 db에 업데이트 한 후 상세 화면으로 연결
 		service.customer_update(vo);
-		return "redirect:detail.cu?id="+vo.getId();
+		return "redirect:list.cu";
 	}
 	
 	//신규 고객 정보 저장
