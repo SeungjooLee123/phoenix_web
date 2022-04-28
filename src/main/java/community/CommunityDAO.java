@@ -27,7 +27,7 @@ public class CommunityDAO implements CommunityService {
 		/* System.out.println(page.getBeginList() + "/" + page.getEndList()); */
 		
 		//페이징 처리된 전체 게시글 조회
-		List<CommunityVO> list = sql.selectList("community.mapper.list", page); 
+		List<CommunityCommentVO> list = sql.selectList("community.mapper.list", page); 
 		page.setList( list );
 		for(int i =0; i<list.size(); i++) {
 			//System.out.println("글번호 : " + list.get(i).getId());
@@ -57,6 +57,7 @@ public class CommunityDAO implements CommunityService {
 
 	@Override
 	public int Community_comment_insert(CommunityCommentVO vo) {
+		System.out.println(vo.getUser_id() +"/"+ vo.getContent());
 		return sql.insert("community.mapper.comment_insert", vo);
 	}
 
@@ -72,7 +73,19 @@ public class CommunityDAO implements CommunityService {
 
 	@Override
 	public List<CommunityCommentVO> Community_comment_list(int id) {
-		return sql.selectList("community.mapper.comment_list",id);
+		List<CommunityCommentVO> list = sql.selectList("community.mapper.comment_list",id);
+		System.out.println("시소");
+		
+		return list;
+	}
+
+	@Override
+	public boolean community_co_comment_regist(int comment_id, CommunityCommentVO vo) {
+		sql.update("community.mapper.step_up", comment_id);
+		//대댓글 단 댓글의 comment_id
+		vo.setComment_id(comment_id);
+
+		return sql.insert("community.mapper.co_comment_regist", vo) == 1 ? true : false;
 	}
 
 	
