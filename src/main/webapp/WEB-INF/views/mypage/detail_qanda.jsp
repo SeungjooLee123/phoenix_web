@@ -7,6 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 <script type="text/javascript" src='js/file_check.js?v<%=new Date().getTime() %>'></script>
 </head>
 <body>
@@ -28,7 +36,7 @@
 
 <div>
 <h3>답변하기</h3>
-	<input type="text" name="reply" style="width: 800px; height: 400px;">
+	<textarea title="내용" name="reply" id="summernote" <c:out value="" escapeXml="true"/>></textarea>
 </div>
 <a onclick="$('form').submit()">전송하기</a>
 </form>
@@ -44,6 +52,14 @@ $(function name() {
 		}
 	}
 });
+
+$('#summernote').summernote({
+    width: 1300,
+   height: 300,
+   lang: "ko-KR"
+ 
+ });
+
 </script>
 </body>
 </html>

@@ -141,6 +141,7 @@ opacity: 0.2;
                		 <li><a href='<c:url value="/login"/>'>로그인</a></li>
                 </c:if>
                       <!-- 로그인의 경우 -->
+                <c:if test="${!empty loginInfo }">
                     <c:if test="${ loginInfo.admin eq 'N' }">    
                			<li><a href='<c:url value="/mypage"/>'>마이페이지</a></li>
                			<li  class="Info-line">|</li>
@@ -150,7 +151,8 @@ opacity: 0.2;
                    	    <li><a href='<c:url value="/admin"/>'>관리자 페이지</a></li>
                    	    <li  class="Info-line">|</li>
                    		<li><a href='<c:url value="/logout"/>'>로그아웃</a></li>
-                   	</c:if>              			
+                   	</c:if>  
+                  </c:if>            			
                 </div>
  		</nav>
  		<hr class="line">
