@@ -17,6 +17,7 @@
 <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 <script type="text/javascript" src='js/file_check.js?v<%=new Date().getTime() %>'></script>
 <style type="text/css">
+.modal{position: absolute !important;}
    .modal-header .close{margin: 0px 0px !important;}
 
 </style>
