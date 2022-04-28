@@ -16,6 +16,10 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 <script type="text/javascript" src='js/file_check.js?v<%=new Date().getTime() %>'></script>
+<style type="text/css">
+   .modal-header .close{margin: 0px 0px !important;}
+
+</style>
 </head>
 <body>
 <section id="detail" style="width: 1300px; margin: 0 auto;">
@@ -56,7 +60,11 @@ $(function name() {
 $('#summernote').summernote({
     width: 1300,
    height: 300,
-   lang: "ko-KR"
+   lang: "ko-KR",
+   tableClassName: function(){
+       $(this).addClass('table table-bordered').attr('border', 1).css('borderCollapse', 'collapse');
+       $(this).find('td').css('borderColor', '#000');
+     }
  
  });
 
