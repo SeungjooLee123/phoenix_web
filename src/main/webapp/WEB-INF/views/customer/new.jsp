@@ -42,6 +42,9 @@ table td{
 	text-align: center; 
 	padding: 10px 30px;
 	margin-right: 10px;}
+.line{
+	border-bottom: 1px solid;
+}
 </style>
 <head>
 <meta charset="UTF-8">
@@ -53,7 +56,7 @@ table td{
 		<hr style="opacity: 0.7; height: 2px; background: #000; border: 0px; margin: 20px 0;">
 		<form action="insert.cu" method="post" enctype="multipart/form-data">
 			<table>
-				<tr>
+				<tr class="line">
 					<th>문의 분류 *</th>
 					<td>
 						<select id="body" name="category" style="width: 280px; height: 38px; font-size: 15px; margin-left: 20px; padding: 5px;">
@@ -63,14 +66,14 @@ table td{
 							<option value="account">계정/로그인/탈퇴</option>
 						</select>
 					</td>
-				</tr>
-				<tr>
+				</tr >
+				<tr class="line">
 					<th>제목 *</th>
 					<td>
 						<input class='chk' title='제목' type="text" name="title" style="width: 620px; height: 38px; font-size: 15px; margin-left: 20px;"/>
 					</td>
 				</tr>
-				<tr>
+				<tr class="line">
 					<th>문의 내용 *</th>
 					<td><textarea class='chk' title='문의사항' name="content" style="width: 620px; height: 260px; font-size: 15px; margin-left: 20px;"></textarea></td>
 				</tr>

@@ -12,6 +12,8 @@ public class CustomerVO {
 	String filepath  ;
 	String title     ;
 	String reply     ;
+	String phone;
+	String email;
 	
 	
 	
@@ -20,6 +22,18 @@ public class CustomerVO {
 	
 	
 	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getReply_chk() {
 		return reply_chk;
 	}

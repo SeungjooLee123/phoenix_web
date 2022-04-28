@@ -7,18 +7,18 @@
 <style type="text/css">
 table{
 	border-collapse: collapse;
-	margin: 10px;
+	
 }
 table, tr, td{
 	border : none;
 }
 table th{
-	width: 150px;
+	width: 160px;
 	padding: 10px 0;
 	text-align: left;
 }
 table td{
-	width: 650px;
+	width: 660px;
 	padding: 10px 0;
 }
 .btnSet{
@@ -43,6 +43,9 @@ table td{
 	text-align: center; 
 	padding: 10px 30px;
 	margin-right: 10px;}
+.line{
+	border-bottom: 1px solid;
+}
 </style>
 <head>
 <meta charset="UTF-8">
@@ -55,7 +58,7 @@ table td{
 	<hr style="opacity: 0.7; height: 2px; background: #000; border: 0px; margin: 20px 0;">
 	<input type="hidden" name="id" value="${vo.id}">
 		<table>
-			<tr>
+			<tr class="line">
 				<th>문의분류</th>
 				<td>
 					<select id="body" name="category" style="width: 280px; height: 38px; font-size: 15px; margin-left: 20px; padding: 10px;">
@@ -66,7 +69,7 @@ table td{
 					</select>
 				</td>
 			</tr>
-			<tr>
+			<tr class="line">
 				<th>제목</th>
 				<td>
 					<input type="text" class='chk' title='제목' name="title" value="${vo.title}" style="width: 620px; height: 38px; font-size: 15px; margin-left: 20px; padding: 10px;"/>		
@@ -77,6 +80,7 @@ table td{
 				<td><textarea class='chk' title='답변' name="content" style="width: 620px; height: 260px; font-size: 15px; margin-left: 20px; padding: 10px;">${fn:replace( vo.content, '<br>', crlf) }</textarea></td>
 			</tr>
 		</table>
+		<hr style="opacity: 0.7; height: 2px; background: #000; border: 0px; margin: 20px 0;">
 	</form>
 	<div class="btnSet">
 	<script type="text/javascript" src='js/common.js?v<%=new Date().getTime() %>'></script>
