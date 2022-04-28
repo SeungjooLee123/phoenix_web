@@ -2,7 +2,6 @@ package admin;
 
 import java.util.List;
 
-
 import customer.CustomerVO;
 
 public interface AdminService {
@@ -22,7 +21,21 @@ public interface AdminService {
 	//문의사항 상세조회
 	CustomerVO admin_qanda_detail(String title);
 	
+	//문의사항 해당 글 파일
 	CustomerVO admin_file(int id);
+	
+	//문의사항 해당 글 답변하기
+	boolean admin_reply(CustomerVO vo);
+	
+	//문의사항 카테고리 없이 글 찾기
+	CustomerVO admin_customer_detail(int id);
+	
+	//문의사항 작성자 아이디로 찾기
+	List<CustomerVO> user_cs_list(String user_id);
+	
+	//사용자 문의사항 답변상태 조회
+	CustomerVO admin_reply_detail(int id);
+	
 	
 	
 

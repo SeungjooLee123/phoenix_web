@@ -56,7 +56,44 @@ public class Admin_UserDAO  implements AdminService{
 		return sql.selectOne("admin.mapper.file", id);
 	}
 
+
+
+
+	@Override
+	public boolean admin_reply(CustomerVO vo) {
+		return sql.update("admin.mapper.reply", vo) > 0 ? true : false;
+	}
+
+
+
+
+	@Override
+	public CustomerVO admin_customer_detail(int id) {
+		return sql.selectOne("admin.mapper.cs_one", id);
+	}
+
+
+
+
+	@Override
+	public List<CustomerVO> user_cs_list(String user_id) {
+		return sql.selectList("admin.mapper.my_cs_list", user_id);
+	}
+
+
+
+
+	@Override
+	public CustomerVO admin_reply_detail(int id) {
+		return sql.selectOne("admin.mapper.my_cs_detail", id);
+	}
+
+
+
+
 	
+
+
 
 
 

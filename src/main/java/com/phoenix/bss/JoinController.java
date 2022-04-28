@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,11 +32,13 @@ import babyinfo.FamilyInfoVO;
 import common.CommonService;
 import join.JoinDAO;
 import join.JoinServiceImpl;
+import user.UserDAO;
 import user.UserVO;
 
 @Controller
 public class JoinController {
 	@Autowired private JoinServiceImpl service;
+	@Autowired UserDAO userdao;
 	@Autowired JoinDAO dao;
 	@Autowired CommonService common;
 	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
@@ -43,8 +46,7 @@ public class JoinController {
 
 	private String naver_client_id = "uR4I8FNC11hwqTB3Fr6l";
 	
-	
-	@RequestMapping("/kakaoLogin")
+	@RequestMapping(value="/kakaoLogin", produces="text/html; charset=UTF-8")
 	public String kakaoLogin() {
 		StringBuffer url = new StringBuffer("https://kauth.kakao.com/oauth/authorize?response_type=code");
 		url.append("&client_id=").append("4b12573ac9cb8199a62e031d7c2e1808");
@@ -58,7 +60,7 @@ public class JoinController {
 		return "redirect:" + url.toString(); //위에서 설정한 url로 이동시킴
 	}
 	
-	@RequestMapping("/kakaocallback")
+	@RequestMapping(value = "/kakaocallback", produces="text/html; charset=UTF-8")
 	public String kakaocallback(@RequestParam(value = "code", required = false) String code, @RequestParam(required = false) String error, HttpServletRequest request, HttpSession session) {
 		if(error != null) {//토큰 발급 불가일 때
 			return "redirect:/";
@@ -74,13 +76,17 @@ public class JoinController {
         if(vo != null) {
         	if(service.id_check(vo.getId())) {
     			service.member_join(vo);
-    		}	
-        	session.setAttribute("loginInfo", vo);        	
-        	return "redirect:/"; 
+    		}
+			vo.setAdmin("N");
+			
+			session.setAttribute("loginInfo", vo);
+        	UserVO vo1 = (UserVO) session.getAttribute("loginInfo");
+        	System.out.println(vo1.getId());
+        	
         }else {
         	System.out.println("null로 넘어옴");
-        	return "redirect:/";
         }
+        return "redirect:/";
 	}
 	
 	public UserVO getUserInfo (String access_Token) {
@@ -129,7 +135,7 @@ public class JoinController {
         return null;
     }
 	
-	@RequestMapping("/naverLogin")
+	@RequestMapping(value="/naverLogin", produces="text/html; charset=UTF-8")
 	public String naverLogin(HttpSession session) {
 		String state = UUID.randomUUID().toString();
 		session.setAttribute("state", state);
@@ -142,8 +148,8 @@ public class JoinController {
 		return "redirect:" + url.toString(); //위에서 설정한 url로 이동시킴
 	}
 	
-	@RequestMapping("/navercallback")
-	public String navercallback(@RequestParam(required = false) String code, String state, @RequestParam(required = false) String error, HttpSession session) {
+	@RequestMapping(value="/navercallback", produces="text/html; charset=UTF-8")
+	public String navercallback(@RequestParam(required = false) String code, String state, @RequestParam(required = false) String error, HttpSession session, HttpServletRequest request) {
 		if(! state.equals(session.getAttribute("state")) || error != null) {//토큰 발급 불가일 때
 			return "redirect:/";
 		}
@@ -163,22 +169,21 @@ public class JoinController {
 		url = new StringBuffer("https://openapi.naver.com/v1/nid/me");		// => 예시 첫줄
 		json = new JSONObject(common.requestAPI(url, type + " " + token));			//type과 token 사이에 무조건 한 칸 띄우기
 		
-		
 		if(json.getString("resultcode").equals("00")) {
 			json = json.getJSONObject("response");
 			UserVO vo = new UserVO();
 			vo.setId(json.getString("email"));
 			vo.setNaver_id("Y");
+			vo.setAdmin("N");
 			
 			session.setAttribute("loginInfo", vo);
 			
 			System.out.println(gson.toJson(vo));
 			if(service.id_check(vo.getId())) {
-				System.out.println(gson.toJson(vo)+"if");
 				service.member_join(vo);
 			}
 		}	
-		return "redirect:/";	//로그인 처리가 되며 홈으로 이동
+		return "redirect:/"	;//로그인 처리가 되며 홈으로 이동
 	}
 	
 	//=========================================================================================================
@@ -195,7 +200,10 @@ public class JoinController {
 			msg.append("alert('회원가입을 축하드립니다.');").append("location='").append(req.getContextPath()).append("';");
 		}
 		msg.append("</script>");
-		session.setAttribute("loginInfo", vo);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("id", vo.getId());
+		map.put("pw", vo.getPw());
+		session.setAttribute("loginInfo", userdao.user_login(map));
 		return msg.toString();
 	}
 

@@ -32,7 +32,7 @@ public interface CommunityService {
 	
 	List<CommunityCommentVO> Community_comment_list(int pid);	//방명록 댓글 목록 조회	pid : 원글의 id
 	
-	
+	boolean community_co_comment_regist(int comment_id, CommunityCommentVO vo);
 	
 	
 	

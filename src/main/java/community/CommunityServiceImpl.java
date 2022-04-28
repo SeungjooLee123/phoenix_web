@@ -62,4 +62,10 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 
+	@Override
+	public boolean community_co_comment_regist(int comment_id, CommunityCommentVO vo) {
+		return dao.community_co_comment_regist(comment_id, vo);
+	}
+
+
 }

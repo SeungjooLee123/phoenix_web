@@ -43,6 +43,32 @@ public class AdminServiceImpl implements AdminService {
 		return dao.admin_file(id);
 	}
 
+	@Override
+	public boolean admin_reply(CustomerVO vo) {
+		return dao.admin_reply(vo);
+	}
+
+	@Override
+	public CustomerVO admin_customer_detail(int id) {
+		return dao.admin_customer_detail(id);
+	}
+
+	@Override
+	public List<CustomerVO> user_cs_list(String user_id) {
+		return dao.user_cs_list(user_id);
+	}
+
+	@Override
+	public CustomerVO admin_reply_detail(int id) {
+		return dao.admin_reply_detail(id);
+	}
+
+	
+
+	
+
+	
+
 	
 
 	

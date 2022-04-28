@@ -11,6 +11,25 @@
 </select>
 
 
+<select id="cs_one" resultType="customer.CustomerVO">
+select *
+from master_web_cs_tbl
+where id=#{id}
+</select>
+
+<select id="my_cs_list" resultType="customer.CustomerVO">
+select a.*, nvl2(a.reply, '답변완료', '답변대기') reply_chk 
+from master_web_cs_tbl a
+where user_id =#{user_id}
+order by reply_chk desc
+</select>
+
+<select id="my_cs_detail" resultType="customer.CustomerVO">
+select a.*, nvl2(a.reply, '답변완료', '답변대기') reply_chk
+from master_web_cs_tbl a
+where id = #{id}
+</select>
+
 
 	<select id="totalList" resultType="integer">
 		SELECT COUNT(*) FROM MASTER_USER_INFO_TBL <include refid="and_search" /> 
@@ -72,13 +91,19 @@
 	where title = #{title}
 	</select>
 	
+	<!-- 문의사항 파일 받기 -->
 	<select id="file" resultType="customer.CustomerVO">
 	select *
 	from master_web_cs_tbl
 	where id = #{id}
-	
 	</select>
 	
+	<!-- 해당 문의사항 글 답변하기 -->
+	<update id="reply">
+	update master_web_cs_tbl
+	set reply = #{reply}
+	where id = #{id}
+	</update>
 	
 	<!-- 고객 삭제 -->
 	<delete id="delete">

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="community.mapper">  
+<!-- 대댓글을 위해 step +1 -->
+<update id="step_up">
+	 UPDATE MASTER_WEB_BOARD_COMMENT_TBL SET STEP = STEP+1 WHERE COMMENT_ID >= #{comment_id}
+</update>
+
+<!-- 대댓글 저장 -->
+<insert id="co_comment_regist">
+	INSERT INTO MASTER_WEB_BOARD_COMMENT_TBL(STEP, USER_ID, CONTENT, WRITE_DATE, INDENT, ID)
+	SELECT step-1 , #{user_id}, #{content}, sysdate, 2 ,#{id} FROM MASTER_WEB_BOARD_COMMENT_TBL where comment_id = #{comment_id}
+</insert>
+
 <!-- 댓글수정 -->
 <update id="comment_update">
 	update MASTER_WEB_BOARD_COMMENT_TBL set CONTENT = #{content}, WRITE_DATE = sysdate   
@@ -16,9 +27,9 @@
 
 
 <!-- 댓글 저장 처리 _ 내용, 작성자, 원글정보를 저장-->
-<insert id="comment_insert">
-	insert into MASTER_WEB_BOARD_COMMENT_TBL (USER_ID, CONTENT, WRITE_DATE, ID, STEP, INDENT)
-	values(#{user_id},#{content}, sysdate, #{id}, 1, 1 )
+<insert id="comment_insert">	
+	INSERT INTO MASTER_WEB_BOARD_COMMENT_TBL(STEP, USER_ID, CONTENT, WRITE_DATE, INDENT, ID)
+	SELECT NVL(MAX(STEP)+1, 1) , #{user_id}, #{content}, sysdate, 1, #{id} FROM MASTER_WEB_BOARD_COMMENT_TBL
 </insert>
 
 
@@ -27,7 +38,7 @@
 	select comment_id,step,indent,id, write_date ,content,user_id 
 	from MASTER_WEB_BOARD_COMMENT_TBL 
 	where id = #{id}
-	order by id desc
+	order by step desc 
 </select>
 
 

@@ -62,4 +62,10 @@ public class IotController {
             
    }
    
+   @ResponseBody
+   @RequestMapping("/stop_biking.io")
+   public void stop_moter() {
+      test_shake = "";
+   }
+   
 }

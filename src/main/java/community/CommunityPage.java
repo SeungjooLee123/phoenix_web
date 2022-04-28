@@ -8,16 +8,16 @@ import common.PageVO;
 @Component
 public class CommunityPage extends PageVO{
 
-	private List<CommunityVO> list;
+	private List<CommunityCommentVO> list;
 
 	
 	
 	
-	public List<CommunityVO> getList() {
+	public List<CommunityCommentVO> getList() {
 		return list;
 	}
 
-	public void setList(List<CommunityVO> list) {
+	public void setList(List<CommunityCommentVO> list) {
 		this.list = list;
 	}
 	
