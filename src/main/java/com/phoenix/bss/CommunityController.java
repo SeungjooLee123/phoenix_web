@@ -219,18 +219,37 @@ public String update(CommunityVO vo, MultipartFile file, HttpSession session, St
 		//비동기 통신을 할떄에는 responsebody를 이용해야한다 ex 안드 어싱크테스크 
 	}
 	
+	//대댓글 저장
+	@ResponseBody
+	@RequestMapping("/community/co_comment/regist")
+	public List<CommunityCommentVO> co_coment_regist(HttpSession session, int id, String content, int comment_id, Model model) {
+		UserVO member = (UserVO) session.getAttribute("loginInfo");
+		CommunityCommentVO vo = new CommunityCommentVO();
+		vo.setUser_id( member.getId() );
+		vo.setId(id);
+		vo.setContent(content);
+		//대댓글 insert
+		service.community_co_comment_regist(comment_id, vo);
+		//댓글 리스트 다시 조회
+		List<CommunityCommentVO> list = service.Community_comment_list(id);
+		model.addAttribute("list", list  );
+		model.addAttribute("crlf", "\r\n");
+		model.addAttribute("lf", "\n");
+		return list;
+	}
+	
 	
 	//커뮤 글에 대한 댓글목록조회 요청
 	@RequestMapping("/community/comment/list/{id}")
 	public String comment_list( @PathVariable int id, Model model ) {//경로에 있눈 값이다
 		//해당 글애 대한 댓글들을 DB에서 조회해 온다,
+		System.out.println("id : "+id);
 		
 		List<CommunityCommentVO> list = service.Community_comment_list(id);
 		
 		model.addAttribute("list", list  );
 		model.addAttribute("crlf", "\r\n");
 		model.addAttribute("lf", "\n");
-		System.out.println("id : "+id);
 		
 		return "community/comment/commentlist";
 	}

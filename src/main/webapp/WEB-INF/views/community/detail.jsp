@@ -148,6 +148,7 @@ function comment_regist(){
 	}
 	var pid = ${vo.id};
 	var con = $('#comment').val()
+	alert(pid);
 	$.ajax ({
 		/* 경로 형태로 url  지정할꺼양 */
 		url :	'community/comment/regist'			/* controller 호출  주소 형식 맵핑 */
@@ -157,6 +158,7 @@ function comment_regist(){
 			if( res ){	//true == true T , false == true F
 				alert('댓글이 등록되었습니다.')	;
 				$('#comment').val('');
+				alert(pid);
 				comment_list();		//댓글 목록 조회 요청
 			} else {
 				alert('댓글 등록을 실패하였습니다.');
@@ -170,10 +172,10 @@ function comment_regist(){
 
 /* 댓글 목록 조회()  */
 function comment_list(){
-	var id = ${ vo.id }
+	var id = ${ vo.id };
 	$.ajax({
 		url : "community/comment/list/${vo.id}"
-		, data : {pid : 383 }
+		, data : {pid : 342 }
 		, success : function ( res) {
 			$('#comment_list').html( res );
 		}, error : function (req, text){
