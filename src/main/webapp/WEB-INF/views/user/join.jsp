@@ -12,7 +12,7 @@ margin:0 auto;
 }
 .login-logo{
 margin-bottom: 60px;
-margin-top: 100px;
+margin-top: 40px;
 text-align: center;
 }
 .input-info {
@@ -45,8 +45,7 @@ z-index: 5;
 }
 
 .btns{
-margin: 20px auto;
-justify-content: center;
+justify-content: space-between;
 display: flex;
 }
 
@@ -76,6 +75,10 @@ margin-top: 20px;}
 	text-align: left;
 	margin: 0 0 5px 5px;
 }
+
+.ad{
+margin-bottom: 30px;
+margin-top: 33px;}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -109,6 +112,10 @@ margin-top: 20px;}
 			<div class="invalid">비밀번호를 다시 입력하세요</div>
 		</div>
 	</div>
+	
+<div class="ad">
+	<img src="imgs/bss_ad1.png" style="width:360px; height:150px;">
+</div>
 	
 	<div class="btns">
 	   <a href="naverLogin"><img src="imgs/naver_join.svg" style="width:155px; height:40px; margin-right:10px;"></a>
