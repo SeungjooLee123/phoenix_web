@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@ page import="java.util.Date"%>
 <!DOCTYPE html>
 <html>
@@ -36,7 +37,8 @@ table td{
 	font-weight: 700;
 	display: block;
 	font-size: 15px;
-	background: #c3bfff;
+	border-radius: 5px;
+	background: #f0efff;
 	cursor: pointer;
 	text-align: center; 
 	padding: 10px 30px;
@@ -49,30 +51,30 @@ table td{
 <body>
 <div id="container" style="width:820px; margin: 0 auto;">
 	<form action="update.cu" method="post">
-	<h1 style="margin: 50px 0;">문의 수정</h1>
+	<h1 style="margin-top: 65px; margin-bottom: 30px;">문의 수정</h1>
 	<hr style="opacity: 0.7; height: 2px; background: #000; border: 0px; margin: 20px 0;">
 	<input type="hidden" name="id" value="${vo.id}">
 		<table>
 			<tr>
 				<th>문의분류</th>
 				<td>
-					<select id="body" name="category" style="width: 280px; height: 38px; font-size: 15px; margin-left: 20px;">
-						<option value="nomal" selected="selected">일반문의</option>
-						<option value="app">어플리케이션</option>
-						<option value="web">BSS 웹</option>
-						<option value="account">계정/로그인/탈퇴</option>
+					<select id="body" name="category" style="width: 280px; height: 38px; font-size: 15px; margin-left: 20px; padding: 10px;">
+						<option value="nomal" ${vo.category eq 'nomal' ? 'selected' : ''}>일반문의</option>
+						<option value="app" ${vo.category eq 'app' ? 'selected' : ''}>어플리케이션</option>
+						<option value="web" ${vo.category eq 'web' ? 'selected' : ''}>BSS 웹</option>
+						<option value="account" ${vo.category eq 'account' ? 'selected' : ''}>계정/로그인/탈퇴</option>
 					</select>
 				</td>
 			</tr>
 			<tr>
 				<th>제목</th>
 				<td>
-					<input type="text" class='chk' title='제목' name="title" value="${vo.title}" style="width: 620px; height: 38px; font-size: 15px; margin-left: 20px;"/>		
+					<input type="text" class='chk' title='제목' name="title" value="${vo.title}" style="width: 620px; height: 38px; font-size: 15px; margin-left: 20px; padding: 10px;"/>		
 				</td>
 			</tr>
 			<tr>
-				<th>내용</th>
-				<td><textarea class='chk' title='제목' name="content" style="width: 620px; height: 260px; font-size: 15px; margin-left: 20px;">${vo.content}</textarea></td>
+				<th>답변</th>
+				<td><textarea class='chk' title='답변' name="content" style="width: 620px; height: 260px; font-size: 15px; margin-left: 20px; padding: 10px;">${fn:replace( vo.content, '<br>', crlf) }</textarea></td>
 			</tr>
 		</table>
 	</form>

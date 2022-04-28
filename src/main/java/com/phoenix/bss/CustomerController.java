@@ -24,7 +24,6 @@ public class CustomerController {
 	@Autowired private CustomerServiceImpl service;
 	@Autowired private CommonService common;
 	
-	//방명록 목록화면 요청
 	@RequestMapping("/list.cu")
 	public String list(HttpSession session, Model model, String category) {
 		//cs -> 마음에 안 들면 변경
@@ -32,23 +31,24 @@ public class CustomerController {
 		category = category == null ? "nomal" : category;
 		List<CustomerVO> list = service.customer_list(category);
 		model.addAttribute("list", list);
+		model.addAttribute("crlf","\r\n");
 		model.addAttribute("cu_category", category);
 		return "customer/list";
 	}
 	
-	//고객 개인정보 상세 화면 요청
-	@RequestMapping("/detail.cu")
-	public String detail(int id, Model model) {
-		//선택한 고객 정보를 db에서 조회하고 보냄
-		model.addAttribute("vo", service.customer_detail(id));
-		model.addAttribute("crlf", "\r\n"); 
-		return "customer/detail";
-	}
+//	@RequestMapping("/detail.cu")
+//	public String detail(int id, Model model) {
+//		//선택한 고객 정보를 db에서 조회하고 보냄
+//		model.addAttribute("vo", service.customer_detail(id));
+//		model.addAttribute("crlf", "\r\n"); 
+//		return "customer/detail";
+//	}
 	
 	@RequestMapping("/modify.cu")
 	public String update(int id, Model model) {
 		//수정 전 기존의 정보를 가져와 화면에 보여줘야함
 		model.addAttribute("vo", service.customer_detail(id));
+		model.addAttribute("crlf","\r\n");
 		return "customer/modify";
 	}
 	
@@ -64,7 +64,7 @@ public class CustomerController {
 		return "redirect:list.cu";
 	}
 	
-	//신규 고객 정보 저장
+	//저장
 	@RequestMapping("/insert.cu")
 	public String insert(CustomerVO vo, HttpSession session, MultipartFile file) {
 		//첨부파일이 있다면
