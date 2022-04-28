@@ -39,6 +39,7 @@ public class WelfareController {
 		page.setKeyword(keyword);
 		page.setPageList(pageList);
 		
+		session.setAttribute("category", "we");
 		model.addAttribute("page", service.wel_list(page));
 		
 		return "welfare/list";

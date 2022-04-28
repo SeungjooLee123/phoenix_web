@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/style.css?v=<%=new Date().getTime()%>">
 <style type="text/css">
-#container_wel{width:1200px; margin:0 auto; display: flex;}
+#container_wel{width:1200px; margin:0 auto; display: flex; margin-top: 20px;}
 .title_list{width:20%;}
 .content_main{width:77%;}
 .line_main{width: 3%; display: flex;}
@@ -23,7 +23,8 @@
 #list-top ul:last-child { float: right;}
 .btn-fill{border-radius: 5px; background: #8c88c9; color: #fff;}
 .file-here{float: right;}
-
+.btn_style{background: #f0efff; cursor: pointer; float: right; margin: 20px 10px; padding: 10px 13px; border: 1px solid #f0efff; border-radius: 3px;}
+#content_here{width: 80%; margin-left: 15px;}
 </style>
 </head>
 <body>
@@ -43,18 +44,18 @@
    </div>
    <div class="content_main">
       <div id="content_here"></div>
-      
+      <div id="btn_here"></div>
    </div>
    
    </div>
    <ul style="width: 1200px; margin: 0 auto;">
       <!-- 관리자로 로그인된 경우만 글쓰기 가능 -->
       <c:if test="${loginInfo.admin eq 'Y' }">
-         <li><a href='new.wel' style="float: right; padding: 5px; border: 1px solid #e6e6e6; border-radius: 3px;">글쓰기</a></li>
+         <li><a class="btn_style" href="new.wel"><i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;글쓰기</a></li>
       </c:if>
    </ul>
    <div class="search">
-   <form action="list.wel" method="post" style="margin-top: 50px;">
+   <form action="list.wel" method="post" style="margin-top: 100px;">
    <input type="hidden" name="curPage" value="1" />
    <div id = 'list-top' style='text-align : center;'>
       <div style="display: inline-block;">
@@ -83,7 +84,8 @@
 			   document.getElementById("content_here").innerHTML = '${page.list[0].content}';
 			   }
 	   if('${page.list[0].user_id}' == "${loginInfo.id}"){
-		   $("#content_here").append("<br/></br><div style='float: right; margin-top: 10px;'><a style='padding: 5px; border-right: 1px solid #000;' href='modify.wel?id=${page.list[0].id }'>수정   </a><a style='padding: 5px; margin-left: 5px;' onclick =' if( confirm(\"정말 삭제?\") ) { href=\"delete.wel?id=${page.list[0].id }\" }''>   삭제</a></div></br></br>");
+		   document.getElementById("btn_here").innerHTML = "<br/></br><div style='float: right; margin-top: 10px;'><a style='padding: 5px; border-right: 1px solid #000;' href='modify.wel?id=${page.list[0].id }'>수정   </a><a style='padding: 5px; margin-left: 5px;' onclick =' if( confirm(\"정말 삭제하시겠습니까?\") ) { href=\"delete.wel?id=${page.list[0].id }\" }''>   삭제</a></div></br></br>";
+		   //$("#content_here").append("<br/></br><div style='float: right; margin-top: 10px;'><a style='padding: 5px; border-right: 1px solid #000;' href='modify.wel?id=${page.list[0].id }'>수정   </a><a style='padding: 5px; margin-left: 5px;' onclick =' if( confirm(\"정말 삭제하시겠습니까?\") ) { href=\"delete.wel?id=${page.list[0].id }\" }''>   삭제</a></div></br></br>");
 		   }
 	   });
    
@@ -99,7 +101,8 @@
 				   }
             	
 		   if('${vo.user_id}' == "${loginInfo.id}"){
-			   $("#content_here").append("</br></br><div style='float: right; margin-top: 10px;'><a href='modify.wel?id=${vo.id }' style='padding: 5px; border-right: 1px solid #000;'>수정   </a><a style='padding: 5px; margin-left: 5px;' onclick =' if( confirm(\"정말 삭제?\") ) { href=\"delete.wel?id=${vo.id }\" }''>삭제</a></div></br></br>");
+			   document.getElementById("btn_here").innerHTML = "</br></br><div style='float: right; margin-top: 10px;'><a href='modify.wel?id=${vo.id }' style='padding: 5px; border-right: 1px solid #000;'>수정   </a><a style='padding: 5px; margin-left: 5px;' onclick =' if( confirm(\"정말 삭제하시겠습니까?\") ) { href=\"delete.wel?id=${vo.id }\" }''>삭제</a></div></br></br>";
+			   //$("#content_here").append("</br></br><div style='float: right; margin-top: 10px;'><a href='modify.wel?id=${vo.id }' style='padding: 5px; border-right: 1px solid #000;'>수정   </a><a style='padding: 5px; margin-left: 5px;' onclick =' if( confirm(\"정말 삭제하시겠습니까?\") ) { href=\"delete.wel?id=${vo.id }\" }''>삭제</a></div></br></br>");
 			   }
 		   }
 	   </c:forEach>

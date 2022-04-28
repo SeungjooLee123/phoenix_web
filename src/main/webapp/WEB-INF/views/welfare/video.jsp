@@ -9,12 +9,9 @@
 <style type="text/css">
    .wrap_test{max-width: 1200px; margin: 0 auto;}
    .wrap_video, .wrap_video2{width: 1200px; margin: 0 auto; margin-top: 10px;}
-   #popup-background{
-   position: absolute; left: 0; top: 0; width: 100%; height: 100%;
-   background-color: #000; opacity: 0.3; display: none; margin: 0 auto;
-   }
+   #popup-background{position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: #000; opacity: 0.3; display: none; margin: 0 auto;}
    .slick-track{height: 210px;} 
-   .slick-prev:before, .slick-next:before{color: #8c88c9 !important; opacity: 1 ; }
+   .slick-prev:before, .slick-next:before{color: #000 !important; opacity: 1 ; }
    .wrap-video div>img{width: 200px; height: 157px;}
    .wrap-video2 div>img{width: 280px; height: 157px;}
    .addVideo{position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); visibility: hidden; transform: scale(1.1); transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; }
@@ -26,9 +23,9 @@
    .close-button:hover{background-color: darkgray;}
    
    #category-ul{display: flex;}
-#category-ul li > a{display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
-#category-ul li > a.btn-fill{background: #c3bfff; color: #fff;}
-#category-ul li > a.btn-empty{background: #f5f5f5;}
+	#category-ul li > a{display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
+	#category-ul li > a.btn-fill{background: #c3bfff; color: #fff;}
+	#category-ul li > a.btn-empty{background: #f5f5f5;}
 
 .search{width: 1200px; margin: 0 auto;}
 #list-top {margin-bottom: 20px; margin-top: 20px;}
@@ -54,7 +51,7 @@
 	         <ul id="search_main">
 	         	<li><input type="hidden" value="all" name="search"/></li>
 	            <li><input type="text" style="padding: 10px; font: 16px;" name='keyword' value='${page.keyword }' class='w-px300' /></li>
-	            <li class="btn-fill" style="padding: 10px; margin-left: 10px;"><a style='vertical-align: center; font: 16px;' onclick="$('#search_form').submit()">검색</a></li>         
+	            <li class="btn-fill" style="padding: 10px; margin-left: 10px;"><a style='vertical-align: center; font: 16px;' onclick="$('#search_form').submit()">검색</a></li>
 	         </ul>
 	      </div>
 	   </div>
@@ -67,9 +64,9 @@
          		<c:if test="${vo.category eq 'CHILDBIRTH' }">
          			<div style="margin-left: 15px; width: 280px; margin-top: 35px;">
 	         			<img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 280px; height: 157px;" class="img${vo.id }"/>
-	         			<h4 style="margin-left: 5px; margin-top: 5px;">${fn:substring(vo.explain , 0, 19) }</h4>
+	         			<h4 style="margin-left: 5px; margin-top: 5px;" class="img${vo.id }">${fn:substring(vo.explain , 0, 19) }</h4>
 	         			<c:if test="${loginInfo.admin eq 'Y' }">
-         					<a style="float: right; display: inline-block;" href="delete_video.wel?no=${vo.no }">삭제</a>
+         					<a style="float: right; display: inline-block;" id="modi" class="modify${vo.id }" href="delete_video.wel?no=${vo.no }">삭제</a>
          				</c:if>
 	         		</div>
          		</c:if>
@@ -82,9 +79,9 @@
          		<c:if test="${vo.category eq 'PARENTING' }">
          			<div style="margin-left: 15px; width: 280px; margin-top: 35px;">
          				<img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 280px; height: 157px;" class="img${vo.id }"/>
-         				<h4 style="margin-left: 5px; margin-top: 5px;">${fn:substring(vo.explain , 0, 19) }</h4>
+         				<h4 style="margin-left: 5px; margin-top: 5px;" class="img${vo.id }">${fn:substring(vo.explain , 0, 19) }</h4>
          				<c:if test="${loginInfo.admin eq 'Y' }">
-         					<a style="float: right; display: inline-block;" href="delete_video.wel?no=${vo.no }">삭제</a>
+         					<a style="float: right; display: inline-block;" id="modi" class="modify${vo.id }" href="delete_video.wel?no=${vo.no }">삭제</a>
          				</c:if>
          			</div>
          		</c:if>
@@ -92,7 +89,7 @@
          </div>
          
          <c:if test="${loginInfo.admin eq 'Y' }">
-         	<a id="new_video" style="float: right; padding: 5px; border: 1px solid #e6e6e6; border-radius: 3px; margin-top: 50px;" class="btn-fill">동영상 추가하기</a>
+         	<a id="new_video" style="float: right; padding: 10px; background: #f0efff; border: 1px solid #f0efff; border-radius: 3px; margin-top: 50px; cursor: pointer;"><i class="fa-solid fa-plus" style="margin-right: 5px;"></i>추가하기</a>
       </c:if>
       </div>
       <div class="addVideo">
@@ -112,11 +109,10 @@
 	      		<textarea placeholder="동영상에 대한 설명을 작성해주세요(100자 이내)" id="explain" name="explain" style="padding: 8px; margin-top: 5px; width: 80%; height: 100px; resize: none;" required="required"></textarea>
 	      		<a style='display: inherit; margin: 0 auto; margin-top: 20px; width: 60px; padding: 5px;' onclick="insert_video()" class="btn-fill">추가</a>
       		</form>
-      		
       	</div>
       </div>
       <div id="popup-background"></div>
-		<div id="popup" class="center" style="vertical-align: middle;"></div>
+      <div id="popup" class="center" style="vertical-align: middle;"></div>
   
       <script type="text/javascript">
          $.noConflict();
@@ -124,22 +120,24 @@
             lazyLoad: 'ondemand',
             infinite: true,
             slidesToShow: 4,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            draggable: true
          });
          $('.wrap_video2').slick({
             lazyLoad: 'ondemand',
             infinite: true,
             slidesToShow: 4,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            draggable: true
          });
-         
+     
          $(document).on('click', '.wrap_video img', function() {
         	 var indexs = $(this).attr("class");
         	 indexs = indexs.split(" ");
         	 <c:forEach var="vo" items="${list}">
         	 	if("${vo.id}" == indexs[0].split("g")[1]){
         	 		$('#popup, #popup-background').css('display', 'block');
-        	 		$('#popup').html('<iframe width="1000" height="600" src="https://www.youtube.com/embed/${vo.videopath}?autoplay=1" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+        	 		$('#popup').html('<iframe width="1000" height="600" id="youtube" src="https://www.youtube.com/embed/${vo.videopath}?autoplay=1" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
         	 	}
         	 </c:forEach>
         	});
@@ -150,16 +148,38 @@
         	 <c:forEach var="vo" items="${list}">
         	 	if("${vo.id}" == indexs[0].split("g")[1]){
         	 		$('#popup, #popup-background').css('display', 'block');
-        	 		$('#popup').html('<iframe width="1000" height="600" src="https://www.youtube.com/embed/${vo.videopath}?autoplay=1" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+        	 		$('#popup').html('<iframe width="1000" height="600" id="youtube" src="https://www.youtube.com/embed/${vo.videopath}?autoplay=1" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+        	 	}
+        	 </c:forEach>
+        	});
+         
+         $(document).on('click', '.wrap_video h4', function() {
+        	 var indexs = $(this).attr("class");
+        	 indexs = indexs.split(" ");
+        	 <c:forEach var="vo" items="${list}">
+        	 	if("${vo.id}" == indexs[0].split("g")[1]){
+        	 		$('#popup, #popup-background').css('display', 'block');
+        	 		$('#popup').html('<iframe width="1000" height="600" id="youtube" src="https://www.youtube.com/embed/${vo.videopath}?autoplay=1" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+        	 	}
+        	 </c:forEach>
+        	});
+         
+         $(document).on('click', '.wrap_video2 h4', function() {
+        	 var indexs = $(this).attr("class");
+        	 indexs = indexs.split(" ");
+        	 <c:forEach var="vo" items="${list}">
+        	 	if("${vo.id}" == indexs[0].split("g")[1]){
+        	 		$('#popup, #popup-background').css('display', 'block');
+        	 		$('#popup').html('<iframe width="1000" height="600" id="youtube" src="https://www.youtube.com/embed/${vo.videopath}?autoplay=1" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
         	 	}
         	 </c:forEach>
         	});
          
         	$(document).on('click', '#popup-background', function() {
         	   $('#popup, #popup-background').css('display', 'none');
-        	   $('#popup').html('<iframe id="test_click" width="1000" height="600" src="https://www.youtube.com/embed/lc1fVIK17Bg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+        	   $('#popup').html('<iframe id="test_click" width="1000" height="600" id="youtube" src="https://www.youtube.com/embed/lc1fVIK17Bg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
         	}).on('click', '#popup-background', function (){
-        		$('#popup , #popup-background' ).css('display', 'none');	
+        		$('#popup , #popup-background' ).css('display', 'none');
         	});
         	
         	$("#new_video").click(function(){
@@ -181,13 +201,9 @@
              if(index_ca == 0){
             	 var cate = document.getElementById('category');
             	 cate.value = "CHILDBIRTH";
-            	 //$('input[name="category"]').value = "CHILDBIRTH";
-            	 console.log("출산");
              } else{
             	 var cate = document.getElementById('category');
             	 cate.value = "PARENTING";
-            	 //$('input[name="category"]').value = "PARENTING";
-            	 console.log("육아");
              }
          });
          

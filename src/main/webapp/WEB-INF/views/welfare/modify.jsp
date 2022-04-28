@@ -18,6 +18,13 @@
    #cate-ul li > a{display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
    #cate-ul li > a.btn-fill{background: #c3bfff; color: #fff;}
    #cate-ul li > a.btn-empty{background: #f5f5f5;}
+   .modal{position: absolute !important;}
+   .modal-header{justify-content: unset;}
+   .modal-header .close{margin: 0px 0px !important;}
+   .modal-title{margin-top: 11px; margin-left: 136px;}
+   input[type=file], #delete-file { display: none;}
+	.file-img { width: 20px; height: 18px; }
+	#attach-file, #delete-file { color: #ff0000; }
    table{
       width: 80%;
       margin: 20px auto;
@@ -64,14 +71,13 @@
          <tr>
             <td class="left middle">
                <label>
-                  <input type="file" name="file" id="attach-file" />
-                  <a class="file-img">업로드</a>
+                  <a><img src='imgs/select.png' class='file-img' /></a>
+				<input type="file" id='attach-file' name='file' />
                </label>
-               <span id="file-name">${vo.filename}</span>
                <c:if test="${! empty vo.filename }">
                   <!-- 파일 보이기  -->
-                  <span id='preview'></span>
-                  <a id="delete-file" style="display: inline;">삭제</a>
+                  <span id='file-name'>${vo.filename }</span>
+                  <a id='delete-file' style='display : ${empty vo.filename ? "none" : "inline"}'><i class="fa-solid fa-circle-xmark"></i></a>
                </c:if>
             </td>
          </tr>
@@ -84,12 +90,18 @@
       <a style="margin-right: 20px; border: 1px solid #8c88c9; background: #8c88c9; border-radius: 5px; color: #fff; padding: 5px; font-size: 18px;" style="cursor: pointer;" onclick="if( emptyCheck() ){ $( '[name=attach]' ).val( $('#file-name').text() ); $('form').submit() }">저장</a>
       <a style="font-size: 18px; padding: 5px; border: 1px solid #fffef0; border-radius: 5px; background: #ebebeb" onclick="history.go(-1)">취소</a>
    </div>
-   <script type="text/javascript" src='js/file_check.js?v<%=new Date().getTime() %>'></script>  <!--파일 미리보기 필요함  -->
+   <script type="text/javascript" src="js/file_check.js?v<%=new Date().getTime()%> "></script>
+   <script type="text/javascript" src='js/common.js?v<%=new Date().getTime() %>'></script>
    <script type="text/javascript">
       $('#summernote').summernote({
           width: 1300,
          height: 300,
          lang: "ko-KR",
+         tableClassName: function(){
+        	$(this).addClass('table table-bordered').attr('border', 1).css('borderCollapse', 'collapse').css('width', '100%');
+        	$(this).find('tr:first-child td').css('borderTop', '1px solid #000').css('borderBottom', '1px solid #ddd').css('borderLeft', '1px solid #ddd').css('borderRight', '1px solid #ddd').css('padding', '15px').css('fontWeight', 'bold').css('background', '#e2f1ff');
+        	$(this).find('tr:not(:first-child) td').css('borderColor', '#ddd').css('padding', '15px');
+         },
             callbacks: {   //여기 부분이 이미지를 첨부하는 부분
                 onImageUpload : function(files) {
                    uploadSummernoteImageFile(files,this);
