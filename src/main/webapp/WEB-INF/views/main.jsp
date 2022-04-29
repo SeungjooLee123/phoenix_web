@@ -444,7 +444,6 @@ var topEle =$('#topBtn');
 var delay =1000;
 $(function () {
 	var isjoin = '${isjoin}';
-	alert(isjoin);
 	if(isjoin == "yes")
 		alert("회원가입을 축하합니다.");
 });
