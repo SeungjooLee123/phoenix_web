@@ -14,16 +14,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.css">
 </head>
 <body>
-
-<jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/>
+<div style="display: flex; width: 1300px; margin: 0 auto;">
+<div><jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/></div>
+<div style="width: 900px; margin-top: 50px; margin-left: 20px;">
 <script type="text/javascript">
 	$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
 	$("#cate-ul li>a").eq(2).attr("class", "btn-fill");
 </script>
-<ul id='graph-ul'>
-	<li>출생</li>
-	<li>표준발육</li>
-</ul>
 
 <div id="grow_select" style="display: none;">
 	<select id="body" onchange="selectchg()">
@@ -33,10 +30,13 @@
 	</select>
 </div>
 
-<div id="chart_div" style="width: 1200px; height: 500px;"></div>
+<div id="chart_div" style="width: 1050px; height: 500px;"></div>
+</div>
+</div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+$(".graph ul>li:not(:first-of-type)").css("display", "block");
   
 google.charts.load('current', {'packages':['corechart']});
 
@@ -211,19 +211,16 @@ google.charts.load('current', {'packages':['corechart']});
 	    chart.draw(data, options);
 	  }
   $(function () {
-		$('#graph-ul li:eq(0)').trigger('click');
+		$('.graph ul>li:eq(1)').trigger('click');
 	})
-  $(document).on('click', '#graph-ul li', function () {
-		$('#graph-ul li').removeClass();
-		$(this).addClass('active');
-		
+  $(document).on('click', '.graph ul>li', function () {
 		var idx = $(this).index();
 		
-		if( idx==0 ) {
+		if( idx==1 ) {
 			$('#grow_select').css('display', 'none');
 			google.charts.setOnLoadCallback(birthVisualization);
 		}
-		else if( idx==1 ) {
+		else if( idx==2 ) {
 			$('#grow_select').css('display', 'block');
 			selectchg();
 		}

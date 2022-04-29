@@ -7,13 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-   .wrap_test{max-width: 1200px; margin: 0 auto;}
-   .wrap_video, .wrap_video2{width: 1200px; margin: 0 auto; margin-top: 10px;}
    #popup-background{position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: #000; opacity: 0.3; display: none; margin: 0 auto;}
-   .slick-track{height: 210px;} 
-   .slick-prev:before, .slick-next:before{color: #000 !important; opacity: 1 ; }
-   .wrap-video div>img{width: 200px; height: 157px;}
-   .wrap-video2 div>img{width: 280px; height: 157px;}
    .addVideo{position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); visibility: hidden; transform: scale(1.1); transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; }
    .video-main{position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 1rem 1.5rem; width: 500px; height: 400px; border-radius: 0.5rem;}
    .video-main div{font-size: 13px;}
@@ -27,7 +21,7 @@
 	#category-ul li > a.btn-fill{background: #c3bfff; color: #fff;}
 	#category-ul li > a.btn-empty{background: #f5f5f5;}
 
-.search{width: 1200px; margin: 0 auto;}
+.search{width: 900px; margin: 0 auto;}
 #list-top {margin-bottom: 20px; margin-top: 20px;}
 #list-top div { height: 36px;}
 #list-top ul { margin: 0; display: flex; float: right;}
@@ -36,13 +30,82 @@
 #list-top ul:last-child { float: right;}
 .btn-fill{border-radius: 5px; background: #8c88c9; color: #fff;}
 .btn-empty{background: #f5f5f5;}
+
+
+ul.grid { width: 900px; display: inline-block; }
+ul.grid li { float: left; width: 32%; height: 200px; margin: 20px 10px 0 0; 
+		border: 1px solid #b0b0b0; box-sizing: border-box; }
+ul.grid li:nth-child(3n) {margin-right: 0;}		/* 5n  <- 5개 마다 */
+ul.grid li div {text-align: left; padding: 5px 10px; }
+ul.grid li:nth-child(n+4){display: none;}
+
+ul.grid2 { width: 900px; display: inline-block; }
+ul.grid2 li { float: left; width: 32%; height: 200px; margin: 20px 10px 0 0; 
+		border: 1px solid #b0b0b0; box-sizing: border-box; }
+ul.grid2 li div {text-align: left; padding: 5px 10px; }
+ul.grid2 li:nth-child(n+4){display: none;}
+
+#video1_point:hover{cursor: pointer;}
+
+ul.grid2 { width: 900px; display: inline-block; }
+ul.grid2 li { float: left; width: 32%; height: 200px; margin: 20px 10px 0 0; 
+		border: 1px solid #b0b0b0; box-sizing: border-box; }
+ul.grid2 li:nth-child(3n) {margin-right: 0;}		/* 5n  <- 5개 마다 */
+ul.grid2 li div {text-align: left; padding: 5px 10px; }
+ul.grid2 li:nth-child(n+4){display: none;}
+
+#video1_point:hover{cursor: pointer;}
+
 </style>
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 </head>
 <body>
-      <jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/>
+	<div style="display: flex; width: 1300px; margin: 0 auto;">
+      <div><jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/></div>
+      <div style="width: 900px; margin-left: 95px; margin-top: 30px;">
+      <div class="wrap_test">
+         <h4 style="font-size: 25px; margin-left: 15px;">출산 정보</h4>
+         <div class="wrap_video">
+         	<ul class="grid">
+         	<c:forEach var="vo" items="${list }">
+         		<c:if test="${vo.category eq 'CHILDBIRTH' }">
+         			<li>
+         				<div><img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 270px; height: 157px;" class="img${vo.id }"/></div>
+         				<div><h4 style="text-align: center" class="img${vo.id }">${fn:substring(vo.explain , 0, 19) }</h4></div>
+       					<c:if test="${loginInfo.admin eq 'Y' }">
+       						<div><a style="float: right; display: inline-block;" id="modi" class="modify${vo.id }" href="delete_video.wel?no=${vo.no }">삭제</a></div>
+       					</c:if>
+         			</li>
+         		</c:if>
+         	</c:forEach>
+         	</ul>
+         	<i id="video1_point" class="fas fa-angle-down" style="width: 900px; text-align: center; margin: 20px auto;"></i>
+         </div>
+         
+         <h4 style="margin-top: 50px; font-size: 25px; margin-left: 15px;">육아 정보</h4>
+         <div class="wrap_video2">
+         	<ul class="grid2">
+         	<c:forEach var="vo" items="${list }">
+         		<c:if test="${vo.category eq 'PARENTING' }">
+         			<li>
+         				<div><img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 270px; height: 157px;" class="img${vo.id }"/></div>
+         				<div><h4 style="text-align: center" class="img${vo.id }">${fn:substring(vo.explain , 0, 19) }</h4></div>
+       					<c:if test="${loginInfo.admin eq 'Y' }">
+       						<div><a style="float: right; display: inline-block;" id="modi" class="modify${vo.id }" href="delete_video.wel?no=${vo.no }">삭제</a></div>
+       					</c:if>
+         			</li>
+         		</c:if>
+         	</c:forEach>
+         	</ul>
+         	<i id="video2_point" class="fas fa-angle-down" style="width: 900px; text-align: center; margin: 20px auto;"></i>
+         </div>
+         
+         <c:if test="${loginInfo.admin eq 'Y' }">
+         	<a id="new_video" style="float: right; padding: 10px; background: #f0efff; border: 1px solid #f0efff; border-radius: 3px; margin-top: 50px; cursor: pointer;"><i class="fa-solid fa-plus" style="margin-right: 5px;"></i>추가하기</a>
+      </c:if>
+      
       <div class="search">
 	   <form action="video.wel" method="post" style="margin-top: 20px;" id="search_form">
 	   <div id = 'list-top'>
@@ -57,40 +120,6 @@
 	   </div>
 	   </form>
 	   </div>
-      <div class="wrap_test">
-         <h4 style="font-size: 25px; margin-left: 15px;">출산 정보</h4>
-         <div class="wrap_video">
-         	<c:forEach var="vo" items="${list }">
-         		<c:if test="${vo.category eq 'CHILDBIRTH' }">
-         			<div style="margin-left: 15px; width: 280px; margin-top: 35px;">
-	         			<img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 280px; height: 157px;" class="img${vo.id }"/>
-	         			<h4 style="margin-left: 5px; margin-top: 5px;" class="img${vo.id }">${fn:substring(vo.explain , 0, 19) }</h4>
-	         			<c:if test="${loginInfo.admin eq 'Y' }">
-         					<a style="float: right; display: inline-block;" id="modi" class="modify${vo.id }" href="delete_video.wel?no=${vo.no }">삭제</a>
-         				</c:if>
-	         		</div>
-         		</c:if>
-         	</c:forEach>
-         </div>
-         
-         <h4 style="margin-top: 50px; font-size: 25px; margin-left: 15px;">육아 정보</h4>
-         <div class="wrap_video2">
-            <c:forEach var="vo" items="${list }">
-         		<c:if test="${vo.category eq 'PARENTING' }">
-         			<div style="margin-left: 15px; width: 280px; margin-top: 35px;">
-         				<img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 280px; height: 157px;" class="img${vo.id }"/>
-         				<h4 style="margin-left: 5px; margin-top: 5px;" class="img${vo.id }">${fn:substring(vo.explain , 0, 19) }</h4>
-         				<c:if test="${loginInfo.admin eq 'Y' }">
-         					<a style="float: right; display: inline-block;" id="modi" class="modify${vo.id }" href="delete_video.wel?no=${vo.no }">삭제</a>
-         				</c:if>
-         			</div>
-         		</c:if>
-         	</c:forEach>
-         </div>
-         
-         <c:if test="${loginInfo.admin eq 'Y' }">
-         	<a id="new_video" style="float: right; padding: 10px; background: #f0efff; border: 1px solid #f0efff; border-radius: 3px; margin-top: 50px; cursor: pointer;"><i class="fa-solid fa-plus" style="margin-right: 5px;"></i>추가하기</a>
-      </c:if>
       </div>
       <div class="addVideo">
       	<div class="video-main" style="text-align: center;">
@@ -111,26 +140,20 @@
       		</form>
       	</div>
       </div>
+      </div>
       <div id="popup-background"></div>
       <div id="popup" class="center" style="vertical-align: middle;"></div>
+   </div>
   
       <script type="text/javascript">
-         $.noConflict();
-         $('.wrap_video').slick({
-            lazyLoad: 'ondemand',
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            draggable: true
-         });
-         $('.wrap_video2').slick({
-            lazyLoad: 'ondemand',
-            infinite: true,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            draggable: true
-         });
-     
+      $(document).on("click", "#video1_point", function(){
+    	 $("ul.grid li:nth-child(n+3)").css("display", "block");
+      });
+      
+      $(document).on("click", "#video2_point", function(){
+     	 $("ul.grid2 li:nth-child(n+3)").css("display", "block");
+       });
+      
          $(document).on('click', '.wrap_video img', function() {
         	 var indexs = $(this).attr("class");
         	 indexs = indexs.split(" ");
@@ -189,9 +212,6 @@
         	$(".close-button").click(function(){
         		$(".addVideo").css("visibility", "hidden");
         	});
-         
-         $("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-         $("#cate-ul li>a").eq(1).attr("class", "btn-fill");
          
          $("#category-ul li").click(function(){
         	 var index_ca = $(this).index();

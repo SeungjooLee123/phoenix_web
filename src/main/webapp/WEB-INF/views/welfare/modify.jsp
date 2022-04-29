@@ -48,16 +48,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id='wel_container'>
-	      <div id="wrap_cate">
-	         <ul id="cate-ul">
-	            <li><a class="btn-fill" href="list.wel">지원정책</a></li>
-	            <li><a class="btn-empty" href="video.wel">동영상</a></li>
-	            <li><a class="btn-empty" href="graph.wel">통계자료</a></li>
-	            <li><a class="btn-empty" id="map-search" href="map.wel">주변장소검색</a></li>
-	         </ul>
-	      </div>
-   </div>
+	<div style="display: flex; width: 1300px; margin: 0 auto;">
+	<div><jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/></div>
+	<div style="width: 900px; margin-top: 50px; margin-left: 20px;">
    <div class="modi_main">
    <form action="update.wel" method="post" enctype="multipart/form-data">
    <input type="hidden" name="id" value="${vo.id}">
@@ -89,6 +82,8 @@
    <div class="btnSet">
       <a style="margin-right: 20px; border: 1px solid #8c88c9; background: #8c88c9; border-radius: 5px; color: #fff; padding: 5px; font-size: 18px;" style="cursor: pointer;" onclick="if( emptyCheck() ){ $( '[name=attach]' ).val( $('#file-name').text() ); $('form').submit() }">저장</a>
       <a style="font-size: 18px; padding: 5px; border: 1px solid #fffef0; border-radius: 5px; background: #ebebeb" onclick="history.go(-1)">취소</a>
+   </div>
+   </div>
    </div>
    <script type="text/javascript" src="js/file_check.js?v<%=new Date().getTime()%> "></script>
    <script type="text/javascript" src='js/common.js?v<%=new Date().getTime() %>'></script>

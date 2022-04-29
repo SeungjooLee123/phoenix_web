@@ -9,12 +9,12 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/style.css?v=<%=new Date().getTime()%>">
 <style type="text/css">
-#container_wel{width:1200px; margin:0 auto; display: flex; margin-top: 20px;}
+#container_wel{width:900px; margin:0 auto; display: flex; margin-top: 20px;}
 .title_list{width:20%;}
 .content_main{width:77%;}
 .line_main{width: 3%; display: flex;}
 .line_here{border-right: 1px solid #000; margin-left: auto; margin-right: auto;}
-.search{width: 1200px; margin: 0 auto;}
+.search{width: 900px; margin: 0 auto;}
 #list-top {margin-bottom: 10px; margin-top: 30px;}
 #list-top div { height: 36px;}
 #list-top ul { margin: 0; display: flex; float: right;}
@@ -25,33 +25,46 @@
 .file-here{float: right;}
 .btn_style{background: #f0efff; cursor: pointer; float: right; margin: 20px 10px; padding: 10px 13px; border: 1px solid #f0efff; border-radius: 3px;}
 #content_here{width: 80%; margin-left: 15px;}
+
+ul.grid {display: inline-block; }
+ul.grid li { float: left; width: 400px; height: 67px; margin: 20px 1.25% 0 0; 
+		box-sizing: border-box; }
+ul.grid li:nth-child(even){margin-left: 30px;}
+ul.grid li div {text-align: left; padding: 9px 10px; }
+ul.grid li div:nth-child(2) {padding: 0px 10px;}
+ul.grid li div:nth-child(1) {
+	height: 65px;
+	overflow: hidden; text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp : 3;	/* 3줄 */
+	-webkit-box-orient : vertical;	/* 가로형태 */
+}
+.center {position: absolute; left:50%; top:50%; transform:translate(-50%, -50%); }
+#popup-background{position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: #000; opacity: 0.3; display: none; margin: 0 auto;}
 </style>
 </head>
 <body>
-   <jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/>
+	<div style="display: flex; width: 1300px; margin: 0 auto;">
+   <div><jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/></div>
+   <div style="width: 900px; margin-left: 95px; margin-top: 50px;">
    <div id="container_wel">
-   <div class="title_list">
-      <ul>
-         <c:if test="${page.list.size() ne 0 }">
-            <c:forEach var="vo" items="${page.list }">
-               <li  style="margin: 10px;"><a><span>${vo.title }</span></a><hr/></li>
-            </c:forEach>
-         </c:if>
-      </ul>
+   <ul class="grid">
+	   <c:if test="${page.list.size() ne 0 }">
+	   	<c:forEach var="vo" items="${page.list }">
+	   		<li>
+	   			<p style="position: relative; width: 100%; height: 67px; margin: 0 0 15px 18px; padding: 18px 125px 0 18px; border: 1px solid #d8d8d8; background: #f5f5f5; border-radius: 4px;">
+		   			<a>${vo.title }</a>
+		   			<a href="detail.wel?id=${vo.id }" style="display: inline-block; position: absolute; top: 50%; right: 18px; height: 26px; margin-top: -14px; padding: 0 7px; border: 1px solid #c8c8c8; border-radius: 2px; color: #595959; font-size: 12px; line-height: 24px; background: #fff">상세보기</a>
+	   			</p>
+	   		</li>
+	   	</c:forEach>
+	   </c:if>
+   </ul>
    </div>
-   <div class="line_main">
-      <div class="line_here"></div>
-   </div>
-   <div class="content_main">
-      <div id="content_here"></div>
-      <div id="btn_here"></div>
-   </div>
-   
-   </div>
-   <ul style="width: 1200px; margin: 0 auto;">
+   <ul style="width: 900px; margin: 0 auto;">
       <!-- 관리자로 로그인된 경우만 글쓰기 가능 -->
       <c:if test="${loginInfo.admin eq 'Y' }">
-         <li><a class="btn_style" href="new.wel"><i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;글쓰기</a></li>
+         <li><a class="btn_style" href="new.wel" style="font-weight: 700; font-size: 15px; margin-right: 40px;"><i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;글쓰기</a></li>
       </c:if>
    </ul>
    <div class="search">
@@ -75,6 +88,9 @@
    </div>
    </form>
    </div>
+   </div>
+   </div>
+   
    <script type="text/javascript">
    jQuery(document).ready(function(){
 	   if('${page.list[0].filename}' != ""){
