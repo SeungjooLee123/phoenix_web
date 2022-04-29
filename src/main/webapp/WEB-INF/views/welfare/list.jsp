@@ -39,6 +39,7 @@ ul.grid li div:nth-child(1) {
 	-webkit-line-clamp : 3;	/* 3줄 */
 	-webkit-box-orient : vertical;	/* 가로형태 */
 }
+.list a{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
 .center {position: absolute; left:50%; top:50%; transform:translate(-50%, -50%); }
 #popup-background{position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: #000; opacity: 0.3; display: none; margin: 0 auto;}
 </style>

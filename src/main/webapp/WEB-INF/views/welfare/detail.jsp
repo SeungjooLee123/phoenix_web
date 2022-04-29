@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#main_content{list-style: none;}
+	.list a{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
 </style>
 </head>
 <body>
@@ -16,8 +17,8 @@
 		${vo.content }
 		<c:if test="${loginInfo.admin eq 'Y' }">
 			<ul style="display: flex; float: right; margin-top: 50px;">
-				<li style="margin-right: 20px;"><a style="font-weight: 700; ">수정</a></li>
-				<li style="margin-left: 20px;"><a style="font-weight: 700; ">삭제</a></li>
+				<li style="margin-right: 20px; border-right: 1px solid rgba(0, 0, 0, 0.1);"><a style="font-weight: 700; margin-right: 30px;" href="modify.wel?id=${vo.id }">수정</a></li>
+				<li style="margin-left: 10px;"><a style="font-weight: 700; "  href="delete.wel?id=${vo.id }">삭제</a></li>
 			</ul>
       </c:if>
 	</div>

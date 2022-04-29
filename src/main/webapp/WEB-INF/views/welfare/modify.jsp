@@ -12,12 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 <style type="text/css">
-	#wel_container {width: 1300px; margin :0 auto;}
-   #cate-ul{display: flex;}
-   #cate-ul>li{margin-top: 30px;}
-   #cate-ul li > a{display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
-   #cate-ul li > a.btn-fill{background: #c3bfff; color: #fff;}
-   #cate-ul li > a.btn-empty{background: #f5f5f5;}
+	#wel_container {width: 900px; margin :0 auto;}
    .modal{position: absolute !important;}
    .modal-header{justify-content: unset;}
    .modal-header .close{margin: 0px 0px !important;}
@@ -25,6 +20,44 @@
    input[type=file], #delete-file { display: none;}
 	.file-img { width: 20px; height: 18px; }
 	#attach-file, #delete-file { color: #ff0000; }
+	.logo_text {
+color: #000;
+font-weight: 700;
+font-size: 16px;
+padding: 9px 0px 0px 50px;}
+.my_info{
+display: flex;
+padding: 9px 29px 0px 50px;
+position: absolute;
+right: 14.3%;
+column-gap: 2rem;
+font-weight: 700;
+}
+
+.footer-wrap {
+width: 1300px;
+margin-left: 133px;
+display: flex;
+margin-top: 40px;
+font-size: 13px;
+color: #888888;
+font-weight: 500;
+line-height: 1
+}
+
+.footer-community{
+margin-left: 188px;
+}
+
+.footer-share {
+margin-left:201px;
+}
+
+.footer-cs {
+margin-left: 205px;}
+
+footer > h2 {
+font-size: 19.5px; color: #000; font-weight: 700;}
    table{
       width: 80%;
       margin: 20px auto;
@@ -37,11 +70,40 @@
    }
    table th{text-align: center;}
    .btnSet{
-      width: 1300px;
+      width: 900px;
       margin: 20px auto;
       text-align: center;
    }
-   .modi_main{width: 1200px; margin: 0 auto; margin-top: 20px;}
+   .modi_main{width: 900px; margin: 0 auto; margin-top: 20px;}
+   #container div>a {color: #505050; margin: 22px 0px; cursor: pointer; font-size: 15px; }
+#container div>a:hover{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
+#container div>ul li{color: #505050; margin: 22px 10px; cursor: pointer; font-size: 15px; }
+#container div>ul li a:hover{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
+.list {margin: 22px 10px; }
+.video {margin: 22px 10px; }
+.graph ul>li:not(:first-of-type) {display: none; margin-left: 20px;}
+.map ul>li:not(:first-of-type) {display: none; margin-left: 50px;}
+.list_hr{
+    display: block;
+    unicode-bidi: isolate;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
+}
+.ori_h{
+	display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.list a{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
 </style>
 <head>
 <meta charset="UTF-8">
@@ -49,7 +111,34 @@
 </head>
 <body>
 	<div style="display: flex; width: 1300px; margin: 0 auto;">
-	<div><jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/></div>
+	<section id="container" style="width: 210px; height: 100%; display:flex;">
+		<div style="margin-top: 13px; width: 182px; margin-left: 75px; border-right: 1px solid rgba(0,0,0,0.1); height: 735px; position: absolute;">
+			<h3 class="ori_h" style="margin: 50px 0px;">베시시</h3>
+			<div class="list">
+				<a class="checkli" href="list.wel">지원정책</a>
+			</div>
+			<div class="video">
+				<a class="ncheckli" href="video.wel">동영상</a>
+			</div>
+			<div class="graph">
+				<ul>
+					<li><a href="graph.wel">통계자료</a></li>
+					<li><a style="margin-left: 15px;">출생</a></li>
+					<li><a style="margin-left: 15px;">표준발육</a></li>
+				</ul>
+			</div>
+			<div class="map">
+				<ul>
+					<li><a href="map.wel">주변장소검색</a></li>
+					<li><a style="margin-left: 15px;">소아과</a></li>
+					<li><a style="margin-left: 15px;">키즈카페</a></li>
+					<li><a style="margin-left: 15px;">어린이집</a></li>
+					<li><a style="margin-left: 15px;">유아용품</a></li>
+				</ul>
+			</div>
+		</div>
+		<hr class="list_hr">
+		</section>
 	<div style="width: 900px; margin-top: 50px; margin-left: 20px;">
    <div class="modi_main">
    <form action="update.wel" method="post" enctype="multipart/form-data">
@@ -89,7 +178,7 @@
    <script type="text/javascript" src='js/common.js?v<%=new Date().getTime() %>'></script>
    <script type="text/javascript">
       $('#summernote').summernote({
-          width: 1300,
+          width: 900,
          height: 300,
          lang: "ko-KR",
          tableClassName: function(){

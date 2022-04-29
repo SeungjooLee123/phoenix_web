@@ -62,6 +62,7 @@
 .placeinfo .title {font-weight: bold; font-size:14px;border-radius: 6px 6px 0 0;margin: -1px -1px 0 -1px;padding:10px; color: #fff;background: #c3bfff;background: #c3bfff url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
 .placeinfo .tel {color:#0f7833;}
 .placeinfo .jibun {color:#999;font-size:11px;margin-top:0;}
+.map ul>li:nth-child(1) a{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
 
 #address{text-align: right;}
 .map_wrap{margin: 15px 0;}

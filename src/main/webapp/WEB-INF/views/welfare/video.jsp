@@ -23,7 +23,7 @@
 
 .search{width: 900px; margin: 0 auto;}
 #list-top {margin-bottom: 20px; margin-top: 20px;}
-#list-top div { height: 36px;}
+#list-top div { height: 36px; margin-top: 150px; margin-right: 20px;}
 #list-top ul { margin: 0; display: flex; float: right;}
 #list-top ul li:not(:first-child) { margin-left: 3px; }
 #list-top ul:first-child { float: left;}
@@ -34,25 +34,18 @@
 
 ul.grid { width: 900px; display: inline-block; }
 ul.grid li { float: left; width: 32%; height: 200px; margin: 20px 10px 0 0; 
-		border: 1px solid #b0b0b0; box-sizing: border-box; }
+		box-sizing: border-box; }
 ul.grid li:nth-child(3n) {margin-right: 0;}		/* 5n  <- 5개 마다 */
 ul.grid li div {text-align: left; padding: 5px 10px; }
 ul.grid li:nth-child(n+4){display: none;}
 
 ul.grid2 { width: 900px; display: inline-block; }
 ul.grid2 li { float: left; width: 32%; height: 200px; margin: 20px 10px 0 0; 
-		border: 1px solid #b0b0b0; box-sizing: border-box; }
+		box-sizing: border-box; }
 ul.grid2 li div {text-align: left; padding: 5px 10px; }
 ul.grid2 li:nth-child(n+4){display: none;}
 
-#video1_point:hover{cursor: pointer;}
-
-ul.grid2 { width: 900px; display: inline-block; }
-ul.grid2 li { float: left; width: 32%; height: 200px; margin: 20px 10px 0 0; 
-		border: 1px solid #b0b0b0; box-sizing: border-box; }
-ul.grid2 li:nth-child(3n) {margin-right: 0;}		/* 5n  <- 5개 마다 */
-ul.grid2 li div {text-align: left; padding: 5px 10px; }
-ul.grid2 li:nth-child(n+4){display: none;}
+.video a{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
 
 #video1_point:hover{cursor: pointer;}
 
@@ -81,7 +74,7 @@ ul.grid2 li:nth-child(n+4){display: none;}
          		</c:if>
          	</c:forEach>
          	</ul>
-         	<i id="video1_point" class="fas fa-angle-down" style="width: 900px; text-align: center; margin: 20px auto;"></i>
+         	<i id="video1_point" class="fas fa-angle-down" style="width: 900px; text-align: center; margin: 90px auto;"></i>
          </div>
          
          <h4 style="margin-top: 50px; font-size: 25px; margin-left: 15px;">육아 정보</h4>
@@ -90,7 +83,7 @@ ul.grid2 li:nth-child(n+4){display: none;}
          	<c:forEach var="vo" items="${list }">
          		<c:if test="${vo.category eq 'PARENTING' }">
          			<li>
-         				<div><img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 270px; height: 157px;" class="img${vo.id }"/></div>
+         				<div style="margin-top: 35px; "><img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 270px; height: 157px;" class="img${vo.id }"/></div>
          				<div><h4 style="text-align: center" class="img${vo.id }">${fn:substring(vo.explain , 0, 19) }</h4></div>
        					<c:if test="${loginInfo.admin eq 'Y' }">
        						<div><a style="float: right; display: inline-block;" id="modi" class="modify${vo.id }" href="delete_video.wel?no=${vo.no }">삭제</a></div>
@@ -99,11 +92,11 @@ ul.grid2 li:nth-child(n+4){display: none;}
          		</c:if>
          	</c:forEach>
          	</ul>
-         	<i id="video2_point" class="fas fa-angle-down" style="width: 900px; text-align: center; margin: 20px auto;"></i>
+         	<i id="video2_point" class="fas fa-angle-down" style="width: 900px; text-align: center; margin: 90px auto;"></i>
          </div>
          
          <c:if test="${loginInfo.admin eq 'Y' }">
-         	<a id="new_video" style="float: right; padding: 10px; background: #f0efff; border: 1px solid #f0efff; border-radius: 3px; margin-top: 50px; cursor: pointer;"><i class="fa-solid fa-plus" style="margin-right: 5px;"></i>추가하기</a>
+         	<a id="new_video" style="float: right; margin-right: 20px; padding: 10px; background: #f0efff; border: 1px solid #f0efff; border-radius: 3px; margin-top: 50px; cursor: pointer;"><i class="fa-solid fa-plus" style="margin-right: 5px;"></i>추가하기</a>
       </c:if>
       
       <div class="search">
@@ -148,10 +141,12 @@ ul.grid2 li:nth-child(n+4){display: none;}
       <script type="text/javascript">
       $(document).on("click", "#video1_point", function(){
     	 $("ul.grid li:nth-child(n+3)").css("display", "block");
+    	 $("ul.grid li:nth-child(n+4)").css("marginTop", "50px");
       });
       
       $(document).on("click", "#video2_point", function(){
      	 $("ul.grid2 li:nth-child(n+3)").css("display", "block");
+     	 $("ul.grid2 li:nth-child(n+4)").css("marginTop", "50px");
        });
       
          $(document).on('click', '.wrap_video img', function() {
