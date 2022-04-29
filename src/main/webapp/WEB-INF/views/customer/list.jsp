@@ -76,7 +76,7 @@ margin: 0 10px; padding: 10px 26px;}
 		<form action="list.cu" method="post">
 			<input type="hidden" name="category">
 			<ul id='tabs'>
-				<li id='nomal' >일반문의</li>
+				<li id='normal' >일반문의</li>
 				<li id='app'>어플리케이션</li>
 				<li id='web'>BSS 웹</li>
 				<li id='account'>계정/로그인/탈퇴</li>
@@ -90,7 +90,7 @@ margin: 0 10px; padding: 10px 26px;}
 		
 		<hr  style="opacity: 0.7; height: 2px; background: #000; border: 0px;"/>
 		<div class='li_title' style="margin: 20px 20px;">일반문의</div>
-		<div style="border-top: solid 3px #000; opacity: 0.7;"></div>
+		<hr  style="opacity: 0.7; height: 2px; background: #000; border: 0px;"/>
 		
 		<div class="qna_list">
 			<ul>
@@ -106,7 +106,7 @@ margin: 0 10px; padding: 10px 26px;}
 						<c:if test="${loginInfo.admin eq 'Y'}">
 							<div style="display: flex; padding: 10px 0px 10px 470px;">
 								<a class="btn_style_ad" href="modify.cu?id=${vo.id}" style="cursor: pointer;">수정</a>
-								<a class="btn_style_ad" onclick="fnDelete()" style="cursor: pointer;">삭제</a>
+								<a class="btn_style_ad" onclick="fnDelete(${vo.id})" style="cursor: pointer;">삭제</a>
 							</div>
 						</c:if>
 					</div>
@@ -117,7 +117,7 @@ margin: 0 10px; padding: 10px 26px;}
 		</div>
 		<div style="display: flex; justify-content: space-between; align-items: center;">
 			<p style="font-size: 13.5px; color: #525252; vertical-align: middle;">원하시는 답변을 찾지못하셨다면, 고객센터로 문의해 주세요.</p>
-			<a class="btn_style" onclick="contact()" style="cursor: pointer;"><i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;문의하기</a>
+			<a class="btn_style" onclick="location.href = 'new.cu'" style="cursor: pointer;"><i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;문의하기</a>
 		</div>
 	</div>
 	</div>
@@ -130,20 +130,11 @@ $(function () {
 	//alert(cate.text());
 	$('.li_title').text($(cate).text());
 });
-function fnDelete() {
+function fnDelete(no) {
+	var cate = '${cu_category}';
 	if(confirm("정말 삭제하시겠습니까?")){
-		location.href = "delete.cu?id=" + '${vo.id}'
+		location.href = "delete.cu?id=" + no + "&category=" + cate;
 	}
-}
-function contact() {
-	var info = '${loginInfo}'
-	if(info == ''){
-		alert("로그인을 해주세요!");
-		location.href = 'login';
-	}else{
-		location.href = 'new.cu';
-	}
-	//alert(info);
 }
 $('.qna_list ul li .question').on('click', function() {
 	//var idx = $(this).index();
@@ -159,7 +150,7 @@ $(document).on('click', '#tabs li', function () {
 	var idx = $(this).index();
 	//alert(idx);
 	
-	if(idx==0) $('input[name=category]').val('nomal');
+	if(idx==0) $('input[name=category]').val('normal');
 	else if(idx==1) $('input[name=category]').val('app');
 	else if(idx==2) $('input[name=category]').val('web');
 	else $('input[name=category]').val('account');

@@ -21,6 +21,23 @@ table td{
 	width: 660px;
 	padding: 10px 0;
 }
+.line{
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.cu_hr{
+	margin: 20px 0;
+}
+input{
+padding: 10px;
+}
+.input_div{
+	display: flex;
+	align-items: center;
+}
+.input_t{
+	width: 150px;
+	margin-left: 20px;
+}
 .btnSet{
 	margin-top: 20px;
 	display: flex;
@@ -55,31 +72,32 @@ table td{
 <div id="container" style="width:820px; margin: 0 auto;">
 	<form action="update.cu" method="post">
 	<h1 style="margin-top: 65px; margin-bottom: 30px;">문의 수정</h1>
+	<div style="width: 820px;"><p style="width: 120px; margin-left: auto;">*필수 입력 사항</p></div>
 	<hr style="opacity: 0.7; height: 2px; background: #000; border: 0px; margin: 20px 0;">
 	<input type="hidden" name="id" value="${vo.id}">
-		<table>
-			<tr class="line">
-				<th>문의분류</th>
-				<td>
-					<select id="body" name="category" style="width: 280px; height: 38px; font-size: 15px; margin-left: 20px; padding: 10px;">
-						<option value="nomal" ${vo.category eq 'nomal' ? 'selected' : ''}>일반문의</option>
-						<option value="app" ${vo.category eq 'app' ? 'selected' : ''}>어플리케이션</option>
-						<option value="web" ${vo.category eq 'web' ? 'selected' : ''}>BSS 웹</option>
-						<option value="account" ${vo.category eq 'account' ? 'selected' : ''}>계정/로그인/탈퇴</option>
-					</select>
-				</td>
-			</tr>
-			<tr class="line">
-				<th>제목</th>
-				<td>
-					<input type="text" class='chk' title='제목' name="title" value="${vo.title}" style="width: 620px; height: 38px; font-size: 15px; margin-left: 20px; padding: 10px;"/>		
-				</td>
-			</tr>
-			<tr>
-				<th>답변</th>
-				<td><textarea class='chk' title='답변' name="content" style="width: 620px; height: 260px; font-size: 15px; margin-left: 20px; padding: 10px;">${fn:replace( vo.content, '<br>', crlf) }</textarea></td>
-			</tr>
-		</table>
+	<div class="input_div">
+		<div class="input_t">문의 분류 *</div>
+		<div>
+			<select id="body" name="category" style="width: 290px; height: 38px; font-size: 15px; margin-left: 20px; padding: 5px;">
+				<option value="normal" ${vo.category eq 'normal' ? 'selected' : ''}>일반문의</option>
+				<option value="app" ${vo.category eq 'app' ? 'selected' : ''}>어플리케이션</option>
+				<option value="web" ${vo.category eq 'web' ? 'selected' : ''}>BSS 웹</option>
+				<option value="account" ${vo.category eq 'account' ? 'selected' : ''}>계정/로그인/탈퇴</option>
+			</select>
+		</div>
+	</div >
+	<hr class="cu_hr">
+	<div class="input_div">
+		<div class="input_t">제목 *</div>
+		<div>
+			<input class='chk' title='제목' type="text" name="title" value="${vo.title}" style="width: 630px; height: 38px; font-size: 15px; margin-left: 20px;"/>
+		</div>
+	</div>
+	<hr class="cu_hr">
+	<div class="input_div">
+		<div class="input_t">답변 *</div>
+		<div><textarea class='chk' title='문의사항' name="content" style="padding:10px; width: 630px; height: 260px; font-size: 15px; margin-left: 20px;">${fn:replace( vo.content, '<br>', crlf) }</textarea></div>
+	</div>
 		<hr style="opacity: 0.7; height: 2px; background: #000; border: 0px; margin: 20px 0;">
 	</form>
 	<div class="btnSet">

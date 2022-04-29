@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -61,7 +62,7 @@ public class JoinController {
 	}
 	
 	@RequestMapping(value = "/kakaocallback", produces="text/html; charset=UTF-8")
-	public String kakaocallback(@RequestParam(value = "code", required = false) String code, @RequestParam(required = false) String error, HttpServletRequest request, HttpSession session) {
+	public String kakaocallback(@RequestParam(value = "code", required = false) String code, @RequestParam(required = false) String error, HttpServletRequest request, HttpSession session, RedirectAttributes rttr) {
 		if(error != null) {//토큰 발급 불가일 때
 			return "redirect:/";
 		}
@@ -76,6 +77,7 @@ public class JoinController {
         if(vo != null) {
         	if(service.id_check(vo.getId())) {
     			service.member_join(vo);
+    			rttr.addFlashAttribute("isjoin", "yes");
     		}
 			vo.setAdmin("N");
 			
@@ -149,7 +151,7 @@ public class JoinController {
 	}
 	
 	@RequestMapping(value="/navercallback", produces="text/html; charset=UTF-8")
-	public String navercallback(@RequestParam(required = false) String code, String state, @RequestParam(required = false) String error, HttpSession session, HttpServletRequest request) {
+	public String navercallback(@RequestParam(required = false) String code, String state, @RequestParam(required = false) String error, HttpSession session, HttpServletRequest request, RedirectAttributes rttr) {
 		if(! state.equals(session.getAttribute("state")) || error != null) {//토큰 발급 불가일 때
 			return "redirect:/";
 		}
@@ -181,6 +183,7 @@ public class JoinController {
 			System.out.println(gson.toJson(vo));
 			if(service.id_check(vo.getId())) {
 				service.member_join(vo);
+				rttr.addFlashAttribute("isjoin", "yes");
 			}
 		}	
 		return "redirect:/"	;//로그인 처리가 되며 홈으로 이동
