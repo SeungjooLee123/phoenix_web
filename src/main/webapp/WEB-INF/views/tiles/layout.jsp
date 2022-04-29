@@ -9,7 +9,7 @@
 	<c:when test="${category eq 'ca' }"><c:set var='title' value="이벤트"/></c:when> 
 	<c:when test="${category eq 'we' }"><c:set var='title' value="육아정보"/></c:when>	
 	<c:when test="${category eq 'co' }"><c:set var='title' value="커뮤니티"/></c:when>	
-	<c:when test="${category eq 'bo' }"><c:set var='title' value="나눔하기"/></c:when>	
+	<c:when test="${category eq 'sh' }"><c:set var='title' value="나눔하기"/></c:when>	
 	<c:when test="${category eq 'cs' }"><c:set var='title' value="고객센터"/></c:when>	
 	<c:when test="${category eq 'ad' }"><c:set var='title' value="관리자"/></c:when>	
 </c:choose>
