@@ -57,7 +57,7 @@ public class CommunityDAO implements CommunityService {
 
 	@Override
 	public int Community_comment_insert(CommunityCommentVO vo) {
-		System.out.println(vo.getUser_id() +"/"+ vo.getContent());
+		//System.out.println(vo.getUser_id() +"/"+ vo.getContent());
 		return sql.insert("community.mapper.comment_insert", vo);
 	}
 
@@ -74,7 +74,6 @@ public class CommunityDAO implements CommunityService {
 	@Override
 	public List<CommunityCommentVO> Community_comment_list(int id) {
 		List<CommunityCommentVO> list = sql.selectList("community.mapper.comment_list",id);
-		System.out.println("시소");
 		
 		return list;
 	}
