@@ -246,6 +246,7 @@ transition-duration: .4s;
 
 <div class="row-middle" style="width:480px;">
 			<img src="imgs/bss-phone.png" style="width: 350px;">
+			<img src="imgs/bss-phone-over.png" style="position: absolute; top: 394px; right: 581px; height: 443px; width: 274px;">
 </div>
 
 	<div class="row-right" style="margin-top: 7%;">
@@ -367,7 +368,7 @@ transition-duration: .4s;
 						</span>
 				<div style="margin-top:25px;">
 						<span class="wrap_imgs" style="height: 306px; margin-top: 71px;">
-							<img src="imgs/size_test.jpg" style="display: block; width:100%; min-height: 100%;">
+							<img src="imgs/event5.png" style="display: block; width:100%; min-height: 100%;">
 						</span>
 				</div>
 				</a>
@@ -382,22 +383,22 @@ transition-duration: .4s;
 						육아정보
 						</span>
 				</span>
-				<a href="" style="display: block; margin: 0 -24px;">
+				<a href="list.wel" style="display: block; margin: 0 -24px;">
 				<div>
 					<h2 class="card-text" style="height: 80px; font-size: 27px; line-height: 40px; padding-left: 20px; margin-top: 20px; margin-bottom: 20px; padding-right: 20px;">
-					베시시, 베시시어플 양육자와 아이 행복 추구
+					베시시, 양육자를 위한 지원 정책과 영상 정보 제공
 					</h2>
 				</div>
 				
 						<span class="info_hash" style="font-weight: 300; overflow: hidden; color: #666666; padding-left: 20px; font-size: 14px; left: 0; right: 84px;">
 							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#베시시</span>
 							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#육아어플</span>
-							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#초보육아</span>
-							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#공지사항</span>
+							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#육아정보</span>
+							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#정책사항</span>
 						</span>
 				<div style="margin-top:25px;">
 						<span class="wrap_imgs" style="height: 306px; margin-top: 71px;">
-							<img src="imgs/size_test.jpg" style="display: block; width:100%; min-height: 100%;">
+							<img src="imgs/event4.png" style="display: block; width:100%; min-height: 100%;">
 						</span>
 				</div>
 				</a>
@@ -412,22 +413,22 @@ transition-duration: .4s;
 						커뮤니티
 						</span>
 				</span>
-				<a href="" style="display: block; margin: 0 -24px;">
+				<a href="community" style="display: block; margin: 0 -24px;">
 				<div>
 					<h2 class="card-text" style="height: 80px; font-size: 27px; line-height: 40px; padding-left: 20px; margin-top: 20px; margin-bottom: 20px; padding-right: 20px;">
-					베시시, 베시시어플 양육자와 아이 행복 추구
+					베시시, 나눔활동을 통한 사회적 선순환 추구
 					</h2>
 				</div>
 				
 						<span class="info_hash" style="font-weight: 300; overflow: hidden; color: #666666; padding-left: 20px; font-size: 14px; left: 0; right: 84px;">
 							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#베시시</span>
 							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#육아어플</span>
-							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#초보육아</span>
-							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#공지사항</span>
+							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#커뮤니티</span>
+							<span class="keyword" style="display: inline-block; margin-right: 3px; vertical-align: top;">#나눔하기</span>
 						</span>
 				<div style="margin-top:25px;">
 						<span class="wrap_imgs" style="height: 306px; margin-top: 71px;">
-							<img src="imgs/size_test.jpg" style="display: block; width:100%; min-height: 100%;">
+							<img src="imgs/event3.png" style="display: block; width:100%; min-height: 100%;">
 						</span>
 				</div>
 				</a>
