@@ -119,7 +119,7 @@ opacity: 0.2;
          				<li><a href='<c:url value="/calendar"/>'>이벤트</a></li>
          				<li><a href='<c:url value="/list.wel" />'>육아정보</a></li>
          				<li><a href='<c:url value="/community"/>'>커뮤니티</a></li>
-         				<li><a href='<c:url value="/" />'>나눔하기</a></li>
+         				<li><a href='<c:url value="/share"/>'>나눔하기</a></li>
          				<li><a href='<c:url value="/list.cu" />'>고객센터</a></li>
          			</ul>
          		</nav>

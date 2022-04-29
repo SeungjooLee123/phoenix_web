@@ -443,6 +443,11 @@ transition-duration: .4s;
 <script type="text/javascript">
 var topEle =$('#topBtn');
 var delay =1000;
+$(function () {
+	var isjoin = '${isjoin}';
+	if(isjoin == "yes")
+		alert("회원가입을 축하합니다.");
+});
 topEle.on('click', function(){
 	$('html, body').stop().animate({scrollTop:0}, delay);
 });

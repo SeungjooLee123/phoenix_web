@@ -66,19 +66,16 @@
 #address{text-align: right;}
 .map_wrap{margin: 15px 0;}
 #address select{height: 30px;}
-#mapcontainer{max-width: 1300px; margin: 0 auto;}
+#mapcontainer{width: 1050px; margin-left: 95px; margin-top: 50px;}
 </style>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/>
+<div style="display: flex; width: 1300px; margin: 0 auto;">
+	<div>
+		<jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/>
+	</div>
 	<div id="mapcontainer">
 		<div>
-			<ul id='map-ul'>
-				<li><a class="btn-fill">소아과</a></li>
-				<li><a class="btn-empty">키즈카페</a></li>
-				<li><a class="btn-empty">어린이집</a></li>
-				<li><a class="btn-empty">유아용품</a></li>
-			</ul>
 			<div class="map-main">
 				<div id="address">
 					<select id="sido"><option value="11">서울특별시</option></select>
@@ -106,13 +103,8 @@
 			var sigugun = "";
 			var dong = "";
 			
-			$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-			$("#cate-ul li>a").eq(3).attr("class", "btn-fill");
-			
-			var parent = document.querySelector("#wel-tab");
-			var leftparent = parent.getBoundingClientRect().left;
-			$('#map-ul').css('left', leftparent);
-			
+			$(".map ul>li:not(:first-of-type)").css("display", "block");
+					
 			jQuery(document).ready(function(){
 				jQuery("#sido").empty();
 				jQuery.each(hangjungdong.sido, function(idx, code){
@@ -180,17 +172,16 @@
 			}
 			
 			$(function(){
-				$("#map-ul li").click(function(){
+				$(".map ul>li").click(function(){
+					console.log("click");
 					var mapItem = $(this).index();
-					$("#map-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-					$("#map-ul li>a").eq(mapItem).attr("class", "btn-fill");
-					if(mapItem == 0){
+					if(mapItem == 1){
 						category = "소아과";
-					} else if(mapItem == 1){
-						category = "키즈카페";
 					} else if(mapItem == 2){
+						category = "키즈카페";
+					} else if(mapItem == 3){
 						category = "어린이집";
-					} else{
+					} else if(mapItem == 4){
 						category = "유아용품";
 					}
 					if(!sigugun || sigugun.text() == "선택"){
@@ -424,5 +415,6 @@
 			</script>
 		</div>
 	</div>
+</div>
 </body>
 </html>

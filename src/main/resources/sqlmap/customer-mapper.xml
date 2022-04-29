@@ -8,22 +8,18 @@
 		order by no
 	</select>
 	
-	<!-- 고객 정보 상세 조회 -->
 	<select id="detail" resultType="customer.CustomerVO">
 		SELECT * FROM MASTER_WEB_CS_TBL WHERE ID = #{id}
 	</select>
 	
-	<!-- 신규 고객 정보 저장 -->
 	<insert id="insert">
-		INSERT INTO MASTER_WEB_CS_TBL (id, title, content, user_id, share_date, filename, filepath, category) VALUES (seq_cs_id.nextval, #{title}, #{content}, #{user_id}, sysdate, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR}, #{category})
+		INSERT INTO MASTER_WEB_CS_TBL (id, title, content, user_id, share_date, filename, filepath, category, email, phone) VALUES (seq_cs_id.nextval, #{title}, #{content}, #{user_id, jdbcType=VARCHAR}, sysdate, #{filename, jdbcType=VARCHAR}, #{filepath, jdbcType=VARCHAR}, #{category}, #{email, jdbcType=VARCHAR}, #{phone, jdbcType=VARCHAR})
 	</insert>
 	
-	<!-- 고객 정보 수정 -->
 	<update id="update">
 		UPDATE MASTER_WEB_CS_TBL SET title = #{title}, content = #{content}, CATEGORY = #{category}  WHERE ID = #{id}
 	</update>
 	
-	<!-- 고객 삭제 -->
 	<delete id="delete">
 		DELETE FROM MASTER_WEB_CS_TBL WHERE ID = #{id}
 	</delete>

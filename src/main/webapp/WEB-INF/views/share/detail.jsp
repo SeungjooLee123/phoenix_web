@@ -11,7 +11,7 @@ table{
 	border: 1px solid;
 	border-collapse: collapse;
 }
-table tr{
+/* table tr{ */
 	height: 46px;
 }
 table th, table td{
@@ -50,7 +50,7 @@ table th{
 		<%-- 글쓴이만 수정 삭제 권한을 가질 수 있으므로 비교 먼저 해야 함 --%>
 		<c:if test="${loginInfo.admin eq 'Y'}">
 			<a class="btn-fill" onclick="$('form').attr('action', 'modify.co'); $('form').submit()">수정하기</a>
-			<a class="btn-fill" onclick='if(confirm("정말 삭제?")) {href="delete.co?id=${vo.id}"}'>삭제하기</a>
+			<a class="btn-fill" onclick='if(confirm("정말 삭제?")) {href="delete.sh?id=${vo.id}"}'>삭제하기</a>
 		</c:if>
 </div>
 
@@ -93,10 +93,10 @@ table th{
 		<tr>
 			<td class='left' colspan="6">
 				<c:if test="${vo.prev ne 0 }">
-					<a href='detail.co?id=${vo.prev }'>[이전 글] ${vo.prev_title }</a> <br />
+					<a href='detail.sh?id=${vo.prev }'>[이전 글] ${vo.prev_title }</a> <br />
 				</c:if>
 				<c:if test="${vo.next ne 0 }">
-					<a href='detail.co?id=${vo.next }'>[다음 글] ${vo.next_title }</a>
+					<a href='detail.sh?id=${vo.next }'>[다음 글] ${vo.next_title }</a>
 				</c:if>
 			</td>
 		</tr>
@@ -116,7 +116,7 @@ table th{
 	
 	
 	
-<form id="comu_form" action="community" method="post">
+<form id="comu_form" action="share" method="post">
 	<input type="hidden" name="id" value="${vo.id}" /> <%-- 검색 조건 --%>
 	<input type="hidden" name="search" value="${page.search}" /> <%-- 검색 조건 --%>
 	<input type="hidden" name="keyword" value="${page.keyword}" /> <%-- 검색어 --%>
@@ -150,7 +150,7 @@ function comment_regist(){
 	var con = $('#comment').val()
 	$.ajax ({
 		/* 경로 형태로 url  지정할꺼양 */
-		url :	'community/comment/regist'			/* controller 호출  주소 형식 맵핑 */
+		url :	'share/comment/regist'			/* controller 호출  주소 형식 맵핑 */
 		, data:	{ pid : pid , content : con }
 				/* pid : 원 글의 id, 입력한 댓글  */
 		, success : function ( res ) {
@@ -172,7 +172,7 @@ function comment_regist(){
 function comment_list(){
 	var id = ${ vo.id };
 	$.ajax({
-		url : "community/comment/list/${vo.id}"
+		url : "share/comment/list/${vo.id}"
 		, data : {pid : 342 }
 		, success : function ( res) {
 			$('#comment_list').html( res );

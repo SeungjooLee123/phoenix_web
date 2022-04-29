@@ -16,6 +16,8 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 <style type="text/css">
+	#container div>a {color: #505050; margin: 22px 0px; cursor: pointer; font-size: 15px; }
+#container div>ul li{color: #505050; margin: 22px 10px; cursor: pointer; font-size: 15px; }
    .file-img { width:24px }
    
    .modal{position: absolute !important;}
@@ -23,7 +25,7 @@
    .modal-header .close{margin: 0px 0px !important;}
    .modal-title{margin-top: 11px; margin-left: 136px;}
    
-   #wel_container {width: 1300px; margin :0 auto;}
+   #wel_container {width: 900px; margin :0 auto;}
    #cate-ul{display: flex;}
    #cate-ul>li{margin-top: 30px;}
    #cate-ul li > a{display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
@@ -49,20 +51,40 @@
       text-align: center;
    }
    
-   .new_container{width: 1200px; margin: 0 auto; margin-top: 20px;}
+   .new_container{width: 900px; margin: 0 auto; margin-top: 20px;}
 </style>
 </head>
 <body>
-   <div id='wel_container'>
-      <div id="wrap_cate">
-         <ul id="cate-ul">
-            <li><a class="btn-fill" href="list.wel">지원정책</a></li>
-            <li><a class="btn-empty" href="video.wel">동영상</a></li>
-            <li><a class="btn-empty" href="graph.wel">통계자료</a></li>
-            <li><a class="btn-empty" id="map-search" href="map.wel">주변장소검색</a></li>
-         </ul>
-      </div>
-   </div>
+   <div style="display: flex; width: 1300px; margin: 0 auto;">
+	<section id="container" style="width: 210px; height: 100%; display:flex;">
+		<div style="width: 210px; margin-left: 20px;">
+			<h3 style="margin: 50px 0px;">베시시</h3>
+			<div class="list">
+				<a class="checkli" href="list.wel">지원정책</a>
+			</div>
+			<div class="video">
+				<a class="ncheckli" href="video.wel">동영상</a>
+			</div>
+			<div class="graph">
+				<ul>
+					<li><a href="graph.wel">통계자료</a></li>
+					<li><a style="margin-left: 15px;">출생</a></li>
+					<li><a style="margin-left: 15px;">표준발육</a></li>
+				</ul>
+			</div>
+			<div class="map">
+				<ul>
+					<li><a href="map.wel">주변장소검색</a></li>
+					<li><a style="margin-left: 15px;">소아과</a></li>
+					<li><a style="margin-left: 15px;">키즈카페</a></li>
+					<li><a style="margin-left: 15px;">어린이집</a></li>
+					<li><a style="margin-left: 15px;">유아용품</a></li>
+				</ul>
+			</div>
+		</div>
+		<hr class='list_hr'>
+		</section>
+	<div style="width: 900px; margin-top: 50px; margin-left: 20px;">
    <div class="new_container">
       <form method="post" action="insert.wel" id="in_form" enctype="multipart/form-data">
          <input type="hidden" name="writer" value="${loginInfo.id }" />
@@ -93,23 +115,34 @@
             <a href='list.wel' style="font-size: 18px; padding: 5px; border: 1px solid #fffef0; border-radius: 5px; background: #ebebeb">취소</a>
          </div>
       </div>
+      </div>
+      </div>
    
    <script type="text/javascript" src="js/file_check.js?v<%=new Date().getTime()%> "></script>
    <script type="text/javascript" src='js/common.js?v<%=new Date().getTime() %>'></script>
    <script type="text/javascript">
    
    $('#summernote').summernote({
-         width: 1300,
+         width: 900,
         height: 300,
         lang: "ko-KR",
         fontSizes: ['8','9','10','11','12','14','18','24','36'],
         toolbar: [ 
-        	['font', ['fontname','fontsize','fontsizeunit']], 
-        	['fontstyle', ['bold','italic','underline','strikethrough','forecolor','backcolor','superscript','subscript','clear']], 
-        	['style', ['style']], 
-        	['paragraph', ['paragraph','height','ul','ol']], 
-        	['insert', ['table','hr','link','picture','video']], ['codeview'], 
+        	['style', ['style']],
+			['fontsize', ['fontsize']],
+			['font', ['bold', 'italic', 'underline', 'clear']],
+			['fontname', ['fontname']],
+			['color', ['color']],
+			['para', ['ul', 'ol', 'paragraph']],
+			['height', ['height']],
+			['table', ['table']],
+			['insert', ['link', 'picture', 'hr']],
+			['view', ['fullscreen', 'codeview']],
+			['help', ['help']]
         	],
+        	fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana', 'Nanum Gothic', 'Malgun Gothic', 'Noto Sans KR', 'Apple SD Gothic Neo'],
+			fontNamesIgnoreCheck: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana', 'Nanum Gothic', 'Malgun Gothic', 'Noto Sans KR', 'Apple SD Gothic Neo'],
+			fontSizes: ['8','9','10','11','12','13','14','15','16','17','18','19','20','24','30','36','48','64','82','150'],
         tableClassName: function(){
         	$(this).addClass('table table-bordered').attr('border', 1).css('borderCollapse', 'collapse').css('width', '100%');
         	$(this).find('tr:first-child td').css('borderTop', '1px solid #000').css('borderBottom', '1px solid #000').css('borderLeft', '1px solid #ddd').css('borderRight', '1px solid #ddd').css('padding', '15px').css('background', '#f0f1f5');
@@ -151,22 +184,6 @@
             }
          });
       }
-      /* 
-      function insert_cont()() {
-    	  var title = document.getElementById('title');
-    	  var content = document.getElementById('content');
-    	  
-    	  if(title.val == ''){
-    		  alert("제목을 입력하세요")
-    	  } else if(content == ''){
-    		  alert("내용을 입력하세요")
-    	  } else{
-    		  $("#in_form").submit();
-    	  }
-      } */
-      
-      $("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-      $("#cate-ul li>a").eq(0).attr("class", "btn-fill");
    </script>
    
    

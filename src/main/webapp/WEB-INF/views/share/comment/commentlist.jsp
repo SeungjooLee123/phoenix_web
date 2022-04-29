@@ -50,7 +50,7 @@
 	var text = $('#co_co_text_'+comment_id).val();
 		$.ajax ({
 			/* 경로 형태로 url  지정할꺼양 */
-			url :	'community/co_comment/regist'			/* controller 호출  주소 형식 맵핑 */
+			url :	'share/co_comment/regist'			/* controller 호출  주소 형식 맵핑 */
 			, data:	{ id : id , 
 				      content: text,
 				      comment_id : comment_id
@@ -58,7 +58,8 @@
 					/* pid : 원 글의 id, 입력한 댓글  */
 			, success : function ( res ) {
  				//location.href='community/comment/list?id='+id+"" ;
- 				location.href='detail.co?id='+id+"";
+ 				alert('detail');
+ 				location.href='detail.sh?id='+id+"";
  				
 				
 			}, 	error : function(req, text) {
@@ -86,7 +87,7 @@ function co_coment(comment_id) {
 	}else if( thistext == '저장'){
 		//alert($div.children('.modify').children('textarea').val());
 		// a jax 로 바꿔야함
-		location.href='comment_update.co?comment_id='+comment +
+		location.href='comment_update.sh?comment_id='+comment +
 						'&content='+ $div.children('.modify').children('textarea').val() +
 						'&id=' + id;
 	}
@@ -102,7 +103,7 @@ function co_coment(comment_id) {
 		}else if ( thistext == '삭제'){
 			if (!confirm("삭제하시겠습니까?")) {
 		    } else {
-				location.href='comment_delete.co?comment_id='+comment + '&id=' + id;
+				location.href='comment_delete.sh?comment_id='+comment + '&id=' + id;
 		 	}
 		} 
 	}
