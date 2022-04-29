@@ -22,15 +22,15 @@
 	$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
 	$("#cate-ul li>a").eq(2).attr("class", "btn-fill");
 </script>
-
-<div id="grow_select" style="display: none;">
-	<select id="body" onchange="selectchg()">
+<div style=" width: 1050px; display: inline-block;">
+<div id="grow_select" style="display: none; width: 90px; float: right; margin-right: 80px;">
+	<select id="body" onchange="selectchg()" style="width: 90px; height: 36px; padding: 5px;">
 		<option value="weight" selected="selected">체중</option>
 		<option value="height">신장</option>
 		<option value="head">머리둘레</option>
 	</select>
 </div>
-
+</div>
 <div id="chart_div" style="width: 1050px; height: 500px;"></div>
 </div>
 </div>

@@ -97,7 +97,6 @@ public class CommunityController {
 	public String detail(int id, Model model) {
 		//해당 글의 조회수 증가 처리
 		service.Community_read(id);
-		
 		//해당 게시글을 DB에서 조회 후 상세화면에 출력
 		model.addAttribute("vo",service.Community_detail(id) );
 		model.addAttribute("crlf", "\r\n");

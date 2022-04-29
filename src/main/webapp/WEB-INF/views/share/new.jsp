@@ -30,7 +30,7 @@ table th{
 </head>
 <body>
 	<h3>방명록 글쓰기</h3>
-	<form action="insert.co" method="post" enctype="multipart/form-data">
+	<form action="insert.sh" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th class="w-px120">제목</th>
