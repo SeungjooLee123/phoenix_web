@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-#graph-ul{display: flex; position: relative; margin-top: 30px;}
+#graph-ul{display: flex; position: relative;}
 #graph-ul li{display: block; font-size: 14px; background: #f5f5f5; display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
 #graph-ul li.active{background: #c3bfff; color: #fff;}
 </style>
@@ -20,21 +20,22 @@
 	$("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
 	$("#cate-ul li>a").eq(2).attr("class", "btn-fill");
 </script>
-<ul id='graph-ul'>
-	<li>출생</li>
-	<li>표준발육</li>
-</ul>
-
-<div id="grow_select" style="display: none;">
-	<select id="body" onchange="selectchg()">
-		<option value="weight" selected="selected">체중</option>
-		<option value="height">신장</option>
-		<option value="head">머리둘레</option>
-	</select>
+<div style="width:1300px; margin: 0 auto;">
+	<ul id='graph-ul' style="margin-left: 205px;">
+		<li>출생</li>
+		<li>표준발육</li>
+	</ul>
+	
+	<div id="grow_select" style="display: none; width: 1200px; text-align: right;">
+		<select id="body" onchange="selectchg()" style="width:90px; height: 35px; padding-left: 5px;">
+			<option value="weight" selected="selected">체중</option>
+			<option value="height">신장</option>
+			<option value="head">머리둘레</option>
+		</select>
+	</div>
+	
+	<div id="chart_div" style="width: 1200px; height: 500px; margin: 0 auto;"></div>
 </div>
-
-<div id="chart_div" style="width: 1200px; height: 500px;"></div>
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   
@@ -64,8 +65,10 @@ google.charts.load('current', {'packages':['corechart']});
       title : '출생아 수 및 합계 출산율',
       hAxis: {title: "년도"},
       seriesType: 'bars',
+      pointSize: 3,
       series: {1: {type: 'line', targetAxisIndex: 1}},
       vAxes:{0:{title:'출생아수(천명)'},1:{title:'합계출산율'}}
+      
       /* axes: {
           y: {
         	  baby_cnt: {title: appbundle.get('circulation'),}, // Left y-axis.

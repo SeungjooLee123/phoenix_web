@@ -28,7 +28,7 @@ public class CustomerController {
 	public String list(HttpSession session, Model model, String category) {
 		//cs -> 마음에 안 들면 변경
 		session.setAttribute("category", "cs");
-		category = category == null ? "nomal" : category;
+		category = category == null ? "normal" : category;
 		List<CustomerVO> list = service.customer_list(category);
 		model.addAttribute("list", list);
 		model.addAttribute("crlf","\r\n");
@@ -61,7 +61,7 @@ public class CustomerController {
 		System.out.println(gson.toJson(vo));
 		//수정된 정보를 db에 업데이트 한 후 상세 화면으로 연결
 		service.customer_update(vo);
-		return "redirect:list.cu";
+		return "redirect:list.cu?category="+vo.getCategory();
 	}
 	
 	//저장
@@ -73,7 +73,13 @@ public class CustomerController {
 			vo.setFilepath(common.fileUpload("customer", file, session));
 		}
 		//입력한 정보를 db에 저장 후 목록 화면으로 연결
-		vo.setUser_id(((UserVO) session.getAttribute("loginInfo")).getId());
+		if((UserVO) session.getAttribute("loginInfo") != null)
+			vo.setUser_id(((UserVO) session.getAttribute("loginInfo")).getId());
+		else {
+			System.out.println(vo.getPhone());
+			System.out.println(vo.getEmail());
+			vo.setPhone(vo.getPhone().replace("-", ""));
+		}
 		service.customer_insert(vo);
 		return "redirect:list.cu";//새로운 데이터 목록을 다시 조회해서 가야하므로
 	}
@@ -95,7 +101,7 @@ public class CustomerController {
 	
 	//삭제
 	@RequestMapping("/delete.cu")
-	public String delete(int id, HttpSession session) {
+	public String delete(int id, String category, HttpSession session) {
 		
 		CustomerVO cus = service.customer_detail(id);
 		String uuid = session.getServletContext().getRealPath("resources") + "/" + cus.getFilename();
@@ -105,6 +111,6 @@ public class CustomerController {
 		}
 		
 		service.customer_delete(id);
-		return "redirect:list.cu";
+		return "redirect:list.cu?category=" + category;
 	}
 }
