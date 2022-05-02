@@ -15,6 +15,7 @@
    .center {position: absolute; left:50%; top:50%; transform:translate(-50%, -50%); }
    .close-button{float: right; width: 1.5rem; line-height: 1.5rem; text-align: center; cursor: pointer; border-radius: 0.25rem; background-color: lightgray;}
    .close-button:hover{background-color: darkgray;}
+   .btn-fill{border-radius: 5px; background: #8c88c9; color: #fff;}
    
    #category-ul{display: flex;}
 	#category-ul li > a{display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
@@ -23,19 +24,16 @@
 
 .search{width: 900px; margin: 0 auto;}
 #list-top {margin-bottom: 20px; margin-top: 20px;}
-#list-top div { height: 36px; margin-top: 150px; margin-right: 20px;}
+#list-top div { height: 36px; margin-top: 200px; margin-right: 20px;}
 #list-top ul { margin: 0; display: flex; float: right;}
 #list-top ul li:not(:first-child) { margin-left: 3px; }
 #list-top ul:first-child { float: left;}
 #list-top ul:last-child { float: right;}
-.btn-fill{border-radius: 5px; background: #8c88c9; color: #fff;}
-.btn-empty{background: #f5f5f5;}
-
 
 ul.grid { width: 900px; display: inline-block; }
 ul.grid li { float: left; width: 32%; height: 200px; margin: 20px 10px 0 0; 
 		box-sizing: border-box; }
-ul.grid li:nth-child(3n) {margin-right: 0;}		/* 5n  <- 5개 마다 */
+ul.grid li:nth-child(3n) {margin-right: 0;}
 ul.grid li div {text-align: left; padding: 5px 10px; }
 ul.grid li:nth-child(n+4){display: none;}
 
@@ -45,14 +43,10 @@ ul.grid2 li { float: left; width: 32%; height: 200px; margin: 20px 10px 0 0;
 ul.grid2 li div {text-align: left; padding: 5px 10px; }
 ul.grid2 li:nth-child(n+4){display: none;}
 
-.video a{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
-
 #video1_point:hover{cursor: pointer;}
+#video2_point:hover{cursor: pointer;}
 
 </style>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 </head>
 <body>
 	<div style="display: flex; width: 1300px; margin: 0 auto;">
@@ -65,16 +59,16 @@ ul.grid2 li:nth-child(n+4){display: none;}
          	<c:forEach var="vo" items="${list }">
          		<c:if test="${vo.category eq 'CHILDBIRTH' }">
          			<li>
-         				<div><img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 270px; height: 157px;" class="img${vo.id }"/></div>
-         				<div><h4 style="text-align: center" class="img${vo.id }">${fn:substring(vo.explain , 0, 19) }</h4></div>
+         				<div><img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 270px; height: 157px; cursor: pointer;" class="img${vo.id }"/></div>
+         				<div><h4 style="text-align: center; cursor: pointer;" class="img${vo.id }">${fn:substring(vo.explain , 0, 19) }</h4></div>
        					<c:if test="${loginInfo.admin eq 'Y' }">
-       						<div><a style="float: right; display: inline-block;" id="modi" class="modify${vo.id }" href="delete_video.wel?no=${vo.no }">삭제</a></div>
+       						<div><a style="float: right; display: inline-block; font-size: 13px;" id="modi" class="modify${vo.id }" href="delete_video.wel?no=${vo.id }">삭제</a></div>
        					</c:if>
          			</li>
          		</c:if>
          	</c:forEach>
          	</ul>
-         	<i id="video1_point" class="fas fa-angle-down" style="width: 900px; text-align: center; margin: 90px auto;"></i>
+         	<div id="video1" style="margin: 60px auto;"><i id="video1_point" class="fas fa-angle-down" style="width: 900px; text-align: center; "></i></div>
          </div>
          
          <h4 style="margin-top: 50px; font-size: 25px; margin-left: 15px;">육아 정보</h4>
@@ -83,16 +77,16 @@ ul.grid2 li:nth-child(n+4){display: none;}
          	<c:forEach var="vo" items="${list }">
          		<c:if test="${vo.category eq 'PARENTING' }">
          			<li>
-         				<div style="margin-top: 35px; "><img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 270px; height: 157px;" class="img${vo.id }"/></div>
-         				<div><h4 style="text-align: center" class="img${vo.id }">${fn:substring(vo.explain , 0, 19) }</h4></div>
+         				<div><img src="https://img.youtube.com/vi/${vo.videopath }/mqdefault.jpg" style="margin-right: 20px; width: 270px; height: 157px; cursor: pointer;" class="img${vo.id }"/></div>
+         				<div><h4 style="text-align: center; cursor: pointer;" class="img${vo.id }">${fn:substring(vo.explain , 0, 19) }</h4></div>
        					<c:if test="${loginInfo.admin eq 'Y' }">
-       						<div><a style="float: right; display: inline-block;" id="modi" class="modify${vo.id }" href="delete_video.wel?no=${vo.no }">삭제</a></div>
+       						<div><a style="float: right; display: inline-block; font-size: 13px;" id="modi" class="modify${vo.id }" href="delete_video.wel?no=${vo.id }"><i class="fa-solid fa-trash"></i></a></div>
        					</c:if>
          			</li>
          		</c:if>
          	</c:forEach>
          	</ul>
-         	<i id="video2_point" class="fas fa-angle-down" style="width: 900px; text-align: center; margin: 90px auto;"></i>
+         	<div id="video2" style="margin: 60px auto;"><i id="video2_point" class="fas fa-angle-down" style="width: 900px; text-align: center;"></i></div>
          </div>
          
          <c:if test="${loginInfo.admin eq 'Y' }">
@@ -140,13 +134,29 @@ ul.grid2 li:nth-child(n+4){display: none;}
   
       <script type="text/javascript">
       $(document).on("click", "#video1_point", function(){
-    	 $("ul.grid li:nth-child(n+3)").css("display", "block");
-    	 $("ul.grid li:nth-child(n+4)").css("marginTop", "50px");
+    	 var cntclass = $(this).attr("class");
+    	 cntclass = cntclass.split(" ")[1];
+    	 if(cntclass == "fa-angle-down"){
+    		 $("ul.grid li:nth-child(n+3)").css("display", "block");
+	    	 $("ul.grid li:nth-child(n+4)").css("marginTop", "50px");
+	    	 document.getElementById("video1").innerHTML = '<i id="video1_point" class="fa-solid fa-angle-up" style="width: 900px; text-align: center;"></i>';
+    	 } else{
+    		 $("ul.grid li:nth-child(n+4)").css("display", "none");
+    		 document.getElementById("video1").innerHTML = '<i id="video1_point" class="fas fa-angle-down" style="width: 900px; text-align: center;"></i>';
+    	 }
       });
       
       $(document).on("click", "#video2_point", function(){
-     	 $("ul.grid2 li:nth-child(n+3)").css("display", "block");
-     	 $("ul.grid2 li:nth-child(n+4)").css("marginTop", "50px");
+    	  var cntclass = $(this).attr("class");
+    	  cntclass = cntclass.split(" ")[1];
+    	  if(cntclass == "fa-angle-down"){
+     		 $("ul.grid2 li:nth-child(n+3)").css("display", "block");
+	     	 $("ul.grid2 li:nth-child(n+4)").css("marginTop", "50px");
+	     	document.getElementById("video2").innerHTML = '<i id="video2_point" class="fa-solid fa-angle-up" style="width: 900px; text-align: center;"></i>';
+     	 } else{
+     		$("ul.grid2 li:nth-child(n+4)").css("display", "none");
+     		document.getElementById("video2").innerHTML = '<i id="video2_point" class="fas fa-angle-down" style="width: 900px; text-align: center;"></i>';
+     	 }
        });
       
          $(document).on('click', '.wrap_video img', function() {

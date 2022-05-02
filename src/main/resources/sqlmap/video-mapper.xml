@@ -19,6 +19,6 @@
 	
 	<!-- 동영상 삭제 -->
 	<delete id="delete">
-		delete from master_web_welfare_youtube_tbl where no = #{no}
+		delete from master_web_welfare_youtube_tbl where id = #{id}
 	</delete>
 </mapper>

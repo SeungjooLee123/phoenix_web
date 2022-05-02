@@ -13,7 +13,6 @@ public class IotController {
    String base_code ="";
    String test_shake = ""; 
         
-        
    
    @ResponseBody
    @RequestMapping("/iot_cap.io")
@@ -67,5 +66,4 @@ public class IotController {
    public void stop_moter() {
       test_shake = "";
    }
-   
 }
