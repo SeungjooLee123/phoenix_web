@@ -5,13 +5,18 @@
 <!DOCTYPE html>
 <html>
 <style type="text/css">
+img{
+	width: 25px;
+	height: 25px;
+}
+
 table{
 	width: 80%;
 	margin: 0 auto;
 	border: 1px solid;
 	border-collapse: collapse;
 }
-/* table tr{ */
+table tr{ 
 	height: 46px;
 }
 table th, table td{
@@ -86,7 +91,7 @@ table th{
 				<c:if test="${ ! empty vo.web_file }">  <!--파일 있을 때  -->
 				<!-- 파일 보이기  -->
 				<a id='preview'></a>
-				<a href="download.co?id=${vo.id }" >다운</a>
+				<a href="download.sh?id=${vo.id }" >다운</a>
 				</c:if>
 			</td>
 		</tr>
@@ -147,11 +152,12 @@ function comment_regist(){
 		return;
 	}
 	var pid = ${vo.id};
+//	var user_id = ${vo.user_id };
 	var con = $('#comment').val()
 	$.ajax ({
 		/* 경로 형태로 url  지정할꺼양 */
 		url :	'share/comment/regist'			/* controller 호출  주소 형식 맵핑 */
-		, data:	{ pid : pid , content : con }
+		, data:	{ pid : pid , content : con  }
 				/* pid : 원 글의 id, 입력한 댓글  */
 		, success : function ( res ) {
 			if( res ){	//true == true T , false == true F
@@ -171,9 +177,11 @@ function comment_regist(){
 /* 댓글 목록 조회()  */
 function comment_list(){
 	var id = ${ vo.id };
+	console.log(id);
+
 	$.ajax({
 		url : "share/comment/list/${vo.id}"
-		, data : {pid : 342 }
+//		, data : {pid : 342 }
 		, success : function ( res) {
 			$('#comment_list').html( res );
 		}, error : function (req, text){

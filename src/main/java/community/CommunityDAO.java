@@ -83,7 +83,6 @@ public class CommunityDAO implements CommunityService {
 		sql.update("community.mapper.step_up", comment_id);
 		//대댓글 단 댓글의 comment_id
 		vo.setComment_id(comment_id);
-
 		return sql.insert("community.mapper.co_comment_regist", vo) == 1 ? true : false;
 	}
 

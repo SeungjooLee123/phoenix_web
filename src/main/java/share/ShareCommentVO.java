@@ -7,17 +7,24 @@ import java.text.SimpleDateFormat;
 public class ShareCommentVO {
 	//SimpleDateFormat sdp = new SimpleDateFormat("YYYY-MM-DD HH:MI");
 
-	private int comment_id;
-	private int step;
-	private int indent;
-	private int id;
-	private Date write_date;
-	private String content;
-	private String user_id;
-	private String secret;
+	private int 	comment_id;
+	private int 	step;
+	private int 	indent;
+	private int 	id;
+	private Date 	write_date;
+	private String	content;
+	private String 	user_id;
+	private String  secret;
+	private String  p_user_id;
 	
 	
 	
+	public String getP_user_id() {
+		return p_user_id;
+	}
+	public void setP_user_id(String p_user_id) {
+		this.p_user_id = p_user_id;
+	}
 	public String getSecret() {
 		return secret;
 	}
