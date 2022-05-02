@@ -52,6 +52,8 @@ public class AdminController {
 		category = category == null ? "normal" : category;
 		List<CustomerVO> list = service.customer_list(category);
 		model.addAttribute("list", list);
+		
+		model.addAttribute("ad_category", category);
 		return "mypage/question-list";
 	}
 	
@@ -60,6 +62,7 @@ public class AdminController {
 	public String datailuser(Model model, String title) {
 		CustomerVO vo = service.admin_qanda_detail(title);
 		model.addAttribute("vo", vo);
+		model.addAttribute("crlf","\r\n");
 		return "mypage/detail_qanda";
 	}
 	
@@ -94,10 +97,15 @@ public class AdminController {
 	@RequestMapping("/my_detail")
 	public String my_detail(Model model, int id) {
 		CustomerVO vo = service.admin_reply_detail(id);
-		//여기서 널 
+		
 		model.addAttribute("vo", vo);
-		String test = "";
+		model.addAttribute("crlf","\r\n");
 		return "mypage/my_detail";
+	}
+	
+	@RequestMapping("/select")
+	public String adming_select() {
+		return "mypage/admin-select";
 	}
 	
 }

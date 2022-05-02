@@ -30,7 +30,6 @@ right:0;
 border:0;
 background: #fff;
 transition: top .2s ease-in-out;
-height: 164px;
 }
 
 .header_wrap {

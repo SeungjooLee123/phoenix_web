@@ -16,7 +16,8 @@ margin-top: 20px;
 cursor: pointer;
 color: #888888;}
 
-#tabs > li:hover {
+
+#tabs > li.active {
 color: #000;
 border-bottom: 2px solid #c3bfff;
 }
@@ -89,6 +90,14 @@ background: rgba(195, 191, 255, .45);
 </section>
 
 <script type="text/javascript">
+
+$(function () {
+	var cate = '#'+'${ad_category}';
+	$(cate).addClass('active');
+
+});
+
+
 $(document).on('click', '#tabs li', function () {
 	var idx = $(this).index();
 
@@ -100,6 +109,12 @@ $(document).on('click', '#tabs li', function () {
 	
 	 $('form').submit();
 });
+
+
+
+
+
+
 </script>
 
 </body>
