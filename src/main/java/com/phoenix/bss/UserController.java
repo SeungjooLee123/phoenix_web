@@ -2,17 +2,24 @@ package com.phoenix.bss;
 
 
 import java.io.IOException;
-
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingException;
+import com.google.firebase.messaging.MulticastMessage;
 import com.google.gson.Gson;
 
 import user.UserDAO;
@@ -25,6 +32,18 @@ public class UserController {
 	Gson gson = new Gson();
 	String a = "";
     
+	
+	@RequestMapping(value = "/fcmtest.do") 
+	public @ResponseBody void fcmtest(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		String tokenId="cEk0APvUS8u_oX2A8hvTyU:APA91bESYz-u0WjskEJ1sSzpYzOVprYDlhBsikpTs42hWNrGhzvSmof5sKZS6uNjnT8lJ2jO-XY_8AL9pCGeDQQgzx_eALfYzxiaYTeOI_YqDWkJhC6v5mwY1TySWRZGwCvZYa6uUUGj"; 
+		String title="응애~응애~ 아기가 울고 있습니다.";
+		String content="어플을 통해 아이를 확인해주세요."; 
+		FcmUtil FcmUtil = new FcmUtil();
+		FcmUtil.send_FCM(tokenId, title, content);
+		//return "test"; 
+	}
+	
+	
     @ResponseBody
     @RequestMapping("/music_check2")
     public void music_check2() {
