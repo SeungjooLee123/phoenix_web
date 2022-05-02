@@ -11,16 +11,15 @@
 	
 	${status.index eq 0 ? '<hr>' : '' }	<!-- 첫 번째 순서 값에 hr 태그 부여 -->
 	<div class="left" >
-		${vo.user_id} [${vo.write_date }]
+		${vo.user_id} [${vo.write_date }] 
 		
 		<!-- 로그인한 사용자가 작성한 댓글인 경우 수정/삭제 가능 -->	
-		<c:if test="${loginInfo.id eq vo.user_id }">
+		<c:if test="${loginInfo.id eq vo.user_id  }">
 			<span style=" float: right; ">
-				<a class="btn-fill-s btn-modify-save"
+				<a class="btn-modify-save"
 				onclick="savebtn(this,${vo.comment_id},${vo.id});">수정</a>
-				<a class="btn-fill-s btn-delete-cancel" 
+				<a class="btn-delete-cancel" 
 				   onclick="canclebtn(this,${vo.comment_id},${vo.id});">삭제</a>
-				
 			</span>
 		</c:if>
 		<div class="original">${ fn:replace( fn:replace(vo.content, lf,'<br/>'), crlf, '<br/>') }</div>
@@ -28,11 +27,15 @@
 		<c:if test="${loginInfo.id ne null }">	
 			<span class="commentarea">
 				<a onclick="co_coment(${vo.comment_id})">답글달기</a>
-				<textarea style="display: none" id="co_co_text_${vo.comment_id}"></textarea>
-				<a class="savebtn " style="display: none" id="co_co_regist_${vo.comment_id}"
-				onclick="co_coment_regist(${vo.comment_id}, ${vo.id})">등록</a>
-				<a class="cancelbtn modify" style="display: none" id="co_co_cancle_${vo.comment_id}"
-				   onclick="display_atag(this);" >취소</a>
+				<div id="co_comment${vo.comment_id}">
+					<textarea style="display: none" id="co_co_text_${vo.comment_id}"></textarea>
+					<a class="savebtn " style="display: none" id="co_co_regist_${vo.comment_id}"
+					onclick="co_coment_regist(${vo.comment_id}, ${vo.id})">등록</a>
+					<a class="cancelbtn modify" style="display: none" id="co_co_cancle_${vo.comment_id}"
+					   onclick="display_atag(this);" >취소</a>
+					<a class="secretbtn" id="secretbtn_${vo.comment_id}" style="display: none">
+					<img id="imglock"  src="imgs/lock.png" onclick="Chgimg(${vo.comment_id})"/></a>   
+				</div>
 			</span>
 		</c:if>
 		
@@ -41,6 +44,18 @@
 </c:forEach>
 </div>
  <script type="text/javascript">
+ 
+function Chgimg(id){
+	if(document.getElementById( 'imglock' ).src == "http://localhost/bss/imgs/lock.png"){
+		document.getElementById( 'imglock' ).src = "http://localhost/bss/imgs/lock2.png";
+		
+	}else {
+		document.getElementById( 'imglock' ).src = "http://localhost/bss/imgs/lock.png";
+		
+	}
+}
+ 
+
  
  //대댓글 등록
  function co_coment_regist(comment_id, id) {
@@ -73,6 +88,8 @@ function co_coment(comment_id) {
 	 $('#co_co_text_'+comment_id).css('display', 'inline');
 	 $('#co_co_regist_'+comment_id).css('display', 'inline');
 	 $('#co_co_cancle_'+comment_id).css('display', 'inline');	
+	 $('#secretbtn_'+comment_id).css('display', 'inline');	
+	 $('#co_comment'+comment_id).css('display', 'inline');	
 }
  //수정/저장 버튼 처리
  function savebtn(tag , comment , id) {
