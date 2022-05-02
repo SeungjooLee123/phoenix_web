@@ -54,6 +54,7 @@ public class ShareDAO implements ShareService {
 
 	@Override
 	public int Share_comment_insert(ShareCommentVO vo) {
+
 		System.out.println("제발ㄹㄹㄹ"+vo.getComment_id() +"/"+ vo.getContent());
 		return sql.insert("share.mapper.comment_insert", vo);
 	}
@@ -77,7 +78,7 @@ public class ShareDAO implements ShareService {
 	@Override
 	public boolean Share_co_comment_regist(int comment_id, ShareCommentVO vo) {
 		sql.update("share.mapper.step_up", comment_id);
-		System.out.println("wpqkf" + vo.getSecret());
+		vo.setComment_id(comment_id);
 		return sql.insert("share.mapper.co_comment_regist",vo) == 1 ? true : false;
 	}
 

@@ -1,6 +1,7 @@
 package com.phoenix.bss;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -40,14 +41,14 @@ public class ShareController {
 						, Model model, @RequestParam(defaultValue = "all") String search
 						, @RequestParam(defaultValue = "all") String keyword
 						, @RequestParam(defaultValue = "10") int pageList
-						, @RequestParam(defaultValue = "list") String viewType) {
+						, @RequestParam(defaultValue = "grid") String viewType) {
 			session.setAttribute("category", "sh");
 			page.setCurPage(curPage);	//현재 페이지 담음
 			
 			page.setSearch(search);
 			page.setKeyword(keyword);	//검색어
 			page.setPageList(pageList);
-//			page.setViewType(viewType);
+			page.setViewType(viewType);
 			model.addAttribute("page",  service.Share_list(page) );
 			return "share/share";
 		}
@@ -200,7 +201,7 @@ public class ShareController {
 		//방명록 글에 대한 댓글저장처리 요청
 		@ResponseBody
 		@RequestMapping("/share/comment/regist")
-		public boolean comment_regist(int pid, String content, HttpSession session) {
+		public boolean comment_regist(int pid, String content, String user_id ,HttpSession session) {
 			//작성자의 경우 s_member의 id값을 담아야 하므로 로그인 정보 확인
 			System.out.println(pid + "/" + content);
 			UserVO member = (UserVO) session.getAttribute("loginInfo");
@@ -208,6 +209,7 @@ public class ShareController {
 			vo.setUser_id( member.getId() );
 			vo.setId( pid );
 			vo.setContent( content );
+//			vo.setP_user_id(user_id);
 			//화면에서 입력한 댓글 정보를 DB에 저장..
 			return service.Share_comment_insert( vo ) == 1 ? true : false ;
 			//비동기 통신을 할떄에는 responsebody를 이용해야한다 ex 안드 어싱크테스크 
@@ -223,8 +225,6 @@ public class ShareController {
 			vo.setId(id);
 			vo.setContent(content);
 			vo.setSecret("N");
-			
-			System.out.println(vo.getSecret());
 			//대댓글 insert
 			service.Share_co_comment_regist(comment_id, vo);
 			//댓글 리스트 다시 조회
@@ -241,7 +241,6 @@ public class ShareController {
 		public String comment_list( @PathVariable int id, Model model ) {//경로에 있눈 값이다
 			//해당 글애 대한 댓글들을 DB에서 조회해 온다,
 			System.out.println("id : "+id);
-			
 			List<ShareCommentVO> list = service.Share_comment_list(id);
 			
 			model.addAttribute("list", list  );
