@@ -164,6 +164,7 @@ ul.grid2 li:nth-child(n+4){display: none;}
         	 indexs = indexs.split(" ");
         	 <c:forEach var="vo" items="${list}">
         	 	if("${vo.id}" == indexs[0].split("g")[1]){
+        	 		$('html').scrollTop(0);
         	 		$('#popup, #popup-background').css('display', 'block');
         	 		$('#popup').html('<iframe width="1000" height="600" id="youtube" src="https://www.youtube.com/embed/${vo.videopath}?autoplay=1" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
         	 	}
@@ -175,6 +176,7 @@ ul.grid2 li:nth-child(n+4){display: none;}
         	 indexs = indexs.split(" ");
         	 <c:forEach var="vo" items="${list}">
         	 	if("${vo.id}" == indexs[0].split("g")[1]){
+        	 		$('html').scrollTop(0);
         	 		$('#popup, #popup-background').css('display', 'block');
         	 		$('#popup').html('<iframe width="1000" height="600" id="youtube" src="https://www.youtube.com/embed/${vo.videopath}?autoplay=1" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
         	 	}
@@ -186,6 +188,7 @@ ul.grid2 li:nth-child(n+4){display: none;}
         	 indexs = indexs.split(" ");
         	 <c:forEach var="vo" items="${list}">
         	 	if("${vo.id}" == indexs[0].split("g")[1]){
+        	 		$('html').scrollTop(0);
         	 		$('#popup, #popup-background').css('display', 'block');
         	 		$('#popup').html('<iframe width="1000" height="600" id="youtube" src="https://www.youtube.com/embed/${vo.videopath}?autoplay=1" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
         	 	}
@@ -197,6 +200,7 @@ ul.grid2 li:nth-child(n+4){display: none;}
         	 indexs = indexs.split(" ");
         	 <c:forEach var="vo" items="${list}">
         	 	if("${vo.id}" == indexs[0].split("g")[1]){
+        	 		$('html').scrollTop(0);
         	 		$('#popup, #popup-background').css('display', 'block');
         	 		$('#popup').html('<iframe width="1000" height="600" id="youtube" src="https://www.youtube.com/embed/${vo.videopath}?autoplay=1" title="YouTube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
         	 	}
