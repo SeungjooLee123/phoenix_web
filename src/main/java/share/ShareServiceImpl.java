@@ -67,5 +67,10 @@ public class ShareServiceImpl implements ShareService {
 		return dao.Share_co_comment_regist(comment_id, vo);
 	}
 
+	@Override
+	public int co_comment_secret(int comment_id, String secret) {
+		return dao.co_comment_secret(comment_id, secret);
+	}
+
 
 }

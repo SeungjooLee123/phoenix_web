@@ -46,10 +46,10 @@ thead {
 </style>
 <head>
 <meta charset="UTF-8">
-<title>Community</title>
+<title>share</title>
 </head>
 <body>
-<img src="imgs/bss_ad_pick.png" style="width: 1440px; height: 400px; margin: 50px auto; ">
+<img src="imgs/bss_event_img.jpg" style="width: 1440px; height: 400px; margin: 50px auto; ">
 <section class="container"  style="width: 1300px; margin: 0 auto; ">
 
 <form action="share" method="post" id="btns"   >
@@ -101,14 +101,13 @@ thead {
 <!-- 그리드 목록 형태 -->
 <c:if test="${page.viewType eq 'grid' }">
 	<div style="width: 1250px; margin: 0 auto; display: flex; margin-left: 40px; ">
-	
 		<ul class="grid" style="  display: block;   ">
 			<c:forEach items="${page.list}" var="vo">
-				<li style="border: 1px solid #b0b0b0; width: 400px; height: 600px; box-sizing: border-box; float: left; margin-bottom: 45px; position: relative; margin-right: 10px;  " >
+				<li style="border: 1px solid #b0b0b0; width: 300px; height: 400px; box-sizing: border-box; float: left; margin-bottom: 45px; position: relative; margin-right: 10px;  " >
 					<div style="position: absolute;   border-radius: 5px; width: 100px; top: 3%; left: 5%; background: #8c88c9; height: 30px; display: flex; justify-content: center; align-items: center; "> 
 						<p style="color: #fff; font-weight: 700; ">조회수 [${vo.cnt }]</p>
 					</div>
-					<img src="imgs/lock2.png" style="  width: 370px; height: 400px; margin: 15px ;">
+					<img src="imgs/lock2.png" style="  width: 270px; height: 270px; margin: 15px ;">
 					<div style="color: #888888; font-size: 15px; margin-left: 20px;">${vo.user_id }</div>
 					<div style="color: #000; font-size: 18px; margin-left: 20px; font-weight: 700; "><a onclick="go_detail(${vo.id})"> ${vo.title}</a></div>
 					<div style="position: absolute; bottom: 3%; left: 3%; color: #ff8585; bottom: 3%; left: 3%; font-size: 18px; font-weight: 700;" >#베시시 #나눔왕EVENT!</div>

@@ -32,9 +32,9 @@ public interface ShareService {
 	
 	List<ShareCommentVO> Share_comment_list(int id);	//방명록 댓글 목록 조회	pid : 원글의 id
 	
-	boolean Share_co_comment_regist(int comment_id, ShareCommentVO vo);
+	boolean Share_co_comment_regist(int comment_id, ShareCommentVO vo); // 답글 저장
 	
-	
+	int co_comment_secret(int comment_id, String secret);		//비밀글 처리 
 	
 	
 	

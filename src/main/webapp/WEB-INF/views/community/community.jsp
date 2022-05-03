@@ -4,36 +4,14 @@
 <!DOCTYPE html>
 <html>
 <style type="text/css">
-body img{
-	text-align: center;
-}
-table{
-	width: 80%;
+div #list-top ul {
 	margin: 0 auto;
-	border: 1px solid;
-	border-collapse: collapse;
+	display: flex;
+    justify-content: center;
+    text-align: center;
+    height: 54px;
+    width: 1300px;
 }
-table tr{
-	height: 46px;
-}
-table th, table td{
-	border : 1px solid;
-	padding: 5px 10px;
-}
-table th{
-	background: #f6f6f6;
-}
-.t-attach{
-	width: 86px;
-}
-thead {
-
-}
-.btnSet{
-	margin-top: 20px;
-}
-
-.file-img { width: 40px; height: 36px; }
 
 </style>
 <head>
@@ -41,16 +19,16 @@ thead {
 <title>Community</title>
 </head>
 <body>
-<img src="imgs/bss_ad_pick.png" style="width: 1440px; height: 400px; margin: 50px auto; ">
+<img src="imgs/bss_event_img.jpg" style="width: 1440px; height: 400px; margin: 50px auto; ">
 
 <form action="community" method="post" id="btns" >
 		<input type="hidden" name="curPage" value="1" />
 		<input type="hidden" name="id" /><%-- detail에 보내질 id --%>
 		<div id="list-top">
 			<%-- 항목별 검색처리 --%>
-			<ul>
+			<ul style="align-items: center;">
 				<li>
-					<select name="search" class="w-px200">
+					<select name="search" style="width: 100px; height: 50px; text-align: center; font-size: 18px; font-weight: 700;  margin-right: 25px;">
 						<option value="all" ${page.search eq 'all' ? 'selected' : '' }>전체</option>
 						<option value="title" ${page.search eq 'title' ? 'selected' : '' }>제목</option>
 						<option value="content" ${page.search eq 'content' ? 'selected' : '' }>내용</option>
@@ -58,12 +36,12 @@ thead {
 					</select>
 				</li>
 				<c:if test="${page.keyword eq 'all'}">
-					<li><input type="text" name="keyword" class="w-px200"></li>
+					<li><input style="width: 600px; height: 50px; text-align: center; font-size: 18px; font-weight: 700; margin-right: 25px;" type="text" name="keyword" ></li>
 				</c:if>
 				<c:if test="${page.keyword ne 'all'}">
-					<li><input type="text" name="keyword" class="w-px200" value="${page.keyword}"></li>
+						<li><input type="text" name="keyword" value="${page.keyword}" style="width: 600px; height: 50px; margin-right: 25px; " /></li>
 				</c:if>
-				<li><a class="btn_style" onclick="$('form').submit()">검색</a></li>
+				<li style=" width: 100px; background: #f0efff; text-align: center; padding: 15px 0 15px 0; font-weight: 700; font-size: 18px;" ><a onclick="$('form').submit()"  >검색</a></li>
 			</ul>
 			<ul>
 				<c:if test="${loginInfo.admin eq 'Y'}">

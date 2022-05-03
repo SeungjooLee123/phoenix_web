@@ -27,7 +27,7 @@ public class ShareDAO implements ShareService {
 		int a = sql.selectOne("share.mapper.totalList", page);
 		page.setTotalList(a);
 		
-		List<ShareVO>list = sql.selectList("share.mapper.list", page);
+		List<ShareCommentVO>list = sql.selectList("share.mapper.list", page);
 		page.setList(list);
 		return page;
 	}
@@ -55,7 +55,7 @@ public class ShareDAO implements ShareService {
 	@Override
 	public int Share_comment_insert(ShareCommentVO vo) {
 
-		System.out.println("제발ㄹㄹㄹ"+vo.getComment_id() +"/"+ vo.getContent());
+		//System.out.println("제발ㄹㄹㄹ"+vo.getComment_id() +"/"+ vo.getContent());
 		return sql.insert("share.mapper.comment_insert", vo);
 	}
 
@@ -80,6 +80,17 @@ public class ShareDAO implements ShareService {
 		sql.update("share.mapper.step_up", comment_id);
 		vo.setComment_id(comment_id);
 		return sql.insert("share.mapper.co_comment_regist",vo) == 1 ? true : false;
+	}
+
+	@Override
+	public int co_comment_secret(int comment_id, String secret) {
+		ShareCommentVO vo = new ShareCommentVO();
+		vo.setComment_id(comment_id);
+		vo.setSecret(secret);
+		
+		
+		
+		return sql.update("share.mapper.co_comment_secret" ,  vo );
 	}
 
 	

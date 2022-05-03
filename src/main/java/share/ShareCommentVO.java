@@ -16,7 +16,7 @@ public class ShareCommentVO {
 	private String 	user_id;
 	private String  secret;
 	private String  p_user_id;
-	
+	//private String ??????
 	
 	
 	public String getP_user_id() {
