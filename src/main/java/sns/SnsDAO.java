@@ -45,7 +45,7 @@ public class SnsDAO {
 			int no = vo.getGro_no();
 			return sql.selectOne("sns.mapper.choice", no);			
 		}
-		//모두 넣기?
+		//다시 담기
 		public List<GrowthVO> insertall(GrowthVO vo) {
 			int result = 0;
 			result = sql.insert("sns.mapper.insertall", vo);

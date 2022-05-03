@@ -67,6 +67,6 @@
 </select>
 
 <select id="photo" resultType="String">
-	select baby_photo from master_baby_info_tbl where title = #{title}
+	select * from (select baby_photo from master_baby_info_tbl where title = #{title}) where baby_photo is not null
 </select>
 </mapper>

@@ -167,6 +167,7 @@ public class BabyInfoController {
 			List<FamilyInfoVO> list = dao.baby_info_co_parent(title.get(i)); //해당 육아일기에 가입한 사람 리스트
 			if(list.size() == 1) { //공동육아하는 사람 1명
 				List<String> temp = dao.photo(title.get(i));
+				System.out.println(temp.size());
 				for(int j=0; j<temp.size(); j++) {
 					common.fileDelete(temp.get(j), session);
 				}
