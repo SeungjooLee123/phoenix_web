@@ -35,7 +35,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/fcmtest.do") 
 	public @ResponseBody void fcmtest(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-		String tokenId="cEk0APvUS8u_oX2A8hvTyU:APA91bESYz-u0WjskEJ1sSzpYzOVprYDlhBsikpTs42hWNrGhzvSmof5sKZS6uNjnT8lJ2jO-XY_8AL9pCGeDQQgzx_eALfYzxiaYTeOI_YqDWkJhC6v5mwY1TySWRZGwCvZYa6uUUGj"; 
+		String tokenId="dON3s0zIQiGRiHA-YXPAyR:APA91bFm2O6n-LLQlErLMjHgL_IEyf59ag5Lxj55M1UPpLvteIk9y6GkfuTuWAA_IP_ouzIrzK5S1m_GeDEhjTi3lW99Vqr-jt2Ot57mmGOTD7tv7lRI265a1Fw17oMgqM7wsF3HSGG1"; 
 		String title="응애~응애~ 아기가 울고 있습니다.";
 		String content="어플을 통해 아이를 확인해주세요."; 
 		FcmUtil FcmUtil = new FcmUtil();
