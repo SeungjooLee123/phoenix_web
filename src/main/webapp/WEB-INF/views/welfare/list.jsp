@@ -91,39 +91,5 @@ ul.grid li div:nth-child(1) {
    </div>
    </div>
    </div>
-   
-   <script type="text/javascript">
-   jQuery(document).ready(function(){
-	   if('${page.list[0].filename}' != ""){
-		   document.getElementById("content_here").innerHTML = "<div class='file-here'><a href='download.wel?id=${page.list[0].id }' style='margin-right: 5px;'><i class='fa-solid fa-floppy-disk'></i></a>${page.list[0].filename }</div>";
-		   $("#content_here").append('</br></br></br>${page.list[0].content}');
-		   } else{
-			   document.getElementById("content_here").innerHTML = '${page.list[0].content}';
-			   }
-	   if('${page.list[0].user_id}' == "${loginInfo.id}"){
-		   document.getElementById("btn_here").innerHTML = "<br/></br><div style='float: right; margin-top: 10px;'><a style='padding: 5px; border-right: 1px solid #000;' href='modify.wel?id=${page.list[0].id }'>수정   </a><a style='padding: 5px; margin-left: 5px;' onclick =' if( confirm(\"정말 삭제하시겠습니까?\") ) { href=\"delete.wel?id=${page.list[0].id }\" }''>   삭제</a></div></br></br>";
-		   //$("#content_here").append("<br/></br><div style='float: right; margin-top: 10px;'><a style='padding: 5px; border-right: 1px solid #000;' href='modify.wel?id=${page.list[0].id }'>수정   </a><a style='padding: 5px; margin-left: 5px;' onclick =' if( confirm(\"정말 삭제하시겠습니까?\") ) { href=\"delete.wel?id=${page.list[0].id }\" }''>   삭제</a></div></br></br>");
-		   }
-	   });
-   
-   $(".title_list ul>li").click(function(){
-	   var title_index = $(this).index();
-	   <c:forEach var = "vo" items = "${page.list}">
-	   if("${vo.no}" == title_index+1) {
-		   if('${vo.filename}' != ""){
-			   document.getElementById("content_here").innerHTML = "<div class='file-here'><a href='download.no?id=${vo.id }' style='margin-right: 5px;'><i class='fa-solid fa-floppy-disk'></i></a>${vo.filename }</div>";
-			   $("#content_here").append('</br></br></br>${vo.content}');
-			   } else{
-				   document.getElementById("content_here").innerHTML = '${vo.content}';
-				   }
-            	
-		   if('${vo.user_id}' == "${loginInfo.id}"){
-			   document.getElementById("btn_here").innerHTML = "</br></br><div style='float: right; margin-top: 10px;'><a href='modify.wel?id=${vo.id }' style='padding: 5px; border-right: 1px solid #000;'>수정   </a><a style='padding: 5px; margin-left: 5px;' onclick =' if( confirm(\"정말 삭제하시겠습니까?\") ) { href=\"delete.wel?id=${vo.id }\" }''>삭제</a></div></br></br>";
-			   //$("#content_here").append("</br></br><div style='float: right; margin-top: 10px;'><a href='modify.wel?id=${vo.id }' style='padding: 5px; border-right: 1px solid #000;'>수정   </a><a style='padding: 5px; margin-left: 5px;' onclick =' if( confirm(\"정말 삭제하시겠습니까?\") ) { href=\"delete.wel?id=${vo.id }\" }''>삭제</a></div></br></br>");
-			   }
-		   }
-	   </c:forEach>
-	   });
-   </script>
 </body>
 </html>

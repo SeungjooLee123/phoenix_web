@@ -15,6 +15,11 @@
 	<div><jsp:include page="/WEB-INF/views/welfare/welfare.jsp"/></div>
 	<div id="main_content" style="width: 1050px; margin-left: 95px; margin-top: 50px;">
 		${vo.content }
+		<div style="float: right;">
+			<c:if test="${!empty vo.filename }">
+				<a href="download.wel?id=${vo.id }"><i class="fas fa-download font-img" ></i> ${vo.filename }</a>
+			</c:if>
+		</div>
 		<c:if test="${loginInfo.admin eq 'Y' }">
 			<ul style="display: flex; float: right; margin-top: 50px;">
 				<li style="margin-right: 20px; border-right: 1px solid rgba(0, 0, 0, 0.1);"><a style="font-weight: 700; margin-right: 30px;" href="modify.wel?id=${vo.id }">수정</a></li>

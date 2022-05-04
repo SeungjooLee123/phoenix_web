@@ -62,16 +62,16 @@ color: #000;
 
 
 <ul class="footer">
-	<li><a href='<c:url value="/calendar"/>'></a>이벤트</li>
-	<li><a href='<c:url value="/welfare"/>'></a>육아정보</li>
-	<li><a href='<c:url value="/community"/>'></a>커뮤니티</li>
-	<li><a href='<c:url value="/"/>'></a>나눔하기</li>
-	<li><a href='<c:url value="/"/>'></a>고객센터</li>
+		<li><a href='<c:url value="/calendar"/>'>이벤트</a></li>
+        <li><a href='<c:url value="/list.wel" />'>육아정보</a></li>
+        <li><a href='<c:url value="/community"/>'>커뮤니티</a></li>
+        <li><a href='<c:url value="/share"/>'>나눔하기</a></li>
+        <li><a href='<c:url value="/list.cu" />'>고객센터</a></li>
 </ul>
 <div class="footer-wrap" style="width:1300px; margin-left: 133px; display: flex; margin-top: 40px; font-size: 13px; color:#888888; font-weight:500; line-height: 2; ">
 	<div class="footer-notice">
 		<p>이벤트 소식</p>
-		<p>히스토리</p>
+		<p><a href='<c:url value="/select"/>'>히스토리</a></p>
 	</div>
 
 	<div class="footer-welfare" style="margin-left:202px;">
@@ -105,7 +105,7 @@ color: #000;
 	<li style="color: #333; font-weight: 700;">개인정보처리방침</li>
 	<li style="color:#888;">운영정책</li>
 	<li style="color:#888;">권리침해신고안내</li>
-	<li style="color:#888;"><a href="https://github.com/eor8451/phoenix_web"></a>Contact Us</li>
+	<li style="color:#888;"><a href="https://github.com/eor8451/phoenix_web">Contact Us</a></li>
 </ul>
 <br>
 <ul>

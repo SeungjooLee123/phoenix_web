@@ -3,7 +3,7 @@ package admin;
 import java.sql.Date;
 
 public class Admin_UserVO {
-	String id, pw, naver_id, kakao_id, admin, naver_id_chk, kakao_id_chk;
+	String id, pw, naver_id, kakao_id, admin, naver_id_chk, kakao_id_chk; //소셜_chk는 계정 확인용
 	Date join_date;
 	
 	

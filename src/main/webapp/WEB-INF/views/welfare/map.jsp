@@ -194,6 +194,7 @@
 					}
 				});
 			});
+			
 			// 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 			var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
 			    contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 

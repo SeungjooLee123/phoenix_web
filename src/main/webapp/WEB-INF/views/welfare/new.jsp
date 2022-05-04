@@ -24,7 +24,6 @@
 .video {margin: 22px 10px; }
 .graph ul>li:not(:first-of-type) {display: none; margin-left: 20px;}
 .map ul>li:not(:first-of-type) {display: none; margin-left: 50px;}
-   .file-img { width:24px }
    
    .modal{position: absolute !important;}
    .modal-header{justify-content: unset;}
@@ -35,6 +34,8 @@
    input[type=file], #delete-file { display: none;}
 	.file-img { width: 20px; height: 18px; }
 	#attach-file, #delete-file { color: #ff0000; }
+	#preview {height: 36px; display: inline-block;}
+	#preview-img{ max-height: 34px;}
    
    table{
    width: 80%;
@@ -174,7 +175,7 @@ font-size: 19.5px; color: #000; font-weight: 700;}
    <script type="text/javascript">
    
    $('#summernote').summernote({
-         width: 900,
+         width: 920,
         height: 300,
         lang: "ko-KR",
         fontSizes: ['8','9','10','11','12','14','18','24','36'],

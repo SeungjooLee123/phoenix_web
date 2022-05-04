@@ -8,18 +8,19 @@ import common.PageVO;
 @Component
 public class SharePage extends PageVO{
 
-	private List<ShareVO> list;
+	private List<ShareCommentVO> list;
 
 	
 	
-	
-	public List<ShareVO> getList() {
+	public List<ShareCommentVO> getList() {
 		return list;
 	}
 
-	public void setList(List<ShareVO> list) {
+	public void setList(List<ShareCommentVO> list) {
 		this.list = list;
 	}
-	
+
+		
+		
 	
 }

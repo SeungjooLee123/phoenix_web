@@ -92,11 +92,17 @@ public class ShareController {
 		@RequestMapping("/detail.sh")
 		public String detail(int id, Model model) {
 			//해당 글의 조회수 증가 처리
+			System.out.println("detail id : " + id);
 			service.Share_read(id);
 			//해당 게시글을 DB에서 조회 후 상세화면에 출력
 			model.addAttribute("vo",service.Share_detail(id));
+			ShareVO vo = new ShareVO();
+			vo = (ShareVO) model.getAttribute("vo");
+			System.out.println("sssss"+vo.getId());
+			
 			model.addAttribute("crlf", "\r\n");
 			model.addAttribute("page", page);
+			String aa = " ";
 			return "share/detail";
 		}
 		
@@ -218,13 +224,19 @@ public class ShareController {
 		//대댓글 저장
 		@ResponseBody
 		@RequestMapping("/share/co_comment/regist")
-		public List<ShareCommentVO> co_coment_regist(HttpSession session, int id, String content, int comment_id, Model model) {
+		public List<ShareCommentVO> co_coment_regist(HttpSession session, int id, String content, int comment_id, String secret, Model model) {
+			System.out.println("regist~secret"+secret);
 			UserVO member = (UserVO) session.getAttribute("loginInfo");
 			ShareCommentVO vo = new ShareCommentVO();
 			vo.setUser_id( member.getId() );
 			vo.setId(id);
 			vo.setContent(content);
-			vo.setSecret("N");
+			vo.setSecret(secret);
+
+			
+			
+			
+			
 			//대댓글 insert
 			service.Share_co_comment_regist(comment_id, vo);
 			//댓글 리스트 다시 조회
@@ -240,9 +252,8 @@ public class ShareController {
 		@RequestMapping("/share/comment/list/{id}")
 		public String comment_list( @PathVariable int id, Model model ) {//경로에 있눈 값이다
 			//해당 글애 대한 댓글들을 DB에서 조회해 온다,
-			System.out.println("id : "+id);
 			List<ShareCommentVO> list = service.Share_comment_list(id);
-			
+			System.out.println("secret값 : 	" + list.get(1).getSecret());
 			model.addAttribute("list", list  );
 			model.addAttribute("crlf", "\r\n");
 			model.addAttribute("lf", "\n");
@@ -275,7 +286,24 @@ public class ShareController {
 			return "redirect:detail.sh?id="+id+"";
 		}
 		
-		
+
+		//커뮤 글에 대한 댓글 수정
+		@ResponseBody
+		@RequestMapping("/share/co_comment/secret")
+		public String co_comment_secret (int comment_id, String secret, int id) {
+			ShareCommentVO vo = new ShareCommentVO();
+			
+			System.out.println(comment_id);
+			System.out.println(secret);
+			System.out.println(id);
+			
+			vo.setComment_id( comment_id );
+			vo.setSecret(secret);
+			
+			service.co_comment_secret(comment_id, secret);
+		return "redirect:detail.sh?id="+id+"";
+
+		}
 		
 		
 		

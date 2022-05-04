@@ -33,8 +33,10 @@
 					onclick="co_coment_regist(${vo.comment_id}, ${vo.id})">등록</a>
 					<a class="cancelbtn modify" style="display: none" id="co_co_cancle_${vo.comment_id}"
 					   onclick="display_atag(this);" >취소</a>
-					<a class="secretbtn" id="secretbtn_${vo.comment_id}" style="display: none">
-					<img id="imglock"  src="imgs/lock.png" onclick="Chgimg(${vo.comment_id})"/></a>   
+					<a class="secretbtn" id="secretbtn_${vo.comment_id}" style="display: none" onclick="Chgimg(this,${vo.comment_id},${vo.id});">
+					<img id="imglock"  src="imgs/lock.png" /></a>
+					<a >${vo.secret}</a>
+					   
 				</div>
 			</span>
 		</c:if>
@@ -44,23 +46,56 @@
 </c:forEach>
 </div>
  <script type="text/javascript">
- 
-function Chgimg(id){
-	if(document.getElementById( 'imglock' ).src == "http://localhost/bss/imgs/lock.png"){
-		document.getElementById( 'imglock' ).src = "http://localhost/bss/imgs/lock2.png";
-		
+
+ //비밀글 처리 
+function Chgimg(tag , comment_id, id){
+	var lock = 'N';
+	var img = $(tag).children('img').attr('src');
+	 if(img == "imgs/lock.png"){
+		//'Y'
+		 //$(tag).children('img').attr('src'  ,  "http://localhost/bss/imgs/lock2.png")
+		 $(tag).children('img').attr('src'  ,  "imgs/lock2.png");
+		lock = 'Y';
 	}else {
-		document.getElementById( 'imglock' ).src = "http://localhost/bss/imgs/lock.png";
-		
-	}
+		//'N'
+			 $(tag).children('img').attr('src'  ,  "imgs/lock.png");
+		//$img.src = "http://localhost/bss/imgs/lock.png";
+	} 
+	//비밀글 일때
+	$.ajax ({
+		url :	'share/co_comment/secret'			
+		, data:	{ secret : lock ,
+			      comment_id : comment_id,
+			      id : id
+			    }
+		, success : function ( res ) {
+			
+				//location.href='detail.sh?id='+id+"";
+				
+		}, 	error : function(req, text) {
+			alert(text + " : " + req.status );
+		}
+	});
+
+	
+	
 }
+ 
  
 
  
  //대댓글 등록
  function co_coment_regist(comment_id, id) {
 	//comment_id : 댓글번호, id : 글번호, user_id : 작성자
-	   if (!confirm("답글을 작성 하시겠습니까?")) {
+    var lock = 'N';																								
+	if(document.getElementById( 'imglock' ).src == "http://localhost/bss/imgs/lock.png"){
+		document.getElementById( 'imglock' ).src = "http://localhost/bss/imgs/lock2.png";
+		lock = 'Y';
+	}else {
+		//비밀글 아닐때
+		document.getElementById( 'imglock' ).src = "http://localhost/bss/imgs/lock.png";
+	} 
+	if (!confirm("답글을 작성 하시겠습니까?")) {
     } else {
 	var text = $('#co_co_text_'+comment_id).val();
 		$.ajax ({
@@ -68,21 +103,22 @@ function Chgimg(id){
 			url :	'share/co_comment/regist'			/* controller 호출  주소 형식 맵핑 */
 			, data:	{ id : id , 
 				      content: text,
-				      comment_id : comment_id
-				      }
+				      comment_id : comment_id,
+				      secret : lock
+		    }
 					/* pid : 원 글의 id, 입력한 댓글  */
 			, success : function ( res ) {
  				//location.href='community/comment/list?id='+id+"" ;
  				alert('detail');
  				location.href='detail.sh?id='+id+"";
- 				
-				
 			}, 	error : function(req, text) {
 				alert(text + " : " + req.status );
 			}
 		});
     }
 }
+ 
+ 
  //클릭하면 보이게 
 function co_coment(comment_id) {
 	 $('#co_co_text_'+comment_id).css('display', 'inline');

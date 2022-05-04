@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="share.mapper">  
+
+<!-- 비밀글 처리 -->
+<update id="co_comment_secret">
+	UPDATE MASTER_WEB_SHARE_COMMENT_TBL SET SECRET = #{secret} WHERE COMMENT_ID = #{comment_id}
+</update>
+
+
 <!-- 대댓글을 위해 step +1 -->
 <update id="step_up">
 	 UPDATE MASTER_WEB_SHARE_COMMENT_TBL SET STEP = STEP+1 WHERE COMMENT_ID >= #{comment_id}
@@ -9,7 +16,7 @@
 <!-- 대댓글 저장 -->
 <insert id="co_comment_regist">
 	INSERT INTO MASTER_WEB_SHARE_COMMENT_TBL(STEP, USER_ID, CONTENT, WRITE_DATE, INDENT, ID, SECRET)
-	SELECT step-1 , #{user_id}, #{content}, sysdate, 2 ,#{id}, 'N' FROM MASTER_WEB_SHARE_COMMENT_TBL where comment_id = #{comment_id}
+	SELECT step-1 , #{user_id}, #{content}, sysdate, 2 ,#{id}, #{secret} FROM MASTER_WEB_SHARE_COMMENT_TBL where comment_id = #{comment_id}
 </insert>
 
 <!-- 댓글수정 -->
@@ -34,15 +41,17 @@
 </insert>
 
 
+
+
 <!-- 해당글의 댓글 목록 조회 -->
 <select id="comment_list" resultType="share.ShareCommentVO">
-	select comment_id, step,indent, id, write_date, content,user_id 
+	select comment_id, step,indent, id, write_date, content,user_id, secret
 	from MASTER_WEB_SHARE_COMMENT_TBL 
 	where id = #{id}
 	order by step desc 
 </select>
 
-
+<!--  -->
 <delete id="delete">
 	delete from MASTER_WEB_SHARE_TBL where id = #{id}
 </delete>
@@ -51,7 +60,7 @@
 <update id="update">
       UPDATE MASTER_WEB_SHARE_TBL SET TITLE = #{title}, CONTENT = #{content}, WEB_FILE = #{web_file, jdbcType=VARCHAR}, WEB_PATH = #{web_path, jdbcType=VARCHAR} 
       WHERE ID = #{id}
-   </update>
+</update>
 
 
 <select id="detail" resultType="share.ShareVO">

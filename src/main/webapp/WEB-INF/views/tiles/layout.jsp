@@ -12,6 +12,7 @@
 	<c:when test="${category eq 'sh' }"><c:set var='title' value="나눔하기"/></c:when>	
 	<c:when test="${category eq 'cs' }"><c:set var='title' value="고객센터"/></c:when>	
 	<c:when test="${category eq 'ad' }"><c:set var='title' value="관리자"/></c:when>	
+	<c:when test="${category eq 'us' }"><c:set var='title' value="마이페이지"/></c:when>	
 </c:choose>
 
   

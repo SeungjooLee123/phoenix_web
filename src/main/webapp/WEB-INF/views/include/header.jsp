@@ -30,7 +30,6 @@ right:0;
 border:0;
 background: #fff;
 transition: top .2s ease-in-out;
-height: 164px;
 }
 
 .header_wrap {
@@ -62,9 +61,6 @@ cursor: pointer;}
 .list_gnb >li>a:hover, active {
 color: #eee;}
 
-hr {
-opacity: 0.3; 
-}
 
 .utill {
 position: absolute;
@@ -101,7 +97,8 @@ font-weight: 700;
 }
 
 .line{
-margin-top: 75px;}
+margin-top: 75px;
+opacity: 0.3;}
 
 .Info-line{
 opacity: 0.2;
@@ -128,7 +125,7 @@ opacity: 0.2;
         			<img src="imgs/clarity_moon-line.png" style="width:36px; height:36px;">
        			  </div>
         </nav>
-        <hr>
+        <hr class="header_line" style="opacity: 0.3;">
  		<nav id="tnb_wrap">
  			<ul id="tnb">
  					<li class="logo_text">베시시</li>

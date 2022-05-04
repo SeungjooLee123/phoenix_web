@@ -32,10 +32,20 @@ public class UserController {
 	Gson gson = new Gson();
 	String a = "";
     
+	String tokenId = "";
+	
+	@ResponseBody
+    @RequestMapping("/fcm_token")
+    public void fcm_token(String token) {
+		System.out.println("che"+token);
+		tokenId = token;
+    }
 	
 	@RequestMapping(value = "/fcmtest.do") 
 	public @ResponseBody void fcmtest(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-		String tokenId="dON3s0zIQiGRiHA-YXPAyR:APA91bFm2O6n-LLQlErLMjHgL_IEyf59ag5Lxj55M1UPpLvteIk9y6GkfuTuWAA_IP_ouzIrzK5S1m_GeDEhjTi3lW99Vqr-jt2Ot57mmGOTD7tv7lRI265a1Fw17oMgqM7wsF3HSGG1"; 
+		//String tokenId="cEk0APvUS8u_oX2A8hvTyU:APA91bESYz-u0WjskEJ1sSzpYzOVprYDlhBsikpTs42hWNrGhzvSmof5sKZS6uNjnT8lJ2jO-XY_8AL9pCGeDQQgzx_eALfYzxiaYTeOI_YqDWkJhC6v5mwY1TySWRZGwCvZYa6uUUGj"; 
+		//String tokenId="f51Z5qjDQpeDbewGHrg5eD:APA91bFsboxWcteoU4-epSc4zrEGHeZyXkkSusRQDVaxbS9b3gWby7T9fXWvpy45dZN65pW1m-0FrtTMnEdc2hVC_j4zCQVTyT4iuHuq4gVKBalAXn9F7tuqyiXy0H3q8QcHflnWM29S"; 
+		System.out.println("do"+tokenId);
 		String title="응애~응애~ 아기가 울고 있습니다.";
 		String content="어플을 통해 아이를 확인해주세요."; 
 		FcmUtil FcmUtil = new FcmUtil();
@@ -112,7 +122,7 @@ public class UserController {
 		System.out.println(pw);
 		return vo == null? false : true;
 	}
-	
+	//안드로이드
 	//로그인!!
 	@ResponseBody
 	@RequestMapping("/bssLoginn")
@@ -124,7 +134,7 @@ public class UserController {
 		loginmap.put("pw" , pw);
 		System.out.println(loginmap);
 		UserVO loginvo = dao.user_loginn ( loginmap );
-		System.out.println(loginvo.getId());
+		//System.out.println(loginvo.getId());
 		try {
 			return gson.toJson(loginvo);			
 		} catch (NullPointerException e) {

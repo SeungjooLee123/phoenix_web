@@ -83,6 +83,8 @@ font-size: 19.5px; color: #000; font-weight: 700;}
 .video {margin: 22px 10px; }
 .graph ul>li:not(:first-of-type) {display: none; margin-left: 20px;}
 .map ul>li:not(:first-of-type) {display: none; margin-left: 50px;}
+#preview {height: 36px; display: inline-block;}
+#preview-img{ max-height: 34px;}
 .list_hr{
     display: block;
     unicode-bidi: isolate;
@@ -139,7 +141,7 @@ font-size: 19.5px; color: #000; font-weight: 700;}
 		</div>
 		<hr class="list_hr">
 		</section>
-	<div style="width: 900px; margin-top: 50px; margin-left: 20px;">
+	<div style="width: 900px; margin-top: 50px; margin-left: 105px;">
    <div class="modi_main">
    <form action="update.wel" method="post" enctype="multipart/form-data">
    <input type="hidden" name="id" value="${vo.id}">
@@ -159,6 +161,7 @@ font-size: 19.5px; color: #000; font-weight: 700;}
                <c:if test="${! empty vo.filename }">
                   <!-- 파일 보이기  -->
                   <span id='file-name'>${vo.filename }</span>
+                  <span id='preview' ></span>
                   <a id='delete-file' style='display : ${empty vo.filename ? "none" : "inline"}'><i class="fa-solid fa-circle-xmark"></i></a>
                </c:if>
             </td>
@@ -178,9 +181,26 @@ font-size: 19.5px; color: #000; font-weight: 700;}
    <script type="text/javascript" src='js/common.js?v<%=new Date().getTime() %>'></script>
    <script type="text/javascript">
       $('#summernote').summernote({
-          width: 900,
+          width: 920,
          height: 300,
          lang: "ko-KR",
+         fontSizes: ['8','9','10','11','12','14','18','24','36'],
+         toolbar: [ 
+         	['style', ['style']],
+ 			['fontsize', ['fontsize']],
+ 			['font', ['bold', 'italic', 'underline', 'clear']],
+ 			['fontname', ['fontname']],
+ 			['color', ['color']],
+ 			['para', ['ul', 'ol', 'paragraph']],
+ 			['height', ['height']],
+ 			['table', ['table']],
+ 			['insert', ['link', 'picture', 'hr']],
+ 			['view', ['fullscreen', 'codeview']],
+ 			['help', ['help']]
+         	],
+         	fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana', 'Nanum Gothic', 'Malgun Gothic', 'Noto Sans KR', 'Apple SD Gothic Neo'],
+ 			fontNamesIgnoreCheck: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana', 'Nanum Gothic', 'Malgun Gothic', 'Noto Sans KR', 'Apple SD Gothic Neo'],
+ 			fontSizes: ['8','9','10','11','12','13','14','15','16','17','18','19','20','24','30','36','48','64','82','150'],
          tableClassName: function(){
         	$(this).addClass('table table-bordered').attr('border', 1).css('borderCollapse', 'collapse').css('width', '100%');
         	$(this).find('tr:first-child td').css('borderTop', '1px solid #000').css('borderBottom', '1px solid #ddd').css('borderLeft', '1px solid #ddd').css('borderRight', '1px solid #ddd').css('padding', '15px').css('fontWeight', 'bold').css('background', '#e2f1ff');
@@ -222,8 +242,14 @@ font-size: 19.5px; color: #000; font-weight: 700;}
              }
           });
        }
-      $("#cate-ul li>a").not("a.btn-empty").attr("class", "btn-empty");
-      $("#cate-ul li>a").eq(0).attr("class", "btn-fill");
+       $(function name() {
+    	   // 첨부된 파일이 이미지 파일인 경우 미리보기 되게끔.
+    	   if(${! empty vo.filename}) { //첨부파일이 있다면
+    	      if( isImage('${vo.filename}') ) {   // 이미지 파일인 경우
+    	         $('#preview').html("<img src='${vo.filepath}' id='preview-img'/>"); //이미지를 올리려면 img 태그를 써야하기때문에 html사용
+    	      }
+    	   }
+    	});
    </script>
 </body>
 </html>
