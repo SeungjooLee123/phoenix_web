@@ -10,6 +10,8 @@
 #graph-ul li{display: block; font-size: 14px; background: #f5f5f5; display: block; cursor: pointer; text-align: center; border-radius: 20px; margin: 0 10px; padding: 10px 13px;}
 #graph-ul li.active{background: #c3bfff; color: #fff;}
 .graph ul>li:nth-child(1) a{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
+.check{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
+.not_check{color: #505050; margin: 22px 0px; font-size: 15px;}
 </style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.css">
@@ -39,6 +41,17 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+$(".graph ul>li").click(function(){
+	var indexs = $(this).index();
+	if(indexs == 0 || indexs == 1){
+		$(".graph ul>li:nth-child(2) a").attr("class", "check");
+		$(".graph ul>li:nth-child(3) a").attr("class", "not_check");
+	} else if(indexs == 2){
+		$(".graph ul>li:nth-child(3) a").attr("class", "check");
+		$(".graph ul>li:nth-child(2) a").attr("class", "not_check");
+	}
+});
+
 $(".graph ul>li:not(:first-of-type)").css("display", "block");
   
 google.charts.load('current', {'packages':['corechart']});

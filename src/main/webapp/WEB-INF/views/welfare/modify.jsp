@@ -83,8 +83,6 @@ font-size: 19.5px; color: #000; font-weight: 700;}
 .video {margin: 22px 10px; }
 .graph ul>li:not(:first-of-type) {display: none; margin-left: 20px;}
 .map ul>li:not(:first-of-type) {display: none; margin-left: 50px;}
-#preview {height: 36px; display: inline-block;}
-#preview-img{ max-height: 34px;}
 .list_hr{
     display: block;
     unicode-bidi: isolate;
@@ -161,7 +159,6 @@ font-size: 19.5px; color: #000; font-weight: 700;}
                <c:if test="${! empty vo.filename }">
                   <!-- 파일 보이기  -->
                   <span id='file-name'>${vo.filename }</span>
-                  <span id='preview' ></span>
                   <a id='delete-file' style='display : ${empty vo.filename ? "none" : "inline"}'><i class="fa-solid fa-circle-xmark"></i></a>
                </c:if>
             </td>

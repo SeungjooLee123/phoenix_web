@@ -63,7 +63,8 @@
 .placeinfo .tel {color:#0f7833;}
 .placeinfo .jibun {color:#999;font-size:11px;margin-top:0;}
 .map ul>li:nth-child(1) a{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
-
+.check{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
+.not_check{color: #505050; margin: 22px 0px; font-size: 15px;}
 #address{text-align: right;}
 .map_wrap{margin: 15px 0;}
 #address select{height: 30px;}
@@ -103,6 +104,32 @@
 			var sido = "";
 			var sigugun = "";
 			var dong = "";
+			
+			$(".map ul>li").click(function(){
+				var indexs = $(this).index();
+				$(".map ul>li:nth-child(1) a").attr("class", "check");
+				if(indexs == 0 || indexs == 1){
+					$(".map ul>li:nth-child(2) a").attr("class", "check");
+					$(".map ul>li:nth-child(3) a").attr("class", "not_check");
+					$(".map ul>li:nth-child(4) a").attr("class", "not_check");
+					$(".map ul>li:nth-child(5) a").attr("class", "not_check");
+				} else if(indexs == 2){
+					$(".map ul>li:nth-child(3) a").attr("class", "check");
+					$(".map ul>li:nth-child(2) a").attr("class", "not_check");
+					$(".map ul>li:nth-child(4) a").attr("class", "not_check");
+					$(".map ul>li:nth-child(5) a").attr("class", "not_check");
+				} else if(indexs == 3){
+					$(".map ul>li:nth-child(4) a").attr("class", "check");
+					$(".map ul>li:nth-child(3) a").attr("class", "not_check");
+					$(".map ul>li:nth-child(2) a").attr("class", "not_check");
+					$(".map ul>li:nth-child(5) a").attr("class", "not_check");
+				} else if(indexs == 4){
+					$(".map ul>li:nth-child(5) a").attr("class", "check");
+					$(".map ul>li:nth-child(3) a").attr("class", "not_check");
+					$(".map ul>li:nth-child(2) a").attr("class", "not_check");
+					$(".map ul>li:nth-child(4) a").attr("class", "not_check");
+				}
+			});
 			
 			$(".map ul>li:not(:first-of-type)").css("display", "block");
 					

@@ -20,6 +20,8 @@
 .video {margin: 22px 10px; }
 .graph ul>li:not(:first-of-type) {display: none; margin-left: 20px;}
 .map ul>li:not(:first-of-type) {display: none; margin-left: 50px;}
+.check{color: #000; font-weight: 700; border-bottom: 1px solid #000;}
+.not_check{color: #505050; margin: 22px 0px; font-size: 15px;}
 </style>
 </head>
 <body>
@@ -35,17 +37,17 @@
 			<div class="graph">
 				<ul>
 					<li><a href="graph.wel">통계자료</a></li>
-					<li><a style="margin-left: 15px;">출생</a></li>
-					<li><a style="margin-left: 15px;">표준발육</a></li>
+					<li><a style="margin-left: 15px;" class="check">출생</a></li>
+					<li><a style="margin-left: 15px;" class="not_check">표준발육</a></li>
 				</ul>
 			</div>
 			<div class="map">
 				<ul>
 					<li><a href="map.wel">주변장소검색</a></li>
-					<li><a style="margin-left: 15px;">소아과</a></li>
-					<li><a style="margin-left: 15px;">키즈카페</a></li>
-					<li><a style="margin-left: 15px;">어린이집</a></li>
-					<li><a style="margin-left: 15px;">유아용품</a></li>
+					<li><a style="margin-left: 15px;" class="check">소아과</a></li>
+					<li><a style="margin-left: 15px;" class="not_check">키즈카페</a></li>
+					<li><a style="margin-left: 15px;" class="not_check">어린이집</a></li>
+					<li><a style="margin-left: 15px;" class="not_check">유아용품</a></li>
 				</ul>
 			</div>
 		</div>
